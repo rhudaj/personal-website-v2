@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/"
+  base: "/" //note!!!! this was a solution to a blank page when releasing to a custom domain
 })

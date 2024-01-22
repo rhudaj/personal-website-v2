@@ -10,6 +10,9 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  border: 1px solid rgb(45, 45, 45);
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .ProjectContent {
@@ -22,7 +25,7 @@
   border-radius: 10px;
 }
 
-.dirRL h2 {
+.dirRL > h2 {
   text-align: right;
 }
 
@@ -41,6 +44,36 @@
   border-radius: 20px;
 }
 
-.ProjectInfo {
+/*--------------------------------
+MARKDOWN
+--------------------------------*/
+
+.Markdown{
   flex-basis: 200%;
+  overflow-y: scroll;
+  /**/
+  display: block;
+  white-space: pre-wrap;
+  font-size: 20px;
+  color: rgb(207, 207, 207)
+}
+
+.Markdown a {
+  color: red;
+}
+
+.Markdown > h1 {
+  font-size: 2em;
+}
+
+.Markdown > h2 {
+  font-size: 1.5em;
+}
+
+.Markdown > h3 {
+  font-size: 1em;
+}
+
+.Markdown > * {
+  font-size: 0.9em;
 }

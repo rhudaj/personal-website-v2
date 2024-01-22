@@ -3,24 +3,30 @@
     "Database Interface App",
     "https://s38063.pcdn.co/wp-content/uploads/2021/09/Blog-SQLDatabaseSchemas-IM-JY-67189.jpg",
     "https://github.com/rhudaj/DatabaseInterfaceApp",
-    "https://github.com/rhudaj/DatabaseInterfaceApp/blob/main/README.md"
+    "https://raw.githubusercontent.com/rhudaj/DatabaseInterfaceApp/main/README.md"
   ],
   [
     "Personal Website",
     "https://tillerdigital.com/wp-content/uploads/2019/12/Blog-web-design-best-practices-01.png",
     "https://github.com/rhudaj/personal-website-v2",
-    "https://github.com/rhudaj/personal-website-v2/blob/main/README.md"
+    "https://raw.githubusercontent.com/rhudaj/personal-website-v2/main/README.md"
   ],
   [
     "Automated Cover Letter Generator",
     "https://assets-global.website-files.com/628cb4acdaf9087cd633cc6b/633d9cbb1b64a417c934d1ce_Full-cover-letter-template.webp",
     "https://github.com/rhudaj/GPT_CL",
-    "na"
+    "https://raw.githubusercontent.com/rhudaj/GPT_CL/main/README.md?token=GHSAT0AAAAAACMV5PVCWFZBBCMQJKCNLMIQZNO6MZQ"
   ],
   [
     "CHESS-CPP",
     "https://course.ccs.neu.edu/cs5004/chessboard.png",
     "https://github.com/rhudaj/CHESS-CPP",
-    "https://github.com/rhudaj/CHESS-CPP/blob/main/README.md"
+    "https://raw.githubusercontent.com/rhudaj/CHESS-CPP/main/README.md"
+  ],
+  [
+    "Notes Web App",
+    "https://images.ctfassets.net/lzny33ho1g45/76X9yTzPjwu0rCjGooyLla/3a66d72925e0a4eab7ec2ecee4945098/obsidian-no-joke.png",
+    "https://github.com/rhudaj/NotesWebApp",
+    "https://raw.githubusercontent.com/rhudaj/NotesWebApp/main/ReadMe.md"
   ]
 ]

@@ -1,0 +1,80 @@
+#Home {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+#Home #Head {
+  /*Main Style*/
+    background-image: url("https://cdn.wccftech.com/wp-content/uploads/2021/08/martin-sanchez-G78c3DPmD_A-unsplash-scaled.jpg");
+    height: 100vh;
+    margin: -50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  /*Children*/
+    display: flex;
+    align-items: center;
+  /*Fade the edges*/
+    border-radius: 40%;
+    box-shadow: 0 0 80px 80px black inset;
+}
+
+#Head > h1 {
+  margin-left: 50px;
+}
+
+#Home #AboutMe {
+  display: flex;
+  gap: 5%;
+}
+
+#Home #AboutMe img {
+  border-radius: 5%;
+  object-fit: cover;
+  max-height: 600px;
+}
+
+#Home #AboutMe .content {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#Home #resume-section-select > h3:hover {
+  text-decoration: underline;
+}
+
+/*MY WORK*/
+
+#MyWork{
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+#WorkItems {
+  display: flex;
+  gap: 5%;
+}
+
+.MyWorkItem {
+  flex: 1 0;
+}
+
+.MyWorkItem img {
+  transition: 0.5s;
+  /*Image Fit*/
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  /*Style*/
+    border-radius: 5%;
+}
+
+.MyWorkItem :hover {
+  transition: 0.5s;
+  transform: scale(1.1);
+  box-shadow: 0 0 5px 5px grey;
+}

@@ -1,0 +1,36 @@
+{
+  "skills" : [
+    [
+      "Web Dev",
+      "React, Node, TypeScript, JavaScript"
+    ],
+    [
+      "Databases",
+      "SQL, SQL Server, MySQL, ODBC, RDBMS, Design"
+    ]
+  ],
+  "Experience" : [
+    [
+      "Martinrea International",
+      "Student Engineer",
+      "Jan/22 - Aug/22"
+    ],
+    [
+      "Environics Analytics",
+      "Product Management Intern",
+      "Apr/23 - Sep/23"
+    ]
+  ],
+  "Education" : [
+    [
+      "University of Waterloo",
+      "Bachelors of Computer Science, Honours",
+      "Sep/20 - Dec/24"
+    ],
+    [
+      "Ursula Franklin Academy",
+      "High School Diploma",
+      "Sep/16 - Jun/20"
+    ]
+  ]
+}

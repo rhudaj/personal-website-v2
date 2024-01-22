@@ -1,0 +1,18 @@
+/*School Page*/
+#Courses {
+  display: flex;
+  flex-direction:column;
+  gap: 20px;
+}
+
+#Courses .Course {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  row-gap: 0px; /*Prevent gap between a hidden div*/
+  flex-wrap: wrap;
+  border: solid;
+  border-radius: 5px;
+  transition: 0.5s;
+  vertical-align: top; /*Grow top-down*/
+}

@@ -1,0 +1,46 @@
+#Projects {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.Project {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.ProjectContent {
+  display: flex;
+  gap: 50px;
+}
+
+.ProjectContent > * {
+  height: 400px;
+  border-radius: 10px;
+}
+
+.dirRL h2 {
+  text-align: right;
+}
+
+.dirRL .ProjectContent {
+  flex-direction: row-reverse;
+}
+
+.ProjectPreview {
+  flex-basis: 100%;
+}
+
+.ProjectPreview > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.ProjectInfo {
+  flex-basis: 200%;
+}

@@ -1,9 +1,10 @@
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import {Home, Projects, School} from "./pages/index"
+import { Home, Projects, School } from "./pages/index"
 import { Menu } from './components/Menu'
-import './styles.css'
 import { ContactMe } from './components/Contact-me';
+import './styles.css'
 
 function Main() {
   return (
@@ -27,11 +28,10 @@ function App() {
   );
 }
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
-
-root.render((
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-));
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);

@@ -1,5 +1,6 @@
 {
   "name": "vite-project",
+  "homepage": "https://roman-hudaj.com/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

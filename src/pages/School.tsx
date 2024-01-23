@@ -50,10 +50,9 @@ function Course(props: {id: string, title: string, desc: string}) {
   return (
     <div
       key={props.id}
-      className="Course"
+      className={`Course ${hasFocus ? "focus" : "nonFocus"}`}
       onMouseEnter={()=>setHasFocus(true)}
       onMouseLeave={()=>{setHasFocus(false); setToggleInfo(false)}}
-      style={ hasFocus ? focusStyle : nonFocusStyle}
     >
       <p className="ToggleInfo"
         onClick={()=>setToggleInfo(!toggleInfo)}

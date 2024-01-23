@@ -16,3 +16,15 @@
   transition: 0.5s;
   vertical-align: top; /*Grow top-down*/
 }
+
+.Course.nonFocus {
+  background-color: transparent;
+  color: grey;
+  padding: 20px;
+}
+
+.Course.focus {
+  background-color: #2b2b2b;
+  color: white;
+  padding: 30px;
+}

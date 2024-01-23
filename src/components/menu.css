@@ -22,13 +22,13 @@
   width: 100%;
   position:fixed;
   top:0;
-  font-size: 50px;
+  font-size: 80px;
+
+  transition: transform .5s;
 }
 
 #HiddenMenu :hover {
-  font-size: 55px;
-  text-shadow: 0 0 3px #FF0000;
-  transition: .3s;
+  transform: scale(1.3);
 }
 
 #Logo {

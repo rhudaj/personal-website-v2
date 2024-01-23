@@ -35,3 +35,23 @@ export function useTypingEffect(
   //Return sub-string up to curPos
   return textToType.substring(0, curPos);
 }
+
+export function useCoverEffect(
+  max:number,
+  time: number
+) {
+  const [curPos, setCurPos] = useState(0);
+  const curPosRef = useRef(0);
+
+  const handleStart = () => {
+    // Called ONCE when component calls useTypingEffect()
+    const intervalID = setInterval(()=> {
+      setCurPos((val)=>val+1);
+      curPosRef.current += 1;
+      if(curPosRef.current >= max) clearInterval(intervalID);
+    }, 10)
+  };
+
+  //Return sub-string up to curPos
+  return { curPos, handleStart };
+}

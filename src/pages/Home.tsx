@@ -4,17 +4,14 @@ import work_1_img from '../assets/work-1.png'
 import work_2_img from '../assets/work-2.jpeg'
 import work_3_img from '../assets/work-3.png'
 import { useState } from 'react';
-import {useTypingEffect } from "../hooks/typing-effect"
-import { useNavigate } from "react-router-dom";
+import { useTypingEffect, useCoverEffect } from "../hooks/typing-effect"
 //------------------
-
 
 //Course info is stored in a JSON file
 import resume_json from '../assets/resume.json';
 
 function AboutMe() {
   const [curSec, setCurSec] = useState("Skills");
-
   const outputContent = (section: any[])=> {
     return (
       <div style={{display: "flex", gap: 40}}>
@@ -36,7 +33,7 @@ function AboutMe() {
         <img src={image}/>
         <div className="content">
             <h1>About Me</h1>
-            <p>CS student at the University of Waterloo who loves tackling cool and creative projects. Check out what I've been up to on this site!</p>
+            <p>{resume_json["Summary"]}</p>
             <div id="resume-section-select" style={{display: "flex", gap: 40, fontWeight: "bold"}}>
                 <h3 onClick={()=>setCurSec("Skills")}>Skills</h3>
                 <h3 onClick={()=>setCurSec("Experience")}>Experience</h3>
@@ -56,18 +53,17 @@ function AboutMe() {
   );
 }
 
-
 function MyWorkItem(props: {img: string, page: string}) {
-  let navigate = useNavigate();
-
-  const go2page = () => {
-    console.log('switching pages');
-    navigate(props.page);
-  };
+  const coverEffect = useCoverEffect(100, 1);
 
   return(
-    <div className="MyWorkItem" onClick={go2page}>
+    <div className="MyWorkItem" onMouseEnter={coverEffect.handleStart}>
       <img src={props.img}/>
+      <div className="AnimatedCover">
+        <h3>Work Type</h3>
+        <p>More Info</p>
+        <a href={props.page}><i className="fa-solid fa-link"></i> </a>
+      </div>
     </div>
   );
 }
@@ -84,8 +80,6 @@ export function MyWork() {
     </div>
   );
 }
-
-
 
 
 export function Home() {

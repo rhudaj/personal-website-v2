@@ -24,29 +24,34 @@
   margin-left: 50px;
 }
 
-#Home #AboutMe {
+#AboutMe {
   display: flex;
   gap: 5%;
 }
 
-#Home #AboutMe img {
+
+#AboutMe img {
   border-radius: 5%;
   object-fit: cover;
   max-height: 600px;
 }
 
-#Home #AboutMe .content {
+#AboutMe .content {
   font-size: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  line-height: 35px;
+  gap: 40px;
 }
 
-#Home #resume-section-select > h3:hover {
+#resume-section-select > h3:hover {
   text-decoration: underline;
 }
 
-/*MY WORK*/
+
+/*--------------------------------------------------
+                My Work (section)
+--------------------------------------------------*/
 
 #MyWork{
   display: flex;
@@ -61,20 +66,71 @@
 
 .MyWorkItem {
   flex: 1 0;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
 .MyWorkItem img {
-  transition: 0.5s;
   /*Image Fit*/
     height: 100%;
     width: 100%;
     object-fit: cover;
-  /*Style*/
-    border-radius: 5%;
+  /*For the Cover Animation*/
+    display: block;
+  /*Own Animation*/
+    transition: transform 0.5s;
 }
 
-.MyWorkItem :hover {
-  transition: 0.5s;
-  transform: scale(1.1);
-  box-shadow: 0 0 5px 5px grey;
+.MyWorkItem:hover img {
+  transform: scale(1.1);  /*scale up image on hover*/
+}
+
+/*--------------------------------------------------
+              MyWorkItem Animation
+--------------------------------------------------*/
+
+.AnimatedCover {
+  /*BASIC*/
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden; /*Keep text off the bottom*/
+    background: linear-gradient(rgba(0,0,0, 0.6), #ff004f);
+  /*CONTENT*/
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  /*ANIMATION*/
+    height: 0;
+    transition: height 0.5s;
+}
+
+.MyWorkItem:hover .AnimatedCover {
+  height: 100%;           /*0-->100% height on hover*/
+}
+
+.AnimatedCover a {
+  /*Style*/
+    color:#ff004f;
+    text-decoration: none;
+    font-size: 18px;
+    background: #fff;
+  /*Shape*/
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+  /*Content*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  /*Animate*/
+    transition: transform 0.3s;
+}
+
+.AnimatedCover a:hover {
+  transform: scale(1.2);
 }

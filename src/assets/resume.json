@@ -1,12 +1,21 @@
 {
+  "Summary" : "Dynamic, agile software developer with rapid adaptability to emerging technologies, a keen aptitude for grasping intricate concepts and solving problems with automation. I am currently a CS student at the University of Waterloo. Check out what I've been up to on this site!",
   "skills" : [
     [
       "Web Dev",
-      "React, Node, TypeScript, JavaScript"
+      "React, Node, TypeScript, JavaScript, JSON, MVC Architecture, ..."
     ],
     [
       "Databases",
-      "SQL, SQL Server, MySQL, ODBC, RDBMS, Design"
+      "SQL, SQL Server, MySQL, ODBC, RDBMS, Physical/Logical Design"
+    ],
+    [
+      "Python",
+      "Pandas, Numpy, Selenium"
+    ],
+    [
+      "Other",
+      "C++, C, Alteryx, Excel"
     ]
   ],
   "Experience" : [

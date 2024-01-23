@@ -35,18 +35,6 @@ function Course(props: {id: string, title: string, desc: string}) {
   const [hasFocus, setHasFocus] = useState(false); //Changes style
   const [toggleInfo, setToggleInfo] = useState(false); //Course Description
 
-  const nonFocusStyle = {
-    backgroundColor: "transparent",
-    color: "grey",
-    padding: 20
-  };
-
-  const focusStyle = {
-    backgroundColor: "#2b2b2b",
-    color: "white",
-    padding: nonFocusStyle.padding * 1.5
-  };
-
   return (
     <div
       key={props.id}

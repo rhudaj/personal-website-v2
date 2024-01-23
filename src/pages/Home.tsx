@@ -4,7 +4,7 @@ import work_1_img from '../assets/work-1.png'
 import work_2_img from '../assets/work-2.jpeg'
 import work_3_img from '../assets/work-3.png'
 import { useState } from 'react';
-import { useTypingEffect, useCoverEffect } from "../hooks/typing-effect"
+import { useTypingEffect } from "../hooks/typing-effect"
 //------------------
 
 //Course info is stored in a JSON file
@@ -54,10 +54,8 @@ function AboutMe() {
 }
 
 function MyWorkItem(props: {img: string, page: string}) {
-  const coverEffect = useCoverEffect(100, 1);
-
   return(
-    <div className="MyWorkItem" onMouseEnter={coverEffect.handleStart}>
+    <div className="MyWorkItem">
       <img src={props.img}/>
       <div className="AnimatedCover">
         <h3>Work Type</h3>

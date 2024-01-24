@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import './AnimatedCover.css'
 
 interface CoverProps {

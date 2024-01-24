@@ -5,6 +5,7 @@ import work_2_img from '../assets/work-2.jpeg'
 import work_3_img from '../assets/work-3.png'
 import { useState } from 'react';
 import { useTypingEffect } from "../hooks/typing-effect"
+import { AnimatedCover } from '../components/AnimatedCover';
 //------------------
 
 //Course info is stored in a JSON file
@@ -53,15 +54,22 @@ function AboutMe() {
   );
 }
 
-function MyWorkItem(props: {img: string, page: string}) {
+interface MyWorkItem_Props {
+  img: string;
+  page: string;
+  heading: string;
+  body: string;
+};
+
+function MyWorkItem(props: MyWorkItem_Props) {
   return(
     <div className="MyWorkItem">
       <img src={props.img}/>
-      <div className="AnimatedCover">
-        <h3>Work Type</h3>
-        <p>More Info</p>
+      <AnimatedCover>
+        <h3>{props.heading}</h3>
+        <p>{props.body}</p>
         <a href={props.page}><i className="fa-solid fa-link"></i> </a>
-      </div>
+      </AnimatedCover>
     </div>
   );
 }
@@ -71,9 +79,9 @@ export function MyWork() {
     <div id="MyWork">
       <h1>My Work</h1>
       <div id="WorkItems">
-        <MyWorkItem img={work_1_img} page='/Projects'/>
-        <MyWorkItem img={work_2_img} page='/School' />
-        <MyWorkItem img={work_3_img} page='/Art'/>
+        <MyWorkItem img={work_1_img} page='/Projects' heading='Projects' body='Check them out'/>
+        <MyWorkItem img={work_2_img} page='/School' heading='School' body='See my Coursework'/>
+        <MyWorkItem img={work_3_img} page='/Art' heading='Art' body = 'View my Artwork'/>
       </div>
     </div>
   );
@@ -81,7 +89,6 @@ export function MyWork() {
 
 
 export function Home() {
-
   // Text that is typed out in real time.
   const head_text = useTypingEffect("Hi, I'm Roman.", 100);
 

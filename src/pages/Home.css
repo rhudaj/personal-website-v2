@@ -20,6 +20,11 @@
     box-shadow: 0 0 80px 80px black inset;
 }
 
+#IntroText {
+  user-select: none;
+}
+
+
 #Head > h1 {
   margin-left: 50px;
 }
@@ -76,8 +81,6 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-  /*For the Cover Animation*/
-    display: block;
   /*Own Animation*/
     transition: transform 0.5s;
 }
@@ -90,28 +93,11 @@
               MyWorkItem Animation
 --------------------------------------------------*/
 
-.AnimatedCover {
-  /*BASIC*/
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    overflow: hidden; /*Keep text off the bottom*/
-    background: linear-gradient(rgba(0,0,0, 0.6), #ff004f);
-  /*CONTENT*/
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  /*ANIMATION*/
-    height: 0;
-    transition: height 0.5s;
-}
 
 .MyWorkItem:hover .AnimatedCover {
   height: 100%;           /*0-->100% height on hover*/
 }
+
 
 .AnimatedCover a {
   /*Style*/

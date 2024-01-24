@@ -34,6 +34,7 @@
 #Logo {
   font-size: 40px;
   font-weight: bold;
+  user-select: none;
 }
 
 nav ul {

@@ -6,10 +6,9 @@ import work_3_img from '../assets/work-3.png'
 import { useState } from 'react';
 import { useTypingEffect } from "../hooks/typing-effect"
 import { AnimatedCover } from '../components/AnimatedCover';
+import { NavLink } from "react-router-dom";
+import resume_json from '../assets/resume.json'; //Course info is stored in a JSON file
 //------------------
-
-//Course info is stored in a JSON file
-import resume_json from '../assets/resume.json';
 
 function AboutMe() {
   const [curSec, setCurSec] = useState("Skills");
@@ -68,7 +67,9 @@ function MyWorkItem(props: MyWorkItem_Props) {
       <AnimatedCover>
         <h3>{props.heading}</h3>
         <p>{props.body}</p>
-        <a href={props.page}><i className="fa-solid fa-link"></i> </a>
+        <NavLink id='NavLink' to={props.page}>
+          <i className="fa-solid fa-link"/>
+        </NavLink>
       </AnimatedCover>
     </div>
   );

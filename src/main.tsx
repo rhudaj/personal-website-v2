@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Home, Projects, School, Art } from "./pages/index"
 import { Menu } from './components/Menu'
 import { ContactMe } from './components/Contact-me';
 import './styles.css'
 
 function Main() {
+  // SECTION: scroll to top anytime page changes
+  const active_page = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [active_page]);
+  // END SECTION
+
   return (
     <div id="Main">
       <Routes>

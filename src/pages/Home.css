@@ -99,7 +99,7 @@
 }
 
 
-.AnimatedCover a {
+.AnimatedCover #NavLink {
   /*Style*/
     color:#ff004f;
     text-decoration: none;
@@ -117,6 +117,6 @@
     transition: transform 0.3s;
 }
 
-.AnimatedCover a:hover {
+.AnimatedCover #NavLink:hover {
   transform: scale(1.2);
 }

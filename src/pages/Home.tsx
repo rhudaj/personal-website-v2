@@ -12,16 +12,13 @@ import resume_json from '../assets/resume.json'; //Course info is stored in a JS
 
 function AboutMe() {
   const [curSec, setCurSec] = useState("Skills");
-  const outputContent = (section: any[])=> {
+
+  const outputContent = (sectionItem: any[])=> {
     return (
-      <div style={{display: "flex", gap: 40}}>
+      <div className = "SectionItem">
         {
-          section.map((item, index) => {
-            return (
-              <>
-                <p style={index == 0 ? {fontWeight: "800", color: "#DDDDDD"}: {color: "darkgrey"}}>{item}</p>
-              </>
-            );
+          sectionItem.map((item, index) => {    /* item : {'title' : 'description'}*/
+            return <p className={index == 0 ? 'title' : 'description'}>{item}</p>;
           })
         }
       </div>
@@ -34,18 +31,18 @@ function AboutMe() {
         <div className="content">
             <h1>About Me</h1>
             <p>{resume_json["Summary"]}</p>
-            <div id="resume-section-select" style={{display: "flex", gap: 40, fontWeight: "bold"}}>
+            <div id="resume-section-select">
                 <h3 onClick={()=>setCurSec("Skills")}>Skills</h3>
                 <h3 onClick={()=>setCurSec("Experience")}>Experience</h3>
                 <h3 onClick={()=>setCurSec("Education")}>Education</h3>
             </div>
-            <div id="resume-section" style={{display: "flex", flexDirection: "column", rowGap: 20}}>
+            <div id="resume-section">
               {
                 (curSec == "Skills") ?
                   resume_json.skills.map(outputContent) :
                   (curSec == "Experience") ?
-                  resume_json.Experience.map(outputContent) :
-                  resume_json.Education.map(outputContent)
+                    resume_json.Experience.map(outputContent) :
+                      resume_json.Education.map(outputContent)
               }
             </div>
         </div>

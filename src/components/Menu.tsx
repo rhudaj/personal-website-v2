@@ -5,7 +5,7 @@ import './menu.css'
 function Navigation() {
   return (
     <nav>
-      <ul>
+      <ul className="NST">
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/Projects'>Projects</NavLink></li>
         <li><NavLink to='/School'>School</NavLink></li>

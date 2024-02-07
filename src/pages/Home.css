@@ -29,73 +29,114 @@
   margin-left: 50px;
 }
 
+/*--------------------------------------------------
+                About Me
+--------------------------------------------------*/
+
 #AboutMe {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-auto-flow: dense;
-  gap: 5% 5%;
+  grid-auto-flow: row;
+  gap: 5% 5%; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3em 3em;
 }
 
-
-#AboutMe img {
-  width: 100%;
+#AboutMe > img {
+  flex: 1 0 100px;
+  max-width: 80%;
+  height: 100%;
   /*-----*/
-  border-radius: 5%;
   object-fit: cover;
-  max-height: 600px;
+  border-radius: 5%;
 }
 
-#AboutMe .content {
-  width: 100%;
+#AboutMe > .content {
+  flex: 1 1 400px;
+  min-width: 300px;
   /*-----*/
-  font-size: 20px;
+  line-height: 35px;
   display: flex;
   flex-direction: column;
-  line-height: 35px;
   gap: 40px;
+}
+
+#AboutMe > .content p {
+  font-size: 20px;
 }
 
 #resume-section-select > h3:hover {
   text-decoration: underline;
 }
 
+/* RESUME SECTION */
+
+    #resume-section-select {
+      display: flex;
+      gap: 40px;
+      font-weight: bold;
+    }
+
+    #resume-section {
+      display: grid;
+      grid-template-columns: 50px repeat(1fr);
+    }
+
+      .SectionItem {
+        justify-content: space-between;
+      }
+
+        .SectionItem > .title {
+          font-weight: 800;
+          color: #DDDDDD;
+          /*----*/
+          white-space: nowrap;
+        }
+
+        .SectionItem > .description {
+          color: darkgrey;
+          /*----*/
+        }
 
 /*--------------------------------------------------
                 My Work (section)
 --------------------------------------------------*/
 
-#MyWork{
+#MyWork {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 3em;
 }
 
-#WorkItems {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5%;
-}
+  #WorkItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em 3em;
+    justify-content: center;
+  }
 
-.MyWorkItem {
-  min-width: 300px;
-  flex: 1 0;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-}
+      .MyWorkItem {
+        min-width: 20em;
+        flex: 1 0 100px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
 
-.MyWorkItem img {
-  /*Image Fit*/
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  /*Own Animation*/
-    transition: transform 0.5s;
-}
+          .MyWorkItem img {
+            /*fill the container*/
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            /*Own Animation*/
+              transition: transform 0.5s;
+          }
 
-.MyWorkItem:hover img {
-  transform: scale(1.1);  /*scale up image on hover*/
-}
+          .MyWorkItem:hover img {
+            transform: scale(1.1);  /*scale up image on hover*/
+          }
 
 /*--------------------------------------------------
               MyWorkItem Animation

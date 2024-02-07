@@ -1,4 +1,6 @@
 #FullMenu {
+  font-size: 1em;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,7 +15,6 @@
     position:fixed;
     top:0;
     z-index: 1000; /*top of page*/
-
 }
 
 #HiddenMenu {
@@ -25,9 +26,9 @@
   position:fixed;
   top:0;
   font-size: 80px;
-  z-index: 1000; /*top of page*/
+  z-index: 1000;        /*top of page*/
   transition: 0.5s;
-
+  z-index: 0;
 }
 
 #HiddenMenu :hover {

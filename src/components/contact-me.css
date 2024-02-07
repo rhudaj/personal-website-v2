@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 300px;
 }
 
     .ContactPoint {
@@ -27,6 +28,7 @@
 
 #ContactForm {
   min-width: 500px;
+  min-height: 400px;
 }
 
     #ContactForm input, textarea {

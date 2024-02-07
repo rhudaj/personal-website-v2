@@ -3,10 +3,65 @@
 ----------------------------------------*/
 #Art-Main-Div {
   margin-top: 150px;
+  /*-----*/
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
+
+/*----------------------------------------
+  Videos
+----------------------------------------*/
+
+#VideoScroll {
+  height: 350px;
+  /*------*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#VideoScroll > .controls {
+  width: 10%;
+  height: 100%;
+  /**/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls > video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px) saturate(0.5);
+}
+
+.controls > i {
+  font-size: 30px;
+  transition: 0.3s;
+  position:absolute;
+}
+
+.controls > i:hover {
+  font-size: 40px;
+  cursor: pointer;
+}
+
+
+#ActiveVideo {
+  height: 100%;
+  width: 100%;
+}
+
+#ActiveVideo > video {
+  height: 100%;
+  width: 100%;
+}
+
 
 /*----------------------------------------
   Images

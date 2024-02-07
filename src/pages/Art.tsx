@@ -1,6 +1,6 @@
 import './Art.css'
 import images_json from '../assets/ART/photos.json'
-import React, { useEffect, useState } from 'react';
+import  React, { useState, useEffect, useRef } from 'react';
 
 interface ImageProps {
   id: string;
@@ -67,10 +67,63 @@ function Images() {
   );
 }
 
+//----------------------------------------------------------------------
+
+function Videos() {
+  const [vidID, setVidID] = useState(1);
+  const numVideos = useRef(8)
+
+  const nextVid = () => {
+    if(vidID == numVideos.current) setVidID(1)
+    else setVidID(vidID + 1)
+  };
+
+  const prevVid = () => {
+    if(vidID == 1) setVidID(numVideos.current)
+    else setVidID(vidID - 1)
+  };
+
+  const getNext = () => {
+    if(vidID == numVideos.current) return 1;
+    else return vidID+1;
+  };
+
+  const getPrev = () => {
+    if(vidID == 1) return numVideos;
+    else return vidID-1;
+  };
+
+
+  return (
+    <div id="VideoScroll">
+        <div id="PreviousVideo" className="controls">
+          <video key={vidID} muted={true}>
+            <source src={`/videos/video${getPrev()}.mp4`} type="video/mp4"/>
+          </video>
+          <i className="fas fa-arrow-left" onClick={prevVid}/>
+        </div>
+        <div id="ActiveVideo">
+          <video key={vidID} autoPlay={true} loop={true} muted={true}>
+            <source src={`/videos/video${vidID}.mp4`} type="video/mp4"/>
+          </video>
+        </div>
+        <div id="NextVideo" className="controls">
+          <video key={vidID} muted={true}>
+            <source src={`/videos/video${getNext()}.mp4`} type="video/mp4"/>
+          </video>
+          <i className="fas fa-arrow-right" onClick={nextVid}/>
+        </div>
+    </div>
+
+  );
+}
+
 export function Art() {
   return (
     <div id="Art-Main-Div">
       <h1>Art</h1>
+      <h2>Videos, 3D Design / Animation</h2>
+      <Videos/>
       <h2>Photography</h2>
       <Images/>
     </div>

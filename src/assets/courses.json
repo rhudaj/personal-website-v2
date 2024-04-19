@@ -48,5 +48,10 @@
     "CS 350",
     "Operating Systems",
     "An introduction to the fundamentals of operating system function, design, and implementation. Topics include concurrency, synchronization, processes, threads, scheduling, memory management, file systems, device management, and security."
+  ],
+  [
+    "CS 489",
+    "Computational Audio",
+    "This is an 'Advanced Topics' course, offered at both the undergraduate and graduate level. The course will provide a self contained introduction to sound processing by computer. The course will have a strong practical focus.  Students will be encouraged to explore various hardware and software platforms for audio."
   ]
 ]

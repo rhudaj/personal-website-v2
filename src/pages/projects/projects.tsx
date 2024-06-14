@@ -3,7 +3,7 @@ import projects_json from '../../assets/projects.json';
 import { get_markdown } from '../../util/markdown'
 import ReactMarkdown from 'react-markdown'
 import { useState } from 'react';
-import { AnimatedCover } from '../../components/AnimatedCover';
+import { AnimatedCover } from '../../components/animatedCover/AnimatedCover';
 //---------------------------------------------------------------------
 
 interface InfoProps {

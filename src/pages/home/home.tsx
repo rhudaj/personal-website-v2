@@ -4,7 +4,7 @@ import './home.css'
 // ---- MODULES
 import { useState } from 'react';
 import { useTypingEffect } from "../../hooks/typing-effect"
-import { AnimatedCover } from '../../components/AnimatedCover';
+import { AnimatedCover } from '../../components/animatedCover/AnimatedCover';
 import { NavLink } from "react-router-dom";
 // ---- ASSETS
 import image from '../../assets/home/me.png';

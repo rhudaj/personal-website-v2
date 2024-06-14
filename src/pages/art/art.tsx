@@ -95,8 +95,8 @@ const Images: React.FC<{}> = () => {
     <div id="ImageDisplay">
       {
         images_json.map((link: string, i: number) => {
-          if ( link.startsWith('http:') ) link = 'https:' + link.slice(5);
-          return <ClickableImage key={i} id={`image-${i}`} src={link} />
+          const l = link.replace('http:', 'https://');
+          return <ClickableImage key={i} id={`image-${i}`} src={l} />
         }
         )
       }

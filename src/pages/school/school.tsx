@@ -1,6 +1,9 @@
+import './school.css'
 import { useState } from "react";
 import '@fortawesome/fontawesome-free/css/all.css';
-import './school.css'
+//Course info is stored in a JSON file
+import courses_json from '../../assets/courses.json';
+let courses = courses_json.slice(1);
 
 const opacity_transition = "0.7s";
 
@@ -71,10 +74,6 @@ function Course(props: {id: string, title: string, desc: string}) {
     </div>
   );
 }
-
-//Course info is stored in a JSON file
-import courses_json from '../assets/courses.json';
-let courses = courses_json.slice(1);
 
 export function School() {
   return (

@@ -1,26 +1,25 @@
+import './styles.css'
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'; // replaced BrowserRouter w' HashRouter
 import { Home, Projects, School, Art } from "./pages/index"
 import { Menu } from './components/Menu'
 import { ContactMe } from './components/Contact-me';
-import './styles.css'
 
 function Main() {
-  // SECTION: scroll to top anytime page changes
+  // Scroll to top anytime page changes
   const active_page = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [active_page]);
-  // END SECTION
 
   return (
     <div id="Main">
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/Projects' element={<Projects/>}></Route>
-        <Route path='/School' element={<School/>}></Route>
-        <Route path='/Art' element={<Art/>}></Route>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/projects' element={<Projects/>}></Route>
+        <Route path='/school' element={<School/>}></Route>
+        <Route path='/art' element={<Art/>}></Route>
       </Routes>
     </div>
   );
@@ -29,8 +28,8 @@ function Main() {
 function App() {
   return (
     <div id='App'>
-      <Menu />
-      <Main />
+      <Menu/>
+      <Main/>
       <ContactMe/>
     </div>
   );
@@ -38,8 +37,8 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );

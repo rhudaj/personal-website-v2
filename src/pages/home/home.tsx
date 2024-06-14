@@ -1,14 +1,18 @@
-import './Home.css'
-import image from '../assets/me.png';
-import work_1_img from '../assets/work-1.png'
-import work_2_img from '../assets/work-2.jpeg'
-import work_3_img from '../assets/work-3.png'
+//----------------------------------
+// ---- CSS
+import './home.css'
+// ---- MODULES
 import { useState } from 'react';
-import { useTypingEffect } from "../hooks/typing-effect"
-import { AnimatedCover } from '../components/AnimatedCover';
+import { useTypingEffect } from "../../hooks/typing-effect"
+import { AnimatedCover } from '../../components/AnimatedCover';
 import { NavLink } from "react-router-dom";
-import resume_json from '../assets/resume.json'; //Course info is stored in a JSON file
-//------------------
+// ---- ASSETS
+import image from '../../assets/home/me.png';
+import work_1_img from '../../assets/home/work-1.png'
+import work_2_img from '../../assets/home/work-2.jpeg'
+import work_3_img from '../../assets/home/work-3.png'
+import resume_json from '../../assets/home/resume.json'; //Course info is stored in a JSON file
+// ----------------------------------
 
 function AboutMe() {
   const [curSec, setCurSec] = useState("Skills");
@@ -77,9 +81,9 @@ export function MyWork() {
     <div id="MyWork">
       <h1>My Work</h1>
       <div id="WorkItems">
-        <MyWorkItem img={work_1_img} page='/Projects' heading='Projects' body='Check them out'/>
-        <MyWorkItem img={work_2_img} page='/School' heading='School' body='See my Coursework'/>
-        <MyWorkItem img={work_3_img} page='/Art' heading='Art' body = 'View my Artwork'/>
+        <MyWorkItem img={work_1_img} page='/projects' heading='Projects' body='Check them out'/>
+        <MyWorkItem img={work_2_img} page='/school' heading='School' body='See my Coursework'/>
+        <MyWorkItem img={work_3_img} page='/art' heading='Art' body = 'View my Artwork'/>
       </div>
     </div>
   );

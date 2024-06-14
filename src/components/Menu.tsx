@@ -7,9 +7,9 @@ function Navigation() {
     <nav>
       <ul className="NST">
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/Projects'>Projects</NavLink></li>
-        <li><NavLink to='/School'>School</NavLink></li>
-        <li><NavLink to='/Art'>Art</NavLink></li>
+        <li><NavLink to='/projects'>Projects</NavLink></li>
+        <li><NavLink to='/school'>School</NavLink></li>
+        <li><NavLink to='/art'>Art</NavLink></li>
       </ul>
     </nav>
   );

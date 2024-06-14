@@ -17,6 +17,7 @@ function ContactForm () {
 }
 
 function ContactInfo () {
+  const resume_path = "cv/resume.pdf";
   return (
     <div id="ContactInfo">
         <h1>Contact Me</h1>
@@ -31,9 +32,9 @@ function ContactInfo () {
         <div className="social-icons">
           <a href="https://www.linkedin.com/in/rhudaj"><i className="fa-brands fa-linkedin"/></a>
           <a href="https://www.instagram.com/rhudaj/"><i className="fa-brands fa-instagram"/></a>
-          <a href="https://github.com/RomanHudaj11"><i className="fa-brands fa-github"/></a>
+          <a href="https://github.com/rhudaj"><i className="fa-brands fa-github"/></a>
         </div>
-        <a href="CV/RomanHudaj_Resume.pdf" download="" className="red-button">Download CV</a>
+        <a href={resume_path} download="" className="red-button">Download CV</a>
       </div>
   );
 }

@@ -81,9 +81,8 @@
 
 #ImageDisplay > img {
   /*STRUCTURE*/
-    width: 100%; /*Important*/
-  /*STYLE*/
-    height: max-content; /*image fills the div*/
+    width: 100%;  /*Important*/
+    height: 100%; /*Important*/
   /*ANIMATION*/
     transition: .3s ease-in-out;
 }

@@ -95,7 +95,7 @@ const Images: React.FC<{}> = () => {
     <div id="ImageDisplay">
       {
         images_json.map((link: string, i: number) => {
-          const l = link.replace('http:', 'https://');
+          const l = link.replace('http:', 'https://');    // the url's come in without a proper format
           return <ClickableImage key={i} id={`image-${i}`} src={l} />
         }
         )

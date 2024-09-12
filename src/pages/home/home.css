@@ -34,10 +34,6 @@
 --------------------------------------------------*/
 
 #AboutMe {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-auto-flow: row;
-  gap: 5% 5%; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -46,7 +42,7 @@
 
 #AboutMe > img {
   flex: 1 0 100px;
-  max-width: 80%;
+  max-width: 50%;
   height: 100%;
   /*-----*/
   object-fit: cover;

@@ -5,6 +5,36 @@
     "description"
   ],
   [
+    "CS 451",
+    "Data-Intensive Distributed Computing",
+    "Introduces students to infrastructure for data-intensive computing, with a focus on abstractions, frameworks, and algorithms that allow developers to distribute computations across many machines.  Topics include core concepts (partitioning, replication, locality, consistency), computational models (MapReduce, dataflows, stream processing, bulk-synchronous parallel), and applications."
+  ],
+  [
+    "CS 480",
+    "Introduction to Machine Learning",
+    "Introduction to modeling and algorithmic techniques for machines to learn concepts from data. Generalization: underfitting, overfitting, cross-validation. Tasks: classification, regression, clustering. Optimization-based learning: loss minimization. regularization. Statistical learning: maximum likelihood, Bayesian learning. Algorithms: nearest neighbour, (generalized) linear regression, mixtures of Gaussians, Gaussian processes, kernel methods, support vector machines, deep learning, sequence learning, ensemble techniques. Large scale learning: distributed learning and stream learning. Applications: Natural language processing, computer vision, data mining, human computer interaction, information retrieval."
+  ],
+  [
+    "CS 486",
+    "Introduction to Artificial Intelligence",
+    "Goals and methods of artificial intelligence. Methods of general problem solving. Knowledge representation and reasoning. Planning. Reasoning about uncertainty. Machine learning. Multi-agent systems. Natural language processing."
+  ],
+  [
+    "CS 456",
+    "Computer Networks",
+    "An introduction to network architectures and protocols, placing emphasis on protocols used in the Internet. Specific topics include application layer protocols, network programming, transport protocols, routing, multicast, data link layer issues, multimedia networking, network security, and network management."
+  ],
+  [
+    "CS 348",
+    "Database Management",
+    "The main objective of this course is to introduce students to fundamentals of database technology by studying databases from three viewpoints: those of the database user, the database designer, and the database administrator. It teaches the use of a database management system (DBMS) by treating it as a black box, focusing only on its functionality and its interfaces. Topics include introduction to database systems, relational database systems, database design methodology, SQL and interfaces, database application development, concept of transactions, ODBC, JDBC, database tuning, database administration, and current topics (distributed databases, data warehouses, data mining)."
+  ],
+  [
+    "CS 349",
+    "User Interfaces",
+    "An introduction to contemporary user interface implementation concepts, including event abstraction, graphical components, layout, feedback, testing, accessibility, and architectures to develop user interfaces. One or more types of interface toolkit paradigms are considered."
+  ],
+  [
     "CS 240",
     "Data Structures and Data Management",
     "Introduction to widely used and effective methods of data organization, focusing on data structures, their algorithms, and the performance of these algorithms. Specific topics include priority queues, sorting, dictionaries, data structures for text processing."
@@ -33,16 +63,6 @@
     "CS 341",
     "Algorithms",
     "The study of efficient algorithms and effective algorithm design techniques. Program design with emphasis on pragmatic and mathematical aspects of program efficiency. Topics include divide and conquer algorithms, recurrences, greedy algorithms, dynamic programming, graph search and backtrack, problems without algorithms, NP-completeness and its implications."
-  ],
-  [
-    "CS 348",
-    "Database Management",
-    "The main objective of this course is to introduce students to fundamentals of database technology by studying databases from three viewpoints: those of the database user, the database designer, and the database administrator. It teaches the use of a database management system (DBMS) by treating it as a black box, focusing only on its functionality and its interfaces. Topics include introduction to database systems, relational database systems, database design methodology, SQL and interfaces, database application development, concept of transactions, ODBC, JDBC, database tuning, database administration, and current topics (distributed databases, data warehouses, data mining)."
-  ],
-  [
-    "CS 349",
-    "User Interfaces",
-    "An introduction to contemporary user interface implementation concepts, including event abstraction, graphical components, layout, feedback, testing, accessibility, and architectures to develop user interfaces. One or more types of interface toolkit paradigms are considered."
   ],
   [
     "CS 350",

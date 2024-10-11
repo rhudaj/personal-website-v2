@@ -1,5 +1,4 @@
 name: Deploy
-
 on:
   push:
     branches:
@@ -43,6 +42,9 @@ jobs:
         with:
           name: production-files
           path: ./dist
+
+      - name: Create CNAME file
+        run: echo 'roman-hudaj.com' > ./dist/CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

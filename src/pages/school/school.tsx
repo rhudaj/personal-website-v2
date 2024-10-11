@@ -2,9 +2,7 @@ import './school.css'
 import { useState } from "react";
 import '@fortawesome/fontawesome-free/css/all.css';
 //Course info is stored in a JSON file
-import courses_json from '../../assets/courses.json';
-let courses = courses_json.slice(1);
-
+import { courses, Course } from '../../assets/courses';
 const opacity_transition = "0.7s";
 
 function CourseNotes(props: {visible: boolean}) {
@@ -34,13 +32,13 @@ function CourseNotes(props: {visible: boolean}) {
   );
 }
 
-function Course(props: {id: string, title: string, desc: string}) {
+function CourseComponent(props: {c: Course}) {
   const [hasFocus, setHasFocus] = useState(false); //Changes style
   const [toggleInfo, setToggleInfo] = useState(false); //Course Description
 
   return (
     <div
-      key={props.id}
+      key={props.c.code}
       className={`Course ${hasFocus ? "focus" : "nonFocus"}`}
       onMouseEnter={()=>setHasFocus(true)}
       onMouseLeave={()=>{setHasFocus(false); setToggleInfo(false)}}
@@ -56,12 +54,12 @@ function Course(props: {id: string, title: string, desc: string}) {
       >
         {toggleInfo ? "▼" : "▶"}
       </p>
-      <p className="CourseID">{props.id}</p>
-      <p className="CourseTitle">{props.title}</p>
+      <p className="CourseID">{props.c.code.toUpperCase()}</p>
+      <p className="CourseTitle">{props.c.title}</p>
       <CourseNotes visible={hasFocus}/>
       <div className="ToggleInfo"
         style={{
-          maxHeight: toggleInfo ? 100 : 0,
+          maxHeight: toggleInfo ? "max-content" : 0,
           marginTop: toggleInfo ? 20 : 0,
           flexBasis: "100%",
           overflow: "hidden",
@@ -69,7 +67,10 @@ function Course(props: {id: string, title: string, desc: string}) {
           transition: toggleInfo ? "max-height 1.5s ease-out" : ""
         }}
       >
-        {props.desc}
+        <div>{props.c.descr}</div>
+        {
+          props.c.tech ? <div className="techDiv">{props.c.tech}</div> : ""
+        }
       </div>
     </div>
   );
@@ -80,8 +81,8 @@ export function School() {
     <div id="Courses">
       <>
       {
-        courses.map((c)=>{
-          return <Course id={c[0].toUpperCase()} title={c[1]} desc={c[2]}></Course>
+        courses.map((c: Course)=>{
+          return <CourseComponent c={c}></CourseComponent>
         })
       }
       </>

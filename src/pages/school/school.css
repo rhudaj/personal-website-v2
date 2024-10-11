@@ -28,3 +28,16 @@
   color: white;
   padding: 30px;
 }
+
+
+.ToggleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.techDiv {
+  border-top: 2px solid white;
+  padding-top: 10px;
+}

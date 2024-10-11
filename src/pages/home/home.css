@@ -65,6 +65,8 @@
 
 #resume-section-select > h3:hover {
   text-decoration: underline;
+  text-decoration-color: red;
+  text-underline-offset: 5px;
 }
 
 /* RESUME SECTION */

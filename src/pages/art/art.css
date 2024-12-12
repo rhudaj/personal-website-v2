@@ -2,11 +2,10 @@
   Main Div
 ----------------------------------------*/
 #Art-Main-Div {
-  margin-top: 150px;
-  /*-----*/
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
 /*----------------------------------------
@@ -14,63 +13,59 @@
 ----------------------------------------*/
 
 #VideoScroll {
-  height: 350px;
-  /*------*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-left: 10%;
-  margin-right: 10%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #VideoScroll > .controls {
-  width: 10%;
-  height: 100%;
-  /**/
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .controls > video {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  filter: blur(2px) saturate(0.5);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: blur(2px) saturate(0.5);
 }
 
 .controls > i {
-  font-size: 30px;
-  transition: 0.3s;
-  position:absolute;
+    font-size: 30px;
+    transition: 0.3s;
+    position: absolute;
 }
 
 .controls > i:hover {
-  font-size: 40px;
-  cursor: pointer;
+    font-size: 40px;
+    cursor: pointer;
 }
 
-
 #ActiveVideo {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 #ActiveVideo > video {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
-
 
 /*----------------------------------------
   Images
 ----------------------------------------*/
 
 #ImageDisplay {
-  /*STRUCTURE*/
+    /*STRUCTURE*/
     padding: 0 20% 0 20%;
-  /*CONTENT*/
+    /*CONTENT*/
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px 20px;
@@ -80,91 +75,40 @@
 /* <img> is wrapped in div (ImageContainer) to smooth the animations */
 
 #ImageDisplay > img {
-  /*STRUCTURE*/
-    width: 100%;  /*Important*/
+    /*STRUCTURE*/
+    width: 100%; /*Important*/
     height: 100%; /*Important*/
-  /*ANIMATION*/
-    transition: .3s ease-in-out;
+    /*ANIMATION*/
+    transition: 0.3s ease-in-out;
 }
 
 #ImageDisplay > img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 0px 5px #ccc; /*[horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color];*/
-  cursor: pointer;
-}
-
-/* IMAGE FOCUSED */
-
-#ScreenCover {
-  position: fixed;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-}
-
-.PopUp {
-  position: fixed;
-  padding: 10px;
-
-  /*CENTER IMAGE*/
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-  background-color: rgb(36, 36, 36);
-
-  display: flex;
-  flex-direction: column;
-}
-
-.PopUp > div {
-  display: flex;
-  align-items: center;
+    transform: scale(1.03);
+    box-shadow: 0 0 0px 5px #ccc; /*[horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color];*/
+    cursor: pointer;
 }
 
 .img-select {
-  font-size: 2em;
-  color: rgb(133, 133, 133);
-  user-select: none;
-  padding: 2em;
+    font-size: 2em;
+    color: rgb(133, 133, 133);
+    user-select: none;
+    padding: 2em;
 }
 
 .img-select:hover {
-  cursor: pointer;
-  color: white;
-  transform: scale(1.1);
+    cursor: pointer;
+    color: white;
+    transform: scale(1.1);
 }
 
-
-.PopUp > div > #ImageContainer {
-  min-height: 200px;
-  width: 50vw;
-  height: 80vh
+#ImageContainer {
+    min-height: 200px;
+    width: 50vw;
+    height: 80vh;
 }
 
 #ImageContainer > img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.x2close {
-  font-size: 1.5em;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 20px;
-
-  user-select: none;
-
-  transition: .3s;
-}
-
-.x2close:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }

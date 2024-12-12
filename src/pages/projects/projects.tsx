@@ -4,37 +4,28 @@ import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
 import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
 import { loadJson } from "../../util/loadJson";
+import { FocusedView } from "../../components/focusedView/focusedView";
+import { Project } from "../../types/types";
 //---------------------------------------------------------------------
 
-interface InfoProps {
-    title: string;
-    img: string;
-    readme_url: string;
-    closeHandler: () => void;
-}
-
-function ProjectInfo(props: InfoProps) {
-    const markdown = get_markdown(props.readme_url);
+function ProjectInfo(props: Project) {
+    const comment_regex = /<!--[\s\S]*?-->/g;
+    const markdown = get_markdown(props.readme).replace(comment_regex, "");
 
     return (
-        <div className="ProjectInfo FullWidth">
-            <h1>{props.title}</h1>
-            <ReactMarkdown className="Markdown" children={markdown} />
-            <span className="closeInfo" onClick={props.closeHandler}>
-                X
-            </span>
+        <div className="ProjectInfo">
+            <h1>{props.name}</h1>
+            <ReactMarkdown className="Markdown" >{markdown}</ReactMarkdown>
         </div>
     );
 }
 
-interface ThumbnailProps {
+function ProjectThumbnail(props: {
     title: string;
     img: string;
     n: number;
     onClick: () => void;
-}
-
-function ProjectThumbnail(props: ThumbnailProps) {
+}) {
     return (
         <div id={`Project-${props.n}`} className="Thumbnail">
             <div className="ProjectPreview">
@@ -51,57 +42,40 @@ function ProjectThumbnail(props: ThumbnailProps) {
 //---------------------------------------------------------------------
 
 export function Projects() {
-    const [selected, setSelected] = useState<number | undefined>(undefined);
-
-	const [projects, setProjects] = useState<any[]>([]);
 
     const thumbnails_dir = "/projects-assets";
+    const [selected, setSelected] = useState<number>(-1);
+	const [projects, setProjects] = useState<Project[]>([]);
 
 	// Load Assets
     useEffect(() => {
-        loadJson<any[]>("projects").then(setProjects);
+        loadJson<Project[]>("projects").then(setProjects);
     }, []);
 
-    const closeInfo = () => {
-        setSelected(undefined);
-    };
-
-    const CreateGrid = (): JSX.Element[] => {
-        // Map the json object to thumnails
-        let target_proj = undefined; //selected project's info
-
-        const grid = projects.map((proj, index) => {
-            if (selected != undefined && index == selected) target_proj = proj;
-            return (
-                <ProjectThumbnail
-                    title={proj[0]}
-                    img={`${thumbnails_dir}/proj-${index}.png`}
-                    n={index}
-                    onClick={() => setSelected(index)}
-                />
-            );
-        });
-
-        //Inject the selected <ProjectThumbnail>'s corresponding <ProjectInfo> element
-        if (selected != undefined && target_proj != undefined) {
-            const element2add = (
-                <ProjectInfo
-                    title={target_proj[0]}
-                    img={target_proj[1]}
-                    readme_url={target_proj[2]}
-                    closeHandler={closeInfo}
-                />
-            );
-            grid.splice(selected, 0, element2add);
-        }
-
-        return grid;
-    };
-
+    // Display the FocusedView on top of the grid (if a project is selected)
     return (
+        <>
+        {
+            (selected !== -1) && (
+                <FocusedView onClose={()=>setSelected(-1)}>
+                    <ProjectInfo {...projects[selected]}/>
+                </FocusedView>
+            )
+        }
         <div id="MyProjects">
             <h1>My Projects</h1>
-            <div id="ProjectsGrid"> {CreateGrid()} </div>
+            <div id="ProjectsGrid">
+                {projects.map((proj, i) => (
+                    <ProjectThumbnail
+                        key={i}
+                        title={proj.name}
+                        img={`${thumbnails_dir}/proj-${i}.png`}
+                        n={i}
+                        onClick={() => setSelected(i)}
+                    />
+                ))}
+            </div>
         </div>
+        </>
     );
 }

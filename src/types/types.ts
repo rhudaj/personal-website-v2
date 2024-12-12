@@ -12,3 +12,9 @@ export interface Resume {
     experience: string[][],
     education: string[][]
 }
+
+export interface Project {
+    name: string,
+    url: string,
+    readme: string
+}

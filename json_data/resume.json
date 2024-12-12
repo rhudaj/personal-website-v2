@@ -1,0 +1,54 @@
+{
+  "summary" : "Dynamic, agile software developer with rapid adaptability to emerging technologies, a keen aptitude for grasping intricate concepts and solving problems with automation. I am currently a CS student at the University of Waterloo. Check out what I've been up to on this site!",
+  "skills" : [
+    [
+      "Web Dev",
+      "React, Node, TypeScript, JavaScript, JSON, MVC Architecture, ..."
+    ],
+    [
+      "Databases",
+      "SQL, SQL Server, MySQL, ODBC, RDBMS, Physical/Logical Design"
+    ],
+    [
+      "Python",
+      "Pandas, Numpy, Selenium, PyTorch"
+    ],
+    [
+      "Big Data",
+      "Apache Spark, Hadoop Map Reduce, Java, Scala"
+    ],
+    [
+      "Other",
+      "C++, C, Alteryx, Excel"
+    ]
+  ],
+  "experience" : [
+    [
+      "Martinrea International",
+      "Student Engineer",
+      "Jan/22 - Aug/22"
+    ],
+    [
+      "Environics Analytics",
+      "Product Management Intern",
+      "Apr/23 - Sep/23"
+    ],
+    [
+      "StreamSix (TimePlay)",
+      "Product Assistant",
+      "May/24 - Sep/24"
+    ]
+  ],
+  "education" : [
+    [
+      "University of Waterloo",
+      "Bachelors of Computer Science, Honours",
+      "Sep/20 - Dec/24"
+    ],
+    [
+      "Ursula Franklin Academy",
+      "High School Diploma",
+      "Sep/16 - Jun/20"
+    ]
+  ]
+}

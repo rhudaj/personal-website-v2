@@ -1,32 +1,32 @@
 [
-  [
-    "Database Interface App",
-    "https://github.com/rhudaj/DatabaseInterfaceApp",
-    "https://raw.githubusercontent.com/rhudaj/DatabaseInterfaceApp/main/README.md"
-  ],
-  [
-    "Personal Website",
-    "https://github.com/rhudaj/personal-website-v2",
-    "https://raw.githubusercontent.com/rhudaj/personal-website-v2/main/README.md"
-  ],
-  [
-    "Job Tool",
-    "https://github.com/rhudaj/JobTool",
-    "https://raw.githubusercontent.com/rhudaj/JobTool/blob/main/README.md"
-  ],
-  [
-    "CHESS-CPP",
-    "https://github.com/rhudaj/CHESS-CPP",
-    "https://raw.githubusercontent.com/rhudaj/CHESS-CPP/main/README.md"
-  ],
-  [
-    "Notes Web App",
-    "https://github.com/rhudaj/NotesWebApp",
-    "https://raw.githubusercontent.com/rhudaj/NotesWebApp/main/ReadMe.md"
-  ],
-  [
-    "Reservation System",
-    "https://github.com/rhudaj/ResyBot",
-    "https://raw.githubusercontent.com/rhudaj/ResyBot/main/ReadMe.md"
-  ]
+  {
+    "name": "Database Interface App",
+    "url": "https://github.com/rhudaj/DatabaseInterfaceApp",
+    "readme": "https://raw.githubusercontent.com/rhudaj/DatabaseInterfaceApp/main/README.md"
+  },
+  {
+    "name": "Personal Website",
+    "url": "https://github.com/rhudaj/personal-website-v2",
+    "readme": "https://raw.githubusercontent.com/rhudaj/personal-website-v2/main/README.md"
+  },
+  {
+    "name": "Job Tool",
+    "url": "https://github.com/rhudaj/JobTool",
+    "readme": "https://raw.githubusercontent.com/rhudaj/JobTool/dnd/README.md"
+  },
+  {
+    "name": "CHESS-CPP",
+    "url": "https://github.com/rhudaj/CHESS-CPP",
+    "readme": "https://raw.githubusercontent.com/rhudaj/CHESS-CPP/main/README.md"
+  },
+  {
+    "name": "Notes Web App",
+    "url": "https://github.com/rhudaj/NotesWebApp",
+    "readme": "https://raw.githubusercontent.com/rhudaj/NotesWebApp/main/ReadMe.md"
+  },
+  {
+    "name": "Reservation System",
+    "url": "https://github.com/rhudaj/ResyBot",
+    "readme": "https://raw.githubusercontent.com/rhudaj/ResyBot/main/ReadMe.md"
+  }
 ]

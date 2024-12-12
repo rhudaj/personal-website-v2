@@ -1,0 +1,16 @@
+{
+    "email": "rhudaj@uwaterloo.ca",
+    "phone": "647-502-0512",
+    "socials": [
+        {
+            "name": "LinkedIn",
+            "link": "https://www.linkedin.com/in/rhudaj",
+            "icon": "fa-brands fa-linkedin"
+        },
+        {
+            "name": "GitHub",
+            "link": "https://github.com/rhudaj",
+            "icon": "fa-brands fa-github"
+        }
+    ]
+}

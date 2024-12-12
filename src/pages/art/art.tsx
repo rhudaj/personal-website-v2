@@ -2,60 +2,27 @@ import { loadJson } from "../../util/loadJson";
 import "./art.css";
 import React, { useState, useEffect, useRef } from "react";
 
-interface ImageProps {
-    id: string;
-    src: string;
-}
-
-interface FocusedImageProps {
-    children: React.ReactNode;
-    handleClose: () => void;
-}
-
-const FocusedImage: React.FC<FocusedImageProps> = (
-    props: FocusedImageProps
-) => {
-    return (
-        <div id="ScreenCover">
-            <div className="PopUp">
-                <div id="ImageContainer">
-                    <span className="x2close" onClick={props.handleClose}>
-                        X
-                    </span>
-                    {props.children}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const ClickableImage: React.FC<ImageProps> = (props: ImageProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    // prevent scrolling when an image is focused
-    useEffect(() => {
-        document.body.style.overflow = isOpen ? "hidden" : "auto";
-    }, [isOpen]);
-
-    const Regular = () => {
-        return (
-            <img
-                id={props.id}
-                src={props.src}
-                onClick={() => setIsOpen(true)}
-            />
-        );
-    };
-
-    const Focused = () => {
-        return (
-            <FocusedImage handleClose={() => setIsOpen(false)}>
-                <Regular />
-            </FocusedImage>
-        );
-    };
-
-    return isOpen ? <Focused /> : <Regular />;
+const FocusedView = (props: {
+	id: any,
+	src: string,
+	onNext: () => void,
+	onPrev: () => void,
+	onClose: () => void,
+}) => {
+	return (
+		<div id="ScreenCover">
+			<div className="PopUp">
+				<span className="x2close" onClick={props.onClose}>X</span>
+				<div>
+					<i className="fas fa-arrow-left img-select" onClick={props.onPrev} />
+					<div id="ImageContainer">
+						<img id={props.id} src={props.src} />
+					</div>
+					<i className="fas fa-arrow-right img-select" onClick={props.onNext} />
+				</div>
+			</div>
+		</div>
+	);
 };
 
 /* Version 2.0: getting images via http-request
@@ -98,12 +65,45 @@ const Images: React.FC<{}> = () => {
 */
 
 const Images = (props: { urls: string[] }) => {
-    return (
+
+	const [imgUrls, _] = useState<string[]>(props.urls);
+	const [activeImg, setActiveImg] = useState<number>(-1);
+
+    const nextImg = () => {
+        if (activeImg >= imgUrls.length-1) setActiveImg(0);
+        else setActiveImg(prev => prev + 1);
+    };
+
+    const prevImg = () => {
+        if (activeImg <= 0) setActiveImg(imgUrls.length-1);
+        else setActiveImg(prev => prev - 1);
+    };
+
+	useEffect(() => {
+		console.log("New active image:", activeImg, " url: ", props.urls[activeImg]);
+		document.body.style.overflow = (activeImg != -1) ? "hidden" : "auto";
+	}, [activeImg]);
+
+	if (activeImg != -1) {
+		return (
+			<FocusedView
+				id={`image-${activeImg}`}
+				src={props.urls[activeImg]}
+				onNext={nextImg}
+				onPrev={prevImg}
+				onClose={() => setActiveImg(-1)}
+			/>
+		);
+	} else return (
         <div id="ImageDisplay">
-            {props.urls.map((url: string, i: number) => {
-                const l = url.replace("http:", "https://"); 	// the url's come in without a proper format
-                return <ClickableImage key={i} id={`image-${i}`} src={l} />;
-            })}
+            {props.urls.map((url: string, i: number) => (
+				<img
+					key={i}
+					id={`image-${i}`}
+					src={url}
+					onClick={() => setActiveImg(i)}
+				/>
+			))}
         </div>
     );
 };
@@ -113,6 +113,8 @@ const Images = (props: { urls: string[] }) => {
 const Videos: React.FC<{}> = () => {
     const [vidID, setVidID] = useState(1);
     const numVideos = useRef(8); // *** constant, set
+
+	const videos_path = "/videos"; // relative to 'public' folder
 
     const nextVid = () => {
         if (vidID == numVideos.current) setVidID(1);
@@ -134,7 +136,6 @@ const Videos: React.FC<{}> = () => {
         else return vidID - 1;
     };
 
-    const videos_path = "/videos"; // relative to 'public' folder
     const get_videoPath = (id: number) => {
         return `${videos_path}/video${id}.mp4`;
     };

@@ -121,9 +121,28 @@
   flex-direction: column;
 }
 
-.PopUp > #ImageContainer {
+.PopUp > div {
+  display: flex;
+  align-items: center;
+}
+
+.img-select {
+  font-size: 2em;
+  color: rgb(133, 133, 133);
+  user-select: none;
+  padding: 2em;
+}
+
+.img-select:hover {
+  cursor: pointer;
+  color: white;
+  transform: scale(1.1);
+}
+
+
+.PopUp > div > #ImageContainer {
   min-height: 200px;
-  width: 80vw;
+  width: 50vw;
   height: 80vh
 }
 

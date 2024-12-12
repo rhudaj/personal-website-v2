@@ -55,6 +55,8 @@ export function Projects() {
 
 	const [projects, setProjects] = useState<any[]>([]);
 
+    const thumbnails_dir = "/projects-assets";
+
 	// Load Assets
     useEffect(() => {
         loadJson<any[]>("projects").then(setProjects);
@@ -73,7 +75,7 @@ export function Projects() {
             return (
                 <ProjectThumbnail
                     title={proj[0]}
-                    img={proj[1]}
+                    img={`${thumbnails_dir}/proj-${index}.png`}
                     n={index}
                     onClick={() => setSelected(index)}
                 />
@@ -86,7 +88,7 @@ export function Projects() {
                 <ProjectInfo
                     title={target_proj[0]}
                     img={target_proj[1]}
-                    readme_url={target_proj[3]}
+                    readme_url={target_proj[2]}
                     closeHandler={closeInfo}
                 />
             );

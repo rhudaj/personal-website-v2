@@ -6,17 +6,14 @@ import { useTypingEffect } from "../../hooks/typing-effect"
 import { AnimatedCover } from '../../components/animatedCover/AnimatedCover';
 import { NavLink } from "react-router-dom";
 // ---- ASSETS
-import image from '../../assets/home/me.png';
-import work_1_img from '../../assets/home/work-1.png'
-import work_2_img from '../../assets/home/work-2.jpeg'
-import work_3_img from '../../assets/home/work-3.png'
 import { Resume } from '../../types/types';
 import { loadJson } from '../../util/loadJson';
 // ----------------------------------
 
+const assetsPath = '/home-assets';
+
 function AboutMe() {
   const [curSec, setCurSec] = useState("Skills");
-
   const [resume, setResume] = useState<Resume|null>(null);
 
   useEffect(() => {
@@ -38,7 +35,7 @@ function AboutMe() {
   if (resume == null) return <div>Loading...</div>;
   return (
     <div id="AboutMe">
-        <img src={image}/>
+        <img src={`${assetsPath}/me.png`}/>
         <div className="content">
             <h1>About Me</h1>
             <p>{resume.summary}</p>
@@ -88,9 +85,9 @@ export function MyWork() {
     <div id="MyWork">
       <h1>My Work</h1>
       <div id="WorkItems">
-        <MyWorkItem img={work_1_img} page='/projects' heading='Projects' body='Check them out'/>
-        <MyWorkItem img={work_2_img} page='/school' heading='School' body='See my Coursework'/>
-        <MyWorkItem img={work_3_img} page='/art' heading='Art' body = 'View my Artwork'/>
+        <MyWorkItem img={`${assetsPath}/work-1.png`} page='/projects' heading='Projects' body='Check them out'/>
+        <MyWorkItem img={`${assetsPath}/work-2.png`} page='/school' heading='School' body='See my Coursework'/>
+        <MyWorkItem img={`${assetsPath}/work-3.png`} page='/art' heading='Art' body = 'View my Artwork'/>
       </div>
     </div>
   );

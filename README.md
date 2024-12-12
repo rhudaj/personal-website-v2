@@ -1,17 +1,31 @@
-### Overview
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-This is the second version of my personal website. The first version was built using HTML, CSS, and JavaScript. This version is built using React. The website is hosted on GitHub Pages and can be accessed [here](https://josephmck.github.io/personal-website-v2/).
+This project is a personal website that contains information about myself (Roman Hudaj). The website is built using React/TypeScript and is hosted on GitHub Pages.
 
-### Features
+View the finished product here: [roman-hudaj.com](https://roman-hudaj.com)
+
+### Built With
+
+* [![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)](#)
+* [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](#)
+* [![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)](#)
+* [![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)](#)
+* [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff)](#)
+
+### Key Features
+
+- Every list of items you see on the page, such as my resume, projects, courses and artwork are all dynamically generated from other websites and APIs. Hence, the site essentially updates by itself. For example, within the 'Art' sub-page all the photos and videos you see are pulled from social media platforms using their APIs. The coursework-section is pulled from the University of Waterloo with web-crawling.
+- The website uses React Router to handle routing.
+- The website is hosted on GitHub Pages.
+- The contact page has a form that sends an email to me when submitted.
+
+### Navigation
 
 - **Home Page**: The home page contains a brief introduction about me and a list of my skills.
 - **Projects Page**: The projects page contains a list of my projects. Each project has a title, description, and a link to the project's GitHub repository.
-
-### Technologies Used
-
-- **React**: The UI is built using React.
-- **React Router**: The website uses React Router to handle routing.
-- **GitHub Pages**: The website is hosted on GitHub Pages.
+- **Art Page**: The art page contains a gallery of my artwork.
+- **School Page**: The courses page contains a list of courses I have taken at the University of Waterloo.
 
 ### How to Run
 

@@ -1,5 +1,5 @@
 {
-  "Summary" : "Dynamic, agile software developer with rapid adaptability to emerging technologies, a keen aptitude for grasping intricate concepts and solving problems with automation. I am currently a CS student at the University of Waterloo. Check out what I've been up to on this site!",
+  "summary" : "Dynamic, agile software developer with rapid adaptability to emerging technologies, a keen aptitude for grasping intricate concepts and solving problems with automation. I am currently a CS student at the University of Waterloo. Check out what I've been up to on this site!",
   "skills" : [
     [
       "Web Dev",
@@ -11,14 +11,18 @@
     ],
     [
       "Python",
-      "Pandas, Numpy, Selenium"
+      "Pandas, Numpy, Selenium, PyTorch"
+    ],
+    [
+      "Big Data",
+      "Apache Spark, Hadoop Map Reduce, Java, Scala"
     ],
     [
       "Other",
       "C++, C, Alteryx, Excel"
     ]
   ],
-  "Experience" : [
+  "experience" : [
     [
       "Martinrea International",
       "Student Engineer",
@@ -35,7 +39,7 @@
       "May/24 - Sep/24"
     ]
   ],
-  "Education" : [
+  "education" : [
     [
       "University of Waterloo",
       "Bachelors of Computer Science, Honours",

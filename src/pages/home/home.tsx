@@ -1,8 +1,7 @@
-//----------------------------------
 // ---- CSS
 import './home.css'
 // ---- MODULES
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTypingEffect } from "../../hooks/typing-effect"
 import { AnimatedCover } from '../../components/animatedCover/AnimatedCover';
 import { NavLink } from "react-router-dom";
@@ -11,11 +10,18 @@ import image from '../../assets/home/me.png';
 import work_1_img from '../../assets/home/work-1.png'
 import work_2_img from '../../assets/home/work-2.jpeg'
 import work_3_img from '../../assets/home/work-3.png'
-import resume_json from '../../assets/home/resume.json'; //Course info is stored in a JSON file
+import { Resume } from '../../types/types';
+import { loadJson } from '../../util/loadJson';
 // ----------------------------------
 
 function AboutMe() {
   const [curSec, setCurSec] = useState("Skills");
+
+  const [resume, setResume] = useState<Resume|null>(null);
+
+  useEffect(() => {
+    loadJson<Resume>('resume').then(setResume);
+  }, []);
 
   const outputContent = (sectionItem: any[])=> {
     return (
@@ -29,12 +35,13 @@ function AboutMe() {
     );
   };
 
+  if (resume == null) return <div>Loading...</div>;
   return (
     <div id="AboutMe">
         <img src={image}/>
         <div className="content">
             <h1>About Me</h1>
-            <p>{resume_json["Summary"]}</p>
+            <p>{resume.summary}</p>
             <div id="resume-section-select">
                 <h3 onClick={()=>setCurSec("Skills")}>Skills</h3>
                 <h3 onClick={()=>setCurSec("Experience")}>Experience</h3>
@@ -43,10 +50,10 @@ function AboutMe() {
             <div id="resume-section">
               {
                 (curSec == "Skills") ?
-                  resume_json.skills.map(outputContent) :
+                  resume.skills.map(outputContent) :
                   (curSec == "Experience") ?
-                    resume_json.Experience.map(outputContent) :
-                      resume_json.Education.map(outputContent)
+                    resume.experience.map(outputContent) :
+                      resume.education.map(outputContent)
               }
             </div>
         </div>

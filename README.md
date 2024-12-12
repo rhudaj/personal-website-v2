@@ -15,7 +15,7 @@ View the finished product here: [roman-hudaj.com](https://roman-hudaj.com)
 
 ### Key Features
 
-- Every list of items you see on the page, such as my resume, projects, courses and artwork are all dynamically generated from other websites and APIs. Hence, the site essentially updates by itself. For example, within the 'Art' sub-page all the photos and videos you see are pulled from social media platforms using their APIs. The coursework-section is pulled from the University of Waterloo with web-crawling.
+- Every list of items you see on the page, such as my resume, projects, courses and artwork are all dynamically generated from other websites and APIs. Hence, the site essentially updates by itself. For example, within the 'Art' sub-page all the photos and videos you see are pulled from social media platforms using their APIs. The coursework-section is pulled from the University of Waterloo with web-crawling. Project descriptions are pulled from GitHub read-me files.
 - The website uses React Router to handle routing.
 - The website is hosted on GitHub Pages.
 - The contact page has a form that sends an email to me when submitted.

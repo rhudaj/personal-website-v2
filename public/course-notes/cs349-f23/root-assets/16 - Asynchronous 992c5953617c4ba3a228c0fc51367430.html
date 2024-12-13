@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>16 - Asynchronous</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="992c5953-617c-4ba3-a228-c0fc51367430" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">16 - Asynchronous</h1><p class="page-description"></p></header><div class="page-body"><p id="83a982e4-7c0f-4b48-af7a-fb54df20b436" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Responsive UI </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="0703ab94-edc5-4f52-830b-cc805279c22e" class="bulleted-list"><li style="list-style-type:disc">not about layout</li></ul><ul id="65a9916b-b62b-4827-b510-3641f4ea9f84" class="bulleted-list"><li style="list-style-type:disc">delivers feedback in timely manner</li></ul><ul id="1948c7bd-4812-4bde-9f95-02eddbc19e61" class="bulleted-list"><li style="list-style-type:disc">2  Ways<ul id="0012bdf1-ca4b-44fa-adf4-2e9c15f037f4" class="bulleted-list"><li style="list-style-type:circle">Improve <strong>performance (make the backend faster) </strong></li></ul><ul id="179d1661-6b68-4da2-b765-5c49fd256ddf" class="bulleted-list"><li style="list-style-type:circle"><strong>Responsiveness</strong><ul id="e2d7331e-c500-4208-891d-7cb86cc4c69e" class="bulleted-list"><li style="list-style-type:square">improve feedback to meet expectations (same speed)</li></ul><ul id="72444ac3-2f68-4ebc-914a-3f39b42f5c34" class="bulleted-list"><li style="list-style-type:square">most important factor in user satisfaction</li></ul></li></ul></li></ul><h2 id="3856388c-76c5-4387-83a7-7507b0ac1562" class="">Responsiveness </h2><p id="3cfc9a8f-2ba2-4d31-9f7b-15804c16ffad" class="">Factors of <strong>responsiveness</strong></p><ul id="411db4ff-616e-4ec6-aa2b-cb43d90150b4" class="bulleted-list"><li style="list-style-type:disc"><strong>User Expectations: </strong>how quick you think a task should be done</li></ul><ul id="a8cbd587-a096-43a8-b1e5-c3f829322ea0" class="bulleted-list"><li style="list-style-type:disc">Application and Interface design (feedback)</li></ul><hr id="2dd4112e-ef13-4afc-a5ce-457e1d4c7108"/><p id="409222ce-6655-40be-91e1-79f720256d91" class=""><strong><strong><strong>Perceived Time </strong></strong></strong></p><p id="ce723c68-d7df-4cea-829d-28b383ed1e10" class="">minimum time to detect a change: <strong><strong><strong><strong><strong>10ms </strong></strong></strong></strong></strong></p><ul id="14aba640-e6fe-4425-9284-61be7f6ad2bb" class="bulleted-list"><li style="list-style-type:disc">input latency should be less than this</li></ul><p id="82f5a9ff-3a2d-40a6-a89c-1df1f105d759" class="">maximum interval between cause-effect events: <strong><strong><strong><strong><strong><strong>140ms </strong></strong></strong></strong></strong></strong></p><ul id="d41a4862-3f2e-4cb8-80d8-2067e33326b9" class="bulleted-list"><li style="list-style-type:disc">anything more is perceived as slow </li></ul><p id="6dc0197e-8538-40cc-959f-377f7f665577" class="">time to prepare for a conscious cognitive task: <strong><strong><strong><strong>10s </strong></strong></strong></strong></p><ul id="141c978b-d94a-4241-9c50-09a29677cdab" class="bulleted-list"><li style="list-style-type:disc">ie: word document loading </li></ul><ul id="811388ee-84e1-4922-81f0-6b41da86a4c4" class="bulleted-list"><li style="list-style-type:disc">you could display an image of the last save while loading </li></ul><hr id="d55e5712-73dd-4aad-a335-135b989533b5"/><p id="3cbca186-9d45-4bd7-b1a5-8a4681d55e46" class="">We expect higher latency for something we are closer to: </p><ul id="e968ced1-3d22-4221-ac45-6bb0af3c9634" class="bulleted-list"><li style="list-style-type:disc"><strong>dragging &gt; tapping &gt; indirect </strong></li></ul><figure id="2bff2fb1-7931-47db-ae37-3930dab6aa41" class="image"><a href="16%20-%20Asynchronous%20992c5953617c4ba3a228c0fc51367430/Screen_Shot_2023-11-26_at_15.28.01.png"><img style="width:240px" src="16%20-%20Asynchronous%20992c5953617c4ba3a228c0fc51367430/Screen_Shot_2023-11-26_at_15.28.01.png"/></a></figure><hr id="36e457ed-9ec8-45c1-9011-308689d87cb1"/><p id="6d8e26d1-1ecd-4f3a-a5d5-8d1d339bc316" class=""><strong>Slow Performance → keep UI responsive </strong></p><ul id="9904cada-9024-457e-b616-e9d247977422" class="bulleted-list"><li style="list-style-type:disc">Progress feedback </li></ul><ul id="28e6bdf9-8e5f-4fd1-9089-dfde5697df74" class="bulleted-list"><li style="list-style-type:disc">confirm user actions </li></ul><ul id="28fba680-261c-4ec2-bc1f-63b6c05c4106" class="bulleted-list"><li style="list-style-type:disc">let them perform other tasks</li></ul><ul id="501745e2-c629-4818-b226-4ca59991a8cd" class="bulleted-list"><li style="list-style-type:disc">anticipate common requests (fetch data below scroll view)</li></ul><ul id="6981e8a4-305f-4bc1-9b1d-9abaa00651f7" class="bulleted-list"><li style="list-style-type:disc">allow task to be paused/cancelled </li></ul><hr id="c06204c7-b12c-4ae9-87b3-e26f084bc4a0"/><p id="89341f76-a652-4ba0-9c97-32aa0dda78dd" class="">For operations more than 1 s </p><ol type="1" id="985986d9-c565-4e4b-a2a1-7a56e2a5d97e" class="numbered-list" start="1"><li><mark class="highlight-red"><strong>display busy/progress bar </strong></mark></li></ol><ul id="c5d0d5f0-5e4a-4ea8-ba0b-c08e85d9f7ab" class="bulleted-list"><li style="list-style-type:disc">show work remaining, not work completed </li></ul><ol type="1" id="554d90ad-8686-439e-bbfa-564a03719868" class="numbered-list" start="2"><li><mark class="highlight-orange"><strong>Skeleton screen </strong></mark>(get a preview of what the page will look like). Helps people adjust for what will appear. </li></ol><hr id="feed52d2-4a92-4f38-a16e-be650e5395e0"/><p id="91695374-e3e4-4205-b765-b6a021f0c273" class=""><mark class="highlight-red"><strong>Progressive Loading </strong></mark></p><ul id="0f3e75d4-f74b-4dc5-bcbb-2efd0144b645" class="bulleted-list"><li style="list-style-type:disc">for loading data: start as low resolution, then work up to high resolution </li></ul><p id="1216941b-b657-4485-97e9-94b666d96d79" class=""><mark class="highlight-red"><strong>Predicting Next Operation </strong></mark></p><ul id="1f185ccc-d474-4821-a94e-f883bb2dc48a" class="bulleted-list"><li style="list-style-type:disc">anticipate what people will do (quick if your right) </li></ul><ul id="83d2034d-c39d-4328-b5e2-c7f9d6f3976a" class="bulleted-list"><li style="list-style-type:disc">eg: pre-downloading linked pages to current one </li></ul><p id="699fec68-4579-4b74-868a-16fd19a07d0d" class=""><mark class="highlight-red"><strong>Graceful Degradation of Feedback </strong></mark></p><ul id="e19b111a-0e4f-4788-8283-50d5d1ef6b2d" class="bulleted-list"><li style="list-style-type:disc">simplify feedback </li></ul><ul id="b60295bd-f218-4b19-9b95-30aafa5a44c7" class="bulleted-list"><li style="list-style-type:disc">eg: window manager renders rectangle outline for window drag. Only render when done dragging </li></ul><ul id="2b2bd653-fbf0-4fc7-a6c8-d27e2b3ddde8" class="bulleted-list"><li style="list-style-type:disc">eg: reduce resolution for pan</li></ul><hr id="a8fca8f8-f4f3-44e6-833a-b3a453821c03"/><p id="65272689-3e09-461c-9e95-5a5e5f9e2a5a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Long Tasks</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="0756ad03-0301-4f35-9eeb-7c546b257366" class="bulleted-list"><li style="list-style-type:disc">keep UI responsive</li></ul><ul id="7eb969d0-b59e-4113-ba29-ee14829c5a93" class="bulleted-list"><li style="list-style-type:disc">progress feedback </li></ul><ul id="608105bf-0d3a-4605-a117-1ee0f2210f47" class="bulleted-list"><li style="list-style-type:disc">allow task to be paused/cancelled </li></ul><hr id="16ad1eeb-b8cf-4ae5-99db-d0f90a8fe33f"/><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange"><strong>Blocking (Demo) </strong></mark></summary><div class="indented"><ul id="e871ad88-5d6c-4053-9cc5-208fe6ee67d7" class="bulleted-list"><li style="list-style-type:disc">UI is blocked while a long task finishes </li></ul><ul id="f4033580-9348-47c5-8ac8-bbd6faeac5b2" class="bulleted-list"><li style="list-style-type:disc">function (setup) has to start and end for the next frame to render </li></ul></div></details><hr id="c266f7af-32e3-4097-a517-120492a8c295"/><p id="9038f23f-325f-49b7-8a3f-7f06b9fefc63" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Multi-Threading</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="2ab6d951-e539-41e5-b90d-62422a75f3e6" class="bulleted-list"><li style="list-style-type:disc">reduces blocking </li></ul><ul id="1c3157db-0576-496e-9a14-adbb36c5473b" class="bulleted-list"><li style="list-style-type:disc">concurrency risks: two threads updating a variable </li></ul><ul id="5da1321e-819a-4c46-958f-985151f89d7f" class="bulleted-list"><li style="list-style-type:disc">Browsers support <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>worker threads</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="15a4458d-8dc9-4b6b-8ce0-28b3f99ee1e2" class="bulleted-list"><li style="list-style-type:circle"><strong>dedicated workers </strong>(most common)</li></ul><ul id="3768c6ba-cda8-4a9f-a424-111720bd13ab" class="bulleted-list"><li style="list-style-type:circle">shared workers</li></ul><ul id="05dad3a5-fb83-441c-9e7f-4c7c5e4783c0" class="bulleted-list"><li style="list-style-type:circle">service workers </li></ul></li></ul><hr id="8fad9719-9d9a-4f3f-9a15-76c2abdb1e75"/><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange"><strong>Worker (Demo) </strong></mark></summary><div class="indented"><ul id="6166f2bd-75b2-4c87-931e-c237a351222c" class="bulleted-list"><li style="list-style-type:disc">long task is done on a worker thread </li></ul><ul id="8b52a816-5b82-4a1e-893a-ba41bc51a979" class="bulleted-list"><li style="list-style-type:disc">UI is not blocked and we can have a progress bar that updates</li></ul><ul id="76305c18-8a61-49c9-b82f-c8268946b254" class="bulleted-list"><li style="list-style-type:disc">html: <code>&lt;progress&gt;</code> tag</li></ul><ul id="b9f877a6-79d2-4cd0-8697-6a1a1a1fd305" class="bulleted-list"><li style="list-style-type:disc">main: <code>new Worker(new URL(&quot;./generate.ts&quot;, import.meta.url)); </code><ul id="58f30366-1cb1-47a3-ae67-3c27cb4bcd7c" class="bulleted-list"><li style="list-style-type:circle"><code>&quot;./generate.ts&quot;</code> : code to run while thread runs </li></ul></li></ul><ul id="633f43ad-cbbf-4636-9692-4e35457cd438" class="bulleted-list"><li style="list-style-type:disc">instead of calling the long task function, <code>generate()</code>, you do: <code>worker.postMessage(command: &quot;generate&quot;, ...)</code><ul id="40d62cbe-2187-47f1-ae4c-7a07aee03f88" class="bulleted-list"><li style="list-style-type:circle">then you have to tell worker what to do with a <em>“generate” </em>message (<code>worker.addEventListener(&quot;message&quot;, ...)</code>) </li></ul></li></ul><ul id="302dd675-53d0-4fd8-b286-15f8b8b37c6d" class="bulleted-list"><li style="list-style-type:disc">the worker thread can do <code>postMessage()</code> to send to the main thread </li></ul></div></details><hr id="12923d73-5b50-4bbe-a12f-f231506349bf"/><p id="ecaecd07-6753-4cde-a006-31a311e86fce" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Fetch API </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="5fc67a7e-b825-4d0e-9eac-eec702cf5fd8" class="bulleted-list"><li style="list-style-type:disc">interface for fetching resources across the web </li></ul><ul id="2da90a03-3e65-4eb5-b3ac-c5d7d8bf4c66" class="bulleted-list"><li style="list-style-type:disc">Global <code>fetch(url)</code> function<ul id="dcc576ef-62fc-478a-bd05-24f0594e21e0" class="bulleted-list"><li style="list-style-type:circle">starts the process of fetching from the network, returning <code>Promise</code><strong><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong></strong>which is fulfilled once response is available </li></ul></li></ul><ul id="419edf53-5d1e-4dfe-adc0-c212ad430cc2" class="bulleted-list"><li style="list-style-type:disc">Response object: JSON, handling errors </li></ul><hr id="b94e97fb-e406-460f-a5a6-a8857fc158a6"/><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange"><strong>Fetch (Demo) </strong></mark></summary><div class="indented"><ul id="744cdca6-dff5-4b6a-a6fc-758c82bc33ca" class="bulleted-list"><li style="list-style-type:disc">get’s JSON data from different API’s through the network</li></ul><ul id="ae21a1f7-3498-4ba8-a2cb-e3e17ac96f28" class="bulleted-list"><li style="list-style-type:disc">displays “Fetching” while the <em>Promise</em> is being fulfilled </li></ul><pre id="5db6e941-43f3-4156-80d8-de2fd4d36a34" class="code"><code>spinner.style.display = &quot;flex&quot; //show it 
+
+fetch(url).then(
+	(response) =&gt; response.json(), //success
+	(reason) -&gt; console.error(reason); //error
+) //once this primise is fullfilled...
+.then( 
+	(data) -&gt; (results.innerText = JSON.stringify(data, null, 2))
+)
+.then(
+	() =&gt; spinner.style.display = &quot;none&quot; //hide it
+); </code></pre><p id="5921decb-bc3d-4793-b89c-23f7e27ee13b" class="">
+</p></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

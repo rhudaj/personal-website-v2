@@ -1,0 +1,775 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DDL</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="714a51d2-2ac3-4b76-8200-4acdc0986320" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/document_purple.svg"/></div><h1 class="page-title">DDL</h1><p class="page-description"></p></header><div class="page-body"><p id="6ec3df6f-9d90-45b5-970a-2f85eaf826ad" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Overview </strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="0a351263-f284-4d4e-9bd8-63df520e3b52" class="bulleted-list"><li style="list-style-type:disc">Create, Insert, Update</li></ul><ul id="a761d4ed-1535-4182-a46e-1fe770573edf" class="bulleted-list"><li style="list-style-type:disc">Integrity Constraints</li></ul><ul id="46fc33c7-3828-4bf7-95f8-a494e085f170" class="bulleted-list"><li style="list-style-type:disc">Views</li></ul><ul id="d3ce65e7-72e3-418b-bb9f-aad2314adf42" class="bulleted-list"><li style="list-style-type:disc">Triggers</li></ul><ul id="8b0eee6d-4b5a-4fbd-963f-55b63b214627" class="bulleted-list"><li style="list-style-type:disc">Transaction Authorization</li></ul><hr id="aa893e98-9072-4195-a4c5-ca26c1bca21c"/><h2 id="d2ce085a-52a7-4923-90b6-4b4df7b9cb3b" class=""><mark class="highlight-orange">Create Table</mark></h2><ul id="1aca8bf3-7fbe-4c2b-ad9a-3946f11b9cd5" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong>Syntax</strong></strong></strong></strong></strong></strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="486fbcfd-8fd6-41e9-9ced-77621de1bbfd" class="code"><code class="language-SQL">CREATE TABLE Name (
+	attr_1 type [not null]
+	...
+	attr_n type [not null]
+	primary key (attr_i)
+	foreign key (attri_n)
+)</code></pre><p id="cf1e5e72-523b-4bb2-91df-c3081be9e718" class="">Sets 4 types of <strong>integrity constraints</strong>: </p><ol type="1" id="8301641d-1007-466d-a2e0-36978cee2d2a" class="numbered-list" start="1"><li>Data Type</li></ol><ol type="1" id="9ce39937-49b8-4b59-a8e6-afbce2cf67f7" class="numbered-list" start="2"><li><mark class="highlight-blue"><code><strong>not null</strong></code></mark></li></ol><ol type="1" id="40e60db1-5d18-4f16-bdb3-1f7ec383f023" class="numbered-list" start="3"><li><mark class="highlight-blue"><strong><code>primary key</code></strong></mark></li></ol><ol type="1" id="ee6cd1c4-e40f-4148-95b7-3c95294a62b4" class="numbered-list" start="4"><li><mark class="highlight-blue"><strong><code>foreign key</code></strong></mark></li></ol><p id="a2cdcf83-72e2-4b30-aa51-2324e8b73ac7" class="">Keys can be tuples</p></details></li></ul><ul id="48c33bca-b8bb-48f5-a44c-5ff4423bf4eb" class="block-color-default toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>EX</strong></mark></summary><figure id="4628d1d6-b020-463d-8bbe-c1ea407345f2" class="image" style="text-align:center"><a href="DDL%20714a51d22ac34b7682004acdc0986320/IMG_D9F543556C7A-1.jpeg"><img style="width:384px" src="DDL%20714a51d22ac34b7682004acdc0986320/IMG_D9F543556C7A-1.jpeg"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4188cea6-1ac0-4e13-812c-1006126d19f8" class="code code-wrap"><code class="language-SQL">create table AUTHOR (
+	aid integer not null,
+	name varchar(10) not null, 
+	primary key (aid)
+)</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="56ca3329-e3b9-40a2-bce3-6a2a579bd40d" class="code code-wrap"><code class="language-SQL">create table PUBLICATION (
+	pubid integer not null,
+	title varchar(25) not null,
+	primary key (pubid)
+)</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="62f31874-cc43-467b-aa5f-f31f8d597f17" class="code code-wrap"><code class="language-SQL">create table WROTE (
+	author integer not null, 
+	publication integer not null, 
+	primary key (author, publication), 
+	foreign key (author) references AUTHOR,
+	foreign key (publication) references PUBLICATION
+)</code></pre><figure id="f817d8d0-0d00-49c1-8c25-8caa8e8b890b" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mi>U</mi><mi>T</mi><mi>H</mi><mi>O</mi><mi>R</mi><mo stretchy="false">(</mo><msub><mi>A</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>D</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>A</mi><mi>k</mi></msub><mo separator="true">,</mo><msub><mi>D</mi><mi>k</mi></msub><mo separator="true">,</mo><mstyle mathcolor="#df0030"><mo stretchy="false">?</mo></mstyle><mo separator="true">,</mo><msub><mi>φ</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><msub><mi>φ</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">AUTHOR(A_1,D_1, ..., A_k, D_k, \red{?}, \varphi_1, ... \varphi_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord mathnormal" style="margin-right:0.00773em;">OR</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mclose" style="color:#df0030;">?</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">φ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mord"><span class="mord mathnormal">φ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure><ul id="1525e84f-1d3f-436c-9a4a-a29611316ec5" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mi>a</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">A_1 = aid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">ai</span><span class="mord mathnormal">d</span></span></span></span></span><span>﻿</span></span> = aid</li></ul><ul id="bd9a019f-cc41-46f9-9454-fceff37fd6f9" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>=</mo><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>g</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">D_1 = integer</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">in</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="d41db827-ecef-4c8d-9912-36077ccec8fe" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>φ</mi><mn>1</mn></msub><mo>=</mo><mi>a</mi><mi>i</mi><mi>d</mi><mtext> </mtext><mi>c</mi><mi>a</mi><msup><mi>n</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mi>t</mi><mtext> </mtext><mi>b</mi><mi>e</mi><mtext> </mtext><mi>n</mi><mi>u</mi><mi>l</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">\varphi_1 = aid\ can&#x27;t\ be\ null</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">φ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord mathnormal">ai</span><span class="mord mathnormal">d</span><span class="mspace"> </span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mord mathnormal">t</span><span class="mspace"> </span><span class="mord mathnormal">b</span><span class="mord mathnormal">e</span><span class="mspace"> </span><span class="mord mathnormal">n</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="7c4e9d4f-8420-4066-84b8-a54ca857180a" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>φ</mi><mn>3</mn></msub><mo>=</mo><mi>a</mi><mi>u</mi><mi>t</mi><mi>h</mi><mi>o</mi><mi>r</mi><mtext> </mtext><mi>i</mi><mi>s</mi><mtext> </mtext><mi>a</mi><mtext> </mtext><mi>p</mi><mi>r</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>r</mi><mi>y</mi><mtext> </mtext><mi>k</mi><mi>e</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">\varphi_3 = author\ is\ a\ primary\ key</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">φ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mspace"> </span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mspace"> </span><span class="mord mathnormal">a</span><span class="mspace"> </span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">ima</span><span class="mord mathnormal" style="margin-right:0.03588em;">ry</span><span class="mspace"> </span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">ey</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="16299476-3049-41a8-b1fb-417ec152ca93" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathcolor="#df0030"><mo stretchy="false">?</mo></mstyle><mo>=</mo></mrow><annotation encoding="application/x-tex">\red{?}=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mclose" style="color:#df0030;">?</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></span><span>﻿</span></span></li></ul></details></li></ul><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="51d97c5a-0960-452d-8543-1e5f705f9201"><div style="font-size:1.5em"><img class="icon" src="DDL%20714a51d22ac34b7682004acdc0986320/Screen_Shot_2023-10-11_at_11.37.43.png"/></div><div style="width:100%"><strong>FOREIGN KEY</strong><p id="f88d1b08-5a85-40d5-8905-3d399ec0a451" class="">The values in this column must occur in the column that the foreign key refers to. </p></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="6e7d3d93-6e90-4283-8765-3c3a4b7302de"><div style="font-size:1.5em"><img class="icon" src="DDL%20714a51d22ac34b7682004acdc0986320/Screen_Shot_2023-10-11_at_11.37.43.png"/></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong>PRIMARY KEY</strong></strong></strong></strong></strong></strong></strong></strong><p id="72408de1-fd0a-4957-a6c5-b71b036b0a09" class="">No 2 rows with the same <code><mark class="highlight-blue">primary-key</mark></code></p><ul id="e8aee625-a73b-4fe5-be7c-3e382b732c4b" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong>Can’t be Null  (</strong></strong></strong></strong></strong></strong></strong>automatic<strong>)</strong></li></ul><ul id="8abc5848-77b8-4c16-9ca3-d0a6963a9e4f" class="bulleted-list"><li style="list-style-type:disc"><strong>Values Can’t be Updated</strong></li></ul></div></figure><h1 id="f4283b16-72ca-412f-8229-1e8b9fd587ca" class="block-color-red">Updates</h1><h2 id="22851201-521a-40d3-8600-7472f04bd356" class=""><mark class="highlight-orange">INSERT</mark></h2><p id="aa9c8742-f255-4b6b-8240-46fc56adf2cf" class="">Insert Tuple(s)</p><ol type="1" id="1b5be120-df0b-4e17-940f-07f93ab7abab" class="numbered-list" start="1"><li>single tuple</li></ol><ol type="1" id="4fc8f6b1-cedf-4c06-b4f7-2f8150d0c3af" class="numbered-list" start="2"><li>multiple tuples from query result</li></ol><ul id="2ef52609-eb3f-4790-b113-e3fc67e134ef" class="toggle"><li><details open=""><summary><strong>Syntax</strong></summary><p id="fb801fce-4567-4519-b1e7-4ead23052185" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Single Tuple</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9774845d-bd72-4a18-9841-ead4b97a0be5" class="code"><code class="language-SQL">INSERT INTO T VALUES (c1, ..., ck)</code></pre><p id="d482870c-7d7b-48f3-afb3-8f3a2a7eab51" class="">Adds tuples <code><mark class="highlight-gray">(c1, ..., ck)</mark></code><mark class="highlight-gray"> </mark><mark class="highlight-default">to table T</mark></p><p id="48a456b6-7f05-47ba-b84c-acb3862c0488" class=""><strong>Multiple Tuples</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="33d9e88b-011d-4ee7-ad79-d41deec0fa36" class="code"><code class="language-SQL">INSERT INTO T VALUES (Q)</code></pre><p id="2b938f9e-5295-4d37-b8e6-13b37034cb2c" class="">Adds each tuple computer by Q to table T</p></details></li></ul><ul id="8fe7903d-a20e-4a5c-8cb3-020e6ebce28a" class="toggle"><li><details open=""><summary><strong><strong>EX</strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0e8bb9de-0e1c-4737-b931-21150559e170" class="code"><code class="language-SQL">INSERT INTO author (
+	SELECT max(aid) + 1, &#x27;Tim&#x27;
+	FROM author
+)</code></pre></details></li></ul><h2 id="4afc4ff0-f6e7-4e08-903f-93932f572283" class=""><mark class="highlight-orange">DELETE</mark></h2><p id="4fee88d2-739a-46f3-a7eb-8fd0c599d859" class="">Remove all tuples </p><ol type="1" id="c8c5f687-7ce9-4d59-90c6-4a49b9e8d59a" class="numbered-list" start="1"><li>satisfying a condition</li></ol><ol type="1" id="c9861bca-2ec0-4f7f-a311-7d0774343b2e" class="numbered-list" start="2"><li>using cursors <mark class="highlight-gray">(later)</mark></li></ol><ul id="46995d77-368a-4249-a5f2-e137e10bdc4e" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong>Syntax</strong></strong></strong></strong></strong></strong></summary><p id="a66e0488-d0c9-47ce-a789-31784ddaf248" class=""><strong>Using a Condition</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0f5e75ff-05de-42e7-8f92-5f73a83275b4" class="code"><code class="language-SQL">DELETE FROM T WHERE &lt;condition&gt; </code></pre><p id="68489145-ba9a-4b58-bd0f-875db99f6d3c" class="">Deletes all tuples that match <code><mark class="highlight-gray">&lt;condition&gt; </mark></code></p></details></li></ul><ul id="92818f19-2df4-466e-bd62-6a56588bfca2" class="toggle"><li><details open=""><summary><strong><strong>EX</strong></strong></summary><p id="45c9ce92-e82a-4966-9778-6aa19990bcc7" class="">Delete authors who have not written anything</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="61635832-e316-42e9-895e-893f63387386" class="code"><code class="language-SQL">DELETE FROM author 
+WHERE NOT EXISTS (
+	SELECT * FROM WROTE
+	WHERE author = aid
+)</code></pre></details></li></ul><h2 id="050faaee-3df0-44ec-a6ec-5cc77c59611f" class=""><mark class="highlight-orange">UPDATE</mark></h2><p id="b6387d0c-b535-41e0-b695-920734b9d7d6" class="">Updating all tuples satisfying a condition</p><ul id="c580c031-19bf-4912-9010-933d95a58641" class="toggle"><li><details open=""><summary><strong>Syntax: </strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="866b74d8-a0eb-47bc-ace4-64a87b337743" class="code"><code class="language-SQL">UPDATE T
+SET &lt;assignments&gt;  //assignment of variables to attributes
+WHERE &lt;condition&gt;  //a search condition</code></pre></details></li></ul><ul id="9959c767-aa60-4be1-b823-0afa1f1fc8db" class="toggle"><li><details open=""><summary><strong><strong>EX</strong></strong></summary><p id="4c390e02-6f76-430b-b5f7-7efcd0c9ef67" class="">Update anyone names Sue to Susan</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ccdba473-5307-4f8f-acf1-907c66311a02" class="code"><code class="language-SQL">UPDATE author
+SET name = &#x27;Susan&#x27; 
+WHERE aid IN (
+	SELECT aid FROM author 
+	WHERE name = &#x27;Sue&#x27; 
+)</code></pre><p id="a5dcc461-31bb-4df6-a35d-9abfb7e574a5" class="">From A3:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="82dca472-c7ef-4a07-a449-771efecc61c7" class="code"><code class="language-SQL">UPDATE TermView
+SET sem = 1
+WHERE sem = &#x27;S&#x27;</code></pre></details></li></ul><h2 id="6f4d22ee-0836-4577-bdc7-5435b71ae986" class=""><mark class="highlight-orange">ADD COLUMN</mark></h2><ul id="6bd85e10-cb1c-4a29-8b15-8c46dcd00963" class="bulleted-list"><li style="list-style-type:disc">When you do <code>ADD COLUMN</code> to a table, all the values will be null. </li></ul><hr id="46ff9206-3d81-4ab4-9ee7-23f815c61f0c"/><h1 id="813e645f-a7b9-493a-8fbd-6929e6745cff" class=""><mark class="highlight-red"><strong>Transaction A</strong></mark><mark class="highlight-red">uthorization</mark></h1><p id="dc8c9073-e06e-4fb7-aa95-565eb8d0abbc" class="">DML includes a… </p><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="09c50b1c-d9d1-49b2-9d21-579c5c7b3ab2"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Data Control Language (DCL) </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="fcea7509-ada4-44e0-ab6c-40f922f85081" class="">To manage access rights to database objects by users and groups of users</p><ul id="4c9cec10-220f-4e4b-a052-b0ae88318cd0" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong>Syntax</strong></strong></strong></strong></strong></strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="880ae859-28a1-498d-b19d-3f3e35207969" class="code"><code class="language-SQL">CREATE ROLE &lt;role&gt;
+GRANT &lt;role&gt; TO &lt;user&gt;
+REVOKE &lt;role&gt; FROM &lt;user&gt; </code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8b08d867-9c77-424b-b577-0120629d2fbb" class="code"><code class="language-SQL">GRANT &lt;what&gt; ON &lt;object&gt; TO &lt;user-or-role&gt; 
+REVOKE &lt;what&gt; ON &lt;object&gt; FROM &lt;user-or-role&gt;</code></pre><ul id="19609495-34af-4a49-806b-3de2d237378a" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-gray">&lt;object&gt;</mark></code><mark class="highlight-gray"> : </mark><code>&lt;database&gt;</code></li></ul><ul id="cc1801ee-82b1-439d-982d-a23cbe51146b" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-gray">&lt;what&gt;</mark></code><mark class="highlight-gray"> : </mark><code>CONNECT|ALTER|REFERENCE|SELECT|INSERT|DELETE|UPDATE ON TABLE|VIEW</code></li></ul></details></li></ul><ul id="ac699fa1-e7ec-44d1-9fa2-56984b2d49a2" class="toggle"><li><details open=""><summary><strong><strong>EX</strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="062f5c15-c2e4-4768-a808-26cbf9ddded8" class="code"><code class="language-SQL">CREATE role PAT //create the &#x27;PAT&#x27; role
+GRANT connect on PAYROLL to PAT //grant ability to access the &#x27;PAYROLL&#x27; db to PAT
+GRANT select on EMPLOYEE to PAT //grant query ability to PAT
+GRANT PAT to Jim //add jim to the payroll project team</code></pre></details></li></ul></div></figure><h2 id="f68c78f1-cbcc-48e9-bf00-67405cd6b536" class="block-color-orange">Transactions</h2><p id="4f27acc1-b8b1-4e6a-8df5-13afc8753397" class="">Transaction starts with first <strong><strong><strong><strong><strong><strong><strong>access </strong></strong></strong></strong></strong></strong></strong>of the database until it sees: </p><ul id="9afa9dc7-5d5c-43ea-870d-10c967d29b25" class="bulleted-list"><li style="list-style-type:disc"><code><strong>COMMIT</strong></code><strong> → </strong>make changes permanent</li></ul><ul id="26e0e9dd-955e-4823-aaaf-d5e1800c91c8" class="bulleted-list"><li style="list-style-type:disc"><strong><code>ROLLBACK</code></strong><strong> → </strong>discard changes</li></ul><p id="b72a1033-36d6-4f46-9015-ac6445f58da5" class="">
+</p><hr id="13399ba9-55ee-43b6-b8dd-4997b871a1ef"/><h2 id="62dcf42a-d7de-423a-b9f7-3d29a7d11c75" class="block-color-orange">Assertion</h2><p id="7e649c50-b0f0-49d8-bec7-17f0d7e80eef" class="">Creates a general <strong>integrity constraint</strong> </p><ul id="dcbcfebe-61d7-4575-b52d-c12820243922" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong>Syntax</strong></strong></strong></strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0ab8b07a-411b-4b6f-bf5b-bea1540a154f" class="code"><code class="language-SQL">CREATE ASSERTION &lt;assertion-name&gt;
+CHECK (&lt;condition&gt;)</code></pre><ul id="dd04d35b-1878-4e07-b683-2646960da139" class="bulleted-list"><li style="list-style-type:disc">identifier: <code>&lt;assertion-name&gt;</code></li></ul><ul id="44d8f619-c10a-412e-ad20-bfba998300a5" class="bulleted-list"><li style="list-style-type:disc">Transaction <code>fails</code> if it were to make <code>&lt;condition&gt;</code> false</li></ul></details></li></ul><ul id="55bed3fb-3d45-40a7-973b-cca9c0c53bf0" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Examples</strong></strong></strong></strong></strong></strong></strong></summary><ul id="19cc5403-b1b1-4c59-92ee-4ca14a0e86ed" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Ex: primary key</strong></mark></summary><p id="cd23e9aa-8523-4c4f-8525-e095212afeeb" class="">No pairs of <em>publications</em> have the same <em>pubid</em></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="44c87fe6-f915-4dd0-8329-725611128dd6" class="code"><code class="language-SQL">CREATE ASSERTION unique-pubid
+CHECK (
+	NOT EXISTS (
+		SELECT * 
+		FROM publication p1, publication p2
+		WHERE p1.pubid = p2.pubid
+		AND p1.title != p2.title 
+	)
+)</code></pre><p id="e5d3725f-130c-4a65-9671-321dfb96fe77" class=""><strong>In RC</strong></p><p id="e7938008-79f9-49e9-a10b-8f2690083689" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathsize="0.9em"><mrow><mi mathvariant="normal">∀</mi><mi>p</mi><mo separator="true">,</mo><msub><mi>t</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>t</mi><mn>2</mn></msub><mo>:</mo><mi>P</mi><mi>U</mi><mi>B</mi><mi>L</mi><mi>I</mi><mi>C</mi><mi>A</mi><mi>T</mi><mi>I</mi><mi>O</mi><mi>N</mi><mo stretchy="false">(</mo><mi>p</mi><mo separator="true">,</mo><msub><mi>t</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>∨</mo><mi>P</mi><mi>U</mi><mi>B</mi><mi>L</mi><mi>I</mi><mi>C</mi><mi>A</mi><mi>T</mi><mi>I</mi><mi>O</mi><mi>N</mi><mo stretchy="false">(</mo><mi>p</mi><mo separator="true">,</mo><msub><mi>t</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>→</mo><msub><mi>t</mi><mn>1</mn></msub><mo>=</mo><msub><mi>t</mi><mn>2</mn></msub></mrow></mstyle></mrow><annotation encoding="application/x-tex">\small{
+\forall p, t_1, t_2:PUBLICATION(p, t_1) \lor PUBLICATION(p, t_2) \rarr t_1 = t_2
+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9em;vertical-align:-0.225em;"></span><span class="mord sizing reset-size6 size5"><span class="mord">∀</span><span class="mord mathnormal">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2796em;"><span style="top:-2.45em;margin-left:0em;margin-right:0.0556em;"><span class="pstrut" style="height:2.6em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2796em;"><span style="top:-2.45em;margin-left:0em;margin-right:0.0556em;"><span class="pstrut" style="height:2.6em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.10903em;">ON</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2796em;"><span style="top:-2.45em;margin-left:0em;margin-right:0.0556em;"><span class="pstrut" style="height:2.6em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∨</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.10903em;">ON</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2796em;"><span style="top:-2.45em;margin-left:0em;margin-right:0.0556em;"><span class="pstrut" style="height:2.6em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2796em;"><span style="top:-2.45em;margin-left:0em;margin-right:0.0556em;"><span class="pstrut" style="height:2.6em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2796em;"><span style="top:-2.45em;margin-left:0em;margin-right:0.0556em;"><span class="pstrut" style="height:2.6em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></details></li></ul><ul id="76c326ec-cfe3-443b-9d7d-e2595dea1ded" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Ex: Foreign Key</strong></mark></summary><p id="d523c264-8995-40c7-a993-5dc8b78dc8c2" class="">Every <em><em><em><em><em><em>author</em></em></em></em></em></em> in a <em><em><em><em><em><em>wrote </em></em></em></em></em></em>tuple occurs as an <em><em><em><em>aid</em></em></em></em> in the <em><em><em><em><em><em><em>author</em></em></em></em></em></em></em> table </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2cce4a31-74d9-4972-b25e-b957bfaafee9" class="code"><code class="language-SQL">CREATE ASSERTION author-foreign-key
+CHECK (
+	NOT EXISTS (
+		SELECT * 
+		FROM WROTE w
+		WHERE NOT EXISTS (
+			SELECT * 
+			FROM author a
+			WHERE a.aid = w.author
+		)
+	)
+)</code></pre><p id="94bb01fd-ca54-4111-b994-8c1d699f3be3" class=""><strong>In RC</strong></p><p id="28bb76ae-4f05-47ef-9299-7a51817a96f8" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathsize="0.9em"><mrow><mi mathvariant="normal">∀</mi><mi>a</mi><mo>:</mo><mi>W</mi><mi>R</mi><mi>O</mi><mi>T</mi><mi>E</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mo>−</mo><mo stretchy="false">)</mo><mo>→</mo><mi>A</mi><mi>U</mi><mi>T</mi><mi>H</mi><mi>O</mi><mi>R</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mo>−</mo><mo stretchy="false">)</mo></mrow></mstyle></mrow><annotation encoding="application/x-tex">\small{
+\forall a: WROTE(a,-) \rarr AUTHOR(a,-)
+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9em;vertical-align:-0.225em;"></span><span class="mord sizing reset-size6 size5"><span class="mord">∀</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord mathnormal" style="margin-right:0.05764em;">ROTE</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord mathnormal" style="margin-right:0.00773em;">OR</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mclose">)</span></span></span></span></span></span><span>﻿</span></span></p><p id="04ae496b-f89c-44c1-9be0-1d126ceb8a8f" class="">
+</p></details></li></ul></details></li></ul><h2 id="bc9efbaf-09ff-4445-b2c4-eed20224ffef" class=""><mark class="highlight-orange">Views</mark></h2><p id="ace1a406-b02a-4a20-bef9-94dfa3c3546a" class="">Like a table: </p><ul id="38a644dc-9afb-44bb-83f2-077fb8cd0a69" class="bulleted-list"><li style="list-style-type:disc">appears in <strong><em>schema</em></strong></li></ul><ul id="77488826-6f70-450f-b2a0-ca5f6d58d0ef" class="bulleted-list"><li style="list-style-type:disc">Can be Queried</li></ul><ul id="96de0666-be5a-427f-8859-76cca05a4b10" class="bulleted-list"><li style="list-style-type:disc">Other views can be defined in terms of it</li></ul><ul id="1d9c00da-6f77-409f-ab73-00bed3a776b9" class="toggle"><li><details open=""><summary><strong>Syntax</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c2bbb5e0-8756-41a0-ac6a-fe9213924f56" class="code"><code class="language-SQL">CREATE VIEW &lt;view-name&gt; AS (&lt;query&gt;)</code></pre></details></li></ul><ul id="8c812b50-2474-437d-a41b-d5bc2d81b1b0" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>EX</strong></mark></summary><p id="0e58100b-5f18-4ff7-a090-30ba62bc7823" class="">A view called <mark class="highlight-blue"><em>PUBSWITHAUTHORS</em></mark> with <em>ids</em>, <em>titles</em>, <em>author count</em> of publications with at least 1 author:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="93b1e913-5573-483c-b5dc-d3dbedc7470d" class="code"><code class="language-SQL">CREATE VIEW pubswithauthors AS (
+	SELECT DISTINCT pubid, title, count(*) AS acnt
+	FROM publication, wrote
+	WHERE pubid = publication
+	GROUP BY pubid, title
+)</code></pre><p id="eb89b5fa-3786-4142-998a-99ae332fa93f" class="">Using the view in a query: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6b5b481b-ec18-480c-bbfb-3ba4ff12252b" class="code"><code class="language-SQL">SELECT * FROM pubswithauthors</code></pre><p id="aa47e2d6-7f14-4df0-b468-849443a2f2ce" class="">
+</p></details></li></ul><h3 id="4d374581-a4e6-4bee-af5a-ba81fca57f06" class=""><mark class="highlight-yellow">Updating Views </mark></h3><ul id="6595a046-3954-45ec-850c-15994045d086" class="bulleted-list"><li style="list-style-type:disc">add a tuple to a view → update the underlying tables (used by view)</li></ul><ul id="3c30dfa5-08b2-4eba-bd4a-623649bf8745" class="bulleted-list"><li style="list-style-type:disc">add a tuple to the underlying tables → update view</li></ul><ul id="2fb4fa58-161a-4193-bde1-75c901b8e147" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>EX</strong></mark></summary><figure id="56b983f9-24c1-47ca-a8c1-c416b2c9cea4" class="image"><a href="DDL%20714a51d22ac34b7682004acdc0986320/IMG_F1A18D526F56-1.jpeg"><img style="width:288px" src="DDL%20714a51d22ac34b7682004acdc0986320/IMG_F1A18D526F56-1.jpeg"/></a></figure><ol type="1" id="32c72f0e-f0d8-49d6-8b51-046f8cda93e8" class="numbered-list" start="1"><li>Insert (Darryl, Hockey) → PERSONAL-PASTIME <p id="999aa86b-06c1-44d1-857b-9250293627f7" class="">→ <strong><strong><strong><strong><strong><strong><strong><strong><strong>PROBLEM: </strong></strong></strong></strong></strong></strong></strong></strong></strong>what citizenship is Daryl / Hockey ? </p></li></ol><ol type="1" id="2bb62c73-5782-43da-90a5-941bf3d5c171" class="numbered-list" start="2"><li>If we delete (Dave, Curling) <p id="3c8c741a-8244-486f-89f5-54290159627a" class="">→ <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>PROBLEM: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>not clear how to delete from tables</p></li></ol><p id="e2f6f195-924d-4512-b145-2c38ff582d36" class=""><strong><strong><strong><strong>Key: </strong></strong></strong></strong>not all views are updatable </p><p id="88059923-0f83-4687-b0f8-aaee954a6d5d" class="">
+</p></details></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a8b1a31d-74f0-42b3-8e0f-ec0841c43026"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">A <strong><strong><strong><strong><strong>view </strong></strong></strong></strong></strong>is <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>updatable </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>only if: <ul id="1a2d3090-59fc-4063-b681-e8d758945a19" class="bulleted-list"><li style="list-style-type:disc">View Query references 1 table</li></ul><ul id="c4160db5-76f4-4699-878a-f282ee570b2c" class="bulleted-list"><li style="list-style-type:disc">the query only outputs simple attributes (no expressions)</li></ul><ul id="da5aaf3e-0eaf-4b60-a9a8-9428b282fe4e" class="bulleted-list"><li style="list-style-type:disc">no grouping/aggregation/DISTINCT/Order By</li></ul><ul id="b803b41e-565d-4e83-8cd2-fd8598ddd735" class="bulleted-list"><li style="list-style-type:disc">no nested queries</li></ul><ul id="fbf44923-f452-49f9-99f5-9e568d678bab" class="bulleted-list"><li style="list-style-type:disc">no set operations</li></ul><p id="2602cbe3-bfe0-46c3-b33b-a98b18e1070e" class=""><strong>Guarantees</strong> if view is updated, only 1 way to update underlying tables</p></div></figure><p id="e3c55c33-c8f7-4445-8ff1-3e72f299a539" class="">
+</p><hr id="9e5ea718-b6cc-4bfa-b87f-bff882c96a9c"/><h2 id="27d56327-8471-4cd3-a2dc-fdd8a407e82d" class="block-color-orange">Triggers</h2><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="4dc3ec6b-fd93-4df0-a6e9-7a6bd1eafaa3"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">A transaction triggers the addition of operations to that transaction<p id="d9dc0930-41b3-4294-80a7-346577a09195" class=""><strong>Event</strong> + <strong>Condition</strong> → <strong>Action</strong></p><ul id="9cf87cd5-f5d4-45a2-a433-c7b44de0f637" class="bulleted-list"><li style="list-style-type:disc">Events/Actions : <code>INSERT</code>, <code>DELETE</code>, <code>UPDATE</code></li></ul></div></figure><ul id="053795cb-22ec-43aa-9c36-c9f2213ecbb9" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong>Syntax: </strong></strong></strong></strong></strong></strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b47d187a-f416-4093-aad0-648519ae2365" class="code"><code class="language-SQL">CREATE TRIGGER [name]
+AFTER [event] ON [tableOrView]
+	[ REFERENCING OLD AS [corelation-old] ]
+	[ REFERENCING NEW AS [corelation-new] ]
+	FOR EACH ROW [ WHEN [condition] ] BEGIN ATOMIC 
+		[dmlAction_1];
+		[dmlAction_2];
+		...
+END</code></pre></details></li></ul><ul id="bfe219af-b8ea-4d2f-bf06-c2e7502c0a0e" class="toggle"><li><details open=""><summary><strong>EX</strong></summary><p id="5283e7cd-1913-4218-b425-4fcd46936107" class="">When deleting an author, also delete wrote tuples. </p><ul id="3ec1fd7a-59ef-42e5-a2bb-f26a262e9bfa" class="bulleted-list"><li style="list-style-type:disc"><strong>event</strong> -<strong> </strong>DELETE ON author</li></ul><ul id="b312f86b-b8e8-4c3c-aa2d-1b4d3290c4df" class="bulleted-list"><li style="list-style-type:disc"><strong>action -  </strong>DELETE from wrote</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="423b6d25-0bdf-45b7-a90d-403dd600bbfb" class="code"><code class="language-SQL">CREATE TRIGGER delete_author
+AFTER DELETE ON author
+REFERENCING OLD AS a
+FOR EACH ROW BEGIN ATOMIC
+	delete from wrote where wrote.author = a.aid; 
+END</code></pre></details></li></ul><p id="2f8c8b52-9162-47bb-a200-fa4b803ff5a8" class="">Timing of integrity constraint checking must be managed carefully</p><p id="b0a8c6c6-f10d-42e6-859a-eb77981588f2" class="">→ deferring all <code>COMMIT</code> time always works</p><ul id="9af8df36-df46-4b44-9755-a70e464355d3" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Rules with Foreign Keys </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><p id="0df3eba0-abca-4f3e-b6c6-1bd8fb87a661" class="">Special syntax for common rules related to foreign key constraints: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="41579e0c-7a50-4e31-aae8-18b166cc6c02" class="code"><code class="language-SQL">FOREIGN KEY (Some Attributes) REFERENCES (Some Attributes) ]
+		ON DELETE &lt;action&gt; 
+		ON UPDATE &lt;action&gt;</code></pre><p id="210e87f6-c6cf-4467-94e3-b18432f060f1" class="">Where <code><mark class="highlight-gray">&lt;action&gt;</mark></code><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong>can be: </p><ul id="672a891b-5d53-403d-907b-cee9f6f67adc" class="bulleted-list"><li style="list-style-type:disc"><code>RESTRICT</code> (produce an error)</li></ul><ul id="7e4435a5-97fb-4daf-ae09-a213aa6ff27e" class="bulleted-list"><li style="list-style-type:disc"><code>CASCADE</code> (propagate the delete)</li></ul><ul id="fef0f24b-6fdb-4308-a139-233c0ae0701f" class="bulleted-list"><li style="list-style-type:disc"><code>SET NULL</code> (set to unknown)</li></ul></details></li></ul><ul id="a98e5efb-30ab-4004-926b-a6a67de75de7" class="toggle"><li><details open=""><summary><strong><strong><strong><strong>EX</strong></strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="64b3babe-245e-4ff6-bd20-e83edaf331f4" class="code"><code class="language-SQL">CREATE TABLE WROTE (
+	author integer not null,
+	publication integer not null,
+	primary key (author, publication),
+	foreign key (author) references AUTHOR 
+		ON DELETE cascade, 
+	foreign key (publication) references PUBLICATION
+)</code></pre></details></li></ul><p id="8e3c3907-1542-4806-8842-391b7dc082d2" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

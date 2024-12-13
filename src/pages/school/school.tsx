@@ -4,15 +4,41 @@ import "@fortawesome/fontawesome-free/css/all.css";
 //Course info is stored in a JSON file
 import { Course } from "../../types/types";
 import { loadJson } from "../../util/loadJson";
+import useToggle from "../../hooks/useToggle";
+
 const opacity_transition = "0.7s";
 
-function CourseNotes(props: { visible: boolean }) {
+/**
+ * 3 Requirements
+ * 1. c.code format: "[subject]( )+[couse number]" (e.g. 'CS 111')
+ * 2. c.sem_year format: "[f|w|s][yy]" (e.g. 'f24')
+ * 3. root html for course notes are in "course-notes/[...]/root.html"
+ * @return path, relative to the public folder
+ */
+const course2path = (c: Course) => {
+    let course_subdir = c.code.replace(/\s/g, "").toLowerCase() + `-${c.sem_year}`
+    // path is relative to the public folder
+    return `/course-notes/${course_subdir}/root.html`
+};
+
+
+function CourseNotes(props: { course: Course, visible: boolean }) {
     const [hasFocus, setHasFocus] = useState(false); //Changes style
 
+    /* OLD FUNCTIONALITY
     const handleClick = () => {
         window.open(
             "https://drive.google.com/drive/folders/1-WDptiqavrrtxHo7Um0KEdzXrNABIuRt?usp=sharing",
-            "_blank" // <- This is what makes it open in a new window.
+            "_blank" // <- open in a new window.
+        );
+    };
+    */
+
+    // Open the notes (html) in a new tab
+    const handleClick = () => {
+        window.open(
+            course2path(props.course),
+            "_blank" // <- open in a new window.
         );
     };
 
@@ -38,52 +64,55 @@ function CourseNotes(props: { visible: boolean }) {
     );
 }
 
-function CourseComponent(props: { c: Course }) {
-    const [hasFocus, setHasFocus] = useState(false); //Changes style
-    const [toggleInfo, setToggleInfo] = useState(false); //Course Description
+function CourseComponent(props: Course ) {
+    const [hasFocus, setHasFocus] = useState(false);    //Changes style
+    const [infoShown, toggleInfoShown] = useToggle();
 
+
+    const style_toggleInfo: React.CSSProperties = {
+        userSelect: "none",
+        transition: opacity_transition,
+        opacity: hasFocus ? 1 : 0,
+        width: hasFocus ? 20 : 0,
+    };
+
+    const style_courseInfo: React.CSSProperties = {
+        maxHeight: infoShown ? "max-content" : 0,
+        marginTop: infoShown ? 20 : 0,
+        flexBasis: "100%",
+        overflow: "hidden",
+        color: "#bcbcbc",
+        transition: infoShown ? "max-height 1.5s ease-out" : "",
+    };
+
+    /**
+     * Inforation can be toggled on and off by:
+     * 1. Double click anywhere
+     * 2. Clicking the ▼/▶ icon */
     return (
         <div
-            key={props.c.code}
+            key={props.code}
             className={`Course ${hasFocus ? "focus" : "nonFocus"}`}
             onMouseEnter={() => setHasFocus(true)}
             onMouseLeave={() => {
                 setHasFocus(false);
-                setToggleInfo(false);
+                if (infoShown) toggleInfoShown();
             }}
+            onDoubleClick={toggleInfoShown}
         >
-            <p
-                className="ToggleInfo"
-                onClick={() => setToggleInfo(!toggleInfo)}
-                style={{
-                    userSelect: "none",
-                    transition: opacity_transition,
-                    opacity: hasFocus ? 1 : 0,
-                    width: hasFocus ? 20 : 0,
-                }}
-            >
-                {toggleInfo ? "▼" : "▶"}
-            </p>
-            <p className="CourseID">{props.c.code.toUpperCase()}</p>
-            <p className="CourseTitle">{props.c.title}</p>
-            <CourseNotes visible={hasFocus} />
             <div
                 className="ToggleInfo"
-                style={{
-                    maxHeight: toggleInfo ? "max-content" : 0,
-                    marginTop: toggleInfo ? 20 : 0,
-                    flexBasis: "100%",
-                    overflow: "hidden",
-                    color: "#bcbcbc",
-                    transition: toggleInfo ? "max-height 1.5s ease-out" : "",
-                }}
+                onClick={toggleInfoShown}
+                style={style_toggleInfo}
             >
-                <div>{props.c.descr}</div>
-                {props.c.tech ? (
-                    <div className="techDiv">{props.c.tech}</div>
-                ) : (
-                    ""
-                )}
+                {infoShown ? "▼" : "▶"}
+            </div>
+            <p className="CourseID">{props.code.toUpperCase()}</p>
+            <p className="CourseTitle">{props.title}</p>
+            <CourseNotes visible={hasFocus} course={props} />
+            <div className="CourseInfo" style={style_courseInfo}>
+                <div>{props.descr}</div>
+                {props.tech && <div className="techDiv">{props.tech}</div>}
             </div>
         </div>
     );
@@ -95,14 +124,14 @@ export function School() {
 
     // Load Assets
     useEffect(() => {
-        loadJson<Course[]>("courses").then(setCourses);
+        loadJson<Course[]>("courses").then(setCourses)
     }, []);
 
     return (
         <div id="Courses">
             <>
                 {courses.map((c: Course) => {
-                    return <CourseComponent c={c}></CourseComponent>;
+                    return <CourseComponent {...c} ></CourseComponent>;
                 })}
             </>
         </div>

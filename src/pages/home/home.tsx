@@ -2,7 +2,7 @@
 import "./home.css";
 // ---- MODULES
 import { useEffect, useState } from "react";
-import { useTypingEffect } from "../../hooks/typing-effect";
+import { TypingEffectWrapper, useTypingEffect } from "../../hooks/typing-effect";
 import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
 import { NavLink } from "react-router-dom";
 // ---- ASSETS
@@ -13,7 +13,6 @@ import { loadJson } from "../../util/loadJson";
 const assetsPath = "/home-assets";
 
 function AboutMe() {
-
     const [curSec, setCurSec] = useState("Skills");
     const [resume, setResume] = useState<Resume | null>(null);
 
@@ -21,44 +20,46 @@ function AboutMe() {
         loadJson<Resume>("resume").then(setResume);
     }, []);
 
-	const resumeSection = (sectionItems: string[][]) => (
-		sectionItems.map((sectionItem, sec) => (
-			<div className="SectionItem" key={sec}>
-				{sectionItem.map((item, i) =>
-					<p key={i} className={i == 0 ? "title" : "description"}>{item}</p>
-				)}
-			</div>
-		))
-	)
+    const resumeSection = (sectionItems: string[][]) =>
+        sectionItems.map((sectionItem, sec) => (
+            <div className="SectionItem" key={sec}>
+                {sectionItem.map((item, i) => (
+                    <p key={i} className={i == 0 ? "title" : "description"}>
+                        {item}
+                    </p>
+                ))}
+            </div>
+        ));
+
+
 
     if (resume == null) return <div>Loading...</div>;
     return (
-        <div id="AboutMe">
-            <img src={`${assetsPath}/me.png`} />
-            <div className="content">
-                <h1>About Me</h1>
-                <p>{resume.summary}</p>
-                <div id="resume-section-select">
-                    <h3 key={1} onClick={() => setCurSec("Skills")}>
-                        Skills
-                    </h3>
-                    <h3 key={2} onClick={() => setCurSec("Experience")}>
-                        Experience
-                    </h3>
-                    <h3 key={3} onClick={() => setCurSec("Education")}>
-                        Education
-                    </h3>
-                </div>
-                <div id="resume-section">
-                    {	curSec == "Skills"
-                        ? resumeSection(resume.skills)
-                        : curSec == "Experience"
-                        ? resumeSection(resume.experience)
-                        : resumeSection(resume.education)
-					}
-                </div>
-            </div>
-        </div>
+		<div id="AboutMe">
+			<img src={`${assetsPath}/me.png`} />
+			<div className="content">
+				<h1>About Me</h1>
+				<p>{resume.summary}</p>
+				<div id="resume-section-select">
+					<h3 key={1} onClick={() => setCurSec("Skills")}>
+						Skills
+					</h3>
+					<h3 key={2} onClick={() => setCurSec("Experience")}>
+						Experience
+					</h3>
+					<h3 key={3} onClick={() => setCurSec("Education")}>
+						Education
+					</h3>
+				</div>
+				<div id="resume-section">
+					{curSec == "Skills"
+						? resumeSection(resume.skills)
+						: curSec == "Experience"
+						? resumeSection(resume.experience)
+						: resumeSection(resume.education)}
+				</div>
+			</div>
+		</div>
     );
 }
 
@@ -112,7 +113,7 @@ export function MyWork() {
 
 export function Home() {
     // Text that is typed out in real time.
-    const head_text = useTypingEffect("Hi, I'm Roman.", 100);
+    const head_text = useTypingEffect("Hi, I'm Roman.", 80);
 
     return (
         <div id="Home">

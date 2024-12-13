@@ -1,10 +1,10 @@
 export interface Course {
     code: string,
+    sem_year: string,
     title: string,
     descr: string,
     tech?: string
 }
-
 
 export interface Resume {
     summary: string,

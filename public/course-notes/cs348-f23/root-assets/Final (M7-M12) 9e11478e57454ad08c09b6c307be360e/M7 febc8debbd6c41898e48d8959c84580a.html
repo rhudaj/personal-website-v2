@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>M7</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="febc8deb-bd6c-4189-8e48-d8959c84580a" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/book-closed_purple.svg"/></div><h1 class="page-title">M7</h1><p class="page-description"></p></header><div class="page-body"><h1 id="4c84fdba-1206-4124-af39-bdc77111bad5" class="block-color-red">ER Model</h1><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="b7a0934f-8d34-4eed-82e9-b4dbea31883a"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong>ER Model</strong></strong></strong></strong><p id="58ec4362-c85d-4f1f-bbd0-b89bbee02d39" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Purpose: </strong></strong></strong></strong></strong></strong></strong></strong></strong>to design a database’s schema </p><p id="9fc322a2-7b69-448f-bd5a-19b9c65a7fcf" class=""><strong>Metadata</strong> ← Entities, Attributes, Relationships</p><p id="cb450217-ed37-4b46-acdb-1c4ed49b6a75" class=""><strong>Syntax</strong> ← Diagram</p></div></figure><table id="5d437021-f772-41be-8caa-4cf0028b92a5" class="simple-table"><thead class="simple-table-header"><tr id="c5829370-9487-4146-be9d-f71dd7490641"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Item</th><th id="VO}B" class="simple-table-header-color simple-table-header" style="width:287px">Syntax</th><th id="XuXr" class="simple-table-header-color simple-table-header" style="width:284px">Other Syntax</th></tr></thead><tbody><tr id="169ba55f-60db-4963-8230-b59fef7aaade"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Entity</th><td id="VO}B" class="" style="width:287px">Square</td><td id="XuXr" class="" style="width:284px"></td></tr><tr id="cf7bf31e-3c19-4987-ba96-80d569b64d8a"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Attribute</th><td id="VO}B" class="" style="width:287px">Bubble</td><td id="XuXr" class="" style="width:284px"><strong>Primary Key</strong> — Underline</td></tr><tr id="26877d1b-d471-41fb-937d-414335d440c7"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Relationship</th><td id="VO}B" class="" style="width:287px">Diamond</td><td id="XuXr" class="" style="width:284px"><strong>Role</strong> — Annotate Line</td></tr><tr id="3470a28a-986a-444f-86f2-1e3047d47d80"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Existence Dependency</th><td id="VO}B" class="" style="width:287px"><strong>Weak Entity Set</strong> — Doubled Lined<br/><br/><strong>Identifying Relationship</strong> — Double Lined</td><td id="XuXr" class="" style="width:284px"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Discriminator </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>— dashed under line</td></tr><tr id="6e6402ce-ec12-4a11-8a16-7f739d2b12a6"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Cardinality Constraints</th><td id="VO}B" class="" style="width:287px">— (x, y) — </td><td id="XuXr" class="" style="width:284px"><strong>Binary Relationship</strong> <strong>—</strong> Arrow Heads</td></tr><tr id="5e100c4f-8d87-43a8-ad3d-c2daf54b7061"><th id="W\Eq" class="simple-table-header-color simple-table-header" style="width:171.9971466064453px">Specialization/<br/>Generalization <br/></th><td id="VO}B" class="" style="width:287px">Special → Unfilled Arrow — General</td><td id="XuXr" class="" style="width:284px"><strong>Non-Disjoint — </strong>“Overlaps” on arrow</td></tr></tbody></table><hr id="3bccfa40-6499-4ed9-b0f8-f7ebec632dcf"/><p id="140540b4-6f17-45b0-828a-6afb0183d3f8" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Key Notes</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="5dc1b4d9-6ef0-44c7-9f0a-bded69f0b0b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Roles</strong> when 2 entities of the same type have a different purpose </li></ul><ul id="f1ed49e0-02a4-4ad0-8772-0f9a51706530" class="bulleted-list"><li style="list-style-type:disc">relationships are uniquely determine by their entities</li></ul><ul id="cdf0ca1a-be2b-49e7-815c-63e222474795" class="bulleted-list"><li style="list-style-type:disc">binary relationships DON’T imply mandatory participation</li></ul><ul id="0528c67a-d856-4f8c-bb73-6b592d39cafd" class="bulleted-list"><li style="list-style-type:disc">Primary key of dominant entity = <strong>Discriminator</strong> + Primary Key</li></ul><ul id="7982b1d5-ae2c-4b16-adf8-1985474b8ae4" class="bulleted-list"><li style="list-style-type:disc">WES always has <strong>a </strong><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>:</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(N:1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></strong><strong> relationship</strong> with the SES</li></ul><ul id="9a2acd0c-4b26-467a-bf11-757a94ffacd2" class="bulleted-list"><li style="list-style-type:disc">With multiple specializations of 1 general set → can <strong><strong><strong><strong><strong>overlap </strong></strong></strong></strong></strong>or not (By default, the general entity can only be 1 type of specialized entity)</li></ul><ul id="e9d2c68f-464d-46c1-ba87-ca96ddf357f5" class="bulleted-list"><li style="list-style-type:disc">Relationship (between <em><em>n </em></em>entity sets) → entity set with n (1,1) binary relationships </li></ul><p id="b847794e-11e2-49ac-aa4d-c4dc45039117" class="">
+</p><hr id="52474a04-155a-423c-82d7-d13f124ffd13"/><div id="be4e9e69-e746-4397-8f7a-b6acf55fbc98" class="column-list"><div id="d6736e27-aced-4db6-9b2c-375069a63073" style="width:43.75%" class="column"><h3 id="da64045e-f0e4-46b0-aa7f-ea71a83b35b7" class=""><mark class="highlight-orange"><strong>Entity</strong></mark></h3><p id="23e24d42-d9c5-46d9-91b7-8ef40fd45bf9" class="">Distinguishable thing</p><ul id="0bd919da-5691-4eb5-aea7-3b1cce3da753" class="bulleted-list"><li style="list-style-type:disc"><strong>Entity set:</strong> {Entities : same type} </li></ul><h3 id="cecce834-2706-4972-8555-e39700267ce6" class=""><mark class="highlight-orange">Attributes</mark></h3><p id="586b310e-d39c-440d-b523-aa16bcd5fe0d" class="">Facts about <strong><strong><strong><strong><strong><strong><strong><strong>entities</strong></strong></strong></strong></strong></strong></strong></strong></p></div><div id="8a27a49b-65fc-434d-9996-5a0e724378f3" style="width:56.25%" class="column"><figure id="a599f0c2-1589-40d4-acfa-497236e9e9ba" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/5838.jpg"><img style="width:384px" src="M7%20febc8debbd6c41898e48d8959c84580a/5838.jpg"/></a><figcaption>Student → entity set of students (3 attributes)</figcaption></figure><p id="cd4b5888-6c31-4565-9da0-1fe02b620d08" class="">
+</p></div></div><hr id="63e8ac91-d0ac-4203-a4af-80fbe89e635e"/><h3 id="6d6359c3-8da9-4a23-9990-baa4ac38a584" class=""><mark class="highlight-orange">Relationships</mark></h3><p id="5fba7ab3-ae27-4e76-b78e-3c01a3f95f15" class="">Associate <strong>Entities </strong></p><ul id="9743f92d-6964-494f-8154-6c5868374670" class="bulleted-list"><li style="list-style-type:disc"><strong>Relationship Set: </strong>{Relationships : same variety}</li></ul><ul id="0198b851-d21d-425d-8367-76debd79c8f5" class="bulleted-list"><li style="list-style-type:disc">Can have <strong>attributes</strong></li></ul><ul id="c77ddeda-13dc-4292-abaa-d8fc8bf99c25" class="bulleted-list"><li style="list-style-type:disc"><strong>Role: </strong><ul id="56e9aa6f-7c89-41bd-8b5b-9c53a91935d6" class="bulleted-list"><li style="list-style-type:circle">purpose of entity in relationship given by <strong><strong><strong>role name </strong></strong></strong></li></ul><ul id="28d162ce-ef88-4474-93c0-48a977fa3d40" class="bulleted-list"><li style="list-style-type:circle">When an entity set has <span style="border-bottom:0.05em solid">multiple functions</span> in the relationship set</li></ul></li></ul><div id="1819c12c-5ad2-4f14-b8c9-a96df1cad067" class="column-list"><div id="be8f6330-88a4-4659-b6c6-29637d82d610" style="width:50%" class="column"><figure id="7baa8008-1534-4b36-be5e-eec629cb9380" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/78314.jpg"><img style="width:240px" src="M7%20febc8debbd6c41898e48d8959c84580a/78314.jpg"/></a><figcaption>Students <em><em><em><em>Registered In C</em></em></em></em>ourses</figcaption></figure></div><div id="1d0cfce0-980a-49fb-88f3-1725a1d39f85" style="width:50%" class="column"><figure id="fb8fbddf-c5f5-40cf-82b1-4b4b77dbe796" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/58333.jpg"><img style="width:336px" src="M7%20febc8debbd6c41898e48d8959c84580a/58333.jpg"/></a><figcaption>A <em>Match</em> take place between <em><em><em><em>HomeTeam </em></em></em></em>&amp; <em><em><em><em><em><em><em><em>Visitor</em></em></em></em></em></em></em></em>. The  has a <em><em><em><em><em>Score</em></em></em></em></em></figcaption></figure></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3ee1c3c6-79d3-44a9-97bb-94dc3cd116f4"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Relationships are uniquely determined by their entities (roles are extra). They can’t exist without them. </div></figure><hr id="def4b710-94e2-474c-91e2-ca26785def53"/><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Structured Attributes</mark></summary><div class="indented"><p id="f1a81124-8046-451e-a2a9-88edcf0c533d" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Composite Attribute — </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Attribute with sub-attributes</p><p id="47ab2dff-82a6-4eec-b296-13ce5cbe5241" class=""><strong><strong><strong><strong><strong>Multi-Valued Attribute — </strong></strong></strong></strong></strong>1 attribute <strong><strong><strong><strong><strong><strong><strong><strong><strong>zero or more</strong></strong></strong></strong></strong></strong></strong></strong></strong> facts</p><ul id="7d91650f-7fb4-422e-a579-996c17df4bac" class="toggle"><li><details open=""><summary><strong>Ex:</strong> </summary><p id="3d605062-282f-4ea4-979a-a6be2352cb42" class="">Suppose we add to the <em>instructor </em>entity set a <em>phone number </em>at-<br/>tribute. An <br/><em>instructor </em>may have zero, one, or several phone numbers, and different instructors may have different numbers of phones. This type of attribute is said to be <strong>multivalued</strong></p></details></li></ul><p id="379fe145-1002-42e0-b8b1-29c1d6252f5a" class=""><em><mark class="highlight-gray">Composite attributes can be multi-valued, &amp; vice-versa </mark></em></p><figure id="66a293f1-59f6-4d12-acf8-b3aa0c570c0c" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_4F5CC887F027-1.jpeg"><img style="width:336px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_4F5CC887F027-1.jpeg"/></a><figcaption><strong><strong><strong><strong>Hobbies: </strong></strong></strong></strong>Multivalued; facts about leisure<strong><strong><strong><strong><br/>Address: <br/></strong></strong></strong></strong>Composite; Street, City, …</figcaption></figure></div></details><h1 id="d58ac2df-208b-40ce-92e8-ab37887a2807" class="block-color-red">Constraints </h1><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Primary Keys</mark></summary><div class="indented"><p id="19c9c52e-2f49-40e4-95d9-a64849a258c8" class="">Uniquely define an <strong>entity</strong></p><figure id="758bfaa2-9b73-430c-9f7e-96d3847cdf30" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/71121.jpg"><img style="width:336px" src="M7%20febc8debbd6c41898e48d8959c84580a/71121.jpg"/></a><figcaption>Departments are identified by their Dnum, Employee’s are defined by their: FirstName, Initial &amp; LastName</figcaption></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">General Cardinality Constraint</mark></summary><div class="indented"><p id="e3d90f8c-f76d-4a3e-b8d5-326bd303be78" class=""><strong>Exact</strong> lower and upper bounds on the # of relationships of a given relationship set in which a<br/>component entity may participate<br/></p><figure id="9e715d56-79ca-48c7-8229-15a09d7dca8b" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-02_at_14.33.31.png"><img style="width:240px" src="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-02_at_14.33.31.png"/></a></figure><figure id="4974365c-a33a-43ab-8dde-97f00bdad190" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/6336.jpg"><img style="width:384px" src="M7%20febc8debbd6c41898e48d8959c84580a/6336.jpg"/></a><figcaption><span style="border-bottom:0.05em solid">Student</span> <strong>can</strong> <em>Take</em> 3-5 <span style="border-bottom:0.05em solid">Courses</span>.<br/><br/><span style="border-bottom:0.05em solid">Course</span> <strong>can</strong> have 6-100 <span style="border-bottom:0.05em solid">Students</span> <em>Take</em> it</figcaption></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Binary Relationships</mark></summary><div class="indented"><ul id="3c0ea937-63d3-4c65-97eb-408f92a3108a" class="bulleted-list"><li style="list-style-type:disc">Specific type of <strong>general cardinality relationships</strong>. </li></ul><ul id="68b2ca32-c415-47c7-8c00-c8c3f276d9a0" class="bulleted-list"><li style="list-style-type:disc">None of them imply mandatory participation</li></ul><ul id="4542d5fd-d92f-4974-a5ab-99f0c3d3cc9b" class="bulleted-list"><li style="list-style-type:disc">use arrow towards the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> side of the relationship </li></ul><table id="d700b945-d7b9-43be-ac6a-8dc024968cb3" class="simple-table"><tbody><tr id="9fb2b4a1-8ebf-4b16-9fae-f929c2944b96"><td id="CV[^" class="" style="width:94px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>:</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(N:N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></td><td id="GlMc" class="" style="width:333.703125px">No limit either way</td></tr><tr id="ecf1ef30-bfff-4676-982c-9d2a678d33e1"><td id="CV[^" class="" style="width:94px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>:</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(N:1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></td><td id="GlMc" class="" style="width:333.703125px"><strong>Each E1</strong> can relate to <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>at most 1</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> E2<br/>No limit other way<br/></td></tr><tr id="ba81c1a7-57c9-4364-8a6c-f5d8fb02a860"><td id="CV[^" class="" style="width:94px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>:</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1:N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></td><td id="GlMc" class="" style="width:333.703125px"><strong>Each E2</strong> can relate to <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>at most 1</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> E1<br/>No limit the other way<br/></td></tr></tbody></table><figure id="adef0e3e-a8c9-462d-9af6-6411c0356f6c" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_72907D2C5923-1.jpeg"><img style="width:384px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_72907D2C5923-1.jpeg"/></a></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="e4c7175c-9e66-4bf8-90c8-74ac2034055b"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong>Note: </strong></strong></strong></strong></strong></strong><p id="bda40266-2545-4264-a65b-e6cb8defaf27" class="">Binary relationship says <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>at most 1. </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>If we want <strong>exactly 1</strong>, you have to also write the cardinality: (1,1) on the arrow (still binary). </p><figure id="74abcc53-6827-4e2b-9729-3e7a92e6b7bc" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-03_at_16.11.22.png"><img style="width:192px" src="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-03_at_16.11.22.png"/></a></figure></div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Existence Dependency</mark></summary><div class="indented"><p id="085898d8-2401-4f8e-89b1-f09141bb7f17" class="">Existence of 1 entity (<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>subordinate entity</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>) depends on another (<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>dominant entity</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>)</p><p id="825e9453-c6f2-424f-b094-e0b646897dac" class=""><mark class="highlight-gray"><strong>Note: </strong></mark><mark class="highlight-gray">dominant entity set can also be weak</mark></p><ul id="3ad00725-6d1d-44e4-b8e9-ff34a21a3d55" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Identifying Relationship: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>between the 2 </li></ul><ul id="c0d0dd65-096e-4f7f-b7d7-dc8df9b92d48" class="bulleted-list"><li style="list-style-type:disc"><strong>Weak Entity Set: </strong>{subordinate entities}</li></ul><ul id="7af22917-904a-455f-9c0b-055736687fbc" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Discriminator: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Primary Key of subordinate relative to the dominant.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="21ea195e-733d-4c48-b0ca-77db153f200f"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong>Primary key of WES</strong></strong></strong></strong></strong></strong><p id="bcf394eb-dd3b-4232-bd07-d5a2ddbbb7ba" class="">Discriminator + Primary Key of Dominant Entity</p></div></figure></li></ul><div id="64a8cf03-c8d0-455d-b88b-4f5d1db11042" class="column-list"><div id="13fb321c-9016-4021-a144-94bcabeab2b7" style="width:50%" class="column"><figure id="319420f7-d879-4ea6-9d8b-0548e40cd35b" class="image" style="text-align:left"><a href="M7%20febc8debbd6c41898e48d8959c84580a/8895.jpg"><img style="width:288px" src="M7%20febc8debbd6c41898e48d8959c84580a/8895.jpg"/></a></figure></div><div id="4f7511bd-e4bf-4363-94a7-1c31f198a81f" style="width:50%" class="column"><p id="bbc9c9e7-7f75-4cc2-a5c4-8d68192938c3" class=""><code>Transaction</code> → WES</p><p id="84e11b57-d003-48a4-b428-983604d5d391" class=""><code>Account</code> → Dominant Entity</p><p id="8d4c2b80-9b6d-4c07-962a-f6a363a3df90" class=""><em>TransNum</em> → Discriminator<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="c78d3f64-b6f6-4364-855f-afef530be679" class="">
+</p></div></div><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="a28e0931-cd19-429a-904a-840ea8bea21d"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">WES must have <strong>a </strong><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>:</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(N:1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></strong><strong> relationship</strong> with <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>strong entity set</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="2fa50719-5881-497f-a815-2a4ab1e3acef"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>Key of WES</strong><p id="dc5118fb-8e2e-4c03-8bb0-541cf62f41f5" class="">Weak Entities → do not have a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>primary key </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>on their own</p><p id="c1a400e3-0ff2-477a-8015-dc8bfb190027" class="">→ they cannot be identified on their own; they depend on some other entity  </p><p id="69594589-d218-4211-8ee5-bba4e426b5d7" class="">→ so they have a discriminator; identified with respect to dominant</p></div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">General Constraints</mark></summary><div class="indented"><p id="c9385ad3-8776-4226-a811-8b1e601e70b9" class="">To express any integrity constraint, you can follow these steps <em>(talked about further in M8) </em></p><p id="475c86e1-79d8-4966-b7b0-09e617d8d468" class=""><strong><strong><strong><strong>1 - Map to Relational Signature </strong></strong></strong></strong></p><div id="d8ad257b-2cd0-4928-a915-92c8e1a4124e" class="column-list"><div id="4fbe15e8-534a-480e-8edc-60a8f838e70f" style="width:62.5%" class="column"><figure id="fa236c32-ea69-4c87-b3fb-d1098701144c" class="image" style="text-align:left"><a href="M7%20febc8debbd6c41898e48d8959c84580a/60487.jpg"><img style="width:432px" src="M7%20febc8debbd6c41898e48d8959c84580a/60487.jpg"/></a></figure><p id="217a2b67-511e-49e1-9697-a89abe9df31d" class="">
+</p></div><div id="e31910e5-c164-4d63-9709-562a2518f432" style="width:37.5%" class="column"><p id="694a0aac-71e8-46dd-9568-76f4131b4193" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mstyle mathsize="0.5em"><mo stretchy="false">(</mo><mspace linebreak="newline"></mspace><mspace width="1.472em"/><mi>A</mi><mi>U</mi><mi>T</mi><mi>H</mi><mi>O</mi><mi>R</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace linebreak="newline"></mspace><mspace width="1.472em"/><mspace width="1.472em"/><mi>A</mi><mi>I</mi><mi>D</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo separator="true">,</mo><mi>a</mi><mi>i</mi><mi>d</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>N</mi><mi>A</mi><mi>M</mi><mi>E</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo separator="true">,</mo><mi>n</mi><mi>a</mi><mi>m</mi><mi>e</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace linebreak="newline"></mspace><mspace width="1.472em"/><mi>P</mi><mi>U</mi><mi>B</mi><mi>L</mi><mi>I</mi><mi>C</mi><mi>A</mi><mi>T</mi><mi>I</mi><mi>O</mi><mi>N</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace linebreak="newline"></mspace><mspace width="1.472em"/><mspace width="1.472em"/><mi>P</mi><mi>U</mi><mi>B</mi><mi>I</mi><mi>D</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo separator="true">,</mo><mi>p</mi><mi>u</mi><mi>b</mi><mi>i</mi><mi>d</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>T</mi><mi>I</mi><mi>T</mi><mi>L</mi><mi>E</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo separator="true">,</mo><mi>t</mi><mi>i</mi><mi>t</mi><mi>l</mi><mi>e</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace linebreak="newline"></mspace><mspace width="1.472em"/><mi>W</mi><mi>R</mi><mi>O</mi><mi>T</mi><mi>E</mi><mo stretchy="false">(</mo><mi>a</mi><mi>u</mi><mi>t</mi><mi>h</mi><mi>o</mi><mi>r</mi><mo separator="true">,</mo><mi>p</mi><mi>u</mi><mi>b</mi><mi>l</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo stretchy="false">)</mo><mspace linebreak="newline"></mspace><mo stretchy="false">)</mo></mstyle></mrow><annotation encoding="application/x-tex">\rho = \tiny( \\ \quad AUTHOR(self), \\ \quad \quad AID(self, aid), NAME(self, name), \\ \quad PUBLICATION(self), \\ \quad \quad PUBID(self, pubid), TITLE(self, title), \\ \quad WROTE(author, publication) \\)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ρ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mopen sizing reset-size6 size1">(</span></span><span class="mspace newline sizing reset-size6 size1"></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mord mathnormal sizing reset-size6 size1">A</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10903em;">U</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">T</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.08125em;">H</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.00773em;">OR</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">se</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10764em;">f</span><span class="mclose sizing reset-size6 size1">)</span><span class="mpunct sizing reset-size6 size1">,</span></span><span class="mspace newline sizing reset-size6 size1"></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mord mathnormal sizing reset-size6 size1">A</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.07847em;">I</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.02778em;">D</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">se</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10764em;">f</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1">ai</span><span class="mord mathnormal sizing reset-size6 size1">d</span><span class="mclose sizing reset-size6 size1">)</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10903em;">N</span><span class="mord mathnormal sizing reset-size6 size1">A</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.05764em;">ME</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">se</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10764em;">f</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1">nam</span><span class="mord mathnormal sizing reset-size6 size1">e</span><span class="mclose sizing reset-size6 size1">)</span><span class="mpunct sizing reset-size6 size1">,</span></span><span class="mspace newline sizing reset-size6 size1"></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">P</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10903em;">U</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.05017em;">B</span><span class="mord mathnormal sizing reset-size6 size1">L</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.07847em;">I</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.07153em;">C</span><span class="mord mathnormal sizing reset-size6 size1">A</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">T</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.07847em;">I</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10903em;">ON</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">se</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10764em;">f</span><span class="mclose sizing reset-size6 size1">)</span><span class="mpunct sizing reset-size6 size1">,</span></span><span class="mspace newline sizing reset-size6 size1"></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">P</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10903em;">U</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.05017em;">B</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.07847em;">I</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.02778em;">D</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">se</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10764em;">f</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1">p</span><span class="mord mathnormal sizing reset-size6 size1">u</span><span class="mord mathnormal sizing reset-size6 size1">bi</span><span class="mord mathnormal sizing reset-size6 size1">d</span><span class="mclose sizing reset-size6 size1">)</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">T</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.07847em;">I</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">T</span><span class="mord mathnormal sizing reset-size6 size1">L</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.05764em;">E</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">se</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.10764em;">f</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1">t</span><span class="mord mathnormal sizing reset-size6 size1">i</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">tl</span><span class="mord mathnormal sizing reset-size6 size1">e</span><span class="mclose sizing reset-size6 size1">)</span><span class="mpunct sizing reset-size6 size1">,</span></span><span class="mspace newline sizing reset-size6 size1"></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mspace sizing reset-size6 size1" style="margin-right:1.472em;"></span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.13889em;">W</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.05764em;">ROTE</span><span class="mopen sizing reset-size6 size1">(</span><span class="mord mathnormal sizing reset-size6 size1">a</span><span class="mord mathnormal sizing reset-size6 size1">u</span><span class="mord mathnormal sizing reset-size6 size1">t</span><span class="mord mathnormal sizing reset-size6 size1">h</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.02778em;">or</span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size1">p</span><span class="mord mathnormal sizing reset-size6 size1">u</span><span class="mord mathnormal sizing reset-size6 size1">b</span><span class="mord mathnormal sizing reset-size6 size1" style="margin-right:0.01968em;">l</span><span class="mord mathnormal sizing reset-size6 size1">i</span><span class="mord mathnormal sizing reset-size6 size1">c</span><span class="mord mathnormal sizing reset-size6 size1">a</span><span class="mord mathnormal sizing reset-size6 size1">t</span><span class="mord mathnormal sizing reset-size6 size1">i</span><span class="mord mathnormal sizing reset-size6 size1">o</span><span class="mord mathnormal sizing reset-size6 size1">n</span><span class="mclose sizing reset-size6 size1">)</span></span><span class="mspace newline sizing reset-size6 size1"></span><span class="base"><span class="strut" style="height:0.5em;vertical-align:-0.125em;"></span><span class="mclose sizing reset-size6 size1">)</span></span></span></span></span><span>﻿</span></span></p><p id="75f27d66-98f9-4f2a-ad00-e02ab0245b4b" class="">
+</p></div></div><p id="1bdcd156-ab40-4298-b046-cdef50cfdecb" class=""><strong>2 - Write RC Sentences</strong></p><figure id="bd73ee9a-611f-49fe-aabe-584e1c721e91" class="image" style="text-align:left"><a href="M7%20febc8debbd6c41898e48d8959c84580a/56778.jpg"><img style="width:432px" src="M7%20febc8debbd6c41898e48d8959c84580a/56778.jpg"/></a><figcaption>Induced by the diagram.</figcaption></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Specialization</mark></summary><div class="indented"><p id="908e36b3-876e-418b-8379-6e00185e6f37" class="">An entity set may include sub-groupings of entities that are <strong>distinct</strong> (special attributes, relationships, etc.) in some way from other entities in the set. </p><figure id="36052e3f-f63e-4035-89af-791d80702b2a" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_7AC32689E201-1.jpeg"><img style="width:432px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_7AC32689E201-1.jpeg"/></a><figcaption>Graduate students = students who have a supervisor and a # of degrees</figcaption></figure><figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="54e64f43-32fd-4c2d-826c-a0b71ed38fbe"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/mathematics_purple.svg"/></div><div style="width:100%">Entity set <em><em><em><em><em><em><em><em>graduate</em></em></em></em></em></em></em></em> is a specialization of entity set <em><em><em><em><em><em><em>student</em></em></em></em></em></em></em><p id="a8015f43-96b2-4493-a78e-5520ee84e6a5" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>e</mi><mi mathvariant="normal">.</mi><mo stretchy="false">(</mo><mi>G</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>u</mi><mi>a</mi><mi>t</mi><mi>e</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>→</mo><mi>S</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall e.(Graduate(e) \rarr Student(e))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mopen">(</span><span class="mord mathnormal">G</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mord mathnormal">u</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">St</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">))</span></span></span></span></span><span>﻿</span></span></p></div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Generalization</mark></summary><div class="indented"><p id="bd3c3d97-b511-42a0-94d6-2ad604f0eab0" class=""><em><mark class="highlight-gray">(Integrity constraint) </mark></em></p><p id="bbb78033-0694-48b0-b24b-8f81e0a94b03" class="">Putting multiple (separate) entity sets under a <strong>general</strong> entity set </p><p id="d086d401-8ca6-4739-88c4-8276adbed433" class="">
+</p><figure id="d6fbb5ac-ab51-4356-a44a-140e00473b96" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_B87FFB576316-1.jpeg"><img style="width:528px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_B87FFB576316-1.jpeg"/></a><figcaption>A vehicle abstracts a car and a truck (it is <strong>also</strong> either a car or a truck) </figcaption></figure><figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="e2ff0c55-4477-4170-96c5-e3d8ae684001"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/mathematics_purple.svg"/></div><div style="width:100%">Entity set <em><em><em><em><em><em><em>vehicle</em></em></em></em></em></em></em> is a generalization of entity sets <em><em><em>car </em></em></em>&amp; <em><em><em><em><em>truck</em></em></em></em></em><p id="cceeb118-fbf4-4427-9d76-99e49c2ddf19" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>e</mi><mi mathvariant="normal">.</mi><mo stretchy="false">(</mo><mi>T</mi><mi>r</mi><mi>u</mi><mi>c</mi><mi>k</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>→</mo><mi>V</mi><mi>e</mi><mi>h</mi><mi>i</mi><mi>c</mi><mi>l</mi><mi>e</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall e.(Truck(e) \rarr Vehicle(e))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">u</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal">e</span><span class="mord mathnormal">hi</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">))</span></span></span></span></span><span>﻿</span></span></p><p id="478faff2-b049-4ce8-9587-6c3a492ba785" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>e</mi><mi mathvariant="normal">.</mi><mo stretchy="false">(</mo><mi>C</mi><mi>a</mi><mi>r</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>→</mo><mi>V</mi><mi>e</mi><mi>h</mi><mi>i</mi><mi>c</mi><mi>l</mi><mi>e</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall e.(Car(e) \rarr Vehicle(e))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal">e</span><span class="mord mathnormal">hi</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">))</span></span></span></span></span><span>﻿</span></span></p><p id="16707428-0c87-46ec-b3b8-347576e21080" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>e</mi><mi mathvariant="normal">.</mi><mo stretchy="false">(</mo><mi>V</mi><mi>e</mi><mi>h</mi><mi>i</mi><mi>c</mi><mi>l</mi><mi>e</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>→</mo><mi>T</mi><mi>r</mi><mi>u</mi><mi>c</mi><mi>k</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>∨</mo><mi>C</mi><mi>a</mi><mi>r</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall e.(Vehicle(e) \rarr Truck(e) \lor Car(e))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal">e</span><span class="mord mathnormal">hi</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">u</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∨</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">))</span></span></span></span></span><span>﻿</span></span></p></div></figure><p id="c7aecc0f-2ced-43c7-ba16-1a64a9aed576" class=""><strong>Specialization vs. Generalization</strong></p><ul id="300939d1-240e-4047-8503-6d1094bb1306" class="bulleted-list"><li style="list-style-type:disc">From the perspective of an ER diagram, they do not look any different.</li></ul><ul id="252655a3-5d18-4a1d-8289-f0740e9ba47b" class="bulleted-list"><li style="list-style-type:disc">They are 2 different approaches (different starting points and goals) to get the design.</li></ul><ul id="6be0803c-0ce4-4557-b160-2b7477106395" class="bulleted-list"><li style="list-style-type:disc">The outcome is basically the same:<ul id="505fa4bc-b529-4dd7-a7b0-7369c15a3188" class="bulleted-list"><li style="list-style-type:circle">A higher-level set with features that apply to all of its lower-level sets. </li></ul><ul id="fa3201fe-1e41-4e4b-a0f5-f4368b119585" class="bulleted-list"><li style="list-style-type:circle">Lower-level sets with distinctive features that apply only within it. </li></ul></li></ul><table id="73b75249-ade1-4267-91df-31a22129ab45" class="simple-table"><thead class="simple-table-header"><tr id="94d0768e-ce9c-4951-9aa9-9b1f8ac5e8cc"><th id="eZXL" class="simple-table-header-color simple-table-header"></th><th id="HCPD" class="simple-table-header-color simple-table-header" style="width:352.1875px">Specialization</th><th id="s;oT" class="simple-table-header-color simple-table-header" style="width:363px">Generalization</th></tr></thead><tbody><tr id="ec3da4a4-abe1-490a-9e68-b3e16cd5631f"><td id="eZXL" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Approach</strong></strong></strong></strong></strong></strong></strong></strong></td><td id="HCPD" class="" style="width:352.1875px"><strong>Top-Down</strong></td><td id="s;oT" class="" style="width:363px"><strong>Bottom Up</strong></td></tr><tr id="07a4d8c8-2c6a-4a10-bb64-ab67359c355a"><td id="eZXL" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Starting Point</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></td><td id="HCPD" class="" style="width:352.1875px">stems from a single entity set</td><td id="s;oT" class="" style="width:363px">Multiple entity sets share some common features</td></tr><tr id="9d54e9a6-8ed9-472b-8d3f-b0e5489a5c54"><td id="eZXL" class=""><strong><strong><strong><strong><strong>Goal </strong></strong></strong></strong></strong></td><td id="HCPD" class="" style="width:352.1875px">To represent distinctive features</td><td id="s;oT" class="" style="width:363px">Emphasize the similarities among lower-level entity sets and to hide the differences</td></tr><tr id="71b459d5-9873-40fc-af5e-c3ec0b63a7d1"><td id="eZXL" class=""><strong><strong><strong><strong><strong><strong><strong>Process</strong></strong></strong></strong></strong></strong></strong></td><td id="HCPD" class="" style="width:352.1875px">Emphasizes differences among entities within the set by creating distinct lower-level sets</td><td id="s;oT" class="" style="width:363px">Synthesizes these entity sets into a single, higher-level entity set</td></tr></tbody></table><p id="ee104adb-1526-4922-8840-cdf4075062ba" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Constraints</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><div class="indented"><p id="e7d05557-4c4a-4104-b82d-8d137868aab3" class=""><strong>Overlap / Disjoint </strong></p><table id="2572b5cf-4086-4e6b-9588-4ef8d3da0784" class="simple-table"><thead class="simple-table-header"><tr id="ea66e878-0a68-4f92-9b8a-3642e98ab4b7"><th id="[yrZ" class="simple-table-header-color simple-table-header" style="width:193px">Type</th><th id="n_EV" class="simple-table-header-color simple-table-header"><strong>overlapping</strong></th><th id="}&gt;~`" class="simple-table-header-color simple-table-header"><strong>disjoint</strong></th></tr></thead><tbody><tr id="39696f34-9ac2-4848-a5b2-a322ff9331d3"><td id="[yrZ" class="" style="width:193px">entity may belong to _____ lower-level entity sets</td><td id="n_EV" class="">0+<br/><br/></td><td id="}&gt;~`" class="">0-1<br/><br/><mark class="highlight-gray">*default </mark></td></tr><tr id="77c81f0f-45c9-4dc1-831d-1b2625461cba"><td id="[yrZ" class="" style="width:193px">Depiction</td><td id="n_EV" class=""><mark class="highlight-red">separate arrows / <br/>“overlap”<br/></mark></td><td id="}&gt;~`" class=""><mark class="highlight-red">single arrow</mark></td></tr></tbody></table></div></p><figure id="842fbfc7-ec10-4ee3-82a6-dfcefa618578" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-12-12_at_10.26.47.png"><img style="width:288px" src="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-12-12_at_10.26.47.png"/></a><figcaption><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>(overlapping) </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>A person can be both an employee and a student<br/><br/><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>(disjoint)  </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>An employee can either be an instructor or a secretary </figcaption></figure><figure id="9abb2097-880b-40eb-a73d-8edfa4a77cef" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-01_at_20.45.24.png"><img style="width:336px" src="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-01_at_20.45.24.png"/></a><figcaption>A vehicle can be both a Car and Truck</figcaption></figure><p id="0fcbfaef-be0c-4e6a-9a9e-cae827cc0e13" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Completeness</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><table id="aedbd7cc-c438-452f-978e-b4efb3c72248" class="simple-table"><thead class="simple-table-header"><tr id="51eb371b-f34b-4610-b403-e8656ed0c495"><th id="[yrZ" class="simple-table-header-color simple-table-header" style="width:192px">Type</th><th id="n_EV" class="simple-table-header-color simple-table-header" style="width:82px">Partial</th><th id="}&gt;~`" class="simple-table-header-color simple-table-header" style="width:77px">Total</th></tr></thead><tbody><tr id="c5ea76be-b0eb-45a6-b9d9-5841a630aa85"><td id="[yrZ" class="" style="width:192px">____ higher-level E must belong to a lower-level ES</td><td id="n_EV" class="" style="width:82px">Not all</td><td id="}&gt;~`" class="" style="width:77px">Each</td></tr><tr id="2fc89c26-f772-4373-beb8-a7604de6f34e"><td id="[yrZ" class="" style="width:192px">Depiction</td><td id="n_EV" class="" style="width:82px"><mark class="highlight-gray"><em>(default)</em></mark></td><td id="}&gt;~`" class="" style="width:77px"><mark class="highlight-red">“total” </mark></td></tr></tbody></table></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-orange">Reification/Aggregation</mark></summary><div class="indented"><h3 id="e286a61e-f6c3-4ccc-9303-d2e6aa634c8a" class="">Reification</h3><p id="1e98b0f6-10c4-4796-a960-143cb76ba554" class=""><em><em><em><em><em><em>n-ary r</em></em></em></em></em></em>elationship → can be replaced w’ → Entity + n <strong>(1,1) binary relationships</strong></p><figure id="1bbde57a-793b-4219-b454-a02bd8f70498" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_C59FB97F215C-1.jpeg"><img style="width:432px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_C59FB97F215C-1.jpeg"/></a></figure><p id="a59aca75-60b1-484e-8ffd-ad37158dcc29" class="">
+</p><ul id="ee341be8-d9df-4991-bc12-0ca519498616" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><p id="6ee3a2da-bb2e-4b03-856e-d08a15a7547f" class=""><strong>EnrolledIn</strong> relationship can become a <strong>component</strong> entity of the <strong>CourseAccount</strong> relationships </p><p id="7cd336e3-c352-4c83-8076-4bfea324f383" class="">Use <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Reification </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>on entity set <em>EnrolledIn</em></p><figure id="dc78ae1b-83c1-4e46-9a3e-531602e82328" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_B609A849F141-1.jpeg"><img style="width:1984px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_B609A849F141-1.jpeg"/></a></figure><ul id="172400b6-5abd-4403-8e88-2edef101f102" class="toggle"><li><details open=""><summary><strong>Steps</strong></summary><ol type="1" id="ec930100-c3c4-468d-8460-26f7782ca7be" class="numbered-list" start="1"><li>Add to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ρ</span></span></span></span></span><span>﻿</span></span><p id="2107cf9d-edf4-4689-beac-6fab319f77bd" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>n</mi><mi>r</mi><mi>o</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>d</mi><mi>I</mi><mi>n</mi><mi>E</mi><mi>n</mi><mi>t</mi><mi>i</mi><mi>t</mi><mi>y</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">EnrolledInEntity(self)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathnormal">se</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="e2458c4f-dd9a-471f-bf43-3dbb05b712b4" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo separator="true">,</mo><mi>s</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">StudentComp(self,student)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">St</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.07153em;">tC</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">se</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="6e1991a3-f2ee-43b0-aad2-d257c5065d4d" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo separator="true">,</mo><mi>c</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">CourseComp(self, course)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">se</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p></li></ol><ol type="1" id="823b60ee-1385-4805-b6ea-e64def60e30d" class="numbered-list" start="2"><li>Add Necessary <strong>Integrity Constraints</strong><p id="76c93bae-84de-4fcd-84de-b9610a991779" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>E</mi><mi>n</mi><mi>r</mi><mi>o</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>d</mi><mi>I</mi><mi>n</mi><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>f</mi><mo stretchy="false">)</mo><mo>→</mo><mi>S</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo separator="true">,</mo><mo>−</mo><mo stretchy="false">)</mo><mo>∧</mo><mi>C</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo separator="true">,</mo><mo>−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall e. EnrolledIn(self) \rarr StudentComp(e,-) \land CourseComp(e, -)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">se</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">St</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.07153em;">tC</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∧</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="b92376e9-a5f5-4630-bc82-d4e7f9861207" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>s</mi><mi mathvariant="normal">.</mi><mi>S</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mo>−</mo><mo separator="true">,</mo><mi>s</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall s. StudentComp(-,s) \rarr Course(s)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">s</span><span class="mord">.</span><span class="mord mathnormal">St</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.07153em;">tC</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">−</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="2ab7eee7-9b3c-41eb-a160-a1011e100b55" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>c</mi><mi mathvariant="normal">.</mi><mi>C</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mo>−</mo><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall c. CourseComp(-,c) \rarr Course(c)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">c</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord">−</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mopen">(</span><span class="mord mathnormal">c</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="2660e766-4391-41a9-979e-0fee391753af" class="">… (EnrolledIn refers to at most 1 StudentComp)</p><p id="7c5ea13b-ff02-4164-9723-0140706c2402" class="">… (EnrolledIn refers to at most 1 CourseComp)</p></li></ol><ol type="1" id="df3b13e6-27c7-4d59-af5e-4f6bde4831e1" class="numbered-list" start="3"><li>Make <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>EnrolledIn </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>a <strong><strong><strong><strong><strong>View </strong></strong></strong></strong></strong><p id="247f32d9-c1d4-4b56-bd13-b394e82dc1af" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><msub><mi>e</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>e</mi><mn>2</mn></msub><mi mathvariant="normal">.</mi><mtext> </mtext><mi>E</mi><mi>n</mi><mi>r</mi><mi>o</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>d</mi><mi>I</mi><mi>n</mi><mo stretchy="false">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>e</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>↔</mo><mi mathvariant="normal">∃</mi><mi>e</mi><mi mathvariant="normal">.</mi><mo stretchy="false">(</mo><mi>E</mi><mi>n</mi><mi>r</mi><mi>o</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>d</mi><mi>I</mi><mi>n</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>S</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo separator="true">,</mo><msub><mi>e</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>∧</mo><mi>C</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>e</mi><mi>C</mi><mi>o</mi><mi>m</mi><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo separator="true">,</mo><msub><mi>e</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall e_1,e_2. \ EnrolledIn(e_1, e_2) \lrarr \exists e. (EnrolledIn(e) \land StudentComp(e, e_1) \land CourseComp(e, e_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">.</span><span class="mspace"> </span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∃</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">n</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∧</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">St</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.07153em;">tC</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∧</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rse</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="51d871b0-23d6-4dee-9009-bf3ed20e0eec" class="">
+</p></li></ol><p id="fea4fd79-2929-4619-bb4e-3d2873933fc2" class="">
+</p></details></li></ul></details></li></ul><h3 id="8fc15226-ff40-48f8-b9be-4f4caaffa080" class="">Aggregation </h3><p id="d6c8c933-0c03-4ce4-afac-be1b5f869e07" class="">Let’s you see both sides of the reification:  </p><figure id="9a409a79-31f6-44e1-822d-94733e4554cd" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_FEF3BA9B92D4-1.jpeg"><img style="width:576px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_FEF3BA9B92D4-1.jpeg"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">Design Tips</mark></summary><div class="indented"><p id="79fe4d94-cf5c-49c1-96e8-3fabe8362602" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Clues for when is something an entity </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="87de960c-fa89-421b-829a-bf54045e1d5c" class="bulleted-list"><li style="list-style-type:disc">Separate object</li></ul><ul id="4e80bf7c-4c8e-4cf7-ba08-2ea3770d8f72" class="bulleted-list"><li style="list-style-type:disc">Has facts about it</li></ul><ul id="96ffd571-3006-4939-81ff-48905e85bc83" class="bulleted-list"><li style="list-style-type:disc">Need a set of them</li></ul><ul id="6bb09449-533d-4d20-863b-f92b9ee4e0fd" class="bulleted-list"><li style="list-style-type:disc">1 can be missing from the set</li></ul><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Example</summary><div class="indented"><p id="4fad5137-d950-43cd-b090-4578323bc7f4" class=""><strong>Design Spec </strong></p><ul id="5262dbe7-b157-4e86-bea8-bc1a8d2ba0f2" class="bulleted-list"><li style="list-style-type:disc"><em>Zero or more sections of a course are offered each term. Courses<br/>have names and numbers. In each term, the sections of each<br/>course are numbered starting with 1.<br/></em></li></ul><ul id="0fd60393-fcbd-489b-96f7-4b1691818da9" class="bulleted-list"><li style="list-style-type:disc"><em>Most course sections are taught </em><em><strong>on-site</strong></em><em>, but a few are taught at<br/><br/></em><em><strong>off-site</strong></em><em> locations.</em></li></ul><ul id="c3379ba7-54b6-47c1-8db4-0f7315943604" class="bulleted-list"><li style="list-style-type:disc"><em>Students have student numbers and names.</em></li></ul><ul id="a0538370-fb27-40cc-89ef-eb80330667b2" class="bulleted-list"><li style="list-style-type:disc"><em>Each course section is taught by a professor. A professor may<br/>teach more than one section in a term, but if a professor teaches<br/>more than one section in a term, they are always sections of the<br/>same course. Some professors do not teach every term.<br/></em></li></ul><ul id="ab42b95f-d5a2-41c2-b973-402f01fa74ac" class="bulleted-list"><li style="list-style-type:disc"><em>Up to 50 students may be registered for a course section. Sections<br/>with 5 or fewer students are cancelled.<br/></em></li></ul><ul id="d03e06ad-6ff6-4b47-b85e-efdfe9399c63" class="bulleted-list"><li style="list-style-type:disc"><em>A student receives a mark for each course in which they are<br/>enrolled. Each student has a cumulative grade point average<br/>(GPA) which is calculated from all course marks the student has<br/>received.<br/></em></li></ul><hr id="2d716c41-fa2b-4d34-aaba-12073b9c3d1a"/><h3 id="9cd749dd-55c2-49f7-843c-1825d65b0cb0" class=""><strong>Entity Sets</strong></h3><ul id="4817fc23-3750-4425-950e-49616164fce5" class="bulleted-list"><li style="list-style-type:disc">Student</li></ul><ul id="aed0b0ff-a8f8-4ea3-b697-871b5b7be430" class="bulleted-list"><li style="list-style-type:disc">Professor</li></ul><ul id="509f2f3c-a388-477f-9b63-ae1f13f7b6d9" class="bulleted-list"><li style="list-style-type:disc">Course</li></ul><ul id="5aeda0fb-b6db-44b5-9bb0-9615debb0388" class="bulleted-list"><li style="list-style-type:disc"><em>Section</em></li></ul><figure id="98738475-00ba-4f51-ad3b-e1e3b9a29c27" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_780CEBDD1A2A-1.jpeg"><img style="width:288px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_780CEBDD1A2A-1.jpeg"/></a></figure><h3 id="b95fb608-1777-4147-a83e-294815ae2c3e" class="">Relationship Sets</h3><ul id="e964f9fc-00fe-49c2-b99f-d74c9b5dbec6" class="bulleted-list"><li style="list-style-type:disc">“<strong>sections</strong> <strong>of a</strong> course”</li></ul><ul id="0190d11a-72c2-4f78-a547-144c90e56015" class="bulleted-list"><li style="list-style-type:disc">“course section is <strong>taught by</strong> a professor”</li></ul><ul id="8a381def-7f7c-4234-9aac-293bd71503e4" class="bulleted-list"><li style="list-style-type:disc">“students are <strong>registered</strong> for a course section”</li></ul><ul id="699e055a-3b98-4a36-b047-106aae26da36" class="bulleted-list"><li style="list-style-type:disc">“Students are <strong>enrolled</strong> in a course” ? </li></ul><figure id="7143a7f8-5481-4cca-8c29-57cf9e8f75f6" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_6BC1AEAB223A-1.jpeg"><img style="width:336px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_6BC1AEAB223A-1.jpeg"/></a></figure><h3 id="7d10e68a-60cd-4cb0-9061-af7819279a3c" class="">Attributes</h3><table id="43a399f7-9fdb-41c0-a333-0125f5d6e20c" class="simple-table"><tbody><tr id="f6591741-d1eb-4f9b-9d8a-4c12888ade03"><th id="`GGK" class="simple-table-header-color simple-table-header" style="width:88px">Student</th><td id="w&gt;qi" class="" style="width:147px"><span style="border-bottom:0.05em solid">snum</span>, name, GPA</td></tr><tr id="1ae04bf4-c1a7-4890-b42a-36f5e465b704"><th id="`GGK" class="simple-table-header-color simple-table-header" style="width:88px">Professor</th><td id="w&gt;qi" class="" style="width:147px"><span style="border-bottom:0.05em solid">pnum</span>, pname</td></tr><tr id="089ce30f-3e78-4e95-a289-a3938fcf9d78"><th id="`GGK" class="simple-table-header-color simple-table-header" style="width:88px">Course</th><td id="w&gt;qi" class="" style="width:147px"><span style="border-bottom:0.05em solid">cnum</span>, name</td></tr><tr id="ab344a6f-3890-4474-b127-b67f1b410d29"><th id="`GGK" class="simple-table-header-color simple-table-header" style="width:88px">Section</th><td id="w&gt;qi" class="" style="width:147px"><span style="border-bottom:0.05em solid">secNum</span>, term</td></tr></tbody></table><ul id="9305a069-bf07-41a1-809c-89545290ecf4" class="bulleted-list"><li style="list-style-type:disc">A student receives a <strong>mark</strong> for each course in which they are enrolled</li></ul><ul id="915c5110-c61f-4d6d-b4c9-475ead93fdb0" class="bulleted-list"><li style="list-style-type:disc">off-site section has a <strong><strong><strong><strong><strong><strong><strong><strong>location</strong></strong></strong></strong></strong></strong></strong></strong></li></ul><figure id="314d34f1-2f13-48d1-92f2-c7ce15aad220" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_1B6E50E080A1-1.jpeg"><img style="width:480px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_1B6E50E080A1-1.jpeg"/></a></figure><h3 id="b01eccd3-2d02-4be0-bfaf-c7a98d8a6ce3" class="">R<strong>elationship Types, Existence Dependencies</strong></h3><p id="fe12651e-42a6-4158-bd0d-c7324755970e" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Relationship Types</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="8596bfa3-4539-4885-815a-db6190e6e5bd" class="bulleted-list"><li style="list-style-type:disc">“ Zero or more sections of a course are offered each term” </li></ul><ul id="327e5baf-0b74-449d-8ea5-4d40f59a1236" class="bulleted-list"><li style="list-style-type:disc">“Each course section is taught by a professor”</li></ul><p id="c17722f5-7d3d-48ab-b792-d3811b1a40cc" class=""><strong>Existence Dependencies</strong></p><ul id="6026b8ff-a63b-4bca-950d-6d6234c2c15f" class="bulleted-list"><li style="list-style-type:disc">“the sections of each course” (<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>existence depends</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>) <figure id="2399d817-f5e7-4798-aef3-8f5df04c947a" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_BA443892082E-1.jpeg"><img style="width:1974px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_BA443892082E-1.jpeg"/></a></figure></li></ul><p id="27aea518-28a0-4e96-8a17-30bdf6bd7951" class="">
+</p><h3 id="87e7a588-9c18-4f30-a718-f73c9e182d8c" class=""><strong>C</strong><em><strong>ardinality constraints</strong></em>, <em><strong>keys, discriminators</strong></em></h3><ul id="a4b45ddd-e80f-4a2d-ae0b-9d7ce068f05d" class="bulleted-list"><li style="list-style-type:disc">“In each term, the sections of each course are numbered starting<br/>with 1.”<br/></li></ul><ul id="a28adca6-82d0-49ed-89fa-2f9f070e759b" class="bulleted-list"><li style="list-style-type:disc">“Up to 50 students may be registered for a course section. Sections with 5 or fewer students are cancelled”</li></ul><figure id="6b5b74ee-5fcf-43a4-aaf7-462ace261b5a" class="image" style="text-align:center"><a href="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-02_at_00.33.47.png"><img style="width:480px" src="M7%20febc8debbd6c41898e48d8959c84580a/Screen_Shot_2023-11-02_at_00.33.47.png"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Example 2 </summary><div class="indented"><p id="af82cbb4-6576-4c12-b8b7-e6478f78af8f" class="">Converting the enrollment database from A2/A3. </p><p id="3b5d5567-bb47-452b-bcd0-1dd6f95e46ef" class="">(I did this myself, has not been checked) </p><p id="3cf4505a-1324-4669-888b-7312e3d83932" class="">
+</p><figure id="d815efae-5cff-4713-b1e4-3b62c8522c3f" class="image"><a href="M7%20febc8debbd6c41898e48d8959c84580a/IMG_D098F807C002-1.jpeg"><img style="width:1971px" src="M7%20febc8debbd6c41898e48d8959c84580a/IMG_D098F807C002-1.jpeg"/></a></figure></div></details></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

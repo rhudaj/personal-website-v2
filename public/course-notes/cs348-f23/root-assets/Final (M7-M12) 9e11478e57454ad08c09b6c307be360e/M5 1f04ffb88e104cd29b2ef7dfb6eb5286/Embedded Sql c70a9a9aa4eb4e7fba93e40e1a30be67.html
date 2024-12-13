@@ -1,0 +1,885 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Embedded Sql</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c70a9a9a-a4eb-4e7f-ba93-e40e1a30be67" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/folder_purple.svg"/></div><h1 class="page-title">Embedded Sql</h1><p class="page-description"></p></header><div class="page-body"><p id="6fe29527-6cd5-4f26-9d36-817646b28372" class=""><strong>Files</strong></p><table id="4dc4c60c-969e-4092-b3a5-77e58c676f99" class="simple-table"><tbody><tr id="34464554-b037-42b7-8cb5-b14870bc3b23"><td id="jKU=" class="" style="width:102px">MakeFile</td><td id="FTXy" class="" style="width:177.390625px">preprocess/compile .sqc</td></tr><tr id="1bd139d4-5446-4cce-a376-d31c26a0912d"><td id="jKU=" class="" style="width:102px">util.h, util.c</td><td id="FTXy" class="" style="width:177.390625px">error reporting</td></tr></tbody></table><hr id="404b6d5d-51bd-4ffa-85f5-1593b064f8a2"/><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="3a5b90a8-f4b5-4719-83fd-8433893128a1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-red"><strong>Embedded SQL</strong></mark><p id="499b67be-1039-41ae-b401-fcced29624d6" class="">SQL statements are embedded in a host language (ie: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span>)</p><ul id="2372192c-4931-4637-bd54-24b96fc899fa" class="bulleted-list"><li style="list-style-type:disc">When the app is <strong>preprocessed </strong>(with pre-compiler)→ it’s purely a <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span> program with library calls </li></ul><ul id="e729ff20-8997-438d-8e52-ac97d430a518" class="bulleted-list"><li style="list-style-type:disc"><strong>static</strong> <strong>parts</strong> of queries are preprocessed<ul id="61e655e5-26ce-4f13-b0ae-2dfd52deb403" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Static/Dynamic</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><div id="3cf967f1-7ca3-46ce-b26a-180b52361256" class="column-list"><div id="2a44f345-20fd-4cce-ba31-79920131164a" style="width:50%" class="column"><p id="9e133533-4ad1-4717-9c36-73d70c729e67" class=""><strong>Static</strong></p><p id="fd4a7d4a-cdb1-485e-92f7-dd19f91dc1ed" class="">Ready to go SQL statement</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbd2cb4-6c1a-4971-9957-d6cfb8ecea41" class="code"><code class="language-JavaScript">SELECT * FROM table</code></pre></div><div id="9403bfe4-f557-4698-aab0-917fec512994" style="width:50%" class="column"><p id="22f93dc5-d11f-4ded-b66c-a31b34b107de" class=""><strong>Dynamic</strong></p><p id="853e88d0-1558-4229-a91f-68a25c0a2c39" class="">Query results depend on parameters</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e9963212-9196-4e3d-ad0e-12e6f4ddd44a" class="code"><code class="language-JavaScript">SELECT ? FROM table</code></pre></div></div></details></li></ul></li></ul><ul id="518a7244-eb57-4496-901c-1a46aa222782" class="bulleted-list"><li style="list-style-type:disc">Database engines require specific host languages (ie: DB2 needs <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span>)</li></ul></div></figure><h3 id="1de949f2-e155-476e-9a0f-1f9e65a769dc" class=""><strong><strong>Process</strong></strong></h3><figure id="78c0edb7-d820-4255-a5d4-f1edcf90df4d" class="image"><a href="Embedded%20Sql%20c70a9a9aa4eb4e7fba93e40e1a30be67/image.jpeg"><img style="width:576px" src="Embedded%20Sql%20c70a9a9aa4eb4e7fba93e40e1a30be67/image.jpeg"/></a></figure><h2 id="57bae7d1-cb17-4dfc-bf6b-431b61f5083f" class="">App Structure</h2><p id="023f0663-106c-41b3-ba3b-498cf580b87f" class="">The file has a <code>.sqc</code> extension. </p><p id="d247a8a9-a50e-495d-84ea-749d86b9e6b7" class="">It must contain a: <code>main()</code> function. </p><table id="d64f8a02-60d0-43bd-bf41-f7ca4efec69f" class="simple-table"><thead class="simple-table-header"><tr id="2523db1d-25e4-418a-868a-ab92c985b632"><th id="b_J&lt;" class="simple-table-header-color simple-table-header" style="width:35px">#</th><th id="Ws?s" class="simple-table-header-color simple-table-header" style="width:158px">Step</th></tr></thead><tbody><tr id="a66b40f9-8081-4d13-8745-6f86771d0917"><td id="b_J&lt;" class="block-color-orange_background" style="width:35px">0</td><td id="Ws?s" class="block-color-orange_background" style="width:158px">Include SQL support</td></tr><tr id="b2c97293-0f69-4662-a009-cf14984514b1"><td id="b_J&lt;" class="block-color-yellow_background" style="width:35px">1</td><td id="Ws?s" class="block-color-yellow_background" style="width:158px">Declare</td></tr><tr id="cb45e5e6-ac58-49e4-a7dc-2f98cd69e32b"><td id="b_J&lt;" class="block-color-yellow_background" style="width:35px">2</td><td id="Ws?s" class="block-color-yellow_background" style="width:158px">Connect to DB</td></tr><tr id="ae6b33f1-a593-43e9-bb82-ce7b62a751b9"><td id="b_J&lt;" class="block-color-yellow_background" style="width:35px">3</td><td id="Ws?s" class="block-color-yellow_background" style="width:158px">Do work</td></tr><tr id="4be2d4ed-87e9-421a-a5d7-09f83f9282ac"><td id="b_J&lt;" class="block-color-yellow_background" style="width:35px">4</td><td id="Ws?s" class="block-color-yellow_background" style="width:158px">Process Errors</td></tr><tr id="ea675a40-a4b6-4526-b692-56cf3ca728ae"><td id="b_J&lt;" class="block-color-yellow_background" style="width:35px">5</td><td id="Ws?s" class="block-color-yellow_background" style="width:158px">Commit/Abort</td></tr><tr id="a13d43ba-4fe2-4fc5-9c75-67fb5ac1dadd"><td id="b_J&lt;" class="block-color-yellow_background" style="width:35px">6</td><td id="Ws?s" class="block-color-yellow_background" style="width:158px">Disconnect</td></tr></tbody></table><h2 id="5b1b552b-6362-4cc6-87ac-5a868de3ad04" class="">Syntax </h2><p id="22821e5d-7474-49c2-a9d1-702e3916c2d4" class="">An <em>SQL statement</em> can be inserted by embedding the following:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="30922f17-aa71-4322-8f21-62d09483f761" class="code"><code class="language-C">EXEC SQL &lt;SQL statement&gt;; </code></pre><table id="33f6249a-63bc-4a33-9d9e-b2c6b4f79cc6" class="simple-table"><thead class="simple-table-header"><tr id="fa560345-376b-42f3-a8c1-e5bd2c505677"><th id="AbwU" class="simple-table-header-color simple-table-header" style="width:272px"><strong><mark class="highlight-default"><code>&lt;</code></mark></strong><strong><mark class="highlight-default"><code><em>SQL statement</em></code></mark></strong><strong><mark class="highlight-default"><code>&gt;</code></mark></strong></th><th id="yWL|" class="simple-table-header-color simple-table-header" style="width:383px">?</th><th id="f?t~" class="simple-table-header-color simple-table-header" style="width:205px">Notes</th></tr></thead><tbody><tr id="f60269e8-c5a0-4a59-8db5-da4d21f611ea"><th id="AbwU" class="simple-table-header-color simple-table-header" style="width:272px"><code><mark class="highlight-default">BEGIN DECLARE SECTION;<br/>  (declare host variables)<br/>END DECLARE SECTION;<br/></mark></code></th><td id="yWL|" class="" style="width:383px">Declare <strong>host variables</strong> in a <strong>declare section</strong>:<br/>Then they can be used in <br/><code><strong>EXEC SQL</strong></code> statements by prefixing with a <code>:</code></td><td id="f?t~" class="" style="width:205px"></td></tr><tr id="ce136b86-1947-4336-87e6-611bf3a81016"><th id="AbwU" class="simple-table-header-color simple-table-header" style="width:272px"><code><mark class="highlight-default">INCLUDE SQLCA</mark></code></th><td id="yWL|" class="" style="width:383px"><code>SQLCA</code> - SQL communication area<br/><br/><strong>Defines:</strong><br/>• <br/><code>sqlcode</code>; return code of SQL statements<br/>• Error messages: <br/>     <br/><code>SQLERROR</code> → NULL value + no indicator<br/>     <br/><code>NOT FOUND</code> → Empty Results<br/>     <br/><code>SQLWARNING</code> → ???</td><td id="f?t~" class="" style="width:205px"></td></tr><tr id="85061091-4846-4dc7-a85a-1a7277aab277"><th id="AbwU" class="simple-table-header-color simple-table-header" style="width:272px"><code><mark class="highlight-default">WHENEVER (&lt;ErrorType&gt;) GO TO &lt;label&gt;; </mark></code></th><td id="yWL|" class="" style="width:383px">Checks <code>sqlcode != 0</code></td><td id="f?t~" class="" style="width:205px"><mark class="highlight-yellow_background"><strong>Label must be in scope</strong></mark></td></tr><tr id="d7cc28c7-6f02-42f6-8a3b-984ee9152aa9"><th id="AbwU" class="simple-table-header-color simple-table-header" style="width:272px"><mark class="highlight-default"><code>CONNECT TO &lt;db-name&gt;; <br/>CONNECT reset;<br/></code></mark></th><td id="yWL|" class="" style="width:383px">1. Connect<br/>2. Disconnect<br/></td><td id="f?t~" class="" style="width:205px"></td></tr><tr id="81ceea09-5415-4a1a-b584-52450ddb80b9"><th id="AbwU" class="simple-table-header-color simple-table-header" style="width:272px"><code><mark class="highlight-default">COMMIT;<br/>ROLLBACK;<br/></mark></code></th><td id="yWL|" class="" style="width:383px"><strong><strong><strong><strong><strong><strong><strong>Commit<br/>Abort<br/></strong></strong></strong></strong></strong></strong></strong></td><td id="f?t~" class="" style="width:205px"></td></tr></tbody></table><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="7a91eabf-acc7-4d0e-b758-fe14e3344a07"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>To run file on DB2</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1c55bad7-de20-42c8-b091-3272ba46f731" class="code"><code class="language-C">make all NAME=&lt;fileName&gt;</code></pre></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="425c696c-3255-4da6-b112-af74419fbfc0"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>To output errors to console</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e78b6d10-96c8-4547-80ed-b7e24f6fdd72" class="code"><code class="language-C">check_error(&quot;My error&quot;,&amp;sqlca);</code></pre></div></figure><hr id="e27b165e-de5e-4358-bc0f-22c6ecc2549d"/><h2 id="eee4fb26-99d0-441a-9a12-8b28b1bf56e6" class="">Handling Null Values</h2><p id="ecba2c26-39aa-44b8-b049-2a78279987e9" class=""><code>NULL</code> is not a valid result</p><p id="e7b28fa1-0c68-4ee3-8150-42623d60cdf0" class="">Without the indicator variable, <code>NULL</code> results in <code>SQLERROR</code></p><p id="40d97e58-2718-413a-b1b7-ed91ed6d068c" class=""><strong>Indicator Variable</strong></p><p id="5d1de78a-6e76-481b-87d0-f4396041b7d2" class="">If <code>ind &lt; 0</code> →  <code>NULL</code> </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4988a1d7-11f2-40ad-9346-7ecb3bbed15d" class="code"><code class="language-C">smallint ind; // (within a BEGIN/END DECLARE SECTION)
+...
+EXEC SQL SELECT firstname INTO :firstname
+												  INDICATOR :ind
+	       FROM ... ;</code></pre><h2 id="b75d9280-ed40-442b-a4e8-94e2039e4aaa" class="">Cursor</h2><p id="09e360e5-3c8a-4744-b10e-067b3023a124" class="">For queries returning more than 1 answer</p><ol type="1" id="b891920f-1334-4805-8bcb-800e4f17e383" class="numbered-list" start="1"><li>Declaring a cursor</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ae4b02fd-03dd-4d42-a31d-bbcb4d67b61d" class="code"><code class="language-C">EXEC SQL DECLARE &lt;name&gt; CURSOR FOR &lt;query&gt;</code></pre><ol type="1" id="fdf5083e-d40d-4652-b44f-abd13cd2b50c" class="numbered-list" start="2"><li><strong>Iterator protocol</strong></li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e75b2898-9290-4dba-b765-791f63463774" class="code"><code class="language-C">EXEC SQL OPEN &lt;name&gt;;
+//------------------------------------------
+EXEC SQL WHENEVER NOT FOUND GO TO end; 
+for(;;) {
+	//set up host params: 
+	EXEC SQL FETCH &lt;name&gt; INTO &lt;host params&gt;; 
+	//process the fetched tuple 
+};
+end:
+//------------------------------------------
+EXEC SQL CLOSE &lt;name&gt;; </code></pre><h3 id="a7184e3d-d85a-4808-bc95-59555c3fea49" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Examples</strong></strong></strong></strong></strong></strong></strong></strong></h3><ul id="a4b82bfc-6887-492d-9dce-bd483827630f" class="toggle"><li><details open=""><summary><strong>EX 1</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ae92e455-4ee0-46dd-9955-542c4b71a456" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &quot;util.h&quot;
+
+//----------------------INCLUDE----------------------
+
+EXEC SQL INCLUDE SQLCA; 
+
+int main(int argc, char *argv[]) {
+   char * getpass();
+
+//----------------------DECLARE----------------------
+
+   EXEC SQL BEGIN DECLARE SECTION;
+      char db[6] = &quot;cs348&quot;;
+   EXEC SQL END DECLARE SECTION;
+
+   //----------------------HANDLE ERRORS----------------------
+
+   EXEC SQL WHENEVER SQLERROR  GO TO error;
+
+	 //----------------------CONNECT----------------------
+	
+	 EXEC SQL CONNECT TO :db;
+
+		 //----------------------DO WORK----------------------
+
+	   //----------------------COMMIT----------------------
+	   EXEC SQL COMMIT;
+
+		 //----------------------DISCONNECT----------------------
+	   EXEC SQL CONNECT reset;
+
+		 //----------------------EXIT(success)----------------------
+	   exit(0);
+
+	:
+
+     //----------------------HANDLE ERRORS----------------------
+	   check_error(&quot;My error&quot;,&amp;sqlca);
+	   EXEC SQL WHENEVER SQLERROR CONTINUE;
+	
+     //----------------------ABORT----------------------
+	   EXEC SQL ROLLBACK;
+	
+	   //----------------------DISCONNECT----------------------
+	   EXEC SQL CONNECT reset;
+	
+	   //----------------------EXIT(error)----------------------
+	   exit(1);
+}</code></pre></details></li></ul><ul id="d5a68e73-c943-4b80-b912-dc02ad707b68" class="toggle"><li><details open=""><summary><strong>EX 2</strong></summary><p id="5ba67ced-5cf8-4e33-b5c4-327de6e433c4" class="">In this example, we will execute simple <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>DML statements </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>(queries with a single tuple, constant statements, simple parameters)</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="424eda86-bfba-4636-ab3a-ece17cff49c1" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &quot;util.h&quot;
+
+//----------------------INCLUDE----------------------
+
+EXEC SQL INCLUDE SQLCA;
+
+int main(int argc, char *argv[]) {
+
+	//----------------------DECLARE----------------------
+	int i;
+	
+	EXEC SQL BEGIN DECLARE SECTION;
+	  char db[6] = &quot;cs348&quot;;
+	  char title[72], pubid[9];
+	EXEC SQL END DECLARE SECTION;
+
+	//----------------------CONNECT----------------------
+	
+	EXEC SQL CONNECT TO :db;
+	
+  //----------------------ERROR HANDLE----------------------
+	
+	EXEC SQL WHENEVER SQLERROR  GO TO error;
+
+	//----------------------DO WORK----------------------
+	
+	for (i=1; i&lt;argc; i++) {
+
+		strncpy(pubid,argv[i],8); //get a pubid from main arguments
+		
+		EXEC SQL WHENEVER NOT FOUND GO TO nope;
+
+		EXEC SQL SELECT title INTO :title
+		         FROM   publication
+		         WHERE  pubid = :pubid;
+		
+		continue;
+		nope:
+			printf(&quot;*** not found ***&quot;, )
+	};
+
+	//----------------------COMMIT----------------------
+	EXEC SQL COMMIT;
+	//----------------------DISCONNECT----------------------
+	EXEC SQL CONNECT reset;
+	exit(0);
+	//----------------------ERROR HANDLE----------------------	
+
+	error:
+		check_error(&quot;My error&quot;,&amp;sqlca);
+		EXEC SQL WHENEVER SQLERROR CONTINUE;
+		EXEC SQL ROLLBACK;
+		EXEC SQL CONNECT reset;
+		exit(1);
+}</code></pre><div id="c66c7135-3d39-4373-a496-554c17be5407" class="column-list"><div id="dcbde60f-7c6c-4fe0-b54e-ccbd547cfc5a" style="width:50%" class="column"><p id="76d2baf9-a760-4d8a-be7c-53e4132501ea" class="">To run the app: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4c18643b-7bca-4f7e-a1bb-fa014c5957ca" class="code"><code class="language-C">make all NAME = sample2
+
+./sample2 1 7 3 5 </code></pre></div><div id="4f2a354e-184c-4bff-956d-698840600176" style="width:50%" class="column"><p id="e76cc53b-9272-48ea-a362-85487be92a6c" class="">Results:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17c009d6-90d9-45b3-b75b-941f5c2d8a7b" class="code"><code class="language-C">1: Mathematical Logic
+2: *** not found *** 
+3: Principles of DB systems
+4: *** not found ***</code></pre></div></div></details></li></ul><ul id="6c29ebb0-f8da-4a0c-9601-25f6de009430" class="toggle"><li><details open=""><summary><strong><strong><strong><strong>EX 3</strong></strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="880b1afe-17c1-427b-b01a-b48b38ad58e7" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &quot;util.h&quot;
+
+//----------------------INCLUDE----------------------
+
+EXEC SQL INCLUDE SQLCA; 
+
+//----------------------DECLARE----------------------
+
+EXEC SQL BEGIN DECLARE SECTION;
+   char db[6] = &quot;cs348&quot;;
+   char title[72], name[20], apat[10];
+   short aid;
+EXEC SQL END DECLARE SECTION;
+
+int main(int argc, char *argv[]) {
+
+   if (argc!=2) {
+      printf(&quot;Usage: sample3 &lt;pattern&gt;\n&quot;);
+      exit(1);
+   };
+
+   EXEC SQL WHENEVER SQLERROR  GO TO error;
+
+	 //----------------------CONNECT----------------------
+
+   EXEC SQL CONNECT TO :db;
+
+	 //----------------------DO WORK----------------------
+
+   strncpy(apat,argv[1],8); // arg 1 -&gt; apat
+     
+   EXEC SQL DECLARE author CURSOR FOR 
+             SELECT name, title 
+             FROM author , wrote, publication
+             WHERE name LIKE :apat
+               AND aid=author
+               AND pubid=publication;
+
+   EXEC SQL OPEN author;
+
+   EXEC SQL WHENEVER NOT FOUND GO TO end;
+   for (;;) {
+     EXEC SQL FETCH author INTO :name, :title;
+     printf(&quot;%10s -&gt; %20s: %s\n&quot;,apat,name,title);
+   };
+
+end:
+
+   EXEC SQL CLOSE author;
+   EXEC SQL COMMIT;
+   EXEC SQL CONNECT RESET;
+   exit(0);
+
+error:
+   check_error(&quot;My error&quot;,&amp;sqlca);
+   EXEC SQL WHENEVER SQLERROR CONTINUE;
+   EXEC SQL ROLLBACK;
+   EXEC SQL CONNECT reset;
+   exit(1);
+}</code></pre></details></li></ul><h1 id="821bc698-3979-4eb4-ac6d-9c086c3e344b" class=""><mark class="highlight-red">Stored Procedures</mark></h1><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="321e1f73-703a-442a-9d2c-49e50dbaa528"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Stored Procedure</strong><p id="b9713936-aef8-4a19-b086-faee77e4b6c3" class="">Executes app logic directly inside the RBDMS server.</p><p id="b465bcae-814a-4527-9fd3-360cb92048db" class="">→ reduce data transfer between client/server</p></div></figure><h3 id="f876387d-5265-48cb-b739-930bb9ce0da8" class="">Syntax</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a71e849f-4250-4fb4-ab67-ae12b947daa7" class="code"><code class="language-SQL">CREATE FUNCTION &lt;Name&gt;(&lt;ParamName&gt; &lt;ParamType&gt;)
+	RETURNS &lt;ReturnType&gt;
+RETURN
+	&lt;UnaryQuery&gt;</code></pre><p id="52627bc8-a03c-448f-9262-3d72f5ffc3c4" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Examples</strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="54c8fda6-bb3c-484e-b431-14db8a8053df" class="toggle"><li><details open=""><summary><strong><strong><strong>Ex 1</strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3d38e60e-6387-4fe5-92fc-49423496b0e8" class="code"><code class="language-JavaScript">CREATE FUNCTION sumSalaries(dept CHAR(3))
+	RETURNS DECIMAL(9,2)
+RETURN
+	SELECT sum(salary)
+	FROM employee
+	WHERE workdept = dept</code></pre><p id="1a01bf90-6c4b-4f80-ac37-4070db1dd3e8" class="">Using it in DB2:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="213f3edf-a14c-4a6d-97ea-b61de66493d9" class="code"><code class="language-JavaScript">db2 =&gt; SELECT deptno, sumSalaries(depptno) AS sal FROM department</code></pre></details></li></ul><ul id="999bd223-524d-4f9c-8234-cca303a1b215" class="toggle"><li><details open=""><summary><strong><strong><strong>Ex 2</strong></strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="43f8fdb4-d55a-49a3-8b51-34c516779dfd" class="code"><code class="language-JavaScript">CREATE FUNCTION deptSalaries(dept, char(3))
+	RETURNS TABLE(salary DECIMAL(9,2))
+RETURN 
+	SELECT salary
+	FROM employee
+	WHERE workdept = dept</code></pre><p id="2650d3cf-77da-4b95-8346-8c45372f1074" class="">Using it:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b78ec0f0-59d1-46af-b852-85bb30edcaf0" class="code"><code class="language-JavaScript">SELECT * 
+FROM TABLE (deptSalaries(CAST(&#x27;A00&#x27; AS CHAR(3)))) AS s</code></pre></details></li></ul><ul id="640d28fe-1f73-4eb0-a85e-2ff5c875c973" class="toggle"><li><details open=""><summary><strong><strong>Ex 3</strong></strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="005ff705-61ad-491a-b298-afaa8cfbc144" class="code"><code class="language-SQL">CREATE PROCEDURE UPDATE_SALARY_IF
+		(IN employee_number CHAR(6) INOUT rating SMALLINT)
+	LANGUAGE SQL 
+BEGIN 
+	DECLARE not_found CONDITION FOR SQLSTATE &#x27;02000&#x27;; 
+	DECLARE EXIT HANDLER FOR not_found
+</code></pre><figure id="c4d8962d-2503-4b04-b1ed-066ab19ce7c9" class="image"><a href="Embedded%20Sql%20c70a9a9aa4eb4e7fba93e40e1a30be67/5724.jpg"><img style="width:480px" src="Embedded%20Sql%20c70a9a9aa4eb4e7fba93e40e1a30be67/5724.jpg"/></a></figure></details></li></ul><p id="18a5fd9c-1466-4457-a5ba-1f3efb48487c" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">:pubid</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 26, 2023, 12:14 PM</time></span></span></div><div style="padding:0.2em">using the parameter</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">INTO :title</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 26, 2023, 12:15 PM</time></span></span></div><div style="padding:0.2em">put query result into <code>title</code> parameter</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong>NOT FOUND</strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 26, 2023, 12:17 PM</time></span></span></div><div style="padding:0.2em">If the query result <code>IS NULL</code></div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

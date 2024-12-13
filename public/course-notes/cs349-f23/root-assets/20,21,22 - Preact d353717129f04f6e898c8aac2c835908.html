@@ -1,0 +1,1567 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>20,21,22 - Preact</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d3537171-29f0-4f6e-898c-8aac2c835908" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">20,21,22 - Preact</h1><p class="page-description"></p></header><div class="page-body"><hr id="967150fe-da97-47d0-8de2-7477c70718f9"/><figure id="3e0b5f88-0a1d-4cc8-9fbf-dfa5fbb536aa" class="link-to-page"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Preact%20More%20Notes%203e0b5f880a1d4cc89fbfdfa5fbb536aa.html">Preact: More Notes</a></figure><hr id="198865f2-4463-4530-bf59-f7ca100549a2"/><p id="f9b5cd4f-6f5d-42ff-9f32-b3090252e8bb" class="">
+</p><div id="54bec2ad-1e84-4563-b1c9-c682c28d7dfd" class="column-list"><div id="d87d1948-e75b-4fed-8674-e9aa08fea4dd" style="width:50%" class="column"><p id="460cc0ac-3d02-4b9d-ad4c-5a653475bab5" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Declarative</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="1470bac2-e41e-4627-8900-bf10e0d13c69" class="">Describe <em>how to</em> achieve a result</p><pre id="c1a8c0b3-f477-4ab3-8d5c-1fd016e6cb83" class="code"><code>let a = document.createElement(&quot;div&quot;); 
+let b = document.createElement(&quot;div&quot;);
+a.appendChild(b); </code></pre></div><div id="e5995381-a106-495a-b7fe-9ff4e36fbc08" style="width:50%" class="column"><p id="d07db03c-b91e-49d0-a31d-cd3d3d9da088" class=""><strong>Imperative</strong></p><p id="6b57fac3-02d8-4ab7-9b0c-31fa881ef692" class="">Describe <em>what</em> result you want</p><pre id="64c5779c-3b5d-4d38-a495-aef69238952d" class="code"><code>&lt;body&gt;
+	&lt;div id=&quot;a&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;b&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre></div></div><hr id="d261a369-4805-44cd-8ba5-e14767e5136b"/><p id="3340cc14-64b7-422d-900e-e87b4d113653" class=""><strong>SimpleKit — A2 — Imperative</strong></p><ul id="0b846ffa-fdf5-4ceb-89b2-a3e2f73324a6" class="bulleted-list"><li style="list-style-type:disc">Creating a tree of nodes with associated events</li></ul><figure id="734e49a0-4594-4ed0-943f-8c320d60932d" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.37.59.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.37.59.png"/></a></figure><hr id="7d88c773-7a9f-4837-90fb-fdbc19c1a6c3"/><p id="425cb98a-1586-4324-bb34-bcc368c0b456" class=""><strong><strong><strong><strong>HTML</strong></strong></strong></strong> — <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>declarative</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="7ee36865-fb2f-42d6-ab0c-68592f5df773" class="bulleted-list"><li style="list-style-type:disc">Create a tree (DOM) of nodes with events</li></ul><p id="9cb550f2-871a-4d31-aa0b-6dc8ba19132c" class="">
+</p><figure id="ff684f09-9883-4ce0-806a-139fee01b641" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.40.00.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.40.00.png"/></a></figure><p id="8f996247-6dc7-419c-9705-0150df3976e8" class="">
+</p><p id="c3027be1-8ae0-4f94-a01d-5cc72e38e2f5" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>HTML DOM Manipulation — A3 — Mix</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="681ffe43-a831-4adf-bfcd-4a1da03f5807" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong>Mix</strong></strong></strong><ul id="80a4a901-105c-4e9c-8a58-b8900587a5f5" class="bulleted-list"><li style="list-style-type:circle">HTML to declaratively describe the UI layout</li></ul><ul id="0e94ef94-6cc5-4d73-aae7-df2b9735119a" class="bulleted-list"><li style="list-style-type:circle">TypeScript to imperatively add events or modify layout </li></ul><figure id="314ed471-6da9-4fc5-9a46-17b09dbdfef6" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.41.29.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.41.29.png"/></a></figure></li></ul><ul id="cdb7f537-e1fd-42b2-8bd2-087252e70edb" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>100% Imperative</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="3a9bcfdd-bdda-4b19-8635-a060a2a6d901" class="bulleted-list"><li style="list-style-type:circle">create the tree with typescript: <code>document.createElement</code>, <code>container.appendChild</code></li></ul></li></ul><ul id="96745461-e00d-4278-9ecb-1731b0ca0063" class="bulleted-list"><li style="list-style-type:disc"><strong>100% Declarative </strong><ul id="66b05123-a9c5-45b6-a04f-eb5e4a0cf0f8" class="bulleted-list"><li style="list-style-type:circle">create tree entirely in HTML (still not fully declarative) </li></ul><figure id="b28e8b59-2753-42ab-9ec9-5c4bbeac7dae" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.44.58.png"><img style="width:528px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.44.58.png"/></a></figure></li></ul><hr id="1f518ee0-e2e9-44f7-9d03-f834e1f43be8"/><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="04581454-0ae4-4151-b2fe-780f9eed2e73"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><mark class="highlight-red"><strong>Library/Framework/Toolkit/Tool</strong></mark><p id="ceea09f7-d1f7-41e8-8327-b01407338435" class=""><mark class="highlight-orange"><strong>Library</strong></mark></p><p id="b2f66437-ea15-44e8-9f16-baba3655495c" class="">Collection of code (types, object, functions, …) </p><p id="9b5cb925-64d0-4af2-86c1-eb3231595d72" class="">You call it’s code (if you want) </p><ul id="709b435f-6a44-4948-b2b1-ff71e1173d30" class="bulleted-list"><li style="list-style-type:disc">eg: <mark class="highlight-purple">React</mark>, <mark class="highlight-purple">Preact </mark></li></ul><p id="08205175-8f65-423f-977c-cac5665bf4f2" class=""><mark class="highlight-orange"><strong>Framework</strong></mark></p><p id="2caf16ea-bc60-47aa-99bc-d13a11a44fa5" class="">Structure to use a collection of code (has libraries inside) </p><p id="316264f9-5331-4a27-ac8f-c241ada8b8c9" class="">Framework calls your code (more rules)</p><ul id="8700f7e1-90c5-4814-9950-87e9587c19f2" class="bulleted-list"><li style="list-style-type:disc">eg: <mark class="highlight-purple">Angular</mark>, <mark class="highlight-purple">Next.js</mark>, <mark class="highlight-purple">*SimpleKit</mark></li></ul><p id="1abdbb8b-101f-4292-8941-b4da904ebd34" class=""><mark class="highlight-orange"><strong>Toolkit</strong></mark></p><p id="ff622e3d-656b-47c1-92f5-24986f85866e" class="">Collection of compatible libraries </p><ul id="a3cdd6d9-2575-4557-8e56-a38653f9678a" class="bulleted-list"><li style="list-style-type:disc">eg: <mark class="highlight-purple">Bootstrap</mark> </li></ul><p id="256819bf-28b5-47fe-9905-c26605311523" class=""><mark class="highlight-orange"><strong>Tool</strong></mark><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></p><p id="8f612715-c7f1-44a5-b0b0-ea50716253a4" class="">Software to perform a specific task </p><ul id="71849601-469c-4a81-bd34-52d1c9dd7617" class="bulleted-list"><li style="list-style-type:disc">eg: <mark class="highlight-purple">Vite</mark>, <mark class="highlight-purple">Node.js </mark></li></ul></div></figure><p id="81f81b6f-f863-4623-8421-fa34b273b309" class="">
+</p><hr id="300d1906-b960-4485-8f0f-75b39f90a6ae"/><h3 id="2664ead7-9373-46bb-a7bd-a0156260238d" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Preact vs React</strong></strong></strong></strong></strong></strong></strong></strong></strong></h3><table id="600abda4-dfe3-4541-b11c-29962b179ba1" class="simple-table"><thead class="simple-table-header"><tr id="8f0fcdb3-81d4-4ec0-b7c7-27c5a6bd3f70"><th id="tLXN" class="simple-table-header-color simple-table-header"><strong>Preact</strong></th><th id="m}@N" class="simple-table-header-color simple-table-header"><strong>React</strong></th></tr></thead><tbody><tr id="c2cfa718-a2bd-41bb-8871-dfe2187f3d2c"><td id="tLXN" class="">Uses native HTML DOM events </td><td id="m}@N" class="">has its own synthetic event system (onInput → onChange, onDblClick → onDoubleClick)</td></tr><tr id="a0f03a8d-fc8b-4a7c-9031-18be114c4bb0"><td id="tLXN" class="">Treats children nodes as native JS arrays</td><td id="m}@N" class="">Has it’s own object for managing children </td></tr><tr id="d4d84bfd-84a8-48b3-8626-39b4dbf9fae7"><td id="tLXN" class="">Supports standard “class” to set the class attribute</td><td id="m}@N" class="">Uses “className” </td></tr></tbody></table><hr id="3640752a-f7fe-4d71-8c16-abfdd09ef31e"/><h1 id="51a906d4-e29f-45af-907f-c1b7baf7d88e" class=""><mark class="highlight-purple">Pr</mark><mark class="highlight-purple"><strong>eact</strong></mark></h1><ul id="0cca1bb1-3f18-4d3d-8efd-231e2017e199" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Idea: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><ul id="3e6889db-738c-4ed5-b574-461d120ae9df" class="bulleted-list"><li style="list-style-type:disc">pull state out of declaration of UI</li></ul><ul id="929f1e8c-a9f9-4146-9d18-aa24990bfbd1" class="bulleted-list"><li style="list-style-type:disc">interface and state update each other (MVC)</li></ul><ul id="28761151-fb36-4773-8129-be4b1ddb36a3" class="bulleted-list"><li style="list-style-type:disc">everything is done in typescript </li></ul><figure id="8615183f-f1b2-4a4d-bcf9-e1a209278eb8" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.47.12.png"><img style="width:432px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_18.47.12.png"/></a></figure></details></li></ul><ul id="77c9556a-f936-4a86-a164-598c0b98e825" class="bulleted-list"><li style="list-style-type:disc">small library (3.5kB)</li></ul><ul id="fe029f9a-c309-4976-b7a5-a3921e7f0b7d" class="bulleted-list"><li style="list-style-type:disc">render quickly &amp; efficiently </li></ul><ul id="c9c47a89-d391-4d27-b1f3-96cca1ffd165" class="bulleted-list"><li style="list-style-type:disc">largely compatible with <mark class="highlight-purple">React</mark></li></ul><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="52fd479d-a71d-4eb2-bd14-fd7ca6362b58"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_pink.svg"/></div><div style="width:100%"><code>preact/compat</code> to enable React compatibility mode</div></figure><h2 id="c0b4f679-795b-46a9-82ed-d28c4bba87d6" class=""><mark class="highlight-orange">Create the DOM (declaratively) </mark></h2><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="5dd18bf9-2df8-4f72-9c49-a1adb98f97b0"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%"><mark class="highlight-orange"><strong>HyperScript</strong></mark><ul id="1ff18502-0200-46c8-807a-9437644a40db" class="bulleted-list"><li style="list-style-type:disc">Language to generate descriptions <figure id="98c733bf-dc30-4e67-b0d2-4b66289d8ed1" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_19.05.12.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_19.05.12.png"/></a></figure></li></ul><ul id="0a85aa25-0671-41c5-a53f-3671595a8f04" class="bulleted-list"><li style="list-style-type:disc">Use via An NPM package<figure id="637d336f-5463-413b-8634-4e697a957b73" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_19.06.10.png"><img style="width:432px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_19.06.10.png"/></a></figure></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="34c23796-6af4-4466-a918-54f853a90545"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%"><mark class="highlight-orange"><strong>JSX</strong></mark><p id="4352ac28-8730-46b5-b525-f0841b79d92b" class="">Create Hyperscript by typing HTML </p><figure id="1174cf29-6085-44bd-8b46-a3fdcda5761d" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_19.34.41.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_19.34.41.png"/></a></figure><p id="98433b05-6865-4eea-9c3c-066b203e3452" class=""><code>.tsx</code> file = TS + JSX</p><hr id="2948fd5e-07ca-4462-bb62-f935553c2602"/><ol type="1" id="ec6048e8-ef18-4659-8767-84af83ce1a72" class="numbered-list" start="1"><li>compiled to Hyperscript → <mark class="highlight-red"><strong>virtual DOM</strong></mark><p id="b92bbc23-4a29-494b-adea-71abb65be56c" class=""><mark class="highlight-gray">→ Abstract the real DOM away, allows for declarative coding </mark></p></li></ol><ol type="1" id="e9176d1d-beb3-479b-871d-ac182f17bb29" class="numbered-list" start="2"><li>then rendered → <strong><mark class="highlight-red">real DOM </mark></strong></li></ol><hr id="f49ccea8-d912-4a03-b528-2148e32186b3"/><p id="eacd52c8-07d1-4aa4-8f9f-79be35ecadf9" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Dynamic Attributes</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="55fb62b7-2951-4a03-a1aa-70591a3dc805" class="">To insert TS into an expression, use <code>{...}</code></p><ol type="1" id="59265333-f7b9-413c-baf7-8bb1f1848d75" class="numbered-list" start="1"><li><mark class="highlight-red_background">Using Template Literals</mark><pre id="7e4f1386-1823-48cf-a3c5-4d993e71fc28" class="code"><code>function Component({num, colour}: ComponentProps) {
+	return 
+		&lt;div style={`background-color: ${colour}`}&gt; 
+			{num}
+		&lt;/div&gt;;
+}</code></pre></li></ol><ol type="1" id="97b8bfd8-1d29-4da6-965d-f1ac18d8131f" class="numbered-list" start="2"><li><mark class="highlight-teal_background">Hyperscript </mark><mark class="highlight-teal_background"><strong>Attribute </strong></mark><mark class="highlight-teal_background"><strong><em>object</em></strong></mark><pre id="af88762c-7674-4694-b564-acab89893d19" class="code"><code>function Component({num, colour}: ComponentProps) {
+	return 
+		&lt;div style={{backgroundColor: colour}}&gt; 
+			{num}
+		&lt;/div&gt;;
+}</code></pre><p id="f8f241b8-0a6e-4286-b0ba-09b4dfadf86a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Other Examples: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="962b33b0-8c3d-40fd-9e4e-623fafcd8a44" class="code"><code>const msg = &quot;Hello World&quot;; 
+const jsx = &lt;p&gt;{msg}&lt;/p&gt;; 
+
+//Iterate through an array: 
+const items = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]; 
+const jsx = &lt;ul&gt; {items.map((item) =&gt; &lt;li&gt;{item}&lt;/li&gt;)} &lt;/ul&gt;;
+
+//For conditions, typically use the ternary operator
+const jsx = &lt;p&gt;{isDone &gt; &quot;Done&quot; : &quot;Not Done&quot;}&lt;/p&gt;</code></pre></li></ol></div></figure><h2 id="0c6aff6b-9ef5-43c3-98b8-087519e7757d" class=""><mark class="highlight-orange">Components</mark> </h2><p id="60010b61-855a-45b9-8632-6d0880141eb9" class=""><em><mark class="highlight-gray"><strong>What? </strong></mark></em></p><p id="c43bee6f-fdb3-471c-99e9-539b425a3140" class=""><mark class="highlight-purple">Preact’s</mark> Fundamental building block of an App</p><ul id="cf8a10e3-ce49-4ae7-a8de-111b9f298231" class="bulleted-list"><li style="list-style-type:disc">Part of the Virtual DOM tree (get’s rendered) </li></ul><ul id="c865def9-3500-44a3-b142-849c554722b9" class="bulleted-list"><li style="list-style-type:disc">have custom properties; <strong><em>props</em></strong></li></ul><ul id="489a04e2-8bd1-4154-a28c-c82d16886bbb" class="toggle"><li><details open=""><summary><strong>Example</strong></summary><p id="961de9b9-dbf7-40de-8c3a-66c49ed69ede" class=""><code>MyComponent</code> — Component </p><p id="b891f911-e1b2-4515-863c-6271650e5360" class=""><code><mark class="highlight-teal">msg</mark></code><mark class="highlight-teal"> </mark><mark class="highlight-default">— Prop </mark></p><pre id="220b1b14-ac60-42ad-a220-45c09a8ddf02" class="code"><code>const vdom = ( 
+	&lt;div&gt;
+			&lt;h1&gt; My component is below here: &lt;/h1&gt;
+				&lt;MyComponent msg=&quot;Hi component&quot; /&gt;
+	&lt;/div&gt;
+);</code></pre></details></li></ul><hr id="5e5b7d5d-2ef1-49b0-a06d-f4ede508d1da"/><p id="ee2f50b3-8e89-4b08-a996-a79bd64d78e2" class=""><mark class="highlight-gray"><em><strong>How? </strong></em></mark></p><p id="9039d410-50ee-4e0b-a476-bd5b5a8739e4" class=""><mark class="highlight-yellow"><strong>Define Components</strong></mark><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>with <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Functions</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="5d6809de-dca5-4b7b-a1a7-ae91547fca2e" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong>pass in </strong></strong></strong></strong></strong>a <span style="border-bottom:0.05em solid">single object</span>; holds the <strong><em>props</em></strong><ul id="770da1b5-ab82-4184-be44-eaad15b5c5b7" class="bulleted-list"><li style="list-style-type:circle">best to <strong>D</strong><strong><em>estructure </em></strong>the object passed in </li></ul></li></ul><ul id="1d34bb3f-5d46-4f45-a080-c78ff1f96562" class="bulleted-list"><li style="list-style-type:disc"><strong>return</strong> the component in hyperscript <ul id="ea00a034-235e-4c72-834c-aea5221da16b" class="bulleted-list"><li style="list-style-type:circle"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908.html"><mark class="highlight-gray">must return a single root component </mark></a></li></ul><pre id="e27e2535-f467-4037-b316-998d818e1b9d" class="code"><code>function MyComponent( props: {prop1: string, prop2: number} ) {
+	return (
+		//Hyperscript expression 
+	);
+}</code></pre></li></ul><p id="2d0d3022-00dc-4ddf-8c05-2afb39223aed" class=""><mark class="highlight-yellow"><strong>Component Children </strong></mark></p><ul id="c954ca51-8ae4-40e3-a599-bc917850968e" class="bulleted-list"><li style="list-style-type:disc">Components can be nested </li></ul><ul id="18daf30d-fb48-4afe-8f2b-1a28ac2495ea" class="bulleted-list"><li style="list-style-type:disc">Children are nodes; <em>standard HTML</em> <span style="border-bottom:0.05em solid">or</span> <em>custom components </em></li></ul><ul id="a0d310f0-91b7-405a-bf1c-c03b646fdb06" class="bulleted-list"><li style="list-style-type:disc">Control over how children are rendered<p id="bfd0e0e1-67d9-47f2-8df2-7c588dcb3589" class=""><mark class="highlight-gray"><em><strong>How? </strong></em></mark></p></li></ul><ul id="3ea6d1cb-8253-4e24-801f-44afe30405ae" class="bulleted-list"><li style="list-style-type:disc">Held in an <strong>array</strong></li></ul><ul id="62fe0a0a-fb78-47f6-8f31-c779b2cc3350" class="bulleted-list"><li style="list-style-type:disc">An <strong><strong><strong>implicit prop </strong></strong></strong>of any component</li></ul><ul id="f2bad6ae-fa2d-42df-bd96-6d82eb0276de" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><pre id="fbbe6fca-5598-4a6c-9ba1-0e114d29f4ed" class="code"><code>function Container( props: {children:any} ) {
+	return &lt;div class=&quot;container&quot;&gt;{props.children}&lt;/div&gt;
+}
+
+const vdom = (
+	&lt;Container&gt;
+		&lt;p&gt;Text&lt;/div&gt;
+		&lt;button&gt;Ok&lt;/button&gt;
+	&lt;/Container&gt;
+);</code></pre></details></li></ul><p id="68adafa1-b8b4-4853-8893-405413add3d7" class=""><mark class="highlight-yellow"><strong>Defining </strong></mark><em><mark class="highlight-yellow"><strong>Props</strong></mark></em><mark class="highlight-yellow"><strong> Type</strong></mark></p><ul id="af01c483-46c6-42df-83b3-69b03da728a9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><em>TypeScript</em></mark> requires types be defined for function parameters</li></ul><ul id="c7fdcf83-148f-4afc-a9ff-16dfdd19775e" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><pre id="6b1a0527-b6e4-4475-8ddd-01fdf00ac2aa" class="code"><code>type CustomProps = {
+	num: number; 
+	colour?: string;
+};
+
+function CustomComponent( {num, colour = &quot;grey}: CustomProps ){
+	return (...); 
+};</code></pre></details></li></ul><p id="7e0f2f9f-7969-4cc1-80d7-76420b1a3057" class=""><mark class="highlight-yellow"><strong>Events in Components </strong></mark></p><ul id="c6ab5d98-7e55-49e2-b461-824cf7763fb8" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-purple">Preact</mark></em> uses <mark class="highlight-default"><strong><em>standard DOM events</em></strong></mark> with <em>“on”</em> in front<pre id="95c30371-4ab4-4df0-8a84-5d587636be6c" class="code"><code>&lt;button onClick={...Function HERE...}&gt;Click&lt;/button&gt;</code></pre></li></ul><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="d00aacd2-2d8f-4917-bd3f-429d6213b347"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Components Must Return 1 Root Node</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="8f4cfb92-c058-4441-859c-279c9623ca3e" class="">The virtual DOM needs a single root</p><p id="33796c15-8ae5-4c90-9a12-b7e042edda45" class=""><strong>Solution: </strong>wrap in <code>&lt;fragment&gt;</code> node <mark class="highlight-gray">(in the VDOM, but not the rendered) </mark></p><figure id="825795ce-0b4d-4b8f-a39a-d932467ee0c4" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_20.29.04.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-27_at_20.29.04.png"/></a></figure></div></figure><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-orange"><strong>Count (demo)</strong></mark></summary><div class="indented"><p id="ca07e8be-e9f5-4dd7-9a0a-bc3eb6e45e39" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>index.html</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="16d958c7-8b30-48fe-a7ab-242ffbffa1af" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  ...
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;module&quot; src=&quot;main.tsx&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="712d63b1-e1b3-435e-bbdf-c90c0b75cdb9" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>main.tsx </strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="0fa9d348-1100-49c0-a2d3-37002ecbe4e3" class="code"><code>import { render } from &quot;preact&quot;;
+import &quot;./style.css&quot;;
+import LeftView from &quot;./Left&quot;;
+import RightView from &quot;./Right&quot;;
+//-----------------------------------------------
+const app = document.querySelector(&quot;div#app&quot;); //Node to insert the app
+if (!app) throw new Error(&quot;no app div&quot;);
+
+// Main Component
+function App() {
+  const count = 8;  // fake state
+
+  function handleClick() {
+    console.log(&quot;click&quot;);
+  }
+
+  return (
+    &lt;&gt;
+      &lt;LeftView count={count} handleClick={handleClick} /&gt;
+      &lt;RightView count={count} /&gt;
+    &lt;/&gt;
+  );
+}
+
+// render the App VDOM
+render(&lt;App /&gt;, app);</code></pre><p id="2c598b5d-9303-4caf-b994-1add1dcf856a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>LeftView.tsx</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="e6434bc1-93b6-4824-8616-4c369dd05415" class="code"><code>type LeftViewProps = {
+  count: number;
+  handleClick: () =&gt; void;
+};
+
+export default function LeftView( {count, handleClick}: LeftViewProps ) {
+  return (
+    &lt;div class=&quot;left-view&quot;&gt;
+      &lt;button onClick={handleClick}&gt;{count}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre><p id="699d63be-b52d-48ff-b394-d5ef487760aa" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>RightView.tsx</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="abcee1d3-2bfd-4d87-8bdd-6db360fd0c44" class="code"><code>import { JSX, h } from &quot;preact&quot;;
+
+//CHILD COMPONENTS
+
+// A component for the box with a number in it.
+type NumberBoxProps = {
+  num: number;
+  colour: string;
+};
+
+function NumberBox({ num, colour }: NumberBoxProps) {
+  // note style attribute is set using a template literal
+  return &lt;div style={{ backgroundColor: colour }}&gt;{num}&lt;/div&gt;;
+}
+
+type RightViewProps = {
+  count: number;
+  colour?: string;
+};
+
+//MAIN COMPONENTS 
+
+export default function RightView( {count, colour = &quot;grey&quot;}: RightViewProps ) {
+  
+  function loop(n: number) {
+    let nodes: JSX.Element[] = [];
+    for (let i = 0; i &lt; n; i++) {
+      nodes.push(&lt;NumberBox num={i + 1} colour={colour}/); 
+    }
+    return nodes;
+  }
+
+  return (
+    &lt;div class=&quot;right-view&quot;&gt;
+      {{loop(count)}}
+    &lt;/div&gt;
+  );
+}</code></pre></div></details><hr id="bdcba163-ae27-4f28-8f1b-533210f458a4"/><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="dfd5ee7c-2eab-4787-a5c1-46b1664d5870"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%"><mark class="highlight-red"><strong>Reactivity</strong></mark><p id="9ac166f6-4f45-4c1c-a71a-91bbd25adb53" class="">UI updates as state changes</p><ul id="fae182b8-6b56-4af0-a8e5-b9bbccad23ec" class="block-color-gray bulleted-list"><li style="list-style-type:disc">eg: MVC was reactive </li></ul><p id="2f8b3cdb-a664-4ccb-abe4-7569a4a526a7" class="">Developer worries about the state of the app. <mark class="highlight-purple"><em>Framework</em></mark> reflects the state in the UI</p></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="c17db852-64a6-40c4-8ea3-7cbb3e5ac8ec"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%"><mark class="highlight-red"><strong>Virtual DOM Reconciliation</strong></mark><p id="678eba4e-7af8-47d2-b902-a4ca5fce9088" class="">VDOM represents the UI in memory </p><p id="049dbaa2-f7b6-46b9-b268-01fa52fadaea" class=""><em>Synchronized</em> with the DOM (to render) as follows: </p><ol type="1" id="cb33670c-800e-47a3-8fc9-f452883186a3" class="numbered-list" start="1"><li>save current VDOM (<em><em><em><em><em><em>vdom1)</em></em></em></em></em></em></li></ol><ol type="1" id="937e154b-d0e9-4b47-b8a9-8d48cbe16835" class="numbered-list" start="2"><li>Components and/or app-state updates the VDOM → (<em><em><em><em><em><em>vdom2)</em></em></em></em></em></em></li></ol><ol type="1" id="a6eea38e-3c9d-4627-bc92-169c9603f5b6" class="numbered-list" start="3"><li>Re-render triggered by the <mark class="highlight-purple"><em>framework</em></mark><ol type="a" id="d484bd22-33d4-48bc-b308-2daa56badf82" class="numbered-list" start="1"><li>Compare <em><em><em><em><em><em>vdom1</em></em></em></em></em></em> to <em><em><em><em><em><em>vdom2</em></em></em></em></em></em></li></ol><ol type="a" id="f5e8e025-bd8c-4939-b061-08e1da7acf27" class="numbered-list" start="2"><li><strong>Reconcile the difference</strong> → identify <em>DOM patches</em></li></ol><ol type="a" id="69a97e96-9b07-4e8d-b817-7a5bd8048aa8" class="numbered-list" start="3"><li>Perform <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>patches </em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>on the real DOM</li></ol></li></ol></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="54c7e78b-9244-4c08-9076-f30aaf84d1f8"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%"><mark class="highlight-orange"><strong>DIFF’ing </strong></mark><mark class="highlight-gray"><em>(Node Difference / Reconciliation Operations / patches) </em></mark><div id="1843886e-195f-44a2-8a89-24097172aa72" class="column-list"><div id="f7ff2642-56a6-4273-a20f-ed4b9cf20b37" style="width:50%" class="column"><p id="9d128d04-0c7f-4536-8c49-e6c779e4caa1" class="">Node type changes</p><p id="4dcf192c-9ecc-4f03-9900-4102cd7c4a38" class="">→ whole subtree is rebuilt </p></div><div id="a406dafd-623a-45cb-927c-d1d158ba2b48" style="width:50%" class="column"><figure id="daefb70a-daa2-45c9-aa97-d7cd5716e352" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.10.13_AM.png"><img style="width:240px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.10.13_AM.png"/></a></figure></div></div><hr id="30ec0903-da41-4b0f-8e7c-0606a4a908d4"/><div id="b9ca904b-45dd-4a70-9ba1-34218aa5d4e5" class="column-list"><div id="7b4e70ac-b9bf-4ac3-81e7-4095fd9db61a" style="width:50%" class="column"><p id="4ea44b32-0c54-43c5-aeb3-1c90d9076e66" class="">Attributes changed: </p><p id="f304c817-880a-41f3-8e67-a8a3a6ac3e5f" class="">→ do the updates to DOM</p><p id="e1a324b6-12f7-4b1d-b25f-3a4366952ce3" class="">
+</p></div><div id="12e92781-24cc-43f2-a56a-46a8bfc511d7" style="width:50%" class="column"><figure id="ac1832fb-7a78-4373-a6f1-78c84ade3a2c" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.10.06_AM.png"><img style="width:398px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.10.06_AM.png"/></a><figcaption>patch: add class to the div</figcaption></figure></div></div><hr id="803b9c3e-b478-45d1-ba49-d36527fb2577"/><div id="cc535764-20f7-412c-ae8d-9288f9e3351f" class="column-list"><div id="db434b0e-bce1-4fdd-8574-5e8e450d9717" style="width:50%" class="column"><p id="e566d919-e1e5-4c40-a907-db6f81ee58f9" class="">Node is inserted into list of <strong><em>same node type</em></strong> siblings: </p><p id="c9dc358b-50f4-4cae-82fc-cb6100874f88" class="">→ if no other info is given: <div class="indented"><p id="829609ec-c8d2-4af4-bf0d-efa2015150d8" class="">→ all children updated </p></div></p><p id="8ad56efd-9404-456d-b2c1-7c7c705f17c2" class="">→ if children have <strong><em>keys</em></strong>: <div class="indented"><p id="9fae7a96-6eaf-482a-837f-3f57b582dd3b" class="">→ insert 1 new child </p></div></p></div><div id="e4076bd7-e0e5-4b67-af6a-d641ca4317be" style="width:50%" class="column"><figure id="4226f39f-fd54-4cab-836e-161a792c96af" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.09.51_AM.png"><img style="width:192px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.09.51_AM.png"/></a></figure></div></div><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="ab8e97e7-9b83-45a9-a0ae-c878302a9ce6"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong>keys for Better Child Reconciliation</strong></strong><ul id="54a9b1cb-6431-4f55-829f-99e9e930935f" class="bulleted-list"><li style="list-style-type:disc">When updating children of same node type → use <code>key</code> prop <ul id="d8f74d29-60b9-4972-8ae8-524391dfcaf7" class="bulleted-list"><li style="list-style-type:circle">Each key must be <em>stable </em>and <em>unique</em></li></ul><ul id="ffd2cb8d-3ecd-4cb4-99da-035b722cb2fd" class="bulleted-list"><li style="list-style-type:circle">Should be assigned when data created, <em>not when rendered</em></li></ul><ul id="58ed77fc-dabb-4db9-a540-0624cbb01e02" class="bulleted-list"><li style="list-style-type:circle">don’t use the iteration index for key ids when rendering a list</li></ul></li></ul><figure id="1860ee8f-ebd1-4c39-8f70-79b7a36657ab" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.11.16_AM.png"><img style="width:240px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screenshot_2023-11-28_at_9.11.16_AM.png"/></a></figure></div></figure></div></figure><h1 id="a673d445-1644-41b6-b838-a39aa01bc400" class=""><mark class="highlight-red">Managing State </mark></h1><p id="0f501bf6-ad94-4f7d-abc7-dd71a30693da" class=""><strong><strong>Approaches</strong></strong></p><ol type="1" id="48514f73-69ac-43ef-8b46-0947b71867d6" class="numbered-list" start="1"><li>Hooks<strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></li></ol><ol type="1" id="87e36e0e-41b9-4735-b10c-ecec74c26a8c" class="numbered-list" start="2"><li>Signals</li></ol><ol type="1" id="c24492b2-d62e-4ae8-bd69-8126346fec67" class="numbered-list" start="3"><li><del>Redux</del> <mark class="highlight-gray"><em>(popular, but we won’t cover)</em></mark></li></ol><h2 id="9414d17d-00ff-4c8e-bac0-a0d8adbda109" class=""><mark class="highlight-orange">Hooks</mark></h2><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="22c742de-3b39-46ce-a6a4-a08358fec175"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%"><mark class="highlight-red"><strong>Hooks</strong></mark><p id="fa00f241-3401-478d-bdf1-bcf7a38d1f39" class=""><mark class="highlight-gray"><em>Like local variables in functions </em></mark></p><ul id="bdb676e8-8739-42e9-b94a-ffb4107f0206" class="bulleted-list"><li style="list-style-type:disc">Persists a <em>state</em> across multiple function calls </li></ul><ul id="2c46fc04-5e6a-4c1b-a7f9-ea34b7d66844" class="bulleted-list"><li style="list-style-type:disc">Components have an <em>ordered</em> sequence of <strong><em>slots</em></strong> to hold <strong><em>hooks</em></strong> <ul id="cf762b84-377e-46ca-8f52-5295e5577982" class="bulleted-list"><li style="list-style-type:circle">in the VDOM tree</li></ul><ul id="43741d99-ebaf-40c2-8146-b39f41b09863" class="bulleted-list"><li style="list-style-type:circle">Calling a <strong><em>hook</em></strong> function uses up a <strong><em>slot</em></strong></li></ul><ul id="a42e88d5-2525-4d2b-8627-a9a2820b9c2d" class="bulleted-list"><li style="list-style-type:circle">Sequence resets before rendering each component <p id="70f67d9d-10c0-4865-b73a-1853b3780005" class=""><em><mark class="highlight-gray">* hooks must be called in the same order within a component, and cannot be called conditionally or within loops. </mark></em></p></li></ul></li></ul><hr id="15a6047c-2593-4abc-8969-ffa8a04a5f07"/><ul id="0f8d63b8-12ec-4041-9a27-b2526ad65cfd" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><pre id="a1996be8-d087-412f-b6f2-84141ed1bdbd" class="code"><code>function User() {
+	const [name, setName] = useState(&quot;Bob&quot;) //slot 0
+	const [age, setAge] = useState(42) //slot 1 
+	const [online, setOnline] = useState(true) //slot 2
+}</code></pre></details></li></ul></div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><code><strong>useState()</strong></code><strong><em> </em></strong><mark class="highlight-gray"><em>(prop-drilling)</em></mark></summary><div class="indented"><ul id="9158f092-a534-4486-8578-b4f6d5b3fbaa" class="bulleted-list"><li style="list-style-type:disc"><em>get</em> and <em>set</em> state</li></ul><ul id="aceeba4f-c2ec-4c24-90d1-051c1a07e1fe" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default">For local component state </mark></li></ul><ul id="5352d820-db02-4951-b4b8-87820389cd31" class="bulleted-list"><li style="list-style-type:disc">no state in the children; state is <mark class="highlight-default">passed to children who need it </mark></li></ul><ul id="f60f1621-ea5e-4d51-bc2f-b52871f3e577" class="toggle"><li><details open=""><summary><mark class="highlight-orange"><strong>count-state (Demo)</strong></mark></summary><pre id="4d98e207-5812-4e0c-8a96-60223be61455" class="code"><code>export default function App() {
+  const [count, setCount] = useState(0);
+
+  // event handler to pass to children
+  function handleClick() {
+    setCount(count + 1);   // update state
+  }
+
+	//Pass state down to the children who need it
+  return (
+    &lt;&gt;
+      &lt;LeftView count={count} handleClick={handleClick} /&gt;
+      &lt;RightView count={count} colour=&quot;pink&quot; /&gt;
+    &lt;/&gt;
+  );
+}</code></pre><p id="d1892759-4e3f-4bc1-be29-854334f3649b" class="">
+</p></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><code><strong>useContext()</strong></code><strong> </strong><mark class="highlight-gray"><em><strong>(no prop-drilling)</strong></em></mark></summary><div class="indented"><p id="8ac15400-2bbc-4132-8142-2ac2e7bec58a" class="">Pass state and other values to children without <strong><em>prop-drilling </em></strong><em><mark class="highlight-gray">(passing as props)</mark></em></p><ol type="1" id="6605f313-9238-4316-91e6-6803afdf6eb1" class="numbered-list" start="1"><li><strong>Define Context </strong><mark class="highlight-gray"><em>(to hold App state) </em></mark></li></ol><ol type="1" id="83602c76-d59f-4db6-99fa-70cd594043d2" class="numbered-list" start="2"><li><strong>Children import Context </strong><mark class="highlight-gray"><em>(to use App state)</em></mark></li></ol><hr id="7297ff39-70bc-401e-b02f-da6f3874a236"/><ul id="32e082f5-bdb1-4459-9a77-7dcf1b2e26cd" class="toggle"><li><details open=""><summary><mark class="highlight-orange"><strong>counter-context (Demo)</strong></mark></summary><p id="da745dfe-9e82-456d-a715-e81880e27a9d" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Context.tsx</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="76554860-6a48-458a-93af-d6651e96e17c" class="code"><code>import { createContext } from &quot;preact&quot;;
+
+// context stores state
+export type CountContextType = {
+  count: number;
+  setCount: (count: number) =&gt; void;
+  colour: string;
+};
+
+// create an empty context
+export const CountContext = createContext({} as CountContextType);</code></pre><p id="41e82f7f-887d-4310-98ec-eaf653df4f74" class=""><strong><strong><strong><strong><strong><strong><strong><strong>main.tsx</strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="20f2936f-a51d-40b4-ae73-bef2dedc2e64" class="code"><code>// app state
+import { CountContext } from &quot;./CountContext&quot;;
+
+...
+
+export default function App() {
+
+  const [count, setCount] = useState(0);
+
+  const memo = useMemo(() =&gt; {
+    return { count, setCount };
+  }, [count]);
+
+  return (
+		//Make context provider node ancestor of components using context
+    &lt;CountContext.Provider value={ {...memo, colour: &quot;lightgreen&quot;} }&gt;
+      &lt;LeftView/&gt;
+      &lt;RightView/&gt;
+    &lt;/CountContext.Provider&gt;
+  );
+}
+
+render(&lt;App /&gt;, app);</code></pre><p id="974d4c8b-a90d-4420-a734-ed0e9776346a" class=""><strong><strong><strong><strong><strong><strong><strong>LeftView.tsx</strong></strong></strong></strong></strong></strong></strong></p><pre id="2b080831-b8fc-4104-855f-d01c727bbee7" class="code"><code>import { CountContext } from &quot;./CountContext&quot;;
+
+export default function LeftView() {
+  // get state form context
+  const { count, setCount } = useContext(CountContext);
+
+  return (
+    &lt;div class=&quot;left-view&quot;&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;{count}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><code><strong>useEffect()</strong></code></summary><div class="indented"><pre id="9b4f27ed-34c9-4b24-bba3-06297c7e6579" class="code"><code>const handler = () =&gt; {...}; 
+useEffect(handler);           //anything happens
+useEffect(handler, [count]);  //only when count changes </code></pre><p id="9c253abb-6b91-4c5c-9001-b5a7559234d4" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Parameters: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ol type="1" id="3ea72966-f80d-4e20-b4a3-7368cdf9c555" class="numbered-list" start="1"><li><code><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>callback : ()=&gt;void</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></code></li></ol><ul id="faa9f7d8-e0a9-4fb9-addf-b4efc9c874ff" class="bulleted-list"><li style="list-style-type:disc">callbacks run when any value in that &quot;dependencies&quot; array changes from one render to the next. For example, the first time a component is rendered, all effect callbacks run because there are no previous &quot;dependencies&quot; array values to compare to.</li></ul><ol type="1" id="a4028b12-bdac-440d-b386-8eab3263e7f8" class="numbered-list" start="2"><li><code>dependencies : [...]</code></li></ol><ul id="3baf1af8-f5b6-4a37-b5c3-13543bd6c29a" class="bulleted-list"><li style="list-style-type:disc">The callback is only triggered when the value(s) <strong>really do change</strong></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Custom Hooks</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><div class="indented"><pre id="46aa0a5c-e406-4f58-a844-50f8f4ef41b1" class="code"><code>//Custom Hook
+function useCounter() {  
+	const [value, setValue] = useState(0); //holds state inside
+	const increment = useCallback(() =&gt; {  //Callback hook (when value changes)
+		setValue(value+1); 
+	}, [value]); 
+	return {value, increment};  //This object represents our custom hook
+}
+
+//Using custom count hook
+function app() {
+	const {value, increment} = useCounter(); 
+	return (
+		&lt;&gt;
+			&lt;LeftView count={value} handleClick = {increment} /&gt;
+			&lt;RightView count={value} color=&quot;pink&quot; /&gt;
+		&lt;/&gt;
+	)
+}</code></pre></div></details><hr id="b3ea7148-aa18-49a1-9111-c78501236fa8"/><h2 id="abce04ac-dc9f-4fcc-9d29-f99465e27a71" class=""><mark class="highlight-orange">Signals</mark> </h2><p id="dc4f8c84-78e1-46d4-b952-783fa156e02e" class="">State management module of Preact (mimics MVC) </p><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="4a332a1c-1e82-43c5-8dfb-3efce2d0cb52"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Installation</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="74fd0285-b216-46e3-9291-2ffbcf211c15" class=""><code>npm install @preact/signals</code></p></div></figure><p id="bb8d3ff0-4764-4ab4-8b85-f4002486eec3" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Suggestions</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="db0b6896-5aba-403e-bfad-542a56227c11" class="bulleted-list"><li style="list-style-type:disc">Each signal focused on a <em>specific part</em> <em>(minimal) </em>of the state<ul id="2ea7a98f-27d0-409a-b420-ba9629cda1ff" class="bulleted-list"><li style="list-style-type:circle">Break down UI into small focused components; each manage a specific piece of state</li></ul><ul id="a93bce6d-a35c-4e89-af15-1bf602f032ca" class="bulleted-list"><li style="list-style-type:circle">components handling several tasks → state harder to manage</li></ul></li></ul><ul id="a1788e8a-5c2f-42da-978f-971b28c26024" class="bulleted-list"><li style="list-style-type:disc">Use signals only when needed<ul id="a72663eb-d9dd-4de5-9be6-fb7dc1242570" class="bulleted-list"><li style="list-style-type:circle">state used in separate parts of an app </li></ul></li></ul><ul id="541bda30-5432-4b85-a828-9af8021aa07f" class="toggle"><li><details open=""><summary><mark class="highlight-orange"><strong>counter-signals (Demo)</strong></mark></summary><pre id="4f610247-7d04-4ecc-aaeb-41c1bacbb009" class="code"><code>import { signal } from &quot;@preact/signals&quot;;
+
+// state
+export const count = signal(0);
+
+// mutators
+export const increment = () =&gt; {
+  count.value++;
+};</code></pre><pre id="ecafd2cf-c222-45c9-9f72-ff8fce4557e8" class="code"><code>import { count, increment } from &quot;./AppState&quot;;
+
+export default function LeftView() {
+  return (
+    &lt;div class=&quot;left-view&quot;&gt;
+      &lt;button onClick={() =&gt; increment()}&gt;{count.value}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre><pre id="574cba14-9d85-44d6-9aba-b2588d2baf53" class="code"><code>import { count } from &quot;./AppState&quot;;
+
+type RightViewProps = {
+  colour?: string;
+};
+
+export default function RightView({
+  colour = &quot;grey&quot;,
+}: RightViewProps) {
+  return (
+    &lt;div class=&quot;right-view&quot;&gt;
+      {[...Array(count.value)].map((_, i) =&gt; (
+        &lt;NumberBox num={i + 1} colour={colour} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// A component for the box with a number in it.
+type NumberBoxProps = {
+  num: number;
+  colour: string;
+};
+
+function NumberBox({ num, colour }: NumberBoxProps) {
+  // note style attribute is set using a template literal
+  return &lt;div style={{ backgroundColor: colour }}&gt;{num}&lt;/div&gt;;
+}</code></pre><pre id="66127785-4024-4089-8b2f-e858dcedaa54" class="code"><code>...
+//Notice: just layout, not state
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;LeftView /&gt;
+      &lt;RightView colour=&quot;lightblue&quot; /&gt;
+    &lt;/&gt;
+  );
+}
+
+render(&lt;App /&gt;, app);</code></pre><p id="85eba201-73fb-4d9f-9f0f-8d18c946e09d" class="">
+</p></details></li></ul><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="113eeb1c-ad2e-4bd4-a826-7ac78833cc5c"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_pink.svg"/></div><div style="width:100%"><mark class="highlight-red"><strong>ES Modules</strong></mark><p id="7f562f95-641c-4334-9f99-e8ed6b17c8da" class="">A module (file that exports something) is basically a class. <div class="indented"><p id="656b9304-9d7e-4a07-bc09-436ef0a9a02d" class="">If we import like: </p><pre id="60f66a24-ed8a-43ab-93d6-79699abeb5b3" class="code"><code>import * as Model from &quot;./AppState&quot;</code></pre><p id="23537e4c-c559-443d-98c7-1bc4b685b2ee" class="">Can access parts of the file like properties of an object: </p><pre id="ddfc2f24-3915-4e84-b186-0fc32e40fb9d" class="code"><code>Model.increment()
+Moudel.count.value++; </code></pre></div></p></div></figure><hr id="ed2c8fc9-8ee7-4779-b810-ed79745d991a"/><h1 id="2a520f11-a018-40dd-8674-1897160fe8ab" class=""><mark class="highlight-red">Controlling Components</mark></h1><div id="ba38e643-390d-4720-9568-727d6e1a3ab6" class="column-list"><div id="3146af6a-6832-4c4c-82a6-87afa29d0716" style="width:50%" class="column"><p id="337ecb2c-3f07-4bf5-98e6-bcfe3bebe81b" class=""><mark class="highlight-red_background"><strong>Uncontrolled</strong></mark></p><ul id="29064cf3-8b13-4b10-8a8c-3a8b020a4209" class="bulleted-list"><li style="list-style-type:disc">HTML element manages the value<ul id="1dee1f6a-957d-43e0-9de3-33ee2c112495" class="bulleted-list"><li style="list-style-type:circle">eg: text input</li></ul></li></ul><ul id="4d6b348b-c8a1-4b85-b192-affdaa7b0ebc" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-purple">Preact</mark></em> <em>(component) </em>not managing the input value itself there, something else is (ie: handler)<pre id="bef06850-babf-425f-8fe9-1a291540896b" class="code"><code>&lt;input onInput={eventHandler} /&gt;</code></pre></li></ul></div><div id="237b3660-08fc-4d2e-a9a9-6e655b6d981f" style="width:50%" class="column"><p id="32330dcb-cde2-4cc3-a574-0079189ab8e7" class=""><mark class="highlight-teal_background"><strong>Controlled</strong></mark></p><ul id="cb6a4c7f-abf7-49ff-8a69-f086bba5d50b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><em>Preact</em></mark> <em>(component)</em> manages the input value</li></ul><ul id="6eb98718-48f1-4d67-8230-2322746b9df2" class="bulleted-list"><li style="list-style-type:disc">Input will update the state(value). The state is used to update the value displayed. </li></ul><pre id="9ee06c4e-2ed3-4381-86c7-3b9a9037b8c7" class="code"><code>&lt;input value={someValue} onInput={eventHandler} /&gt;</code></pre></div></div><ul id="3864fc1c-4220-48ad-bac7-b3ed92449ac9" class="toggle"><li><details open=""><summary><mark class="highlight-orange"><strong>input-text(demo)</strong></mark></summary><figure id="4f9fe7f9-d301-47b7-9446-14ed100ad32b" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_15.13.45.png"><img style="width:240px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_15.13.45.png"/></a></figure><p id="d904b847-0c17-4ebd-bdb4-8e01a97283c2" class="">The input (text-box) is a <strong><em>controlled input component</em></strong><strong> </strong></p><ul id="c9a0122d-ccc2-4d22-8f1d-dcf91d3c0754" class="bulleted-list"><li style="list-style-type:disc">Have to enter a specific value into a text-box. </li></ul><ul id="8cc15c7d-24bf-4780-83ae-b44ea706f725" class="bulleted-list"><li style="list-style-type:disc">Uses the value from the text-field</li></ul><ul id="4fdb65eb-09c7-4933-b669-e7085e60594d" class="bulleted-list"><li style="list-style-type:disc">local state to display input value<ul id="1a9e95f7-dc34-4d28-8094-4908fdedd12c" class="bulleted-list"><li style="list-style-type:circle"><code>useState()</code> hook is a <em>local state</em> for the component <code>Test</code></li></ul><ul id="53305134-7e14-4ed7-b146-b6133fa9ea9c" class="bulleted-list"><li style="list-style-type:circle"><code>useEffect()</code>to update local state</li></ul></li></ul><ul id="5304e1ee-d057-45c9-8051-0aa38c25d6ea" class="bulleted-list"><li style="list-style-type:disc">only update <em>app state</em>  when valid input </li></ul><ul id="c990efea-1413-4119-84b8-7e84d6a9072d" class="bulleted-list"><li style="list-style-type:disc">leave text input value with valid value when input is no longer valid. </li></ul><ul id="11658379-28b2-4b48-b02f-5ca6b3ee3bd0" class="bulleted-list"><li style="list-style-type:disc">only render error message &lt;p&gt; when invalid </li></ul><hr id="b1a1614d-f74c-42e3-8c11-97c4c63ff003"/><pre id="d74cc874-b5a8-446e-8802-9f9a381ba0ad" class="code"><code>import { render } from &quot;preact&quot;;
+import { signal } from &quot;@preact/signals&quot;;
+import { useEffect, useState } from &quot;preact/hooks&quot;;
+//--------------------------------------------------------
+const appState = signal(&quot;abc&quot;); // App state
+
+export default function App() {
+  
+	// local state for the input value
+  const [inputValue, setInputValue] = useState(appState.value);
+
+  // Update local state when App State changes
+  useEffect(() =&gt; {
+    setInputValue(appState.value);
+  }, [appState.value]);
+
+  // Handle input changes
+  const handleInput = (e: Event) =&gt; {
+    const newValue = (e.target as HTMLInputElement).value;
+    
+		// Update local state immediately
+    setInputValue(newValue);
+
+    // Update App State, only if valid
+    if (/^[abc]*$/.test(text))) {
+      appState.value = newValue;
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; (appState.value = &quot;abc&quot;)}&gt;Reset&lt;/button&gt;
+      &lt;h2&gt;&#x27;{appState}&#x27;&lt;/h2&gt;
+      &lt;input
+        value={inputValue}
+        type=&quot;text&quot;
+        onInput={handleInput}
+        // always leave input field with valid value
+        onChange={() =&gt; setInputValue(appState.value)}
+      /&gt;
+      {!isValid(inputValue) &amp;&amp; &lt;p&gt;Invalid: use a, b, or c&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+render(&lt;App /&gt;, document.body);</code></pre><p id="aa550b44-25e4-4690-a78b-9d4b5a37db07" class="">
+</p></details></li></ul><ul id="b8d70294-6874-4f4e-817b-89271865f7c3" class="toggle"><li><details open=""><summary><mark class="highlight-orange"><strong>todo (Demo)</strong></mark></summary><ul id="d2fc83ea-e2d6-4d8d-9872-14b6bc173e5e" class="bulleted-list"><li style="list-style-type:disc">more complicated app → array state</li></ul><ul id="722ed831-a421-4393-80bb-aaf9343622d5" class="bulleted-list"><li style="list-style-type:disc">AppState has state signals and mutations: <ul id="eaa889d1-048e-4a23-ba5c-e1884ccd91e9" class="bulleted-list"><li style="list-style-type:circle"><em><strong>mutations must create an entirely new state (new array) to trigger signal</strong></em></li></ul><ul id="58255170-a3a4-4499-ba78-70ff79c2e31b" class="bulleted-list"><li style="list-style-type:circle"><code><strong>computed()</strong></code><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> signal </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul></li></ul><ul id="9cc77c53-40e6-467b-ba2b-fe949490fb9f" class="bulleted-list"><li style="list-style-type:disc">simple unique id generator </li></ul><ul id="e87580eb-cee6-4220-a2a2-d8442239b03f" class="bulleted-list"><li style="list-style-type:disc">TodoList and TodoItem<ul id="3d557b7d-7e3d-4aaf-adef-050516f00292" class="bulleted-list"><li style="list-style-type:circle">map to create TodoItem children </li></ul><ul id="79b71997-08b2-499a-b03b-7878414908ec" class="bulleted-list"><li style="list-style-type:circle">TodoItem component uses todo prop (no state)</li></ul></li></ul><ul id="e91f8c88-d6e3-438e-97eb-8238ba4cca6a" class="bulleted-list"><li style="list-style-type:disc">TodoForm<ul id="016ced86-95cd-4090-856d-e438863a10e3" class="bulleted-list"><li style="list-style-type:circle">using <code>&lt;form onSubmit /&gt;</code></li></ul><ul id="3497da3a-83bb-4bff-943e-c70be6fc578f" class="bulleted-list"><li style="list-style-type:circle">two versions: local state (useState) and element ref (useRef)</li></ul><ul id="c9446c88-f1bf-4b19-8623-c6d268b6153b" class="bulleted-list"><li style="list-style-type:circle">&lt;p&gt; summary with signals </li></ul></li></ul><hr id="996b0396-12ea-4243-a2c7-b1dee46cb74d"/><p id="e99ee443-a66a-4d4c-ab26-a0337356fb13" class=""><strong><strong><strong><strong><strong><strong><strong><strong>main.tsx</strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="cfeeeeb3-f9ee-4756-8d22-47d269012b2f" class="code"><code>...
+//get app div from HTML (as before) 
+...
+
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;TodoForm /&gt;
+      &lt;TodoList /&gt;
+    &lt;/&gt;
+  );
+}
+
+...</code></pre><p id="ddf4022d-5518-4dca-91c9-fcad6f72e962" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>AppState.tsx</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="71a462b7-d153-4da4-a2e8-0fdf8cac67a7" class="code"><code>...
+export type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+//App State 
+export const todos = signal&lt;Todo[]&gt;([]);
+
+//Computed Signal: # of completed todo&#x27;s 
+export const numCompleted = computed(
+  () =&gt; todos.value.filter((t) =&gt; t.completed).length 
+);
+
+export const selected = signal&lt;number|null&gt;(null); //not used
+
+// MUTATIONS
+
+	let nextId = 0; //Unique ID&#x27;s
+
+export const addTodo = (text: string) =&gt; {
+	const newTodo = { id: nextId++, text, completed: false }; 
+
+	//GOOD: assigns new array, signal will know
+  todos.value = [...todos.value, newTodo];
+	//BAD: this changes the array, but array ref is same (the signal won&#x27;t know something changed)
+  //todos.value.push(newTodo);
+};
+
+export const deleteTodo = (id: number) =&gt; {
+  todos.value = todos.value.filter((t) =&gt; t.id !== id);
+};
+
+export const toggleTodo = (id: number) =&gt; {
+  todos.value = todos.value.map((t) =&gt;
+    t.id === id
+      ? ({
+          ...t,
+          completed: !t.completed,
+        } as Todo)
+      : t
+  );
+};</code></pre><p id="a299c2d5-87af-46b1-bd8a-c37b8ee9eaf1" class=""><strong><strong><strong><strong>TodoForm.tsx</strong></strong></strong></strong></p><pre id="63ff9cf3-79a6-4aeb-bd1b-5ea46f33075f" class="code"><code>...
+export default function TodoForm() {
+  // local state for &quot;controlled input&quot;
+  const [inputValue, setInputValue] = useState(&quot;&quot;); //controls the form
+  
+  // update local state when user types
+  function inputHandler(e: Event) {
+    const newValue = (e.target as HTMLInputElement).value;
+    setInputValue(newValue);
+  }
+
+  return (
+    &lt;form
+      onSubmit={(e) =&gt; {
+        e.preventDefault();
+        addTodo(inputValue);
+        setInputValue(&quot;&quot;);
+      }}
+    &gt;
+      &lt;input
+        type=&quot;text&quot;
+        placeholder=&quot;What needs to be done?&quot;
+        onChange={inputHandler}
+        value={inputValue}
+        size={40}
+      /&gt;{&quot; &quot;}
+      (useState)
+      &lt;p&gt;{todos.value.length} todos, {numCompleted} completed&lt;/p&gt;
+    &lt;/form&gt;
+  );
+}</code></pre><p id="4ce27deb-f965-4f28-99aa-8c6867343e67" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>TodoList.tsx</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="ec4fd984-5b4c-4542-b1c0-a5874743ea06" class="code"><code>...
+export default function TodoList() {
+  return (
+    &lt;ul&gt;
+      {todos.value.map((todo) =&gt; (
+        &lt;TodoItem todo={todo} /&gt; //each has a prop of type todo
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre><p id="39d9e2a4-7592-4ff1-bfe1-6977f70048d4" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>TodoItem.tsx</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="cdde4d9c-fb15-4e72-9089-524dc188ebf0" class="code"><code>type TodoItemProps = { todo: Todo; }; //defined in AppState
+
+export default function TodoItem({ todo }: TodoItemProps) {
+  return (
+    &lt;li key={todo.id}&gt; 
+      &lt;input
+        type=&quot;checkbox&quot;
+        checked={todo.completed}
+        onInput={() =&gt; toggleTodo(todo.id)}
+      /&gt;
+      &lt;span&gt;{todo.text}&lt;/span&gt;
+      &lt;button onClick={() =&gt; deleteTodo(todo.id)}&gt;x&lt;/button&gt;
+    &lt;/li&gt;
+  );
+}</code></pre><p id="3747ae51-911b-4f12-acef-8f092cf05cf0" class="">
+</p></details></li></ul><p id="6c48d7d3-ed76-45f0-a03c-4c6fda3da22c" class="">
+</p><hr id="86a723bd-76bb-4943-9825-5ea13af4bd4f"/><h1 id="5a0f084f-f386-4e1c-a2a5-c2102efa64de" class=""><mark class="highlight-red">Dynamic Components</mark></h1><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="0413e05a-604b-4df5-81ee-116249f64086"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>collapsible</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="fb1df47a-f273-4e65-a421-f5a8771ee753" class="bulleted-list"><li style="list-style-type:disc">takes one or more children, either collapse or show it, depending on the state </li></ul><ul id="50c7fa32-b98c-418b-8ae1-ff2f65d476df" class="bulleted-list"><li style="list-style-type:disc"><code>useState</code> for local component state</li></ul><hr id="f660d26c-149b-46f8-92eb-488ad5933ae1"/><ul id="bfd68526-5549-471b-b83d-b6c0c7587cec" class="toggle"><li><details open=""><summary><strong><strong><strong><strong>Demo</strong></strong></strong></strong></summary><pre id="32db594c-758e-482f-b62f-20c2db0c5362" class="code"><code>function App() {
+  return (
+    &lt;&gt;
+      &lt;Collapsible label=&quot;Lorem&quot;&gt;
+        &lt;h3&gt;Lorem ipsum dolor sit&lt;/h3&gt;
+        &lt;p&gt;
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Quis consequatur, eos sapiente amet, laboriosam, explicabo
+          sequi doloremque pariatur iste velit recusandae quaerat
+          ipsum dolorum sit. Doloribus eos laborum consequuntur
+          repellat!
+        &lt;/p&gt;
+      &lt;/Collapsible&gt;
+      &lt;Collapsible label=&quot;Recusandae&quot; open={true}&gt;
+        &lt;h3&gt;Recusandae sint fugiat quisquam&lt;/h3&gt;
+        &lt;p&gt;
+          Recusandae sint fugiat quisquam tempore ducimus, autem vero
+          cum, voluptatibus porro sequi, quae quas labore. Labore
+          voluptatem reiciendis quas architecto consequatur fuga quae
+          quia, blanditiis aliquam soluta sequi suscipit quaerat.
+        &lt;/p&gt;
+      &lt;/Collapsible&gt;
+    &lt;/&gt;
+  );
+}
+
+render(&lt;App /&gt;, document.body);</code></pre><pre id="f06012c2-2201-4a1f-922b-19aab4b1e03d" class="code"><code>type CollapsibleProps = {
+  open?: boolean;
+  label: string;
+  children: ComponentChildren;
+};
+
+export function Collapsible({
+  open: initializeOpen = false,
+  label,
+  children,
+}: CollapsibleProps) {
+  const [isOpen, setIsOpen] = useState(initializeOpen);
+
+  return (
+    &lt;div&gt;
+      &lt;p
+        style={{ background: &quot;whitesmoke&quot;, cursor: &quot;pointer&quot; }}
+        onClick={() =&gt; setIsOpen(!isOpen)}
+      &gt;
+        {isOpen ? &quot;[-]&quot; : &quot;[+]&quot;} {label}
+      &lt;/p&gt;
+
+      {isOpen &amp;&amp; &lt;div class=&quot;content&quot;&gt;{children}&lt;/div&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="7aa8220f-edab-4930-8768-0a1356753851"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong>Toggle</strong></strong></strong><hr id="9425b7d4-a528-470f-905d-d93d7e5af032"/><ul id="fdf7a2a2-63cf-4d6e-90c8-3ab979c4be06" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong>Demo </strong></strong></strong></strong></strong></summary><ul id="517dce31-fdf9-4d79-aa45-96ca613303f4" class="bulleted-list"><li style="list-style-type:disc">CSS creates look of toggle (import stylesheet) </li></ul><ul id="604239ee-b8b9-4cd2-a897-3d29a0938960" class="bulleted-list"><li style="list-style-type:disc">Component emulates input checkbox<ul id="16dab492-2057-4280-9fb5-f8770d168679" class="bulleted-list"><li style="list-style-type:circle"><em>checked</em> boolean group </li></ul><ul id="a5601f89-e36b-4119-9ce4-a22e5d78c4fd" class="bulleted-list"><li style="list-style-type:circle"><em>onChange</em> Event prop</li></ul></li></ul><ul id="a59c7da0-a517-4d10-a583-586d3c15e130" class="bulleted-list"><li style="list-style-type:disc">Component new props </li></ul><ul id="8a96d8d2-939c-4a54-91e1-25b3d97c481d" class="bulleted-list"><li style="list-style-type:disc">Local state for “Controlled” input</li></ul><pre id="30ea8d04-1c82-4741-9b96-8cbb948adfcf" class="code"><code>// global state with a signal
+const pear = signal(false);
+
+function App() {
+  // local app state with useState
+  const [apple, setApple] = useState(true);
+
+  return (
+    &lt;&gt;
+      &lt;h3&gt;
+        Apple: &#x27;{apple.toString()}&#x27;, Pear: &#x27;{pear.toString()}&#x27;
+      &lt;/h3&gt;
+      &lt;p&gt;
+        &lt;Toggle
+          checked={apple}
+          label=&quot;Apple&quot;
+          onChange={(e) =&gt;
+            setApple((e.currentTarget as HTMLInputElement).checked)
+          }
+        /&gt;
+        &lt;Toggle
+          checked={pear.value}
+          label=&quot;Pear&quot;
+          onChange={(e) =&gt;
+            (pear.value = (
+              e.currentTarget as HTMLInputElement
+            ).checked)
+          }
+        /&gt;
+      &lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+
+render(&lt;App /&gt;, document.body);</code></pre><pre id="f597c416-f915-4e77-bacb-1e68f8c6ffbf" class="code"><code>type ToggleProps = {
+  checked?: boolean;
+  label?: string;
+  onChange?: (e: Event) =&gt; void;
+};
+
+export function Toggle({
+  checked: initChecked = false,
+  label = &quot;&quot;,
+  onChange,
+}: ToggleProps) {
+  // local state for controlled checkbox
+  const [checked, setChecked] = useState(initChecked);
+
+  const changeHandler = (e: Event) =&gt; {
+    setChecked((e.currentTarget as HTMLInputElement).checked);
+    if (onChange) onChange(e);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;label class=&quot;toggle&quot;&gt;
+        &lt;input
+          class=&quot;toggle-checkbox&quot;
+          type=&quot;checkbox&quot;
+          checked={checked}
+          onChange={changeHandler}
+        /&gt;
+        &lt;div class=&quot;toggle-switch&quot; style={{ scale: &quot;70%&quot; }}&gt;&lt;/div&gt;
+        {label &amp;&amp; &lt;span class=&quot;toggle-label&quot;&gt;{label}&lt;/span&gt;}
+      &lt;/label&gt;
+    &lt;/&gt;
+  );
+}</code></pre></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="8fe2cd21-a630-4a50-8fbc-361b469d8ac9"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong>Canvas</strong></strong></strong></strong></strong></strong><ul id="66d8b5a2-7fea-4e41-ba23-cad63fdd35b4" class="bulleted-list"><li style="list-style-type:disc"><code>useRef</code> hook <ul id="f391c129-8214-4edf-829f-9f39e634137e" class="bulleted-list"><li style="list-style-type:circle">looks for a reference to a given HTML object </li></ul><ul id="cfcc4f45-2c78-47a0-b38e-7300a93a4286" class="bulleted-list"><li style="list-style-type:circle">we need this to get access to the graphics context</li></ul></li></ul><ul id="d955e746-5319-41e0-9542-10d69b9cf025" class="bulleted-list"><li style="list-style-type:disc"><code>useLayoutEffect</code> vs. <code>useEffect</code></li></ul><hr id="ce792246-2a4d-4a0b-923d-85b208320e51"/><ul id="737b4e12-7fb2-474c-81e5-03b8a1701638" class="toggle"><li><details open=""><summary><strong><strong><strong><strong>Demo (V1) </strong></strong></strong></strong></summary><ul id="88f651de-69ce-4664-94ad-8291cc4b0948" class="bulleted-list"><li style="list-style-type:disc">draws 100 points randomly on the canvas</li></ul><pre id="6a37dd3a-0b5e-4762-b43f-88651859f1c9" class="code"><code>let size = 256;
+
+function App() {
+  return &lt;Canvas width={size} height={size} /&gt;;
+}
+
+render(&lt;App /&gt;, document.body);</code></pre><pre id="d8ca71fd-170f-4436-bc49-b51761d11fd4" class="code"><code>type CanvasProps = {
+  width?: number;
+  height?: number;
+};
+
+export function Canvas({ width = 256, height = 256 }: CanvasProps) {
+  const canvasRef = useRef&lt;HTMLCanvasElement&gt;(null);
+
+  // drawing
+  useLayoutEffect(() =&gt; {
+    const gc = canvasRef.current?.getContext(&quot;2d&quot;);
+    if (gc) draw(gc);
+  }),
+	 [];
+
+	//Standard canvas stuff: 
+  function draw(gc: CanvasRenderingContext2D) {
+    gc.fillStyle = &quot;black&quot;;
+    gc.fillRect(0, 0, gc.canvas.width, gc.canvas.height);
+
+    gc.fillStyle = &quot;red&quot;;
+
+    // 100 random points
+    [...Array(100)].forEach((_) =&gt; {
+      const [x, y] = [Math.random() * width, Math.random() * height];
+      gc.beginPath();
+      gc.arc(x, y, 5, 0, 2 * Math.PI);
+      gc.fill();
+    });
+  }
+
+  return &lt;canvas ref={canvasRef} width={width} height={height} /&gt;;
+}</code></pre><p id="d230aa9f-4c17-49f0-9dce-2754ea2890c1" class="">
+</p></details></li></ul><ul id="66c5a3df-870b-41bb-a2a6-2ac90327a045" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong>Demo (V2)</strong></strong></strong></strong></strong></summary><p id="3ec02579-41f5-4a12-a83a-70c92c889dbe" class="">Make the canvas size adjustable. </p><ul id="61dc4af7-6780-481a-af20-53a600c1f259" class="bulleted-list"><li style="list-style-type:disc">Change the size to local state </li></ul><ul id="d70c32bf-116b-4bf3-a55b-d1b222de6bb6" class="bulleted-list"><li style="list-style-type:disc">increase size on keypress</li></ul><p id="50738d91-535a-4481-bb27-10ba537da567" class="">Insert the following into the App component (<code>App()</code>)</p><pre id="fb9c4bfb-7821-4184-a838-abdd671a9c7e" class="code"><code>const [size, setSize] = useState(256); 
+
+function keyHandler(e: keyboardEvent) {
+	setSize((size) =&gt; size+1); 
+}
+
+document.body.addEventListener(&quot;keydown&quot;, keyHandler); </code></pre><p id="7f972e9d-56cc-4e9f-94f4-ebbc2dfc06d2" class=""><strong><strong><strong>Problem: </strong></strong></strong>The listener is being added outside of the component. Every time the state changes, it adds a new event listener to the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>document body</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.  So every key press doubles the # of event listeners. </p><p id="b624fea5-e245-42bd-b5cf-1f9d4b466a81" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Solution: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>wrap it is a <code>useEffect()</code> hook</p><ul id="21470282-cf38-43d2-9570-8246614e45db" class="bulleted-list"><li style="list-style-type:disc">only called when the canvas is created</li></ul><pre id="e817d9e1-e475-42be-98ce-701d46ff5010" class="code"><code>function keyHandler(e: keyboardEvent) {
+	setSize((size) =&gt; size+1); 
+}
+
+useEffect(() =&gt; {
+	document.body.addEventListener(&quot;keydown&quot;, keyHandler); 
+}, []); </code></pre></details></li></ul><ul id="58c9565f-1a40-48f4-8dc7-d2f950ed92b2" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Demo (V3)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><figure id="c964a7be-1eef-43b2-898e-95e25563e8e7" class="image" style="text-align:center"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_17.23.24.png"><img style="width:192px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_17.23.24.png"/></a></figure><p id="1030a3f3-9abe-41ea-a6f5-afae61c87e0c" class="">Add events to it: </p><ul id="77f1b741-9d1b-4c6f-99e8-ada7be3ec80e" class="bulleted-list"><li style="list-style-type:disc">local state for <em>point</em> in App and <em>movePoint</em> in Canvas<ul id="0818605e-b880-4fc6-9703-96c03059393f" class="bulleted-list"><li style="list-style-type:circle">remember to set new point object, don’t just change object property (changing property point won’t trigger a component update)</li></ul><ul id="c011fcc7-9edd-4db4-9262-ce3f5b730ac8" class="bulleted-list"><li style="list-style-type:circle">Draw using <code>useLayoutEffect</code> when point local state changes</li></ul><ul id="c3abce30-1712-4758-97a4-fdc52abb68c0" class="bulleted-list"><li style="list-style-type:circle">handlers reference canvas<ul id="8faa79fa-5bd5-4248-b4f8-43340cbf8823" class="bulleted-list"><li style="list-style-type:square">when canvas destroyed, the handlers are also destroyed </li></ul></li></ul></li></ul><pre id="b8eaaff4-68bb-4ee3-9257-b6db86e586e6" class="code"><code>const size = 256;
+
+function App() {
+  const [point, setPoint] = useState({ x: size / 2, y: size / 2 });
+
+  const canvasHandler = (x: number, y: number) =&gt; {
+    setPoint({ x: x, y: y });
+  };
+
+  return (
+    &lt;div style=&quot;display: flex; flex-direction: column; align-items: start;&quot;&gt;
+      &lt;input
+        style=&quot;flex: 1 1 auto;&quot;
+        type=&quot;range&quot;
+        max={size}
+        value={point.x}
+        onInput={(e) =&gt; {
+          setPoint({
+            ...point,
+            x: Number.parseFloat(e.currentTarget.value),
+          });
+        }}
+      /&gt;
+      &lt;input
+        type=&quot;range&quot;
+        max={size}
+        value={point.y}
+        onInput={(e) =&gt; {
+          setPoint({
+            ...point,
+            y: Number.parseFloat(e.currentTarget.value),
+          });
+        }}
+      /&gt;
+      &lt;Canvas
+        point={point}
+        width={size}
+        height={size}
+        callback={canvasHandler}
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+
+render(&lt;App /&gt;, document.body);</code></pre><pre id="43220a54-7ba5-4b21-b55f-1040f3dc65a6" class="code"><code>type CanvasProps = {
+  point: { x: number; y: number };
+  width?: number;
+  height?: number;
+  callback?: (x: number, y: number) =&gt; void;
+};
+
+export function Canvas({
+  point,
+  width = 256,
+  height = 256,
+  callback,
+}: CanvasProps) {
+  const canvasRef = useRef&lt;HTMLCanvasElement&gt;(null);
+  // initial point is set to point property
+  const [movePoint, setMovePoint] = useState(point);
+
+  const clickHandler = (e: MouseEvent) =&gt; {
+    // send click point to parent
+    if (callback) callback(e.offsetX, e.offsetY);
+  };
+
+  const moveHandler = (e: MouseEvent) =&gt; {
+    // update local state
+    setMovePoint({ x: e.offsetX, y: e.offsetY });
+  };
+
+  // drawing
+  useLayoutEffect(() =&gt; {
+    const gc = canvasRef.current?.getContext(&quot;2d&quot;);
+    if (gc) draw(gc);
+  }),
+    [movePoint];
+
+  function draw(gc: CanvasRenderingContext2D) {
+    gc.fillStyle = &quot;black&quot;;
+    gc.fillRect(0, 0, gc.canvas.width, gc.canvas.height);
+
+    // local state point
+    gc.fillStyle = &quot;red&quot;;
+    gc.beginPath();
+    gc.arc(movePoint.x, movePoint.y, 10, 0, 2 * Math.PI);
+    gc.fill();
+
+    // property  point
+    gc.strokeStyle = &quot;yellow&quot;;
+    gc.beginPath();
+    gc.arc(point.x, point.y, 10, 0, 2 * Math.PI);
+    gc.stroke();
+
+    // show points
+    gc.font = &quot;14px sans-serif&quot;;
+    gc.fillStyle = &quot;yellow&quot;;
+    gc.fillText(`${point.x}, ${point.y}`, 8, 20);
+    gc.fillStyle = &quot;red&quot;;
+    gc.fillText(`${movePoint.x}, ${movePoint.y}`, 8, 20 + 20);
+  }
+
+  return (
+    &lt;canvas
+      ref={canvasRef}
+      width={width}
+      height={height}
+      onMouseMove={moveHandler}
+      onClick={clickHandler}
+    /&gt;
+  );
+}</code></pre></details></li></ul><ul id="23634c6f-4dee-455c-b44a-970f3773bab3" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Demo(V4) </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><ul id="f9ba3dec-9978-44c4-ae60-4c774c240ad8" class="bulleted-list"><li style="list-style-type:disc">When the window is resize, canvas fills up the whole container<table id="5097c409-581d-4d00-bd4a-de66196fd117" class="simple-table"><tbody><tr id="3cab13cd-b5cc-441c-a485-8f312fa8b071"><td id="tEDS" class=""><code>useLayoutEffect</code></td><td id="sshT" class=""><code>useEffect</code></td></tr><tr id="e64b0872-0f67-429a-b4e9-11cc30319179"><td id="tEDS" class="">side effect guaranteed to be executed <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>before the next render</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></td><td id="sshT" class="">side effect excited when there is <strong>enough time</strong></td></tr><tr id="e674b9e2-45f6-47ae-b1e8-7dd78fda72d3"><td id="tEDS" class="">(important for a canvas) </td><td id="sshT" class="">(canvas could be blank at certain points)</td></tr></tbody></table></li></ul><pre id="26ca5b9d-a455-4369-a67c-d2ca33975001" class="code"><code>let size = 100;
+
+function App() {
+  return (
+    &lt;div
+      style={{
+        padding: 20,
+        border: &quot;1px solid black&quot;,
+        height: &quot;100vh&quot;,
+      }}
+    &gt;
+      &lt;Canvas width={size} height={size} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+render(&lt;App /&gt;, document.body);</code></pre><pre id="c33d6a53-ade3-4564-890e-4338b7f4e9f9" class="code"><code>type CanvasProps = {
+  width?: number;
+  height?: number;
+};
+
+export function Canvas({
+  width: widthInit = 256,
+  height: heightInit = 256,
+}: CanvasProps) {
+  const canvasRef = useRef&lt;HTMLCanvasElement&gt;(null);
+  // local state for canvas size
+  const [width, setWidth] = useState(widthInit);
+  const [height, setHeight] = useState(heightInit);
+
+	//useEffect(): the first frame will be 100x100
+	//useLayoutEffect(): the resize observer is guaranteed to be added before the first frame
+  useLayoutEffect(() =&gt; {
+    // watch for resize events
+    const resizeObserver = new ResizeObserver(() =&gt; {
+      // this should never happen
+      if (!canvasRef.current) throw new Error(&quot;Canvas not found&quot;);
+
+      const w = canvasRef.current.offsetWidth;
+      const h = canvasRef.current.offsetHeight;
+
+      // update the state if the size has changed
+      if (w != width)  setWidth(w); 
+      if (h != height) setHeight(h);
+    });
+
+    if (canvasRef.current) resizeObserver.observe(canvasRef.current);
+
+    return () =&gt; {
+      // cleanup by removing from ResizeObserver
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  // drawing
+  // (try useEffect and see difference)
+  useLayoutEffect(() =&gt; {
+    const gc = canvasRef.current?.getContext(&quot;2d&quot;);
+    if (gc) draw(gc);
+  }, [width, height]);
+
+  function draw(gc: CanvasRenderingContext2D) {
+    gc.fillStyle = &quot;black&quot;;
+    gc.fillRect(0, 0, gc.canvas.width, gc.canvas.height);
+
+    gc.fillStyle = &quot;red&quot;;
+    gc.beginPath();
+    const r = Math.min(width, height) / 4;
+    gc.arc(width / 2, height / 2, r, 0, 2 * Math.PI);
+    gc.fill();
+
+    gc.strokeStyle = &quot;white&quot;;
+    gc.beginPath();
+    gc.moveTo(0, 0);
+    gc.lineTo(width, height);
+    gc.moveTo(width, 0);
+    gc.lineTo(0, height);
+    gc.stroke();
+
+    gc.fillStyle = &quot;white&quot;;
+    gc.textAlign = &quot;center&quot;;
+    gc.textBaseline = &quot;middle&quot;;
+    gc.font = &quot;20px sans-serif&quot;;
+    gc.fillText(`${width},${height}`, width / 2, 20);
+  }
+
+  return (
+    &lt;canvas
+      ref={canvasRef}
+      width={width}
+      height={height}
+      style={{
+        width: &quot;100%&quot;,
+        height: &quot;100%&quot;,
+      }}
+    /&gt;
+  );
+}</code></pre></details></li></ul></div></figure><p id="ef5fd634-c462-470d-a2eb-eacaf696224a" class="">
+</p><hr id="42eee3f9-27cd-4bb5-8e80-3384b9cd9e23"/><h1 id="c0cf2359-f040-4787-8450-9f5f570a559e" class=""><mark class="highlight-red">Component Style</mark></h1><h3 id="3e7c1889-06ee-48a0-b603-21c602025826" class=""><strong><strong><strong><strong><strong><strong><strong>Approaches</strong></strong></strong></strong></strong></strong></strong></h3><ol type="1" id="19a3497c-2a36-4cdd-8236-d22b8fe521e4" class="numbered-list" start="1"><li><mark class="highlight-red_background">global link (in HTML)</mark></li></ol><ol type="1" id="7e805e47-ced6-4f0c-853d-f051480ed3c5" class="numbered-list" start="2"><li><strong><mark class="highlight-yellow_background">Inline CSS </mark></strong><ul id="7634fa68-4b84-4594-8452-646300940cab" class="bulleted-list"><li style="list-style-type:disc">in component render</li></ul><ul id="45a55ad4-9920-408b-a20f-c2e8f3102c29" class="bulleted-list"><li style="list-style-type:disc">can’t have selectors (only for basic styles) </li></ul></li></ol><ol type="1" id="36763bdd-799b-47c2-9369-ce65f51ca642" class="numbered-list" start="3"><li><strong><mark class="highlight-teal_background">CSS module file(s)</mark></strong></li></ol><ol type="1" id="b8b3e812-ec2c-4578-b1cf-a8e9e6676323" class="numbered-list" start="4"><li><mark class="highlight-teal_background"><strong>Tailwind</strong></mark></li></ol><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="99d3c1db-0496-40b0-ac34-d6cf4cd44cc7"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Inline CSS </strong></mark><p id="005ff339-44f1-4ffd-ad88-e58d263796ef" class="">Style attribute accepts a JS <strong>style object </strong>to specify CSS: </p><pre id="c00a22db-f708-4a81-a61e-51f1f5a7892b" class="code"><code>&quot;padding: 10px&quot; -&gt; {padding: &quot;10px&quot;} or {padding: 10}
+&quot;flex: 1 1 autor&quot; -&gt; {flex: &quot;1 1 auto&quot;}
+&quot;flex-flow: row nowrap&quot; -&gt; {flexFlow: &quot;row nowrap&quot;}</code></pre><p id="96936ba6-28d8-4f05-bb23-70240741816b" class=""><strong><strong><strong><strong><strong><strong><strong>Convention: </strong></strong></strong></strong></strong></strong></strong>create <em><em><em><em><em><em><em><em><em><em><em><em><em>const object </em></em></em></em></em></em></em></em></em></em></em></em></em>and assign in render</p><pre id="d2dc3ea8-66bc-4aa6-92da-91eb2a272bf4" class="code"><code>&lt;div style={{
+	padding: &quot;10px&quot;, 
+	display: &quot;flex&quot;
+}}&gt; ... </code></pre><p id="50ba6882-803e-4dd7-ba6e-3156e6a229be" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Demo (</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><em><strong>style-inline</strong></em><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="561c2f48-2d0f-44f5-9cce-1936b8bbb703"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><mark class="highlight-orange"><strong>CSS module file</strong></mark><p id="7e285fbe-7f18-4399-aabb-3ae1b64ac959" class="">CSS file with “.module.css” extension </p><p id="44a17c62-8fa1-45fa-be62-f25b674f4b89" class="">Import module.css into the component <em>tsx</em> file </p><pre id="c61cd9d0-58a3-440e-9381-250459eb5566" class="code"><code>import style from &quot;./MyComponent.module.css&quot;; //import as object</code></pre><p id="f51e747e-4ef1-4db1-85cc-2ca27fa7d1fd" class="">Assign classes in render: </p><pre id="26f94002-851f-4480-ae2a-4ed41f1ea92a" class="code"><code>&lt;div class={style.root}&gt;</code></pre><p id="c29e315e-5df8-4e49-99a2-119b2fddae4a" class="">Class names are <strong>locally scoped to component </strong></p><ul id="a70d3f69-8281-4d80-9016-e54c830d89a5" class="bulleted-list"><li style="list-style-type:disc">unique class names are generated (eg: <code>class=&quot;root_dsfdsf_1&quot;</code>)</li></ul><p id="bba657b3-7a14-4290-80c8-805993bbba08" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Demo (style-module)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="f17d8b45-11be-4cb9-ba56-c5cf776b1b39"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Tailwind</strong></mark><strong><strong><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="f37a9fc0-6235-4a49-909e-81434bfcd816" class="bulleted-list"><li style="list-style-type:disc">CSS framework</li></ul><ul id="e4be78d8-1d7b-42ed-a746-8588b529148d" class="bulleted-list"><li style="list-style-type:disc"><strong>Define CSS with classes</strong><ul id="59b5fda8-3c69-4a48-9ce7-ed578f790fac" class="bulleted-list"><li style="list-style-type:circle">class names are the style (called Utility classes) </li></ul></li></ul><ul id="b1e13c23-f91f-4bd3-a89d-2cc1e9dcf6bb" class="bulleted-list"><li style="list-style-type:disc">Same strategy for hover, focus, etc</li></ul><ul id="1ca8d8ff-a798-4417-ad6e-422b99a4b523" class="bulleted-list"><li style="list-style-type:disc">automatically removes all unused CSS</li></ul><ul id="e718e6c0-9055-4095-9b3a-0bec943f8cab" class="bulleted-list"><li style="list-style-type:disc">Works best with component based development </li></ul><ul id="77e66a49-024c-4bc1-9cf8-da875e7b26e1" class="bulleted-list"><li style="list-style-type:disc"><strong>No predesigned components</strong> (ie: buttons, text, etc.)<ul id="e7c6e1ea-c68a-4fb4-9301-5a9d493bd575" class="bulleted-list"><li style="list-style-type:circle">other CSS frameworks (eg: bootstrap) provide predesigned components that you have to override</li></ul><ul id="5b49647b-3c11-4f02-80ce-303bc728e452" class="bulleted-list"><li style="list-style-type:circle">Need to add basic styling for everything</li></ul></li></ul><ul id="8e3087d4-8984-4bf9-b271-592225b4f68d" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>mobile first responsive</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="c313c3f4-22c6-4f17-89c4-0e6d3258889f" class="bulleted-list"><li style="list-style-type:circle">provides a <code>{screen:}</code> prefix to use instead of media queries/rules</li></ul><ul id="0326227b-f10b-4a42-8f76-ac62bcc98a2d" class="bulleted-list"><li style="list-style-type:circle">screen prefix identifies when to use utility class<ul id="136d54fb-e66d-469e-a9f5-19a71a3e391e" class="bulleted-list"><li style="list-style-type:square">default screen is mobile (no prefix) </li></ul></li></ul><figure id="e81b1f36-0302-44f9-80d1-4c44bdb27d6e" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_18.18.46.png"><img style="width:432px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_18.18.46.png"/></a></figure></li></ul><hr id="411197ed-2343-436e-b822-49baba40bef7"/><p id="f0817905-9a10-4f40-9f5c-7feb91712c69" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Installation: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><a href="https://tailwindcss.com/docs/guides/vite">https://tailwindcss.com/docs/guides/vite</a></p><hr id="85c4b2b3-a365-450c-a71b-14a6157040d5"/><p id="8cb19dcc-c895-43f4-ad76-e7302f5287aa" class=""><strong><strong><strong>Example: </strong></strong></strong></p><p id="4f43a425-2f88-43a5-a3d3-e7fca5cff94d" class="">Default Style</p><figure id="6c74de65-3498-49ac-b5c6-621d5ce56c3e" class="image"><a href="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_18.15.06.png"><img style="width:480px" src="20,21,22%20-%20Preact%20d353717129f04f6e898c8aac2c835908/Screen_Shot_2023-11-28_at_18.15.06.png"/></a></figure><hr id="54f4c8e0-3129-458f-81d3-87e362eb7176"/><ul id="94826fbf-ee51-4f69-87bd-9f3ad82ac1d1" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Tailwind (Demo)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><pre id="f54cb497-84eb-402d-8e9c-b77e9a41afb4" class="code"><code>// get ref for node to insert the app
+const app = document.querySelector(&quot;div#app&quot;);
+if (!app) throw new Error(&quot;no app div&quot;);
+
+export default function App() {
+  return (
+    // app &quot;root&quot;
+    &lt;div class=&quot;h-screen flex justify-center bg-gray-50&quot;&gt;
+      {/* container */}
+      &lt;div class=&quot;m-12 flex-auto flex flex-col sm:flex-row items-stretch gap-12&quot;&gt;
+        {/* views */}
+        &lt;LeftView /&gt;
+        &lt;RightView colour=&quot;lightblue&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+render(&lt;App /&gt;, app);</code></pre><pre id="544217e0-707c-4626-b1f7-2ea75c8efe7a" class="code"><code>export default function LeftView() {
+  return (
+    &lt;div class=&quot;p-3 bg-white border border-gray-500 flex-1 flex justify-center items-center&quot;&gt;
+      &lt;button class=&quot;min-w-[80px]&quot; onClick={() =&gt; increment()}&gt;
+        {count.value}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre><pre id="5b129769-2efd-40b2-b354-6f60aa98b89c" class="code"><code>type RightViewProps = {
+  colour?: string;
+};
+
+export default function RightView({
+  colour = &quot;grey&quot;,
+}: RightViewProps) {
+  return (
+    &lt;div class=&quot;p-3 border-gray-500 bg-white border flex-1 flex flex-wrap content-start overflow-scroll&quot;&gt;
+      {[...Array(count.value)].map((_, i) =&gt; (
+        &lt;NumberBox num={i + 1} colour={colour} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// A component for the box with a number in it.
+type NumberBoxProps = {
+  num: number;
+  colour: string;
+};
+
+function NumberBox({ num, colour }: NumberBoxProps) {
+  return (
+    &lt;div
+      class=&quot;m-1 p-[10px] flex-none hover:cursor-pointer text-black hover:text-red-500&quot;
+      style={{ background: colour }}
+    &gt;
+      {num}
+    &lt;/div&gt;
+  );
+}
+
+// class={style.box}</code></pre><pre id="3a4c5cdb-ad91-4027-a8eb-7078ba22fcae" class="code"><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//Global Button Style (transformed to standard CSS)
+
+@layer base {
+  button {
+    @apply text-sm py-0 px-4 rounded 
+     bg-gray-200 border-gray-500
+     text-black border 
+     hover:bg-gray-300
+     active:bg-gray-100;
+  }
+}</code></pre></details></li></ul></div></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">nodes</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 12:03 PM</time></span></span></div><div style="padding:0.2em">Virtual DOM elements nested within a component </div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">props.children</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 12:08 PM</time></span></span></div><div style="padding:0.2em">render children as they are</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">{num, colour = &quot;grey}</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 12:12 PM</time></span></span></div><div style="padding:0.2em">Destructuring: best practice</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 12:26 PM</time></span></span></div><div style="padding:0.2em">root to insert at</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">src=&quot;main.tsx&quot;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 12:26 PM</time></span></span></div><div style="padding:0.2em">.tsx</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">render(&lt;App /&gt;, app);</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 12:29 PM</time></span></span></div><div style="padding:0.2em">*</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">increment()</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 1:42 PM</time></span></span></div><div style="padding:0.2em">could mutate the signal value here instead of calling AppState increment mutator</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">/^[abc]*$/.test(text)</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 1:55 PM</time></span></span></div><div style="padding:0.2em">Regex Validation</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong>computed</strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 2:00 PM</time></span></span></div><div style="padding:0.2em"><strong>computed signal: 
+- </strong>type of signal 
+- anyone who listens to this signal will be notified when numCompleted changes</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><mark class="highlight-orange_background"><strong>onSubmit</strong></mark></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 2:07 PM</time></span></span></div><div style="padding:0.2em">text is only commited to the model when you press enter (form::onSubmit event)
+</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong>addTodo(inputValue)</strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 2:07 PM</time></span></span></div><div style="padding:0.2em">AppState mutator</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><mark class="highlight-orange_background"><strong>toggleTodo(todo.id)</strong></mark></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 2:11 PM</time></span></span></div><div style="padding:0.2em">AppState mutator</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><mark class="highlight-orange_background"><strong>deleteTodo(todo.id)</strong></mark></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 2:11 PM</time></span></span></div><div style="padding:0.2em">AppState mutator</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><mark class="highlight-orange_background">`background-color: ${colour}`</mark></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 11:49 AM</time></span></span></div><div style="padding:0.2em">template literal w’ JS expression</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">count</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 1:22 PM</time></span></span></div><div style="padding:0.2em">state</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">...memo</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 1:30 PM</time></span></span></div><div style="padding:0.2em">Memoize the count state by using memo in Provider </div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Resolved inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">msg</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 11:54 AM</time></span></span></div><div style="padding:0.2em">prop</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">numCompleted</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 29, 2023, 2:00 PM</time></span></span></div><div style="padding:0.2em"><strong>computed signal: 
+- </strong>type of signal 
+- anyone who listens to this signal will be notified when numCompleted changes</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

@@ -3,50 +3,49 @@
 ------------------------------------ */
 
 #FullMenu {
-  font-size: 1em;
-  display: flex;
-  justify-content: space-between; /* Logo ---- max space ---- nav-bar */
-  align-items: center;
-  padding: 20px 50px 20px 50px;   /*T R B L*/
-  border-bottom: solid white;
-  /*Style*/
+    font-size: 1em;
+    display: flex;
+    justify-content: space-between; /* Logo ---- max space ---- nav-bar */
+    align-items: center;
+    padding: 20px 50px 20px 50px; /*T R B L*/
+    border-bottom: solid white;
+    /*Style*/
     background-color: rgba(0, 0, 0, 0.8);
-  /*Always on top*/
+    /*Always on top*/
     width: 100%;
-    position:fixed;
-    top:0;
+    position: fixed;
+    top: 0;
     z-index: 10000; /*top of page*/
 }
 
 #Logo {
-  font-size: 40px;
-  font-weight: bold;
-  user-select: none;
+    font-size: 40px;
+    font-weight: bold;
+    user-select: none;
 }
 
 nav ul {
-  list-style: none;   /*remove bullet points*/
-  display: flex;
-  justify-content: right;
-  gap: 15%;
+    list-style: none; /*remove bullet points*/
+    display: flex;
+    justify-content: right;
+    gap: 15%;
 }
 
 nav ul li a {
-  display: inline-block;
-  transition: transform 0.3s ease;
-  color: white;
-  text-decoration: none;
-  transition: all .6s;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    color: white;
+    text-decoration: none;
+    transition: all 0.6s;
 }
 
 nav ul li a:hover {
-  transform: scale(1.2);
+    transform: scale(1.1);
 }
-
 
 /*Active NavLink*/
 .active {
-  color: red;
+    color: red;
 }
 
 /* ------------------------------------
@@ -54,20 +53,25 @@ nav ul li a:hover {
 ------------------------------------ */
 
 #HiddenMenu {
-  color: white;
-  text-shadow: 1px 1px 10px black; /* offset-x | offset-y | blur-radius | color */
-  display: flex;
-  justify-content:end;  /*menu button to right*/
-  padding: 20px;
-  padding-right: 50px;
-  position:fixed;
-  right: 0;
-  top: 0;
-  font-size:6em;      /*size of button*/
-  z-index: 10000;        /*top of page*/
+	z-index: 10000; /*top of page*/
+
+    user-select: none;
+    cursor: pointer;
+    text-shadow: .5px .5px 10px black;		/* offset-x | offset-y | blur-radius | color */
+	font-size: 6em;
+	padding: 1rem;
+
+	/* background-color: rgb(235, 39, 39); */
+	border-radius: 0 0 0 2rem; /*round top right corner*/
+
+
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
-#HiddenMenu :hover {
-  transition: 0.8s ease;
-  transform: scale(1.3);
+#HiddenMenu > p:hover {
+    transition: 0.8s ease;
+	opacity: 1.0;
+    transform: scale(1.2);
 }

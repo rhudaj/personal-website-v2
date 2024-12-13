@@ -2,7 +2,7 @@
 import "./home.css";
 // ---- MODULES
 import { useEffect, useState } from "react";
-import { TypingEffectWrapper, useTypingEffect } from "../../hooks/typing-effect";
+import { useTypingEffect } from "../../hooks/typing-effect";
 import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
 import { NavLink } from "react-router-dom";
 // ---- ASSETS

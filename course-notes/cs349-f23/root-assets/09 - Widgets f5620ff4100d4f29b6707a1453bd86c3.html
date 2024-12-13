@@ -1,0 +1,700 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>09 - Widgets</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f5620ff4-100d-4f29-b670-7a1453bd86c3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">09 - Widgets</h1><p class="page-description"></p></header><div class="page-body"><hr id="2e5831c4-14b2-4418-be35-9d74509cc723"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8bcc627f-3b78-4c01-898a-4d69d2481ac0"><div style="font-size:1.5em"><img class="icon" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-11_at_11.37.43.png"/></div><div style="width:100%"><strong><strong><strong><strong><strong><strong>Widget</strong></strong></strong></strong></strong></strong><ul id="cda0bdd4-6ce8-4880-8fc0-15db3be29108" class="toggle"><li><details open=""><summary><strong>Handle User Input </strong><mark class="highlight-gray"><strong>(controller)</strong></mark></summary><p id="25a675fd-2a9e-4569-9991-6ac705f9b0bf" class="">Capture Input &amp; Generate events</p><ul id="237f5bc6-a928-4ffd-a3ae-dae18a1d61d6" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong>ie: </strong></strong></strong></strong>detect &lt;click&gt;, send &lt;Action&gt; </li></ul></details></li></ul><ul id="dc654c57-84e2-4050-91a6-f96508963ea8" class="toggle"><li><details open=""><summary><strong>Provide User Feedback </strong><mark class="highlight-gray"><strong>(View)</strong></mark></summary><p id="2cc1ab06-2d73-4d36-b43c-6acd1c750b82" class="">Show the <strong><strong><strong><strong><strong><strong>state </strong></strong></strong></strong></strong></strong>(after capture input / generate event) </p><ul id="d90b0917-63bc-4490-b1d7-13793b821e6a" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong>ie: </strong></strong></strong></strong></strong>button down, button clicked</li></ul><p id="a461b67a-6300-45ce-bfec-c0b592c39b90" class="">
+</p></details></li></ul></div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Architecture</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><div class="indented"><div id="d989deba-edb2-4a34-aa94-8409a93e8cb9" class="column-list"><div id="5cc6d3ba-d488-4042-a38d-bb100202b10d" style="width:50%" class="column"><figure id="9e8de7e8-9a77-4acf-9c45-1661bd2fdd5e" class="image" style="text-align:left"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.13.30.png"><img style="width:384px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.13.30.png"/></a><figcaption>Widgets are the layer in between User and View/Controller</figcaption></figure></div><div id="2ec91d3e-ffa5-41ad-86ff-85ac0640d322" style="width:50%" class="column"><figure id="11c45fcd-5e3a-40dd-932f-61fa9d40335b" class="image"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.15.46.png"><img style="width:132px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.15.46.png"/></a></figure></div></div></div></details><hr id="3652e259-a8a2-4020-9254-839f69d9d618"/><h2 id="ca812013-9411-4dcc-bb9d-8541f1f6098a" class="block-color-orange">Characterizing Widgets</h2><p id="d217d51f-6629-4da0-9969-b073d0c12da8" class=""><strong><strong><strong><strong><strong>Ways to characterize: </strong></strong></strong></strong></strong></p><ol type="1" id="2c2624f7-226c-4fb4-85f5-51b6fa8bf6a0" class="numbered-list" start="1"><li><strong>Essential Function</strong><p id="9b3ecb91-9050-4252-adc1-599b3c33c651" class="">What it represents (not how it looks) </p></li></ol><ol type="1" id="3bdbe609-8780-42f9-adb9-5155b38504d7" class="numbered-list" start="2"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Container/Not</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ol><ol type="1" id="d415d254-2680-4ed7-9524-ef4f53d71801" class="numbered-list" start="3"><li><strong>Behavior</strong></li></ol><ol type="1" id="48385f5b-8b3a-4c5b-9dfe-57bb2a7fc9e8" class="numbered-list" start="4"><li><strong>Appearance</strong></li></ol><h3 id="d5fb463a-72e5-40f3-889f-ae432bc00df9" class="block-color-yellow">Logical Input Device</h3><p id="54958287-b8e4-4468-94f3-871d0c64a18d" class=""><strong>Widgets </strong><em>are specific </em><strong>instances</strong> of Logical Input Devices</p><p id="6f17bcd9-01f4-4556-b066-aea59003de47" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Examples</strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="a3dea4e9-6289-4342-bb02-470e20f7a1af" class="toggle"><li><details open=""><summary>Logical <strong>Button</strong> Device</summary><div id="9481c017-10ab-41e1-972c-b8ece0cfc3a1" class="column-list"><div id="1aec3850-70c8-4c70-b5f4-7ac877ed4d76" style="width:50%" class="column"><p id="9518e587-2cd0-471b-a434-3e449529e769" class=""><strong>Essential Function:</strong></p><ol type="1" id="5e6a3871-3fa9-45bb-b88b-9d1b98abce5b" class="numbered-list" start="1"><li>Take 1 input</li></ol><ol type="1" id="bddfea36-1a48-4369-b441-532e286d4270" class="numbered-list" start="2"><li>Generates “action” events </li></ol></div><div id="6d3e9743-0a75-4244-99b5-d018189c0b55" style="width:50%" class="column"><p id="67a8b4e3-5ccf-43a4-8d46-056d388b6955" class=""><strong>Instances: </strong></p><ul id="d710e2f2-0dae-4ee4-8262-b2d28a060cc5" class="bulleted-list"><li style="list-style-type:disc">Button Widget</li></ul><ul id="3f0a71b2-baa4-4fbc-88f9-ba600ccb4ece" class="bulleted-list"><li style="list-style-type:disc">Drop Down Item</li></ul><ul id="7a1f2e87-ffc5-4151-b9d9-45d048d4456d" class="bulleted-list"><li style="list-style-type:disc">keyboard shortcut </li></ul></div></div><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="3afe9084-4aad-473e-95ba-4bde9f9f9e9e"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">A search bar is not a logical button device. It generates an &lt;action&gt; event but that’s not it’s essential function. </div></figure><p id="20fb7959-54ea-471d-8123-aa35d9403f8d" class="">
+</p></details></li></ul><ul id="3d0f958c-016d-4116-86de-f79a3ad9ac3c" class="toggle"><li><details open=""><summary>Logical <strong>Number</strong> Device</summary><div id="666d166a-d23a-44f3-8a20-457ffe5cd67c" class="column-list"><div id="f3861ec0-1b19-49cb-b75a-0b39d5709037" style="width:50%" class="column"><p id="6d0c39aa-6545-4c6b-af72-e094c0aeaaff" class=""><strong>Essential Function:  </strong></p><ol type="1" id="8c885976-116a-456a-b868-13b047eed4a9" class="numbered-list" start="1"><li>Display Value</li></ol><ol type="1" id="897beda3-71dc-445a-986f-4012c6fc3997" class="numbered-list" start="2"><li>Send “value changed” event</li></ol><p id="be815f22-18e9-47c3-bd19-c82175d9d1f2" class=""><strong>Optionally</strong></p><ul id="6e86e8d3-bcd9-4b8a-864f-6b30a6c3d91f" class="bulleted-list"><li style="list-style-type:disc">accept number as input<ul id="a3af82da-0cb6-4013-92f4-b6b266a23b7f" class="bulleted-list"><li style="list-style-type:circle">validation (ie: range)</li></ul></li></ul></div><div id="fc9af4f8-edae-423c-97ae-50feddfc956c" style="width:50%" class="column"><p id="6f3ac5bb-ba56-477d-a7db-c07da2c146cb" class=""><strong>Instances: </strong></p><figure id="ab343852-4650-456b-a58f-7c17d83220a6" class="image"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.50.27.png"><img style="width:1058px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.50.27.png"/></a></figure></div></div><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="53e6f66c-49f2-4b44-bec2-c4129e29daa7"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">The spinner also <strong>has</strong> 2 logical button devices … But the goal is to change a number value</div></figure></details></li></ul><ul id="ff8ad8e4-cc74-4102-a357-d17e48c7c5dd" class="toggle"><li><details open=""><summary>Logical <strong>Boolean</strong> Device</summary><p id="dad5ee09-d183-4e7b-9ff5-1cdf83d8b14c" class=""><strong>Essential Function</strong></p><ol type="1" id="8bd9ef68-fc76-4b5b-8657-c215fe6e37f6" class="numbered-list" start="1"><li>Display &amp; Input Boolean Value</li></ol><ol type="1" id="40dd830d-4769-4edb-b103-14c5515c1b9d" class="numbered-list" start="2"><li>Sends “value changed” event</li></ol><p id="39c36349-8db2-4e7a-9ddb-2d45da8e7c0d" class=""><strong>Instances</strong></p><figure id="cf0d080c-9658-46b1-918e-7680388ecf34" class="image"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.56.04.png"><img style="width:384px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.56.04.png"/></a></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="25c307ad-e4cb-4d2c-8522-7001659639e9"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">An <strong>individual radio button </strong>is a boolean device…but radio buttons only work as part of a group. When they are together → they are a different type of device…</div></figure></details></li></ul><ul id="c38cf8ec-9a4c-4a9b-af48-72a375bfaab2" class="toggle"><li><details open=""><summary>Logical <strong>Text</strong> Device</summary><p id="68799a0a-8ae7-4df2-998d-b34cccd6089e" class=""><strong>Essential Function:  </strong></p><ol type="1" id="40e40d0f-f5b7-4a64-b05e-bbe8982fb83d" class="numbered-list" start="1"><li><em>Display</em> &amp;/or <em>Input</em> Text Value</li></ol><ol type="1" id="a81f5457-7968-4099-aa03-5968882481ba" class="numbered-list" start="2"><li>Sends “value changed” event</li></ol><p id="57f437c1-a758-495b-950b-69751742644c" class=""><strong>Instances: </strong></p><figure id="ecf4f43e-fbab-4088-a767-fb7e7c1cf54a" class="image"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.58.42.png"><img style="width:288px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_16.58.42.png"/></a></figure></details></li></ul><ul id="b5d31194-a6ad-4ed4-8b76-14c4d6402e06" class="toggle"><li><details open=""><summary>Logical <strong>Choice</strong> Device</summary><p id="0c89232c-883b-46e3-aacb-1a3b0ad35435" class=""><strong>Essential Function:  </strong></p><ol type="1" id="eb23039f-fdc8-4356-8a7b-c40ee5aa2364" class="numbered-list" start="1"><li><em>Input</em> <em><em>&amp; Display </em></em>1 choice among list</li></ol><ol type="1" id="a5d8a458-ea5b-48f9-a129-c885538306dd" class="numbered-list" start="2"><li>Sends “selection changed” event</li></ol><p id="5bac3ee6-e196-4452-9230-a1a1917b9b97" class=""><strong>Instances: </strong></p><ul id="a82b1c5a-9db4-4880-9027-3162d33e7b0e" class="bulleted-list"><li style="list-style-type:disc">group of radio buttons</li></ul><figure id="5772b065-8c0e-4f95-bbb3-b7f273a0c4d3" class="image"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.02.06.png"><img style="width:480px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.02.06.png"/></a></figure></details></li></ul><hr id="39509261-d374-4fc2-86c6-e4e1eaa5a02c"/><h1 id="246096dd-a8fb-4ca7-94d5-cbec42aa854f" class="block-color-orange"><mark class="highlight-red">Implementation</mark></h1><p id="6327c5cc-d62b-4b52-ae51-e9d18594ab01" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Base Widget:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> <code>SKElement</code></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0440b1fa-83f8-476e-835c-4c9ba9d09b12"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">The<strong> bounding box </strong>of any <strong><strong><strong><strong><strong><strong><strong>widget </strong></strong></strong></strong></strong></strong></strong>is a rectangle (regardless of the shapes inside)<p id="678fe15e-a30f-44da-8ffd-621026c59014" class="">→ if your widget holds text, you need to <code>measure()</code> the text to determine the size of this rectangle</p></div></figure><hr id="e79ed0dd-5103-495f-a01a-2be4dc1bbc50"/><h3 id="a4ec2dbb-65dc-4608-a93b-8af032711f00" class="block-color-orange">Demos</h3><figure id="255e2fd3-6c6c-4f3b-b131-5c76acd389a9" class="link-to-page"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/button%20demo%20255e2fd36c6c4f3bb1315c76acd389a9.html">button demo</a></figure><figure id="a632fc13-82c3-49bb-bc05-cd0085df9a2f" class="link-to-page"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Label%20Demo%20a632fc1382c349bbbc05cd0085df9a2f.html">Label Demo</a></figure><figure id="58af58a9-d09a-493d-bfc6-d04f57b1a8a6" class="link-to-page"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/textfield%20demo%2058af58a9d09a493dbfc6d04f57b1a8a6.html">textfield demo</a></figure><hr id="88e70b09-cfb9-4c3a-a9ac-2c1b2398b3e5"/><h3 id="7f6c8651-40d3-4de4-9005-729076202096" class="block-color-orange">Container Widget</h3><ul id="610d5a38-4cef-434d-b6a5-1ed0fb5760f5" class="bulleted-list"><li style="list-style-type:disc">holds <code>SKElements</code> → widget <strong><strong><strong><strong>tree</strong></strong></strong></strong></li></ul><ul id="4ec34dd1-6c42-4448-97b5-8c7d97b04d17" class="bulleted-list"><li style="list-style-type:disc"><strong>child</strong> widgets positioned relative to container (<strong>parent</strong>)</li></ul><ul id="40cd1aef-f360-44f7-8ec1-4a30e07815cb" class="toggle"><li><details open=""><summary><strong>code</strong></summary><pre id="4be8aec0-4b22-46e3-a082-c987883bed02" class="code"><code>class SKContainer extends SKElement {
+	//constructor: x, y, w, h	
+	children: SKElement[] = []
+
+	addChild(element: SKElement) {
+		//push
+	}
+
+	removeChild(element: SKElement {
+		//find and remove ALL such element
+	}
+
+	//mouse event stuff...
+
+	draw(gc) {
+		...
+		gc.translate(this.x, this.y)
+		children.foreach((child) =&gt; child.draw(gc))
+		...
+	}
+	</code></pre></details></li></ul><h2 id="db780adf-6528-40e6-8de7-abfc5f797174" class=""><mark class="highlight-orange">Other types of widgets</mark></h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-yellow">Specialized Widgets</mark></summary><div class="indented"><figure id="4addd023-a2d5-4fe5-9146-30d3214d60dd" class="image" style="text-align:left"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.56.57.png"><img style="width:528px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.56.57.png"/></a></figure><figure id="d2752e01-b89d-4902-af9a-f28e1f40766b" class="image" style="text-align:left"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.57.18.png"><img style="width:384px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.57.18.png"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-yellow">Special Value Widgets</mark></summary><div class="indented"><p id="f2fb21ac-c406-48e1-b348-9a045f5a9365" class="">pick a special value</p><figure id="b1a3c42b-5a81-47e3-8e90-c20ed1c3f4c5" class="image" style="text-align:left"><a href="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.58.37.png"><img style="width:432px" src="09%20-%20Widgets%20f5620ff4100d4f29b6707a1453bd86c3/Screen_Shot_2023-10-14_at_17.58.37.png"/></a></figure></div></details><h2 id="a8ff47b5-3431-427b-9e3b-6bf05aa6f356" class="">Widget Toolkit Goals - Reusability </h2><ol type="1" id="30272897-6304-4d48-9905-6c5de57fe26e" class="numbered-list" start="1"><li>Complete  - all you need</li></ol><ol type="1" id="86707013-6ca3-4ad9-9c28-cb2fac5a6622" class="numbered-list" start="2"><li>Consistent - behavior across component </li></ol><ol type="1" id="31e38dd0-8bce-407e-84f7-316063a26356" class="numbered-list" start="3"><li>Customizable</li></ol><h3 id="87744e90-9f8b-4953-a36e-0188c9c05d76" class="">Customization</h3><ul id="751f03b1-159f-4d09-a0fd-9aeafdfb95a6" class="bulleted-list"><li style="list-style-type:disc">change <strong><strong><strong><strong><strong>some </strong></strong></strong></strong></strong>appearance and behavior<ul id="476ee839-05ed-4e14-a5ab-0ebe10326a88" class="bulleted-list"><li style="list-style-type:circle">ie: colors, font, orientation</li></ul></li></ul><ul id="630ecab7-3316-435e-9af6-140bcb131848" class="bulleted-list"><li style="list-style-type:disc">Factor out key behavior<ul id="9b7609c3-8637-4b1d-bf38-f8be96e15257" class="bulleted-list"><li style="list-style-type:circle">formatters</li></ul><ul id="df23a8ce-b39f-410e-82c4-ab3d9f3c4e53" class="bulleted-list"><li style="list-style-type:circle">LayoutManagers</li></ul></li></ul><ul id="bae5f5d2-badd-4b54-86d4-eca73de7f00d" class="bulleted-list"><li style="list-style-type:disc">Expose Class Hierarchy that promotes customization<ul id="448ad0c0-2696-49b8-a2ee-47e2f8a44ee4" class="bulleted-list"><li style="list-style-type:circle"><strong><strong><strong><strong>ie: </strong></strong></strong></strong>Button extends ButtonBase (not just Button extend SKElement), base class implement a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>logical button device </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul></li></ul><p id="6d0c778d-c63d-466f-81b4-216ea67e95dd" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">		children.foreach((child) =&gt; child.draw(gc))
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 15, 2023, 3:00 PM</time></span></span></div><div style="padding:0.2em">last child in container is drawn last</div><div style="padding:0.3em"></div></li><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 15, 2023, 3:00 PM</time></span></span></div><div style="padding:0.2em">could add ‘z’ for depth and draw in that order</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">		gc.translate(this.x, this.y)</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 15, 2023, 3:01 PM</time></span></span></div><div style="padding:0.2em">draw relative to the container</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">keyboard shortcut </mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 18, 2023, 3:28 PM</time></span></span></div><div style="padding:0.2em">cmd + m → sends an Action event </div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

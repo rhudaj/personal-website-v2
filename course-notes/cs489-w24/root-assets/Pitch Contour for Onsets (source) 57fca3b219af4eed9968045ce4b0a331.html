@@ -1,0 +1,889 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pitch Contour for Onsets (source)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(249, 228, 188, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="57fca3b2-19af-4eed-9968-045ce4b0a331" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/book-closed_gray.svg"/></div><h1 class="page-title">Pitch Contour for Onsets (source)</h1><p class="page-description"></p></header><div class="page-body"><p id="9efc5d6c-894f-4714-bfc6-8195ba04834a" class=""><a href="https://www.mdpi.com/2076-3417/12/15/7391">https://www.mdpi.com/2076-3417/12/15/7391</a></p><ul id="b8ee5078-2955-4fb5-857c-72a4c5a84190" class="bulleted-list"><li style="list-style-type:disc">the proposed algorithm is focused on evaluating the changes on a pitch contour to identify those meaningful changes that will signify onsets, offsets, and transitions.</li></ul><ul id="50213832-dd43-4b2e-b952-00840754544f" class="bulleted-list"><li style="list-style-type:disc">pitch contour is selected because it is a robust indicator of onset compared to other features.<ul id="cbb37386-fa62-44ce-8681-ae154a34a5c8" class="bulleted-list"><li style="list-style-type:circle"> it is difficult to rely on the amplitude contour as a feature when analyzing <strong>legato singing</strong>, as unpredictable variation occurs in the movement from one note to the next. </li></ul><ul id="960875ec-d383-48a0-bd32-4d9fe3b5750c" class="bulleted-list"><li style="list-style-type:circle">In contrast, the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">F0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord">0</span></span></span></span></span><span>﻿</span></span> is either erratic before the onset and then quickly becomes stable or moves smoothly from one value to the next in the case of legato singing, even when the consecutive notes are in the same pitch frequency</li></ul></li></ul><h1 id="e962f09f-bc70-432d-b4f6-61b9cbb26086" class="">Data Structures</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c35870d7-64e7-452f-abae-b03c19484ddd"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>PitchFrame</strong><hr id="9693ecc5-6f33-4b06-8863-76c7bc0e05ad"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1bb362e4-34e8-49e2-a545-90f36f1d68b6" class="code"><code class="language-Python">TimeSecond: float
+F0Hz: float</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d77064e7-d03f-49ac-9091-613f6930325d"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>DetectedPitch</strong><hr id="75ea6200-fbb3-44a3-bced-9af9601fee87"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="248c7d9d-3041-49d8-b49a-7f54a0cb2cd7" class="code"><code class="language-Python">Pitch: PitchFrame
+StretchedPitch: float
+Onset: bool
+Offset: bool 
+Silent: bool
+TransitionNote: bool
+PitchSlope: float
+FollowingPitchSlope: float
+PercentOffsetBasedPitch: float
+PercentOnsetBasedPitch: float
+AvgFollowingPitchSlope: float
+StdFollowingPitchSlope: float</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4d560f5a-4dae-47a1-acb4-17c6dcdb8c6a"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>OnsetDetector</strong><hr id="bb5906d5-6a0e-49f9-b6d5-dce4ce743997"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="743bea60-1257-4871-9701-d7f042a781db" class="code"><code class="language-Python">_onsetSettings: OnsetSettings 
+_detectedPitches: list[DetectedPitch]
+_timeDistanceBetweenFrames: float</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="43ab07e6-2043-4674-865c-7f958a59acd4"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>OnsetSettings</strong><hr id="30b689c5-d39c-4061-95e7-948a04d530ec"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d31a4738-7656-43ea-bdfa-c8eb2a6b6a43" class="code"><code class="language-Python">PitchThreshold: float
+MaxPitchThreshold: float
+NumberOfF0sBefore: int
+NumberOfF0sAfter: int
+MinNumberOfFrequenciesBetweenOnsets: int</code></pre></div></figure><h1 id="b8f6cbc1-121b-4d30-9c48-45a76a311ca3" class=""><strong>7 Steps </strong></h1><p id="fbedf997-41ba-4f5a-9ca1-c155c3d9c2f0" class=""><em><strong>To find Onsets, Offsets &amp; Transitions</strong></em></p><figure id="0365a6fd-2b3c-4d65-8b57-fb3a201ce936" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.26.31.png"><img style="width:480px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.26.31.png"/></a></figure><h2 id="a6586866-0b4e-4acf-b536-b40e82c50e6b" class=""><strong>1 — Estimating F0s (pitch contour)</strong></h2><p id="13903c04-f852-42ee-a9d3-017fb871eabd" class="">Since the algorithm is based on the fundamental frequencies, the F0s must be estimated correctly: </p><p id="78c830f0-d143-4e91-bb23-6b2f362473d2" class=""><em>The </em><code>pYin</code> algorithm can accurately estimate <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">F0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord">0</span></span></span></span></span><span>﻿</span></span> for singing. </p><ul id="899ffbe7-ad2a-4a42-a9c9-e0813067ac9c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default"><code><em>Librosa</em></code></mark> has a <em>pYin </em>function </li></ul><ul id="5fec69f0-778d-4dd1-aadb-2f4d27674bbf" class="bulleted-list"><li style="list-style-type:disc"><strong>offline</strong>; base on lot’s of data, not just past data points (<strong>online</strong>)</li></ul><h3 id="ebeafec5-8f83-4652-abf2-b66b4be43853" class="">Note on Windowing: </h3><ul id="adaf6ab3-fe39-4c06-9d96-82070d9a5741" class="bulleted-list"><li style="list-style-type:disc">Whenever you do a finite Fourier transform, you&#x27;re implicitly applying it to an infinitely repeating signal. So, for instance, if the start and end of your finite sample don&#x27;t match then that will look just like a discontinuity in the signal, and show up as lots of high-frequency nonsense in the Fourier transform, which you don&#x27;t really want. And if your sample happens to be a beautiful sinusoid but an integer number of periods don&#x27;t happen to fit exactly into the finite sample, your FT will show appreciable energy in all sorts of places nowhere near the real frequency. You don&#x27;t want any of that.</li></ul><ul id="89236881-4348-46d0-b3f1-aa0716620258" class="bulleted-list"><li style="list-style-type:disc">Windowing the data makes sure that the ends match up while keeping everything reasonably smooth; this greatly reduces the sort of &quot;spectral leakage&quot; described in the previous paragraph.<figure id="3a16970a-15ea-43db-8a38-5e3148daa4b0" class="image" style="text-align:center"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/numpy-hanning-1_00_00.png"><img style="width:384px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/numpy-hanning-1_00_00.png"/></a></figure></li></ul><p id="5b430240-f6eb-458f-a0e2-7650a931d23b" class="">
+</p><h2 id="89fd2c7b-26ec-4579-82b3-5d3e81008b9d" class=""><strong>2 — Stretching Pitch Contour</strong></h2><p id="8078bbca-e8a5-48b7-9de8-af89d8eaff32" class="">Humans’ vocal pitch range generally from <mark class="highlight-default"><code>77 - 900 Hz</code></mark></p><p id="2a69a90d-ec2a-4bec-8270-5e8f1118d9b3" class="">Calculating significant changes occurring on pitch contour has some difficulty</p><ul id="ca2d84d8-5e98-4798-8a5b-eaaec51e0101" class="bulleted-list"><li style="list-style-type:disc"><strong>eg. </strong>The slope of the line when moving from the note 𝐸2≈82 Hz to the note 𝐹2 ≈87 Hz is much less than when it moves from the note 𝐸5≈659 Hz to the note 𝐹5 ≈698 Hz</li></ul><p id="96e616ce-f31a-489f-ac3a-40c46c4aa9a7" class="">To counteract any adverse effect of this wide pitch frequency range on the slopes, the F0s are <strong><em>stretched</em></strong> to be on the<strong> </strong>almost same pitch frequency range.</p><figure id="82506a87-840e-439e-a258-c45c8e6daaf1" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.32.14.png"><img style="width:1140px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.32.14.png"/></a><figcaption>although (a) and (b) are in different pitch frequency ranges, after stretching, the slopes between notes in both (c) and (d) are almost similar.</figcaption></figure><p id="694bdf41-6c5a-4ebc-a36f-c804e472f39e" class="">Formulas:</p><figure id="185a9f46-8be7-4af6-8789-e7111a98f856" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.33.27.png"><img style="width:240px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.33.27.png"/></a></figure><ul id="313f5b64-ca1c-4639-a283-adcf67b085f7" class="bulleted-list"><li style="list-style-type:disc"><code>max</code> holds the maximum <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">F0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord">0</span></span></span></span></span><span>﻿</span></span> value estimated until index <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7429em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="4918124e-8eeb-4ac9-afe7-1e5f599636d4" class="bulleted-list"><li style="list-style-type:disc">The constant value <mark class="highlight-default"><code>Threshold</code></mark> holds the maximum possible <em>F</em>0<ul id="0fc61bd8-88da-4136-89f6-f2bfd2382d1f" class="bulleted-list"><li style="list-style-type:circle">For this study, <mark class="highlight-default"><code>Threshold = 1000 Hz</code></mark> (based on studied singers) </li></ul><ul id="dbc70d94-59f5-415d-9c75-584044effc16" class="bulleted-list"><li style="list-style-type:circle">Eq. (1), if the current <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mn>0</mn><mo separator="true">,</mo><mtext> </mtext><mi>F</mi><msub><mn>0</mn><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">F0,\ F0_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>, is more than <mark class="highlight-default"><code>max</code></mark> , Eq (2) should be run for all the F0 from  <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>→</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 \rarr i-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7429em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span></li></ul></li></ul><p id="0f561c74-8313-4922-8705-08b973469809" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f62963d5-5edd-4534-bb8f-1de2930b8802"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>DetectedPitch::StretchingPitch</strong><hr id="314ec39e-e28c-4a85-a2db-53fe044d2f11"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3aa653e3-c458-41fa-9fc0-92169bc1f088" class="code"><code class="language-Python">def StretchingPitch(detectedPitches: List[DetectedPitch], maxPitchThreshold) -&gt; List[DetectedPitch]: 
+    pitches: List[DetectedPitch] = detectedPitches
+    N = detectedPitches.size
+    maxPitch: float = float(pitches.max(t =&gt; t.Pitch.F0Hz))
+    coefficient: float = maxPitchThreshold / maxPitch
+    #------
+    for i in range(0, N - 1)
+        pitches[i].stretchedPitch = float(pitches[i].Pitch.F0Hz) * coefficient;
+    #------
+    return pitches;
+}</code></pre></div></figure><h2 id="ddf21995-4f3f-4706-9bab-a827751a2b2a" class=""><strong>3 — Slopes</strong></h2><p id="1c84e418-c090-4500-80c1-442cbc5a32c0" class="">To find the significant changes in F0s, the slopes between points in the pitch contour are needed. </p><figure id="e80c5c21-d593-4836-aba5-bcedb381d50f" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.37.38.png"><img style="width:1106px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.37.38.png"/></a></figure><p id="b3a388a5-254b-4816-98e9-72354c3801fe" class="">
+</p><ol type="a" id="2dd592e0-71bf-4988-9614-e0ed8bb3f41e" class="numbered-list" start="1"><li>estimated pitch contour</li></ol><ol type="a" id="ca749870-7135-45d0-b85f-6562e59abb83" class="numbered-list" start="2"><li>stretched pitch contour of the contour</li></ol><ol type="a" id="20c8c64e-0bce-429d-a85a-827427a3ebee" class="numbered-list" start="3"><li><strong>differentiating</strong> the contour<ol type="a" id="b1c3d4d2-9d03-4253-9fd0-5cb02d2adec2" class="numbered-list" start="1"><li><mark class="highlight-red">red lines </mark>= possible <strong>offset points</strong></li></ol><ol type="a" id="ba604863-535c-4915-8660-fc87974cb737" class="numbered-list" start="2"><li><mark class="highlight-teal">green lines </mark>= possible <strong>onset points</strong></li></ol></li></ol><h2 id="7fe08d6b-5b81-4766-89fa-ffb15c00e423" class=""><strong>4 — Summation of Slopes</strong></h2><p id="2551593d-2e0e-4123-a4b0-355529b2edb7" class="">In singing, transitions can be observed as the singer moves from one note to another: </p><figure id="6e185022-b86d-4d39-b9ce-2d0c31fe6003" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.40.13.png"><img style="width:432px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.40.13.png"/></a></figure><ul id="5bdbb543-b0e9-4c7e-a7e5-51e451daac17" class="bulleted-list"><li style="list-style-type:disc">between the two pairs of orange-colored lines</li></ul><p id="0c21e92a-6123-48af-8088-75208bfbf57e" class="">The summation of the following points’ slopes is calculated to find the transitions at each point. In other words, as far as the direction of the line (upward, downward, or straight) in the stretched pitch contour remains the same, the slopes between every two consecutive points would be added to each other. </p><p id="1ba34ed7-9ff3-4ec9-9737-a1412acef236" class=""><strong>Algorithm: </strong>number of same slope direction (point <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span></span><span>﻿</span></span>)</p><p id="58f69026-b340-4493-8011-c81c195f4e1b" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span></span><span>﻿</span></span> = current point</p><div id="c875dfd5-7039-4e5a-9ea9-eb400de737ed" class="column-list"><div id="32855256-f062-4b23-99f4-8058716c2d87" style="width:50%" class="column"><figure id="599f6254-699a-4945-98dd-713125788862" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.42.08.png"><img style="width:432px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.42.08.png"/></a></figure><p id="be61b902-dbd8-4299-8713-1bd17f245e22" class="">
+</p></div><div id="f4904e16-0a05-489e-b109-c63e42770fdf" style="width:50%" class="column"><ol type="1" id="fa43bbba-9e39-40c8-9196-ea0b9831b5e5" class="numbered-list" start="1"><li>compute the <strong>cumulative sum </strong>of the consecutive points in the slope representation. In other words, their amplitudes, the values on the <em>y</em>-axis in <a href="https://www.mdpi.com/2076-3417/12/15/7391#fig_body_display_applsci-12-07391-f003"><strong>Figure 3</strong></a>c, are summed. </li></ol><ol type="1" id="bb1aa148-ddeb-497e-ba54-98afbc2b7fbe" class="numbered-list" start="2"><li>According to the evaluation of several manually annotated onsets, offsets, and transitions, it is observed that there is a sharp upward or downward movement between two consecutive notes in a pitch contour. Therefore, a heuristic function implemented using decision logic is applied to assess how much change happens after each new point. </li></ol><ol type="1" id="d7506c9d-aa37-4457-ac58-04c3e06799d6" class="numbered-list" start="3"><li>In addition, it is found how many consecutive points have the same sign as the current point’s slope: that is, how many of the successive values are heading in the same direction.</li></ol><p id="7c874dd8-23f5-407a-b9f4-19127a4053a2" class="">
+</p></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7cd9fc1e-c282-43bf-bdac-25c8d21f1d7f"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>DetectedPitch::AddSlopes</strong><hr id="3380340a-1e13-4eba-a72b-e52f10127203"/><p id="56f3af6c-2bf3-49be-8e63-d70c592ba153" class="">Differentiate the stretched pitch: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ed728cb1-23af-4f60-ae36-639cb946bd0c" class="code"><code class="language-Python">def AddSlopes(List[DetectedPitch] detectedPitches, timeDistanceBetweenFrames: float) -&gt; List&lt;DetectedPitch&gt;: 
+  pitches: List[DetectedPitch] = detectedPitches
+  N = detectedPitches.size
+  # For each pitch: 
+  for i in range(1, N-1): 
+		  # 1 - Calculate the time diff 
+      timeDiff: float = 0
+      t1 = detectedPitches[i].Pitch.TimeSecond
+      t2 = detectedPitches[i - 1].Pitch.TimeSecond
+      if (t1 != null &amp;&amp; t2 != null)
+          timeDiff = float(t1) - float(t2)
+      
+      timeDiff = timeDiff if timeDiff &gt; 0  else timeDistanceBetweenFrames
+      
+      # 2 - Calculate the pitch diff
+			p1 = detectedPitches[i].StretchedPitch
+			p2 = detectedPitches[i - 1].StretchedPitch
+      diff: float = p1 - p2
+      
+      # 2 - Calculate the slope
+      slope: float = float(diff) / timeDiff
+      pitches[i].PitchSlope = slope
+  }
+	return pitches;</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3013b845-be90-4f92-bf52-c858a3f60ea0"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>DetectedPitch::AddFollowingSlopes</strong><hr id="49638184-d20a-47ed-9ace-5d5ec2b1add6"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2a82214c-c403-481a-beb3-538fb070288f" class="code"><code class="language-Python">
+def AddFollowingSlopes(List&lt;DetectedPitch&gt; detectedPitches) -&gt; List[DetectedPitch]
+  pitches = detectedPitches
+  N = detectedPitches.size
+  #-----
+  for i in range(0, N-1): 
+		sumSlope: float = pitches[i].PitchSlope
+		for j in range(i+1, N-1): 
+        if ((pitches[i].PitchSlope &gt; 0 &amp;&amp; pitches[j].PitchSlope &gt; 0) || (pitches[i].PitchSlope &lt; 0 &amp;&amp; pitches[j].PitchSlope &lt; 0))
+            sumSlope += pitches[j].PitchSlope;
+        else
+            break;
+    pitches[i].FollowingPitchSlope = sumSlope;
+  #-----
+  return pitches;</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0afed5d-4402-46d3-b4ea-5867330a9722"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>DetectedPitch::AddAvgStdFollowingPitchSlopesInPercent</strong><hr id="7363e7fc-01fc-4859-9904-844c61f0cfa1"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="20951e93-dfa2-4e0e-ae97-ad5c70c14bfe" class="code"><code class="language-Python">def AddAvgStdFollowingPitchSlopesInPercent(List&lt;DetectedPitch&gt; detectedPitches, int noBefore, int noAfter=0) -&gt; List[DetectedPitch]:
+  pitches = detectedPitches;
+  #------
+  for i in range(noBefore, pitches.Count-noAfter - 1):
+      localPitches: list[float] = pitches.Skip(i - noBefore).Select(t =&gt; t.FollowingPitchSlope).Take(noBefore + noAfter).ToList();
+      avg: float = average(localPitches)
+      std: float = MathFunctions.StandardDeviation(localPitches, avg, true)
+      pitches[i].AvgFollowingPitchSlope = avg;
+      pitches[i].StdFollowingPitchSlope = std;
+  #------
+  return pitches;</code></pre></div></figure><h2 id="4f8c03e8-2b44-48fb-b1b0-a6b6e0c650f0" class=""><strong>5 — Mean of the Local Slopes</strong></h2><p id="de48819f-002c-4ce7-b8ed-81072049a844" class="">This mean is always accounted for by considering some of the previous points until the current point</p><figure id="d8b8706b-6517-418f-a5c7-bd6130304845" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.45.19.png"><img style="width:288px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.45.19.png"/></a></figure><p id="c2bd52cd-5d6d-40c7-ab8b-fd63b4f9d427" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> = window size </p><p id="7430225d-caec-43bb-8fca-898338539149" class="">
+</p><p id="ec48b067-17c9-48be-b046-46ff0cb67e2e" class="">The mean should show the mean of the fluctuations in a note. </p><p id="bcd2b153-4022-480d-884e-7c4fce343c04" class="">
+</p><p id="d65e07fd-1b8d-4693-9fea-9bb24230aa55" class="">If <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> is too big, it may include some old-time fluctuations that make an incorrectly local mean. </p><p id="64b67e15-3633-40c8-b3b8-878587265df9" class="">If <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> is too small, there would not be enough fluctuations to calculate the correct local mean. </p><p id="f0250f16-8bc9-4e07-861a-778c7b9a3749" class=""><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span></strong><strong> should be selected based on the </strong><span style="border-bottom:0.05em solid"><strong>singing technique</strong></span><strong>, </strong><span style="border-bottom:0.05em solid"><strong>duration</strong></span><strong>, and </strong><span style="border-bottom:0.05em solid"><strong>intervals</strong></span><strong>.</strong></p><h2 id="90803f7f-c140-4835-89a1-7fd0dc38cf4c" class=""><strong>6 — Standard Deviation of the Local Slopes</strong></h2><p id="b8332056-5331-44b8-bcb0-8aa74a971191" class="">To define a trajectory change in the fundamental frequencies, the sample standard deviation of the local slopes is calculated: </p><figure id="15806c42-bca4-4dde-84b8-53f77780be60" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.48.05.png"><img style="width:480px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.48.05.png"/></a></figure><p id="d7a03581-5a39-425f-bfb4-e8546a4325e2" class="">The same <strong>window size, </strong><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span></strong><strong>,</strong> is used</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="91b2bf08-5c4c-4748-9203-191c04298ca8" class="code"><code class="language-Python">def StandardDeviation(values: list, avg: float, sample: bool = False) -&gt; float:	
+	sd = sqrt(Variance(values, avg, sample)
+
+def Variance(values: list, avg: float, sample: bool = False) -&gt; float: 
+	var = 0
+	N = values.size
+	for val in values: 
+		var += 2 ** (val - avg) #*** avg over all values
+	if sample: 
+		var /= (N -1)
+	else 
+		var /= N
+	return var</code></pre><h2 id="e444dea2-6cf5-47d0-94c9-be3b0881380b" class=""><strong>7 — Compare Current Slope w’ Mean and Std Dev’</strong></h2><p id="42a79764-819d-437b-9f96-059d51469502" class="">In this step, all the required information is prepared to determine if a significant change has occurred in the fundamental frequency trajectory.</p><p id="c6713947-16d6-44fe-a6ce-9af05fa81e1a" class="">Each of the points in the pitch contour can have only one of the following statuses:</p><ol type="1" id="7e439aff-553c-4a00-b53a-2325c92b4b0a" class="numbered-list" start="1"><li><strong>Onset</strong>: this means the point is an onset.</li></ol><ol type="1" id="84de25f7-b3bb-4654-b071-07d9d9be4d40" class="numbered-list" start="2"><li><strong>Offset</strong>: this means the point is an offset.</li></ol><ol type="1" id="b0d538f5-141b-4ae0-90d4-f55b49ceaf39" class="numbered-list" start="3"><li><strong>StartTransition</strong>: this means a transition will follow, and this point is the start of the transition.</li></ol><ol type="1" id="bfda36f1-f6b6-42be-bd5a-762d882dd154" class="numbered-list" start="4"><li><strong>EndTransition</strong>: this means it is the end of the transition.</li></ol><ol type="1" id="1b597bad-dd9b-4cc5-a348-7f33edcb4387" class="numbered-list" start="5"><li><strong>None</strong>: this means this point is neither an event’s start nor the end.</li></ol><figure id="3421769c-2510-455d-9fea-d22af83eb6f6" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.40.13.png"><img style="width:432px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.40.13.png"/></a></figure><p id="317482ca-d00f-448b-9f94-acd183fc2bb8" class=""><strong>Algorithm:</strong></p><div id="b5a1b9cd-4594-4233-9f88-695b47c1615d" class="column-list"><div id="de609931-dc09-4e0b-a419-f87f878cadb9" style="width:37.5%" class="column"><figure id="c910f6aa-8d5a-4b27-acf0-cf4038166681" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/applsci-12-07391-g007.png"><img style="width:240px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/applsci-12-07391-g007.png"/></a></figure></div><div id="83d0377c-255f-4f43-8b87-b66b6dac9955" style="width:62.5%" class="column"><figure id="9d17f11e-8f66-47e5-961b-b2877356349a" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.50.38.png"><img style="width:576px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-05_at_21.50.38.png"/></a></figure><p id="0b0dad21-27ef-4374-8f2e-0535d734beec" class="">
+</p></div></div><p id="fad1ba19-0f22-4631-83a2-93404c5e74d0" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="47989aab-c948-4f8b-bc47-7aedcfcb37f6"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>Code</strong><hr id="954b3b51-ad15-42a6-80c1-c9ede1c9ecbe"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="28aa1571-0012-46b7-92ec-1eacf6fb6393" class="code"><code class="language-Python">def CalculateOnset(): 
+	&#x27;&#x27;&#x27;
+		OnsetDetector::CalculateOnset
+	&#x27;&#x27;&#x27;
+  _detectedPitches = DetectedPitch.StretchingPitch(_detectedPitches, _onsetSettings.MaxPitchThreshold)
+  _detectedPitches = DetectedPitch.AddSlopes(_detectedPitches, _timeDistanceBetweenFrames)
+  _detectedPitches = DetectedPitch.AddFollowingSlopes(_detectedPitches)
+  _detectedPitches = DetectedPitch.AddAvgStdFollowingPitchSlopesInPercent(_detectedPitches, _onsetSettings.NumberOfF0sBefore, _onsetSettings.NumberOfF0sAfter)
+  _detectedPitches = FillOnsetPercentages(_detectedPitches)
+	
+	N = _detectedPitches.size
+
+	for i in range(0, N-1):
+      if (_detectedPitches[i].PercentOnsetBasedPitch &gt;= 100):
+          _detectedPitches[i].status = ONSET;
+          if (i &gt;= 1): _detectedPitches[i - 1].status = OFFSET
+          i += int(_onsetSettings.MinNumberOfFrequenciesBetweenOnsets) # int 32 specifically
+
+  _detectedPitches = AlteringDetectedOnsets(_detectedPitches,_onsetSettings);
+  _detectedPitches = AddingTransitions(_detectedPitches);
+}</code></pre><hr id="30fb0e03-cfc8-4feb-88be-4ffd06b3a4e4"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bdac9953-8824-4ac3-9666-95033b31918d" class="code"><code class="language-Python">def AddingTransitions(list[DetectedPitch] detectedPitches) -&gt; list[DetectedPitch]:
+
+	pitches = detectedPitches;
+	N = pitches.size
+	for i in range(0, N-1): 
+      if(pitches[i].Onset == True &amp;&amp; pitches[i].TransitionNote == False):         
+          positive1: bool = pitches[i].FollowingPitchSlope &gt; 0 
+          for j in range(i+1, N-1):
+              positive2: bool = pitches[j].FollowingPitchSlope &gt; 0
+              if ((positive1 != positive2 || (Math.Abs(pitches[j].FollowingPitchSlope)&lt;0.2)) &amp;&amp; j-i&gt;1):
+                  pitches[j].Onset = true
+                  pitches[j - 1].Offset = true
+                  pitches[i].TransitionNote = true
+                  pitches[j - 1].TransitionNote = true
+                  break
+          #--------
+          i = j
+  #--------
+  return pitches</code></pre><hr id="221437a1-b09b-4b52-b5fd-43fbb12f7f84"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5f295ada-a279-4ffd-8d02-1ab62e202557" class="code"><code class="language-Python">def FillOnsetPercentages(pitches: list[DetectedPitch]) -&gt; list[DetectedPitch]: 
+    detectedPitches = pitches
+		N = detectedPitches.size
+		for i in range(0, N-2): # N-2 ***
+        if (pitches[i].Silent == false &amp;&amp; pitches[i + 1].Silent == true):
+            detectedPitches[i + 1].PercentOnsetBasedPitch = 100;
+            detectedPitches[i + 1].PercentOffsetBasedPitch = 0;
+            detectedPitches[i].PercentOnsetBasedPitch = 0;
+            detectedPitches[i].PercentOffsetBasedPitch = 100;
+            i++;
+        else if (pitches[i].Silent == true &amp;&amp; pitches[i + 1].Silent == false):
+            detectedPitches[i].PercentOnsetBasedPitch = 0;
+            detectedPitches[i].PercentOffsetBasedPitch = 100;
+
+            detectedPitches[i + 1].PercentOnsetBasedPitch = 100;
+            detectedPitches[i + 1].PercentOffsetBasedPitch = 0;
+            i++;
+        else if (pitches[i].Silent == true &amp;&amp; pitches[i + 1].Silent == true):
+            detectedPitches[i + 1].PercentOnsetBasedPitch = 0;
+            detectedPitches[i + 1].PercentOffsetBasedPitch = 0;
+        else:
+            if (i &gt;= 1 &amp;&amp;
+                (detectedPitches[i - 1].StdFollowingPitchSlope &gt; 0.0000001 ||
+                 detectedPitches[i - 1].StdFollowingPitchSlope &lt; -0.0000001) &amp;&amp;
+                Math.Abs(detectedPitches[i].FollowingPitchSlope) &gt;
+                Math.Abs(detectedPitches[i - 1].AvgFollowingPitchSlope +
+                         (detectedPitches[i - 1].StdFollowingPitchSlope *
+                          _onsetSettings.PitchThreshold))
+            ):
+                detectedPitches[i].PercentOnsetBasedPitch = 100;
+		#--------
+    return detectedPitches;</code></pre><hr id="93fe9451-4f18-4d5d-baab-3fd6574af428"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cb71e943-736c-40dd-ad70-f687a3b72d87" class="code"><code class="language-Python">def AlteringDetectedOnsets(List&lt;DetectedPitch&gt; pitches, OnsetSettings onsetSettings) -&gt; list[DetectedPitch]: 
+    detectedPitches = pitches;
+    N = detectedPitches.size
+    maxDiff: float
+    indexMaxDiff: int
+    tempDiff: float
+    #----------1
+    for i in range(0, N-1):
+        if (detectedPitches[i].Onset == true &amp;&amp; i &gt;= 1):
+            maxDiff = Math.Abs(detectedPitches[i].FollowingPitchSlope) -
+                      Math.Abs((detectedPitches[i - 1].AvgFollowingPitchSlope +
+                                (detectedPitches[i - 1].StdFollowingPitchSlope *
+                                 onsetSettings.PitchThreshold)));
+            indexMaxDiff = i;
+            #----------
+            j = i + 1
+		        while(j &lt;= i + onsetSettings.MinNumberOfFrequenciesBetweenOnsets &amp;&amp; j &lt; detectedPitches.Count): 
+                if (detectedPitches[j].Silent == true) break;
+                if (detectedPitches[j].Onset == true): 
+                    tempDiff = Math.Abs(detectedPitches[j].FollowingPitchSlope) -
+                               Math.Abs((detectedPitches[j - 1].AvgFollowingPitchSlope +
+                                         (detectedPitches[j - 1].StdFollowingPitchSlope *
+                                          onsetSettings.PitchThreshold)))
+                    if (tempDiff &gt; maxDiff): 
+                        detectedPitches[indexMaxDiff].Onset = false;
+                        detectedPitches[indexMaxDiff - 1].Offset = false;
+                        maxDiff = tempDiff;
+                        indexMaxDiff = j;
+                    else: 
+                        detectedPitches[j].Onset = false;
+                        if (detectedPitches[j - 1].Offset == true):
+                            detectedPitches[j - 1].Offset = false;
+								#----------
+								j+=1
+						#----------
+            i = j - 1;
+            if (i &gt;= N) break;
+            i += onsetSettings.MinNumberOfFrequenciesBetweenOnsets - 1;
+		#----------
+    return detectedPitches;</code></pre></div></figure><h1 id="8f2b7c09-9b75-44cc-a867-c350f1aca09a" class="">Discussion</h1><p id="ca431c01-d664-4183-8742-c3875bae2a71" class=""><strong>Window Size </strong></p><ul id="0470474b-d1af-491f-8879-bbf6dea7977d" class="bulleted-list"><li style="list-style-type:disc">A larger window size for F-measure shows more similarity, since an enormous difference between the ground truth and the estimated onset would be accepted in this case. However, as seen in <a href="https://www.mdpi.com/2076-3417/12/15/7391#table_body_display_applsci-12-07391-t001"><strong>Table 1</strong></a> and <a href="https://www.mdpi.com/2076-3417/12/15/7391#table_body_display_applsci-12-07391-t002"><strong>Table 2</strong></a>, after applying the window size of 150 ms, the speed of improvement in F-measure values decreases. In addition, a window size of more than 250 cannot be meaningful, since it accepts more than a 250 ms difference between the ground truth and the estimated onset, which is too long.</li></ul><ul id="9bc42929-21cf-4034-9367-622e17c7689c" class="bulleted-list"><li style="list-style-type:disc">our proposed algorithm finds more correct onsets compared to the other algorithms when the window size is equal to or greater than 150 ms</li></ul><ul id="e205db4a-3d84-45b1-9b05-38b03ebec026" class="bulleted-list"><li style="list-style-type:disc">Since the proposed algorithm is based on the changes in a pitch contour, when the intervals between notes are bigger, and there are fewer soft onsets, the algorithm can estimate onsets more accurately.</li></ul><p id="0524e348-a615-43c5-932e-8b787cc97c4f" class=""><strong>Potential Improvements</strong></p><ul id="45aa4add-84df-43cb-adda-60937af83eed" class="bulleted-list"><li style="list-style-type:disc"><strong>The accuracy of the proposed algorithm may be improved by considering more spectrogram channels, i.e., including other related frequency components from the spectrogram and not only the fundamental frequencies. In this way, a more comprehensive formula weighted together with the measurements for each channel could improve the overall measure. </strong>Therefore, a new series of numbers will be generated to find the onsets, offsets, and transitions from the trajectory changes in the new contour. In this approach, the adverse effect of the incorrect <em>F</em>0 estimation may be reduced, especially in a real-time environment.</li></ul><ul id="222631a4-ab19-44e3-beea-52dc57cd9816" class="bulleted-list"><li style="list-style-type:disc">t<strong>he accuracy of the proposed algorithm can be improved by incorporating a function tracking significant changes in the magnitudes of each spectral channel that are also associated with the onset.</strong></li></ul><ul id="46ec83b1-77d5-4795-82e7-9ed00f81ca58" class="bulleted-list"><li style="list-style-type:disc">In addition, the algorithm is based on two parameters, window size (as explained in <a href="https://www.mdpi.com/2076-3417/12/15/7391#sec3dot5-applsci-12-07391"><strong>Section 3.5</strong></a>) and the proportion of the standard deviation to calculate the thresholds, as discussed in <a href="https://www.mdpi.com/2076-3417/12/15/7391#sec3dot7-applsci-12-07391"><strong>Section 3.7</strong></a>. <mark class="highlight-yellow_background">By evaluating the algorithm on other larger datasets such as VocalSet [</mark><mark class="highlight-yellow_background"><a href="https://www.mdpi.com/2076-3417/12/15/7391#B41-applsci-12-07391"><strong>41</strong></a></mark><mark class="highlight-yellow_background">], these parameters could be fixed to be a constant value that is generally applicable to all singers or could be determined by a formula and therefore be adaptive to the nature of the style of input singing.</mark></li></ul><hr id="3f885f81-ce90-4512-a120-85e72bffc64a"/><h2 id="3849075f-fe23-4f66-a26a-2f23fce8904d" class=""><del><mark class="highlight-red">Log Frequency Axis</mark></del></h2><p id="b55825cd-b5b0-43d7-a285-7742f018c298" class=""><mark class="highlight-yellow_background">“Another possible approach instead of using the starting pitch explained in </mark><mark class="highlight-yellow_background"><a href="https://www.mdpi.com/2076-3417/12/15/7391#sec3dot2-applsci-12-07391"><strong>Section 3.2</strong></a></mark><mark class="highlight-yellow_background"> is to scale down all F0s to one specific octave and then use a log frequency axis. This approach may help in regularizing the slopes and making them comparable.”</mark></p><p id="ad81fda0-d4f9-4f38-82d0-ab99debed1b8" class="">We percieve the differences between the same notes on the scale (ie: C1, C2, C3, …) as the same, even though by frequency, they don’t differ by a constant amount</p><figure id="d34e2b88-d66a-4435-8dfa-35b01c98b89b" class="image"><a href="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-21_at_21.22.55.png"><img style="width:604px" src="Pitch%20Contour%20for%20Onsets%20(source)%2057fca3b219af4eed9968045ce4b0a331/Screen_Shot_2024-03-21_at_21.22.55.png"/></a></figure><p id="5861eb30-5e60-460b-8c15-fa438cce1f0e" class="">One octave is not a fixed frequency <em>difference </em>but a frequency <em>ratio</em> of 2:1</p><p id="02f48d86-c9af-463c-808b-6a96cf5be8df" class="">So on a <strong>logarithmic scale</strong>, the frequency differences are the same. </p><p id="78b6620a-1599-4376-aefc-c34f03f9bcca" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong>100</strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Mar 12, 2024, 6:38 PM</time></span></span></div><div style="padding:0.2em">??</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong>0.2</strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Mar 12, 2024, 6:44 PM</time></span></span></div><div style="padding:0.2em">?</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

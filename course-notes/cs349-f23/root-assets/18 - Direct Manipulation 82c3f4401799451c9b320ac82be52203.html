@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>18 - Direct Manipulation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="82c3f440-1799-451c-9b32-0ac82be52203" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">18 - Direct Manipulation</h1><p class="page-description"></p></header><div class="page-body"><h3 id="1e5a7923-303c-4dde-93b1-ed60f6160d57" class="">Interaction Model</h3><ul id="3324c7ed-d3d4-4798-a4be-d34fbcc5fe88" class="bulleted-list"><li style="list-style-type:disc">a way to describe an interface</li></ul><ul id="fd3af800-5165-43df-a9bc-1fe61a2b209b" class="bulleted-list"><li style="list-style-type:disc">how to combine interaction techniques </li></ul><ul id="0513f199-4d7c-4696-aaf7-a22f027c574f" class="bulleted-list"><li style="list-style-type:disc">we want an interaction model that works with typical desktop and is useful to describe direct manipulation<ul id="65627009-1efa-40d1-b88a-be3400139bd2" class="bulleted-list"><li style="list-style-type:circle">eg: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>instrumental interaction</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul></li></ul><hr id="78384fd7-7aab-4101-9bdb-f933b527e34a"/><h2 id="9bebeb46-1d93-4dc3-972c-c42d7725a31a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>instrumental interaction</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></h2><p id="01ab5767-6954-4436-b61e-ab33a729e45f" class=""><mark class="highlight-gray"><em>model of interaction </em></mark></p><ul id="bbadb8b4-f327-46fd-b99f-4ad028478fda" class="bulleted-list"><li style="list-style-type:disc">on how we naturally use tools to manipulate objects in the real world </li></ul><ul id="3b2f296a-babd-4848-a9d4-03c5b732083a" class="bulleted-list"><li style="list-style-type:disc">interface has <strong>interaction instruments</strong> and <strong>domain object </strong><ul id="74828e23-f533-4773-84ed-b07ee3fd41ac" class="bulleted-list"><li style="list-style-type:circle">domain object = data of interest, manipulated with instrument </li></ul><ul id="99881150-3427-4672-a59b-01e06c8cd03b" class="bulleted-list"><li style="list-style-type:circle">(text is the domain, instrument: bold, italics, select all, indent)</li></ul></li></ul><figure id="4ff191ec-c542-4890-a9c2-e091530e646b" class="image"><a href="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_15.46.27.png"><img style="width:1064px" src="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_15.46.27.png"/></a></figure><p id="a8820b9f-c95f-4674-8aee-d95341c12f93" class="">
+</p><h3 id="e2bca312-c163-4d7f-bcdd-6cf5bd4f7c78" class="">Instrument Activation </h3><p id="7b125f16-fa83-41d5-a668-71eded3c761a" class=""><mark class="highlight-gray"><em>how instrument is triggered for use</em></mark></p><p id="c9dbcabb-b88a-41b6-9a95-746ce0fae843" class=""><mark class="highlight-gray"><em>UI layout and design is concerned with the tradeoff of these costs</em></mark></p><ul id="b73f8f0f-33d2-426a-9013-7241acb2e975" class="block-color-gray bulleted-list"><li style="list-style-type:disc">ie: can’t have all the tools laid out (all spatial) but can’t have them all hidden (all temporal) </li></ul><ol type="1" id="378081ac-4fb7-41cc-b4ae-0d0b97b9cc09" class="numbered-list" start="1"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong>spatially</strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="26aa0ca1-8c32-44e6-b9a3-ea4c2cc6a87d" class="">Has a <strong>movement cost </strong></p><ul id="bcdcd461-4510-49c8-b02a-76ecd9518dfc" class="bulleted-list"><li style="list-style-type:disc">click a button</li></ul><ul id="480956f3-747b-4870-99c7-8063417937bb" class="bulleted-list"><li style="list-style-type:disc">scroll-bar</li></ul></li></ol><ol type="1" id="14edc0e1-c240-45c2-bd6e-a4df607c561f" class="numbered-list" start="2"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong>Temporal</strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="6ef0bb8e-1478-44a2-b56a-8146c12f9a06" class="">Has a <strong>activation time</strong> cost </p><ul id="10266fff-4f12-45e2-befc-b39c6872a464" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>Note: </strong></mark><mark class="highlight-yellow_background">temporal is about “activation time”. So for a slider. You don’t count the time it takes to slide it, only to activate the slider (which takes no time). </mark></li></ul><ul id="667759ea-bf39-4a6d-a876-bf64435392c2" class="bulleted-list"><li style="list-style-type:disc">draw rectangle, have to select rectangle from drop-down, then select what type of rectangle, then you can draw them spatially. There is a time-cost. </li></ul></li></ol><hr id="77da34b1-18aa-4507-b587-9cbf234f084e"/><p id="c721dfc4-1a59-4327-ae49-1c738db097de" class=""><strong><strong><strong><strong><strong><strong>Note: </strong></strong></strong></strong></strong></strong>almost all elements are spatial (because in a GUI you have to click to use)</p><div id="baa42cad-516e-43a6-ac4a-27c441db55f3" class="column-list"><div id="488cb989-db84-4436-91d4-415d19fcceb1" style="width:62.5%" class="column"><figure id="c37ea16d-e176-4499-a681-4d48744d9246" class="image"><a href="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_15.51.19.png"><img style="width:240px" src="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_15.51.19.png"/></a></figure><p id="1d2977a5-37f2-407c-b241-c9a0cc32f3dc" class="">
+</p></div><div id="a8a4f415-55b4-4f3a-a6ba-b140419f797e" style="width:37.50000000000001%" class="column"><p id="05e70e7d-3a40-42be-b3e5-9b6dbec9acee" class="">button: spatial</p><p id="91a7be77-de6b-465d-a55d-ba4504eb0f53" class="">scroll-bar: spatial </p><p id="550d2dcc-8f95-4bab-be4a-dfb16a159035" class="">rotate: temporal</p><p id="c18191a5-b54e-4d95-8b39-90d24048b364" class="">scale: temporal </p><p id="6edcf11b-de87-424d-8600-20f466f3b90d" class="">translate: spatial </p><p id="bbee3bc5-7d62-4e61-9ef8-17b09bf3f706" class="">
+</p></div></div><p id="128c3d34-6679-43bd-995f-7981ae7ee02b" class=""><mark class="highlight-red"><strong>Reification</strong></mark></p><p id="68ec50b9-61cc-4779-b5cb-16a4b319bdcb" class="">Turning a concept into something real</p><ul id="ef48a2e7-f1a9-4a04-83fb-c34e6d4b1acb" class="bulleted-list"><li style="list-style-type:disc">ie: instrument is a <strong>reification</strong> of a command</li></ul><ul id="d605b8c7-0fcb-40f2-8412-3761f0818626" class="bulleted-list"><li style="list-style-type:disc">e.g: scrollbar <strong>reifies</strong> scroll commands</li></ul><p id="4946601e-95b4-4d6e-b545-7df7724e1021" class=""><mark class="highlight-red"><strong>Meta Instrument</strong></mark></p><p id="063085bd-bf9d-495c-b48c-dfd00e54c6c2" class="">Instrument acting on another instrument. </p><ul id="4df5ae89-5f88-4060-8b9e-3c191e0e967a" class="bulleted-list"><li style="list-style-type:disc">object of interest = other instrument </li></ul><ul id="a32fc38e-7795-47bb-a3af-a5f2a8affd4a" class="bulleted-list"><li style="list-style-type:disc">ie: in photoshop, increasing the brush size</li></ul><ul id="2b406045-cf99-4015-8638-3308dbe23084" class="bulleted-list"><li style="list-style-type:disc">ie: instrument = fill tool, but then having a color-wheel is changing what the fill tool does. </li></ul><h2 id="710a6313-7c74-4d41-8d00-6064cb4d758e" class=""><mark class="highlight-red">Instrument Properties</mark></h2><p id="25070593-5807-4db8-b411-a4d8c350bb04" class="">3 Degrees</p><ul id="4866b143-efde-4cfe-831d-08be3ef6c63a" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong>Indirection</strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="24e0e9df-8ddc-45f8-8d00-b07883ba0185" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Integration </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="c9b12823-63f1-48bb-b23e-4a9aa6936bd0" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Compatibility</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><h3 id="001d86de-e852-445f-8446-ca6ebc680890" class=""><mark class="highlight-orange"><strong>Indirection</strong></mark></h3><p id="92a92a09-cd66-4658-87df-db7d2ae1fc27" class=""><mark class="highlight-gray"><em>distance from instrument to domain object *WHEN YOUR USING IT*</em></mark></p><p id="21be2704-fb3a-4066-ad7e-9e1d5f2f68ec" class="">2 dimensions: </p><ol type="1" id="8427c10d-a54e-4185-a1dc-5e1418f5df72" class="numbered-list" start="1"><li><strong>Spatial</strong> (how far to move mouse to activate) <p id="8aa40042-0cbf-4e3c-bd72-1aa81a5b1989" class=""><strong>eg: Near: </strong>drag to translate, handles to resize</p><p id="dd7c7e58-6823-4f3d-a006-91b46e5deb45" class=""><strong>eg: Medium: </strong>scrollbar near page</p><p id="5f749f89-d0cc-41dc-ae70-cc7ca75b3139" class=""><strong>eg: Far: </strong>dialog boxes</p></li></ol><ol type="1" id="540c058a-6a6d-4060-9ee6-18a7b4106916" class="numbered-list" start="2"><li><strong>Temporal</strong>  (how long to wait to activate) <p id="058cb515-2bef-4dd8-8c93-45f6b99fff4a" class=""><strong>eg: short: </strong>direct dragging response </p><p id="c3024c6d-5a8c-4c79-9e33-0e20dd06b918" class=""><strong>eg: med: </strong>activate tool in toolbar</p><p id="207a45ee-de9e-42d4-83e8-67653f4a16e8" class=""><strong>eg: long: </strong>using dialog, finishing drag and drop </p></li></ol><h3 id="9b96ca32-65d0-4245-a125-095e3244876c" class=""><mark class="highlight-orange">Degree of </mark><mark class="highlight-orange"><strong>Integration</strong></mark></h3><p id="6ca77498-e10c-42f2-b1b0-331f33e80b5b" class=""><strong>instrument DOF / input DOF</strong></p><p id="fdd218d4-56ae-4a9a-b197-38bf35717778" class="">if <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">&lt;1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> : input device is <strong><strong><strong><strong><strong><strong><strong><strong>suitable</strong></strong></strong></strong></strong></strong></strong></strong></p><p id="6e94ef1c-d29f-429b-891a-812064ac0683" class="">if <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\ge1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> : input device is not <strong><strong><strong><strong><strong><strong><strong><strong>suitable</strong></strong></strong></strong></strong></strong></strong></strong></p><div id="e25adacf-506a-4633-9548-42c5eaf0249b" class="column-list"><div id="2b63f802-28a6-49d0-a15d-c7fb7fd6cc75" style="width:50%" class="column"><figure id="274bd58b-d9d9-4b41-a3a6-d1019b2e1751" class="image"><a href="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_16.11.56.png"><img style="width:1002px" src="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_16.11.56.png"/></a></figure></div><div id="12a8b62f-6429-4371-9a18-5fe40312126f" style="width:50%" class="column"><p id="b3f9ca70-84ce-4b3a-952f-3fc38dd617f4" class="">instrument DOF = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span><span>﻿</span></span></p><p id="c315d6e6-8632-43cf-a368-2dfb76d95ca9" class="">input device DOF = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span></span><span>﻿</span></span></p><p id="96572016-2cb3-42fe-944d-58198cbeee99" class="">So using only a mouse: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">3/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3/2</span></span></span></span></span><span>﻿</span></span> (not suitable) </p></div></div><h3 id="4032b897-76c7-4aae-8b25-9d0d21267736" class=""><mark class="highlight-orange">Degree of </mark><mark class="highlight-orange"><strong>Compatibility</strong></mark></h3><p id="dbceabe1-a1fa-4cd3-8154-76b6157e1b00" class=""><em><mark class="highlight-gray">How similar is the physical action and the response? </mark></em></p><figure id="2be1e52b-0e7a-4c23-bdb5-b1a514f08739" class="image"><a href="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_16.14.49.png"><img style="width:336px" src="18%20-%20Direct%20Manipulation%2082c3f4401799451c9b320ac82be52203/Screen_Shot_2023-11-27_at_16.14.49.png"/></a></figure><hr id="a82f686b-e221-4f40-91dd-8172a6b4ebba"/><h3 id="e2217a6c-55af-4b12-b89a-cf67c8121731" class="">Direct Manipulation </h3><p id="647c67e2-f392-4171-9ba4-77b7b83e86ac" class=""><mark class="highlight-gray"><em>Directly act on a set of objects</em></mark></p><ul id="e4294a90-5681-49f4-a19c-db7b387a15f7" class="bulleted-list"><li style="list-style-type:disc">Low Indirection </li></ul><ul id="ffd48cd0-b848-4d24-afad-85635cec6335" class="bulleted-list"><li style="list-style-type:disc">High integration (1:1)</li></ul><ul id="7e5aa5d0-7c02-46f2-af59-d20675412f2c" class="bulleted-list"><li style="list-style-type:disc">High Compatibility</li></ul><p id="9555f696-8af8-4dae-a78c-6cb79863476f" class=""><mark class="highlight-yellow_background"><strong>Ideal Level: </strong></mark><mark class="highlight-yellow_background">Instruments are visually indistinguishable from objects they control (ie: dragging object) </mark></p><p id="2729e988-3840-4b4e-ba1c-bdcfd94d75e3" class=""><strong><strong><strong><strong><strong>Note:</strong></strong></strong></strong></strong> need to maintain offset between shape and mouse during drag</p><hr id="b23475ba-2dfc-4439-ab9e-d05ab1ecf2c1"/><p id="18d34a14-4ad1-4c27-b26e-8bae2d6bff86" class=""><mark class="highlight-orange"><strong>drag-canvas (Demo) </strong></mark></p><ul id="e0a5e57f-24e3-4fa8-b3c0-b7922aaa334e" class="bulleted-list"><li style="list-style-type:disc">HTML canvas (not the DOM) </li></ul><ul id="9f9a5122-2c2c-4a37-8785-f3ecbdc42fa2" class="bulleted-list"><li style="list-style-type:disc">use capture on the listener for “mousedown”  (otherwise all circles underneath will be dragged) </li></ul><ul id="eacb9952-2209-456e-b921-e2d5736168ee" class="bulleted-list"><li style="list-style-type:disc"><code>stopPropagation</code> vs. <code>stopImmediatePropogation</code></li></ul><ul id="5818c164-a4f9-4306-8bd8-b8af04db1075" class="bulleted-list"><li style="list-style-type:disc">add event listeners to circles in reverse order (otherwise first click will go to the last item)</li></ul><pre id="2d5766dc-c51b-4ab1-b811-2bb8c447e8d9" class="code"><code>&lt;body&gt;
+	&lt;div&gt;
+		&lt;canvas/&gt;
+	&lt;/div&gt;
+&lt;\body&gt;</code></pre><pre id="52f80d34-5527-4fc8-987b-e44a93695333" class="code"><code>draw(canvas.getContext(&quot;2d&quot;))</code></pre><hr id="e8440a4a-b2b3-447d-8b0c-73306b4eb9cc"/><p id="3bf36dcb-799e-4d0d-84db-17855bcff850" class=""><mark class="highlight-orange"><strong>drag-dom (Demo)</strong></mark></p><ul id="ca7df2c9-cb0b-422d-93f6-023740231d0d" class="bulleted-list"><li style="list-style-type:disc">dragging an HTML element<ul id="8b91ba41-4219-4961-a4ef-cea51f41e492" class="bulleted-list"><li style="list-style-type:circle">div as a circle </li></ul><ul id="cb187aac-9bf0-4df0-901d-c9b3a11cf69b" class="bulleted-list"><li style="list-style-type:circle">style to move element independently: <code>position: absolute</code><ul id="dca615ef-f88f-48bc-b7c0-f85d4013f922" class="bulleted-list"><li style="list-style-type:square">to move independent of layout / parent div</li></ul><ul id="13038ec4-d43c-498d-9f69-f8a4b0ca2dbc" class="bulleted-list"><li style="list-style-type:square">just relative to top left corner of div </li></ul></li></ul><ul id="c0a2f020-eecb-4733-9231-732c028f9beb" class="bulleted-list"><li style="list-style-type:circle">left and top are x &amp; y coordinates of top-left of div</li></ul></li></ul><ul id="23f5b9a0-5f80-4f91-aae3-c68344ceb5fd" class="bulleted-list"><li style="list-style-type:disc">mousemove and mouseup listeners on parent div<ul id="404c8a9d-01fd-475c-8c58-40f03c078b95" class="bulleted-list"><li style="list-style-type:circle">otherwise: if you drag too fast, your mouse could be off of the circle and the drag will stop </li></ul><ul id="c8d8c04d-8877-4edb-9643-172be788c2f2" class="bulleted-list"><li style="list-style-type:circle">so by adding to the parent (root div) of all circles, it will always be on. </li></ul></li></ul><hr id="3259193e-7253-4a55-8cbe-b2333f2799e3"/><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="7f4a292d-ce56-4f86-8e63-8336c41ff1e7"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong>Drag And Drop</strong></strong></strong></strong><ol type="1" id="7bea38c7-a9c3-428e-b782-cd6ce1cd61d4" class="numbered-list" start="1"><li>Mousedown on source object</li></ol><ol type="1" id="2e6062ff-c27f-4fa4-9de1-2e9cc4b923e3" class="numbered-list" start="2"><li>Drag source object onto target object</li></ol><ol type="1" id="14cdca2d-4a90-47b8-8a1f-d70fe912f018" class="numbered-list" start="3"><li>Mouseup to drop object on target </li></ol></div></figure><p id="dcfdb74b-a8fa-4f5c-8915-15718573fb7c" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>HTML Drag &amp; Drop API</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="7643a135-2d1c-4bf8-b252-0d69860feb4a" class="bulleted-list"><li style="list-style-type:disc">Make element drag-able: <code>&lt;div draggable=&quot;true&quot;...</code></li></ul><ul id="21299bed-4e2d-4cf4-964a-aebee63b4f1e" class="bulleted-list"><li style="list-style-type:disc">Manage a <code>drag operation</code> by handling drag-and-drop events: <ul id="7be11f07-01bd-4023-9900-a3d93ebea728" class="bulleted-list"><li style="list-style-type:circle"><code>dragstart</code>, <code>drag</code>, <code>dragenter</code>,<code>dragleave</code>,<code>dragover</code>,<code>drop</code>, <code>dragend</code></li></ul></li></ul><ul id="78ae10a4-704c-4e45-96ed-b8c74a698b8e" class="bulleted-list"><li style="list-style-type:disc">Define what info is manipulated</li></ul><ul id="ee3ee3ef-090b-4155-882e-f9a385b76f9c" class="bulleted-list"><li style="list-style-type:disc">Visual indication of: drop-targets, elements that can be dragged</li></ul><p id="6f6a8488-98a1-47b7-88f0-98723e2914f7" class=""><strong><mark class="highlight-orange">Drag-and-Drop (demo)</mark></strong></p><ul id="c920cee2-abfe-4d42-bfdf-9e04c1a9b427" class="bulleted-list"><li style="list-style-type:disc"><code>e.preventDefault()</code> is important (watch video for more info) </li></ul><p id="9c37ff40-7c64-47f3-b57f-47d473c5408e" class="">
+</p><p id="ad3969be-d237-43d0-a87d-e8c0ecc45bc7" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

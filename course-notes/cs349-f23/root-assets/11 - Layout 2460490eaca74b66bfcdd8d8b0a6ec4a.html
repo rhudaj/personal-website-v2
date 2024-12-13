@@ -1,0 +1,817 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>11 - Layout</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2460490e-aca7-4b66-bfcd-d8d8b0a6ec4a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">11 - Layout</h1><p class="page-description"></p></header><div class="page-body"><table id="b9eda2ef-7eb9-485f-b4b6-71051d3007f0" class="simple-table"><tbody><tr id="8e4e75fa-786a-4c8d-94a1-6a0149bc5726"><th id="aHdc" class="block-color-gray_background simple-table-header">Title</th><td id="&lt;SCr" class="" style="width:421.4609375px"><strong>Layout</strong></td></tr><tr id="e1b9df73-1106-4aec-b794-c1048cf2e09b"><th id="aHdc" class="block-color-gray_background simple-table-header"><strong>Date</strong></th><td id="&lt;SCr" class="" style="width:421.4609375px">2023 - OCT - 16</td></tr></tbody></table><hr id="bd6f6a0a-3343-452c-a47c-af0317e51f8a"/><h2 id="d0dbe4ec-a819-421c-bc4f-8c9d61785086" class=""><mark class="highlight-orange">Box Model</mark></h2><div id="02065e06-5426-48b9-b32d-5a0e1b030787" class="column-list"><div id="3ece0fd0-fa84-40b9-8f99-a1b23dd954a5" style="width:43.75%" class="column"><p id="0425b8eb-08f5-4245-9435-d44379c4c98b" class="">Hierarchy of 4 dimensions:</p><ul id="7586f6b8-18ad-49c5-9979-4fdffa69aa2a" class="bulleted-list"><li style="list-style-type:disc">margin</li></ul><ul id="1eda255b-c2aa-4802-bb96-0ed5649dfb7e" class="bulleted-list"><li style="list-style-type:disc">border </li></ul><ul id="ef8b345c-fba0-40d1-a3ef-76223ac000fb" class="bulleted-list"><li style="list-style-type:disc">padding</li></ul><ul id="c90686f7-4e51-46b8-b600-fa8489c9295a" class="bulleted-list"><li style="list-style-type:disc">content </li></ul></div><div id="8260f039-7c66-4fb1-ad7e-fe05e5e30692" style="width:56.25%" class="column"><figure id="b62417d9-46f2-4d5c-8ae0-e3c2861c739c" class="image" style="text-align:left"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_14.49.51.png"><img style="width:288px" src="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_14.49.51.png"/></a></figure><p id="b6e8cbf1-e82c-417d-921e-b7fdde4dbc88" class="">
+</p></div></div><p id="e66bfeb5-0e14-4cd0-b5eb-706e39083da0" class=""><strong>How to define box (w,h) </strong></p><ul id="39b02fe2-3365-4276-8879-0350bbb7ac20" class="bulleted-list"><li style="list-style-type:disc">Standard CSS<ul id="9ce698a8-a979-401a-8278-316969d771bd" class="bulleted-list"><li style="list-style-type:circle">(w,h) → content size </li></ul><ul id="991f4bb2-624e-40de-b443-d3268e48ef26" class="bulleted-list"><li style="list-style-type:circle">render size → content size + padding + border</li></ul></li></ul><ul id="9a2d01b5-3207-4918-b48e-1662290bf921" class="bulleted-list"><li style="list-style-type:disc">Alternative CSS<ul id="fb8b2b31-4387-47d8-9872-c21026191d59" class="bulleted-list"><li style="list-style-type:circle">(w,h) → rendered size </li></ul><ul id="59c6ac0d-1f86-4481-818f-998251ed0641" class="bulleted-list"><li style="list-style-type:circle">content size = rendered-sized - padding - border</li></ul></li></ul><p id="d991c71f-ac93-440b-9a5f-cbebb5b16433" class="">
+</p><figure id="cfed9b8b-c5f3-4b37-a087-86abcf66efd5" class="image"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_14.54.38.png"><img style="width:384px" src="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_14.54.38.png"/></a></figure><h3 id="d53b4599-2ef3-42fa-954d-2ce86ee40303" class=""><mark class="highlight-orange">SimpleKit - Box Model</mark></h3><p id="edf829d0-b1c5-4b20-ab88-c72b7fa6d4b1" class="">Uses: CSS Alternative box model </p><div id="4c97b187-a545-41b1-bbc1-7f0b07600647" class="column-list"><div id="c6a8b3dd-e63f-4ac1-8ee1-57910b9095a3" style="width:37.5%" class="column"><p id="5474fc67-3b6e-4ea0-baf7-6e5f3649113a" class="">3 Dimensions:</p><ul id="356dbb49-7f90-40b1-ad26-fd5a761ea605" class="bulleted-list"><li style="list-style-type:disc">margin</li></ul><ul id="0ff94486-f1d4-4293-8fdb-1da6df3c85d0" class="bulleted-list"><li style="list-style-type:disc">padding</li></ul><ul id="bb321d80-5b05-45bc-a474-c842728233ac" class="bulleted-list"><li style="list-style-type:disc">content</li></ul></div><div id="3b05a446-f125-4954-ad4c-067ae42541bf" style="width:62.5%" class="column"><figure id="33683788-aa98-4cf9-86b9-5d27e63e348b" class="image"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_15.06.27.png"><img style="width:384px" src="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_15.06.27.png"/></a></figure><p id="2c1ff2f2-2cfc-4676-9820-d5136a3c9d41" class="">
+</p></div></div><ul id="e33c174a-1885-4ac7-8815-386bb44997ea" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>boxmodel class: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><pre id="7d3748d5-4a41-4c01-a10a-c41303637a3c" class="code"><code>type Size = { width: number; height: number };
+
+export class BoxModel {
+
+	// each has a get() and set()
+	private _margin = 0;
+	private _padding = 0;
+	private _contentWidth = 0;
+	private _contentHeight = 0;
+
+  onUpdate() {
+    invalidateLayout();
+  }
+
+  // margin
+  set margin(m: number) {
+	  ...
+    this.onUpdate();
+  }
+
+  get marginBox(): Size {
+    return {
+      width: this.contentWidth + 2 * this.padding + 2 * this.margin,
+      height: this.contentHeight + 2 * this.padding + 2 * this.margin,
+    };
+  }
+
+  set padding(p: number) {
+	  this.padding = p; 
+		//adjust width and height to account for padding
+		this.width = this.width; 
+		this.height = this.height; 
+    this.onUpdate();
+  }
+
+  get paddingBox(): Size {
+    return {
+      width: this.contentWidth + 2 * this.padding,
+      height: this.contentHeight + 2 * this.padding,
+    };
+  }
+
+  // content
+  set contentWidth(w: number) {
+    ...
+    this.onUpdate();
+  }
+
+  private _contentHeight = 0;
+  set contentHeight(h: number) {
+    ...
+    this.onUpdate();
+  }
+
+  get contentBox(): Size {
+    return { width: this.contentWidth, height: this.contentHeight };
+  }
+
+  // full box size (including margin)
+  get fullWidth() {
+    return this.marginBox.width;
+  }
+
+  set fullWidth(w: number) {
+    ...
+    this.contentWidth = w - 2 * this.padding - 2 * this.margin;
+  }
+
+  get fullHeight() {
+    return this.marginBox.height;
+  }
+
+  set fullHeight(h: number) {
+    h = Math.max(0, h);
+    this.contentHeight = h - 2 * this.padding - 2 * this.margin;
+  }
+
+  // width and height include padding
+
+  // width
+  set width(w: number) {
+    // width must be at least 2 * padding
+    w = Math.max(2 * this.padding, w);
+    this.contentWidth = w - 2 * this.padding;
+  }
+
+  get width() {
+    return this.contentWidth + 2 * this.padding;
+  }
+
+  // height
+  set height(h: number) {
+    // height must be at least 2 * padding
+    h = Math.max(2 * this.padding, h);
+    this.contentHeight = h - 2 * this.padding;
+  }
+
+  get height() {
+    return this.contentHeight + 2 * this.padding;
+  }
+
+  // draw box model for debugging
+  draw(gc: CanvasRenderingContext2D) {
+    gc.save();
+    // margin
+    // padding
+    // content
+    gc.restore();
+  }
+}</code></pre></details></li></ul><hr id="15035482-2a59-4894-9200-e41d347f0452"/><p id="64f787f4-ad91-4e34-98bd-fc59be9cdc5b" class=""><strong><strong><strong><strong><strong>boxmodel (demo) </strong></strong></strong></strong></strong></p><figure id="422d3475-960c-4745-9796-6af85fe3786b" class="image" style="text-align:left"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/IMG_01AA89F1F247-1.jpeg"><img style="width:384px" src="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/IMG_01AA89F1F247-1.jpeg"/></a></figure><pre id="e56f15c6-4c67-4a1d-a457-6eb35af9f885" class="code"><code>const root = new SKContainer(25, 25);
+root.id = &quot;root&quot;;
+root.debug = true;
+root.fill = &quot;white&quot;;
+root.box.padding = 25;
+
+const a = new SKContainer(30, 30, 100, 100);
+a.box.margin = 20;
+a.box.padding = 10;
+a.fill = &quot;lightgrey&quot;;
+a.debug = true;
+a.id = &quot;A&quot;;
+root.addChild(a);</code></pre><hr id="0d0a625c-e1fc-46f7-ad20-b1006461f609"/><h2 id="0af87616-aa1a-4cc8-b865-9b0369d05ab8" class=""><mark class="highlight-red"><strong>Layouts</strong></mark></h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3b875da1-02c4-48c6-a76d-d0b6a99e4a40"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Strategy Design Pattern</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="bfcf3773-97b9-4477-b15f-4ed271ad3cec" class="">For widgets with a layout → decide which layout algorithm they use</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0dd5e783-c78d-4930-9531-90f0975e087e"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">To a layout, a Widgets Location (x,y) is the top left of it’s <code>marginBox</code><p id="6bd9cf93-f0bd-4e69-aee3-4eadf8d7342f" class="">Widgets are positioned relative to the top left of the container’s <code>paddingBox</code></p></div></figure><h3 id="ebbad4ab-8ed8-4889-9983-3c0a877ac7b4" class="">SimpleKit</h3><div id="9dccd72e-4eb9-4e6e-8eea-aadf1dd8a782" class="column-list"><div id="11394de1-2fc8-4bd3-b148-9ccdfdd78520" style="width:50%" class="column"><p id="614516ed-b32b-4454-b5bd-3fe806bc2851" class="">Containers have a LayoutMethod:</p><pre id="44d3bc7e-b07a-4c57-80c7-7769d1692e32" class="code"><code>type LayoutMethod = (
+	boundsWidth: number,
+	boundsHeight: number, 
+	elements: SKElement[]
+) =&gt; Size; </code></pre><pre id="d6edb858-9171-41b4-886e-a6b37aaa3d19" class="code"><code>protected _layoutMethod: LayoutMethod | undefined; 
+set layoutMethod(lm: LayoutMethod) {
+	this._layoutMethod = lm; 
+}</code></pre></div><div id="e7112b39-0684-4924-86ad-44de786db0ef" style="width:50%" class="column"><p id="b49b228e-de61-448e-830e-a1f6c3f3dbe5" class="">To assign layouts, you do: </p><pre id="b2efefa3-5d63-4001-916b-55acf5cfc6fd" class="code"><code>container.layoutMethod = layoutMethod({params})</code></pre><p id="3ce36ae8-3d79-4577-b713-d970664df8b4" class="">You set the layout method of the container to a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>reference of a function.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="82a1c434-d497-45cb-a228-08e996cf176c" class="">We can modify the function that we pass with the <code>{params}</code> part</p><p id="a1fbaab1-7c77-43f3-900e-7115071b2a9f" class="">
+</p></div></div><hr id="72acf22b-c319-487c-aebb-d17197174b0b"/><h3 id="6830dccb-c44d-4534-b579-c1516fd14aa3" class="">FixedLayout </h3><ul id="a3bf7d1e-527d-4fbe-9238-dec59d1c1a66" class="bulleted-list"><li style="list-style-type:disc">simplest layout type</li></ul><ul id="3a4cc2db-01c2-4853-a7a6-55570265d236" class="bulleted-list"><li style="list-style-type:disc">does not adjust to canvas resize, does not adjust w/h, x/y of elements</li></ul><figure id="b0db4e8b-4d87-4599-aaad-4d58eb4c3b4f" class="link-to-page"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/fixed%20layout%20(demo)%20b0db4e8b4d874599aaad4d58eb4c3b4f.html"><span class="icon">🧑🏽‍💻</span>fixed layout (demo)</a></figure><h3 id="88f5ddfd-0cea-4f5e-914b-382cede9aec7" class="">Center Layout</h3><ul id="4ebcbf48-5cb5-4929-a73e-89c14565151a" class="bulleted-list"><li style="list-style-type:disc">all elements centred in container, stacked back to front</li></ul><ul id="a267bde0-13e5-410f-897a-6c436fbe2e8b" class="bulleted-list"><li style="list-style-type:disc">sets new x and y for each element</li></ul><ul id="98db8020-66ca-436a-a89d-57b54e2752ec" class="bulleted-list"><li style="list-style-type:disc">still does not adjust element height/width</li></ul><figure id="46724fa8-205c-47f4-8889-f6e330c38dad" class="link-to-page"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/centred%20layout%20(demo)%2046724fa8205c47f48889f6e330c38dad.html"><span class="icon">🧑🏽‍💻</span>centred layout (demo)</a></figure><h3 id="46a078aa-13e4-4289-852b-e7461d12eba3" class="">Wrap Layout</h3><ul id="0771932e-64c3-4721-b945-56571b9b92e5" class="bulleted-list"><li style="list-style-type:disc">places elements in rows, wrapping to next row as needed</li></ul><ul id="ffb84dfe-7db9-4494-ad18-8ab1caab71b9" class="bulleted-list"><li style="list-style-type:disc">takes a <strong><strong><strong><strong>gap </strong></strong></strong></strong>parameter, when making the function</li></ul><pre id="a2f1d99b-2a99-465f-a53d-4a072aa2567f" class="code"><code>root.layoutMethod = Layout.makeWrapRowLayout({ gap: 10}); </code></pre><figure id="7ca6190b-e3fc-4421-8ba3-bcd175350f99" class="link-to-page"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/wrap%20layout%20(demo)%207ca6190be3fc44218ba3bcd175350f99.html"><span class="icon">🧑🏽‍💻</span>wrap layout (demo)</a></figure><hr id="31dddfb1-06cd-4060-980e-034e55696ce5"/><h3 id="d1fa60bd-5198-484e-b43e-076d9dd71223" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Responsive vs Adaptive</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></h3><p id="d12c7117-88bc-482d-85bc-ffbf6746aafb" class="">Both layouts that can change (resize) </p><table id="301157fe-d04c-4464-b6b8-4ecff0f4e0d3" class="simple-table"><thead class="simple-table-header"><tr id="7221e1dc-706b-4350-8178-c2342a4c2aae"><th id="]hdo" class="simple-table-header-color simple-table-header" style="width:235.99998474121094px"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Responsive</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></th><th id="M=Ao" class="simple-table-header-color simple-table-header" style="width:301.99999237060547px"><strong>Adaptive</strong></th></tr></thead><tbody><tr id="f8cf4f80-20b3-4db8-9313-5154ee39e9c3"><td id="]hdo" class="" style="width:235.99998474121094px">Support a universal design that reflows spatial layout to fit the dimensions of the current view (device or window)</td><td id="M=Ao" class="" style="width:301.99999237060547px">Design optimized spatial layouts for each device and dynamically switch to fit devices</td></tr></tbody></table><figure id="9e5fc4ef-4880-4330-a5f7-e1e3e8872147" class="image" style="text-align:left"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-21_at_17.59.06.png"><img style="width:480px" src="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-21_at_17.59.06.png"/></a></figure><p id="97a84de3-5e86-47f5-90d8-f92b83c6db0c" class="">
+</p><hr id="70b677d0-210e-4a68-9419-2ca6fdb82a29"/><h3 id="e5c74bf7-2167-4a3c-bc2a-6d306971c480" class="">Widget “Preferred” Size</h3><ul id="869f3770-8665-490f-bda8-f3164b2c4fd1" class="bulleted-list"><li style="list-style-type:disc">widgets should be flexible in size and position</li></ul><ul id="cab621ac-97af-4ca9-ad3f-e6fad82dbdab" class="bulleted-list"><li style="list-style-type:disc">the layout can change a widgets size and position</li></ul><ul id="d98bba35-94b8-4763-9706-69118a309e57" class="bulleted-list"><li style="list-style-type:disc">the widget should be able to set some bounds for what’s allowed. </li></ul><p id="ef5aaa02-9cc1-41a5-8528-69731c1f085b" class="">SimpleKit: </p><ol type="1" id="a827afa6-5f4c-4173-a815-df15bbebeeda" class="numbered-list" start="1"><li>widget specify (w,h) or, </li></ol><ol type="1" id="10ad2734-7db5-4b29-8214-dae9fa22a364" class="numbered-list" start="2"><li>undefined → widget lets the layout choose one</li></ol><h2 id="30da8480-9e98-45bd-a923-7272e168cc90" class="">Variable Intrinsic Layouts</h2><ul id="f5e53407-710b-4770-82e7-4e90d86d44fa" class="bulleted-list"><li style="list-style-type:disc">layouts that do this responsive/dynamic sized layout</li></ul><ul id="6306e0a5-7bec-423c-ad94-ea7ed3802152" class="bulleted-list"><li style="list-style-type:disc">layout <strong><strong><strong><strong><strong><strong><strong><strong><strong>attempts </strong></strong></strong></strong></strong></strong></strong></strong></strong>to use the widget preferred sizes, but queries all widgets first and allocates space to them as a group </li></ul><p id="67caf574-5572-4c95-af04-1910dca22a4e" class="">Layout is determined in 2 passes: </p><ol type="1" id="9e724959-f476-4631-915b-fdeb24109bd4" class="numbered-list" start="1"><li>get each child widget’s preferred size</li></ol><ol type="1" id="870c93a6-6625-4e8b-95e8-710d2d0bd292" class="numbered-list" start="2"><li>Decide on a layout that satisfies everyone’s preferences. Then iterate through each child and set its size/position. </li></ol><p id="794e87ae-04a0-4f10-bfa1-247c89b33802" class=""> </p><hr id="bc78c871-b877-40b1-a196-63c0182fbde3"/><h3 id="84b63049-ae85-4ddd-9adc-b34623acd94c" class="">fill layout</h3><ul id="5f5a6a9b-d3ff-4cbc-8d1c-ad384f5c42c2" class="bulleted-list"><li style="list-style-type:disc">implements dynamic layout</li></ul><ul id="1e114dcf-a9a9-4d07-8ae2-c399c8bb5c23" class="bulleted-list"><li style="list-style-type:disc">lays out elements in a row, they can grow or shrink to fit space.</li></ul><ul id="623b77dc-e3dd-4ac4-9e5b-8f3eae6bf55a" class="bulleted-list"><li style="list-style-type:disc">takes a <strong><strong><strong><strong>gap </strong></strong></strong></strong>parameter</li></ul><figure id="51121a98-5bf0-4b41-9dac-5e3eeab2d758" class="link-to-page"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/fill%20layout(demo)%2051121a985bf04b419dac5e3eeab2d758.html"><span class="icon">🧑🏽‍💻</span>fill layout(demo)</a></figure><p id="69902813-15a0-4e0d-bff4-7175374ca821" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2d192f0a-3a25-4250-95d0-3a1ad2eaf9d7"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong>FillWidth/FillHeight</strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="672c65f7-1616-4f2a-a345-09d693e8c13e" class="">Is a ratio to all the other elements fill width.</p><p id="a69b30bc-ee21-46b4-8669-b8b6d589c783" class=""><strong><strong><strong><strong>ie: </strong></strong></strong></strong>if A.fillWidth = 3 and B.fillWidth = 3 → they have the same width </p></div></figure><h2 id="e817473b-36f3-4735-b54d-88d54763cef0" class="">Layout Invalidation </h2><p id="6b627789-9e26-4e1e-8dc9-1d9448b7162f" class="">To avoid changing the layout every time you change a parameter</p><ul id="44fa3e27-4ec7-4274-a598-d0700c495e89" class="bulleted-list"><li style="list-style-type:disc">every time widget size/layout related property changes, at least some of the UI has to be laid out again</li></ul><ul id="e57e7d19-f2c4-4779-a11f-525a4c6e552a" class="bulleted-list"><li style="list-style-type:disc">there could be multiple changes each frame of the run-loop</li></ul><ul id="8d9bace3-af41-401e-b71c-8ed785411b41" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong>Best-Practice: </strong></strong></strong></strong>run layout at most once per run-loop frame<ul id="b934f028-e6d3-4c4b-8aa8-c17f439150ee" class="bulleted-list"><li style="list-style-type:circle">SimpleKit uses a global function and flag (in run-loop.ts) → <code>InvalidateLayout()</code>, <code>layoutDirty</code></li></ul><ul id="e7cac6d2-d9bf-4701-9f1a-621b5a121ad2" class="bulleted-list"><li style="list-style-type:circle">Whenever the widget size or layout related property changes, it calls <code>InvalidateLayout()</code> but the layout isn’t done until the start of the next frame of run-loop.</li></ul><pre id="1f9779c6-7ff9-4649-8235-5ffc54f691b4" class="code"><code>if(uiTreeRoot &amp;&amp; layoutDirty) {
+	layoutRoot()
+	layoutDirty = false; 
+}</code></pre><ul id="e6a6c98a-72f6-404f-816f-20f37b3ee139" class="bulleted-list"><li style="list-style-type:circle"><code>layoutRoot()</code> → sets root to canvas size and calls <code>doLayout()</code>which will call doLayout for all widgets in the widget tree</li></ul></li></ul><p id="d7950c3c-ee50-4656-8378-debd9bc3ac4d" class="">
+</p><figure id="aeeaf676-c045-4543-b808-6736833d1d5c" class="link-to-page"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/demo%20(demo)%20aeeaf676c0454543b8086736833d1d5c.html"><span class="icon">🧑🏽‍💻</span>demo (demo)</a></figure><p id="a348737d-de3b-415e-99ad-6867d2711d71" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">this.onUpdate();
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 21, 2023, 5:14 PM</time></span></span></div><div style="padding:0.2em">layout is now invalid</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">this.width = this.width; </mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 21, 2023, 5:17 PM</time></span></span></div><div style="padding:0.2em">refers to the setter, set width()</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">w = Math.max(2 * this.padding, w);</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 21, 2023, 5:17 PM</time></span></span></div><div style="padding:0.2em">!!!</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">Size</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 21, 2023, 5:24 PM</time></span></span></div><div style="padding:0.2em">width &amp; height type</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Resolved inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">elements that have a layout</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 23, 2023, 11:09 AM</time></span></span></div><div style="padding:0.2em">ie: containers</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">	layoutRoot()
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 21, 2023, 6:22 PM</time></span></span></div><div style="padding:0.2em">sets root to canvas size and calls doLayout() which will call doLayout for all widgets in the widget tree</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

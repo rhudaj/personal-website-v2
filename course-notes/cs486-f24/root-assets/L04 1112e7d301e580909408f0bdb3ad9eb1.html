@@ -1,0 +1,736 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>L04</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1112e7d3-01e5-8090-9408-f0bdb3ad9eb1" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/document_pink.svg"/></div><h1 class="page-title"><strong>L04</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="1112e7d3-01e5-8046-9df0-fd85de958105" class=""><strong>Topic: </strong> Features and Constraints</p><hr id="1252e7d3-01e5-8044-8989-c014e1450a3e"/><h3 id="1112e7d3-01e5-8054-aea8-e2c7700f233e" class=""><strong>Constraint Satisfaction Problem (CSP)</strong></h3><p id="1252e7d3-01e5-80e6-82e9-f690a0e6f281" class="">Assign <strong><span style="border-bottom:0.05em solid">values</span></strong> for a <span style="border-bottom:0.05em solid">set of </span><strong><span style="border-bottom:0.05em solid">variables</span></strong> (each with a <strong><span style="border-bottom:0.05em solid">domain</span></strong>) that satisfies <strong><span style="border-bottom:0.05em solid">constraints</span></strong></p><ul id="1252e7d3-01e5-8032-a891-e84ba8a140ec" class="bulleted-list"><li style="list-style-type:disc">a solution (satisfying variable assignment) is a model of the constraints</li></ul><p id="1252e7d3-01e5-8018-9413-f7428dad2b82" class=""><strong>Model</strong></p><ul id="1112e7d3-01e5-8033-b8df-fbad6b265aba" class="bulleted-list"><li style="list-style-type:disc">Solution to CSP</li></ul><ul id="1112e7d3-01e5-80e1-9e84-cce52b88adbc" class="bulleted-list"><li style="list-style-type:disc">An <strong>assignment of values</strong> to variables that <strong>satisfies all the constraints</strong>. </li></ul><p id="1252e7d3-01e5-80a9-9afb-e5d17f0c7e6f" class=""><strong>2 Types of CSP Problems</strong></p><table id="1252e7d3-01e5-8083-b92e-c44a81195b53" class="simple-table"><thead class="simple-table-header"><tr id="00a75b3b-a065-416c-947d-f0b082b7d224"><th id="{bK_" class="simple-table-header-color simple-table-header">Problem Type </th><th id="b&lt;;i" class="simple-table-header-color simple-table-header" style="width:264px">Find assignment that</th><th id="pd{S" class="simple-table-header-color simple-table-header">Constraints are</th></tr></thead><tbody><tr id="7f7c8e98-93c0-40f2-b0bf-137e6ef85ff8"><th id="{bK_" class="simple-table-header-color simple-table-header">Satisfiability</th><td id="b&lt;;i" class="" style="width:264px">satisfies all constraints</td><td id="pd{S" class="">Hard<strong> </strong>(all or nothing) </td></tr><tr id="b20609e6-f995-4063-9b79-f99cfdd33281"><th id="{bK_" class="simple-table-header-color simple-table-header"><strong>Optimization</strong></th><td id="b&lt;;i" class="" style="width:264px">optimizes some evaluation function</td><td id="pd{S" class="">Soft (Some constraints can be violated)</td></tr></tbody></table><h3 id="1112e7d3-01e5-808c-b337-c8d9210d4c80" class=""><strong>As Graph Search: </strong></h3><p id="1112e7d3-01e5-802b-828d-c98ec76b87cb" class="">Notes: </p><ul id="1112e7d3-01e5-80e5-bef8-f20d154d8141" class="bulleted-list"><li style="list-style-type:disc">Many variables ⇒ large <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span></span><span>﻿</span></span> ⇒ huge search space </li></ul><ul id="1112e7d3-01e5-8050-9e73-c7416b75a0f6" class="bulleted-list"><li style="list-style-type:disc">Only the goal matters, not the path to it. </li></ul><ul id="1112e7d3-01e5-8098-8fe8-ce683c8bbd20" class="bulleted-list"><li style="list-style-type:disc">No predefined starting nodes</li></ul><p id="1252e7d3-01e5-8078-be59-ff3baae56c44" class="">2 types of search trees: </p><table id="1252e7d3-01e5-8086-ac1b-e7c0e4c95b85" class="simple-table"><thead class="simple-table-header"><tr id="f5f783fa-f524-4913-995f-c099e82b89eb"><th id="yBHm" class="simple-table-header-color simple-table-header">Assignment Type</th><th id="_HV_" class="simple-table-header-color simple-table-header" style="width:258px">Nodes</th><th id="]S}E" class="simple-table-header-color simple-table-header">Edges</th></tr></thead><tbody><tr id="ddc6d35d-9525-4f95-90fc-9e7fb686b463"><th id="yBHm" class="simple-table-header-color simple-table-header"><strong>Complete</strong></th><td id="_HV_" class="" style="width:258px">assignment of value to all variables</td><td id="]S}E" class="">change one variable value</td></tr><tr id="06cc46e1-96fa-48d3-b58a-0d2716f7f576"><th id="yBHm" class="simple-table-header-color simple-table-header"><strong>Partial</strong></th><td id="_HV_" class="" style="width:258px">assignment to first <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex"> k − 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> variables</td><td id="]S}E" class="">assignment to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>k</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">k^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> variable</td></tr></tbody></table><h3 id="1252e7d3-01e5-809a-a2dd-fe834f0a452b" class="">Constraint Graphs</h3><p id="1112e7d3-01e5-8036-9804-ecb86e1590fe" class="">2 types: Primal &amp; Dual </p><table id="1252e7d3-01e5-800b-a1a8-f51eeafdadf7" class="simple-table"><thead class="simple-table-header"><tr id="527d63b6-c8ae-45bd-a4e7-d0b3738cedde"><th id="sUx&lt;" class="simple-table-header-color simple-table-header">Representation</th><th id="NqBQ" class="simple-table-header-color simple-table-header"><strong>Constraint Type</strong></th><th id="eoe@" class="simple-table-header-color simple-table-header">Nodes </th><th id="t=^\" class="simple-table-header-color simple-table-header">Edges</th></tr></thead><tbody><tr id="92c631c6-7ddf-4deb-9815-2b5b4eb56948"><th id="sUx&lt;" class="simple-table-header-color simple-table-header">Primal</th><td id="NqBQ" class="">Unary &amp; Binary (between 1 or 2 variables)</td><td id="eoe@" class="">variables</td><td id="t=^\" class="">constraints</td></tr><tr id="6fd6f91b-959f-497e-8aab-ce044495c986"><th id="sUx&lt;" class="simple-table-header-color simple-table-header">Dual</th><td id="NqBQ" class="">N-Ary (over sets of N variables)</td><td id="eoe@" class="">constraints</td><td id="t=^\" class="">shared variables between constraints.</td></tr></tbody></table><figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="1252e7d3-01e5-801d-aac6-d70d85c4d35c"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/thought-alert_gray.svg"/></div><div style="width:100%"><p id="d66dd37c-d679-48d9-9195-46d084b156fd" class=""><strong>Ex — Crossward Puzzle</strong></p><figure id="1112e7d3-01e5-80bb-adb6-f4e4ac392c03" class="image" style="text-align:center"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-29_at_23.04.22.png"><img style="width:384px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-29_at_23.04.22.png"/></a></figure><table id="1112e7d3-01e5-8071-9b71-d5bb5fde0bd3" class="simple-table"><thead class="simple-table-header"><tr id="708a251a-91e0-48e8-9761-4d15c81f2a4a"><th id="sUx&lt;" class="simple-table-header-color simple-table-header" style="width:64.99038696289062px"></th><th id="yTnE" class="simple-table-header-color simple-table-header" style="width:139.9639434814453px">Variables</th><th id="`Nop" class="simple-table-header-color simple-table-header" style="width:80px">Domains</th><th id="F}TJ" class="simple-table-header-color simple-table-header" style="width:257.18995666503906px">Constraints</th></tr></thead><tbody><tr id="cf22f131-6412-460b-9343-aa98a40744df"><th id="sUx&lt;" class="simple-table-header-color simple-table-header" style="width:64.99038696289062px">Primal</th><td id="yTnE" class="" style="width:139.9639434814453px">Word positions (e.g. 1-down)</td><td id="`Nop" class="" style="width:80px">Words</td><td id="F}TJ" class="" style="width:257.18995666503906px">Letters at intersections must match</td></tr><tr id="4880b3e8-f23b-4c51-9f24-5ed1d5d97100"><th id="sUx&lt;" class="simple-table-header-color simple-table-header" style="width:64.99038696289062px">Dual</th><td id="yTnE" class="" style="width:139.9639434814453px">Individual Squares</td><td id="`Nop" class="" style="width:80px">Letters</td><td id="F}TJ" class="" style="width:257.18995666503906px">Words must fit</td></tr></tbody></table></div></figure><h1 id="1112e7d3-01e5-80a4-8a12-f09813f33fcc" class=""><strong>Finding a Solution</strong></h1><p id="1252e7d3-01e5-80d9-ba99-c78a04eb8710" class=""><strong>Methods:</strong></p><ol type="1" id="1112e7d3-01e5-804d-b162-c0196bfa1071" class="numbered-list" start="1"><li>Generate and test</li></ol><ol type="1" id="1112e7d3-01e5-802b-a941-f44535033b16" class="numbered-list" start="2"><li>Backtracking</li></ol><ol type="1" id="1112e7d3-01e5-805a-959a-e162b49be1f7" class="numbered-list" start="3"><li>Consistency (AC3) </li></ol><ol type="1" id="1262e7d3-01e5-80c3-8d05-d53a53ba1e52" class="numbered-list" start="4"><li>Local Search (CSP as Search)</li></ol><ol type="1" id="1112e7d3-01e5-8024-afac-d7a653d3e4f9" class="numbered-list" start="5"><li>Hill-Climb</li></ol><ol type="1" id="1112e7d3-01e5-80ee-a42c-e47998bdb7be" class="numbered-list" start="6"><li>Randomized incl. Local Search</li></ol><hr id="1112e7d3-01e5-802e-9234-decb6d0cb7e4"/><figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="1252e7d3-01e5-8007-b28b-e341560ac66b"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/thought-alert_gray.svg"/></div><div style="width:100%"><p id="8297893d-6fa9-4c07-b86c-3ec94d2ba0dc" class=""><strong>Ex — Delivery Robot </strong></p><p id="1252e7d3-01e5-808b-b2fa-cd4696c7ed07" class="">Activities must be scheduled into time slots.</p><p id="1252e7d3-01e5-8096-b0fe-ea3218930e1d" class="">Primal Representation:</p><table id="1252e7d3-01e5-80fd-9bdb-e67e11175dde" class="simple-table"><tbody><tr id="3b7e9bc4-a226-4153-8b54-ff10f7983ee9"><th id="CP=]" class="simple-table-header-color simple-table-header">Variables</th><td id="azS\" class="">A, B, C, D, E</td><td id="B~Wm" class="">the time a specific activity will occur</td></tr><tr id="a9bdf2ed-4a26-453f-afa8-626dd34a1aca"><th id="CP=]" class="simple-table-header-color simple-table-header">Domains</th><td id="azS\" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>A</mi></msub><mo>=</mo><msub><mi>D</mi><mi>B</mi></msub><mo>=</mo><msub><mi>D</mi><mi>C</mi></msub><mo>=</mo><msub><mi>D</mi><mi>D</mi></msub><mo>=</mo><msub><mi>D</mi><mi>E</mi></msub><mo>=</mo><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mtext> </mtext><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">D_A=D_B=D_C=D_D=D_E= \set{1,2,3,4}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mclose">}</span></span></span></span></span><span>﻿</span></span></td><td id="B~Wm" class="">each activity can take place at any of the four time slots.</td></tr><tr id="33f2397b-f187-41a2-9b54-5492cd9dca0c"><th id="CP=]" class="simple-table-header-color simple-table-header">Constraints</th><td id="azS\" class="">1. B ≠ 3<br/>2. C ≠ 2 <br/>3. A ≠ B<br/>4. B ≠ C<br/>5. C &lt; D<br/>6. A = D<br/>7. E &lt; A<br/>8. E &lt; B<br/>9. E &lt; C<br/>10. E &lt; D<br/>11. B ≠ D<br/></td><td id="B~Wm" class=""></td></tr></tbody></table><figure id="1252e7d3-01e5-80a2-9c11-cf78f338a7bf" class="image" style="text-align:center"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-10-20_at_19.05.24.png"><img style="width:384px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-10-20_at_19.05.24.png"/></a></figure></div></figure><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">1. Generate &amp; Test</summary><div class="indented"><ul id="1252e7d3-01e5-80ee-8c15-cde232d555df" class="bulleted-list"><li style="list-style-type:disc">Try every assignment</li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">2. Backtracking </summary><div class="indented"><p id="1262e7d3-01e5-8002-a741-f60b8503c935" class="">Assign variables one at a time: </p><ol type="1" id="1112e7d3-01e5-809d-85d8-d0269302359a" class="numbered-list" start="1"><li><strong>Ordering: </strong>decide which order you will assign values to the variables.</li></ol><ul id="1252e7d3-01e5-80d0-953f-d41bc3c95f0c" class="bulleted-list"><li style="list-style-type:disc">Problem: Finding the optimal ordering is as hard as the problem. </li></ul><ul id="1262e7d3-01e5-8013-95e7-d740fc919cf8" class="bulleted-list"><li style="list-style-type:disc">Solution: Push failures as high as possible. Cut off large branches of the tree as soon as possible. </li></ul><ol type="1" id="1252e7d3-01e5-803a-9185-e0695d3010d6" class="numbered-list" start="2"><li><strong>Pruning: </strong>After each variable assignment, check constraints (even before assigning values to the remaining variables)<figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="1262e7d3-01e5-8070-8a10-e394589cdc7c"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/thought-alert_gray.svg"/></div><div style="width:100%"><p id="c9e2458f-ce15-4dfb-9e69-af227603420b" class=""><strong>Ex — Delivery Robot</strong></p><figure id="1262e7d3-01e5-804c-b394-c042ac81d10d" class="image" style="text-align:center"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/IMG_D8F04F9D301B-1.jpeg"><img style="width:384px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/IMG_D8F04F9D301B-1.jpeg"/></a></figure></div></figure></li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">3. <strong>Consistency</strong></summary><div class="indented"><ul id="1112e7d3-01e5-806e-a967-d15c35d23d8d" class="bulleted-list"><li style="list-style-type:disc">goal: each domain takes a value, and all constraints are satisfied. </li></ul><ul id="1112e7d3-01e5-80e0-b339-cc00a9b84747" class="bulleted-list"><li style="list-style-type:disc">Backtracking would “re-discover” this inconsistency. </li></ul><h3 id="1262e7d3-01e5-80be-85fa-c8a3d5bb3ca2" class="">Consistency Network (CN)</h3><figure id="1262e7d3-01e5-80a7-ab1a-d55cd8b1ca45" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-10-20_at_21.19.10.png"><img style="width:336px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-10-20_at_21.19.10.png"/></a></figure><figure id="1262e7d3-01e5-804f-88b9-d00135132ce3" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-10-20_at_21.11.49.png"><img style="width:480px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-10-20_at_21.11.49.png"/></a></figure><ul id="1262e7d3-01e5-8022-abc0-e3cfc1e0548f" class="bulleted-list"><li style="list-style-type:disc">circles = variable domains</li></ul><ul id="1262e7d3-01e5-801e-b93a-fa5579f200c9" class="bulleted-list"><li style="list-style-type:disc">squares:<ol type="a" id="1262e7d3-01e5-80d0-8bad-fbfaa8de8abb" class="numbered-list" start="1"><li>domain constraint: c(X)<ul id="1262e7d3-01e5-8094-b332-f705371cc324" class="bulleted-list"><li style="list-style-type:disc">circle → box </li></ul></li></ol><ol type="a" id="1262e7d3-01e5-805b-bfb8-d5024f4cbcb8" class="numbered-list" start="2"><li>arc constraint: C(X,Y)<ul id="1262e7d3-01e5-80e0-b4e9-ef7593fa4951" class="bulleted-list"><li style="list-style-type:disc">circle → box → circle</li></ul></li></ol></li></ul><hr id="1262e7d3-01e5-8032-93fa-e75f649619b3"/><p id="1262e7d3-01e5-802f-b82c-ddd58c2a64be" class=""><strong>Domain Consistent </strong>X<strong>: </strong>X satisfies all domain constraints </p><p id="1262e7d3-01e5-80cb-9e98-d069ea3bb777" class=""><strong>Domain Consistent </strong>CN: all nodes are domain consistent</p><p id="1112e7d3-01e5-80df-8777-c6eef7137a7f" class=""><strong>Arc Consistent </strong>Arc: for any X value, there is a Y value that satisfies c(X,Y) </p><p id="1262e7d3-01e5-80b1-9aa7-c3915cb7ff88" class=""><strong>Arc Consistent </strong>CN: every arc is arc consistent </p><p id="1112e7d3-01e5-80c3-8499-c9c41e538005" class=""><strong>Path Consistency:</strong></p><p id="1112e7d3-01e5-802f-ba4c-d6bbfb63acaf" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>X</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>X</mi><mn>3</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>X</mi><mi>N</mi></msub></mrow><annotation encoding="application/x-tex">{X_1, X_2, X_3, ..., X_N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> is <strong>path consistent</strong> if: <div class="indented"><ol type="1" id="1112e7d3-01e5-8016-b419-c671b5421ca9" class="numbered-list" start="1"><li>domain consistent CN</li></ol><ol type="1" id="1112e7d3-01e5-80cc-95ba-db4c0fbb0e80" class="numbered-list" start="2"><li>arc consistent CN</li></ol><ol type="1" id="1112e7d3-01e5-8079-9829-c3a744f75361" class="numbered-list" start="3"><li>For any triplet of variables (Xi, Xj, Xk), if values for Xi and Xj satisfy the constraint between them, there must be some value for Xk that is consistent with both Xi and Xj.</li></ol></div></p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">AC-3 Algorithm</summary><div class="indented"><p id="1262e7d3-01e5-80fb-979c-d36177a5d966" class="">Domain consistency + Arc Consistency </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1262e7d3-01e5-80c8-b4d1-c724453509b4" class="code"><code class="language-Python">def AC3(csp: CSP):
+	# 1 -- Domain Consistency
+    csp.makeDomainConsistent()
+
+	# 2 -- Arc Consistency
+    TDA = list(csp.binaryConstraints)  # TDA: To Do Arcs queue
+    
+    # For each arc constraint, revise the domain of X
+    while len(TDA) &gt; 0:
+        
+        bc: Constraint = TDA.pop(0)
+        X, Y = bc.vars
+        Dx, Dy = csp.domains[X], csp.domains[Y]
+        
+        # Revise the domain of X
+        revised = False
+        # Remove x values where no y value satisfies the constraint
+        for x in Dx:
+            if not any(bc.check([x, y]) for y in Dy):
+                Dx.remove(x)
+                revised = True
+
+        if revised:
+            if not Dx:
+                return False    # NO SOLUTION
+                
+            otherBCs = filter(
+                lambda bc: ( bc not in TDA and bc.vars[0] != Y and bc.vars[1] == X ),
+                csp.binaryConstraints
+            )
+
+            # TDA = otherBCS + TDA
+            TDA = list(otherBCs) + TDA
+
+    return True # ARC CONSISTENT</code></pre><ul id="1112e7d3-01e5-808b-a3fe-d815a4cb85d6" class="toggle"><li><details open=""><summary><strong>Guaranteed to terminate </strong></summary><p id="1112e7d3-01e5-8045-a4a5-d24548d43690" class="">When AC-3 terminates, either: </p><ol type="1" id="1112e7d3-01e5-802d-846a-c23b431bf888" class="numbered-list" start="1"><li>Every domain is empty ⇒ no solution, OR</li></ol><ol type="1" id="1112e7d3-01e5-8094-a2ab-c5204b12dff4" class="numbered-list" start="2"><li>Every domain has a 1 value ⇒ solution, OR</li></ol><ol type="1" id="1112e7d3-01e5-80ee-b336-e8664ea68a7a" class="numbered-list" start="3"><li>Some domain has more than one value ⇒ <ul id="1112e7d3-01e5-80e2-a0fd-c49abdc50214" class="bulleted-list"><li style="list-style-type:disc">Split it in two </li></ul><ul id="1112e7d3-01e5-8096-876d-c33d7c496807" class="bulleted-list"><li style="list-style-type:disc">run AC-3 recursively on two halves<ul id="1112e7d3-01e5-806a-862e-ff73f796bb01" class="bulleted-list"><li style="list-style-type:circle">Don’t have to start from scratch — put back all arcs ⟨Z, c′(Z, X)⟩ if X was the domain that was split</li></ul></li></ul></li></ol></details></li></ul><ul id="1112e7d3-01e5-8081-a8ae-f2d6f7ae991c" class="toggle"><li><details open=""><summary><strong>Complexity — </strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>c</mi><msup><mi>d</mi><mn>3</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(cd^3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">c</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span><strong> </strong></summary><ul id="1112e7d3-01e5-803c-ad38-c6a709dc1c83" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> variables, c binary constraints, size of each domain is at most d</li></ul><ul id="1112e7d3-01e5-80a0-a7a2-d1b5244d584b" class="bulleted-list"><li style="list-style-type:disc">Each arc (Xk, Xi) can be added to the queue at most d times because we can delete at most d values from Xi</li></ul><ul id="1112e7d3-01e5-80f1-ae60-f3237805314e" class="bulleted-list"><li style="list-style-type:disc">checking consistency of each arc can be done in O(d2)<strong> </strong>time</li></ul></details></li></ul><figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="1262e7d3-01e5-803a-9820-ed9d374db9ec"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/thought-alert_gray.svg"/></div><div style="width:100%"><p id="90e34bfc-b943-41ee-9435-a1a5e3452234" class=""><strong>Ex — Crossword</strong></p><figure id="1262e7d3-01e5-8020-b44d-ddaca608051c" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/IMG_B0408A3722A4-1.jpeg"><img style="width:528px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/IMG_B0408A3722A4-1.jpeg"/></a></figure></div></figure></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">4. Variable Elimination </summary><div class="indented"><ul id="1112e7d3-01e5-803c-9bb7-fb2775586ea3" class="bulleted-list"><li style="list-style-type:disc">Idea: eliminate variables, converting them into constraints on their neighbours. </li></ul><ul id="1112e7d3-01e5-80f3-9423-f7594653884d" class="bulleted-list"><li style="list-style-type:disc">1 variable remaining, no values ⇒ inconsistent CN</li></ul><p id="1112e7d3-01e5-8039-b998-fedbbe9b3164" class=""><strong>Algorithm:  </strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1112e7d3-01e5-80c1-afad-f3ae5165aaac" class="code"><code class="language-Python">def VariableElimination():
+	# BASE CASE 
+	if num variables == 1: 
+		return its domain after applying domain constraints 
+	# recursive case
+	select X
+	R1 = join the constraints in which X appears
+	R2 = R1 without X
+	for variables connected to X:
+			place R2 between them 
+	remove X
+	# recurse 
+	recursive_solution = solve the simplified sub_problem
+	return R + recursive_solution</code></pre><ul id="1112e7d3-01e5-80d7-81de-d87517c010b1" class="toggle"><li><details open=""><summary><strong>Example</strong></summary><figure id="1262e7d3-01e5-802c-a60e-e0f928177ab9" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/IMG_A1DDF40F0D3C-1.jpeg"><img style="width:1148px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/IMG_A1DDF40F0D3C-1.jpeg"/></a></figure><p id="1262e7d3-01e5-80a7-9bcf-e542e40a2fbb" class="">
+</p><p id="1112e7d3-01e5-800b-a3bc-c10ec4694cfe" class="">
+</p></details></li></ul></div></details><h2 id="1122e7d3-01e5-8097-95a6-c3fcc981e1a5" class=""><strong>5. Local Search</strong></h2><p id="1262e7d3-01e5-8028-9f64-cbb3dbc2c3c7" class=""><strong>Idea: </strong> <em><mark class="highlight-orange">(need to define)</mark></em></p><ul id="1122e7d3-01e5-803c-8891-ef73d1b76e1b" class="bulleted-list"><li style="list-style-type:disc"><em>Maintain</em> an assignment of a value to each variable. </li></ul><ul id="1122e7d3-01e5-80b2-8c70-edd95d100dd9" class="bulleted-list"><li style="list-style-type:disc">At each step, select <em>(based on </em><em><mark class="highlight-orange">heuristics</mark></em><em>)</em> a <mark class="highlight-orange">neighbour</mark> of the current assignment.</li></ul><ul id="1122e7d3-01e5-80b1-8338-f10340472a7f" class="bulleted-list"><li style="list-style-type:disc">Stop when a <em>satisfying</em> <em>assignment</em> is found <em>(or best found)</em></li></ul><p id="1262e7d3-01e5-80da-a8ed-df1ebe040ef0" class=""><strong>For CSP</strong><div class="indented"><p id="1262e7d3-01e5-8017-bca7-d655da310838" class="">Heuristic: # conflicts </p><p id="1262e7d3-01e5-8002-bf1a-cf6468882476" class="">⇒ select by minimizing the heuristic</p><p id="1262e7d3-01e5-80ec-9ac1-c8f374216c5e" class="">⇒ goal: assignment with 0 <strong>conflicts </strong>(unsatisfied constraints)<strong> </strong>constraints</p></div></p><h3 id="1122e7d3-01e5-800a-9c43-c8fcabbeaeac" class=""><strong>Greedy Descent </strong></h3><p id="1262e7d3-01e5-8042-a85c-d700a429d7c8" class=""><strong>Variants</strong></p><table id="1262e7d3-01e5-804a-ba67-f4a5495d3daf" class="simple-table"><thead class="simple-table-header"><tr id="1262e7d3-01e5-80f4-a5a0-f30ccbeb7e5c"><th id="ddr?" class="simple-table-header-color simple-table-header" style="width:39px"><strong>#</strong></th><th id="jbkV" class="simple-table-header-color simple-table-header"><strong>Key Idea</strong></th><th id="wJ?:" class="simple-table-header-color simple-table-header"><strong>Neighbours</strong></th><th id="p\MO" class="simple-table-header-color simple-table-header"><strong>Select</strong></th></tr></thead><tbody><tr id="1262e7d3-01e5-809a-ba1c-c32e176b397e"><th id="ddr?" class="simple-table-header-color simple-table-header" style="width:39px">1</th><td id="jbkV" class="">Minimize overall conflicts by finding the best pair</td><td id="wJ?:" class="">Considers all possible variable-value pairs as neighbours</td><td id="p\MO" class="">Chooses the variable-value pair that minimizes the total number of conflicts</td></tr><tr id="1262e7d3-01e5-8027-a803-eb9687b3282b"><th id="ddr?" class="simple-table-header-color simple-table-header" style="width:39px">2</th><td id="jbkV" class="">Focus on the variable causing the most conflicts</td><td id="wJ?:" class="">Neighbors are values for the variable with the most conflicts</td><td id="p\MO" class="">Selects the variable with the most conflicts, then picks the value that minimizes conflicts for it</td></tr><tr id="1262e7d3-01e5-80d5-8e40-db92c8d09ffe"><th id="ddr?" class="simple-table-header-color simple-table-header" style="width:39px">3</th><td id="jbkV" class="">Address any variable currently involved in a conflict</td><td id="wJ?:" class="">Neighbors are values for any variable that is currently in conflict</td><td id="p\MO" class="">Randomly selects a variable from those in conflict, then picks the value that minimizes conflicts for it</td></tr><tr id="1262e7d3-01e5-8061-89c6-de583cc2970c"><th id="ddr?" class="simple-table-header-color simple-table-header" style="width:39px">4</th><td id="jbkV" class="">Introduce randomness to escape local optima</td><td id="wJ?:" class="">Neighbors are values for a randomly chosen variable</td><td id="p\MO" class="">Randomly picks a variable, then selects the value that minimizes conflicts for it</td></tr><tr id="1262e7d3-01e5-80f5-a17f-ff848c86cb41"><th id="ddr?" class="simple-table-header-color simple-table-header" style="width:39px">5</th><td id="jbkV" class="">Explore randomly while ensuring no worsening of conflicts</td><td id="wJ?:" class="">Neighbors are randomly chosen variable-value pairs</td><td id="p\MO" class="">Randomly picks a variable and value, accepting the change if it does not increase conflicts</td></tr></tbody></table><p id="1122e7d3-01e5-8005-909e-dd653bc4eace" class=""><strong>Problems</strong></p><figure id="1122e7d3-01e5-80db-872d-ebd79a7b4ae5" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-30_at_20.08.53.png"><img style="width:240px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-30_at_20.08.53.png"/></a></figure><ol type="1" id="1122e7d3-01e5-8030-9f72-de2bd40a7158" class="numbered-list" start="1"><li><strong>local minimum</strong>, non-global</li></ol><ol type="1" id="1262e7d3-01e5-80e0-8231-f05a40f69352" class="numbered-list" start="2"><li>A <strong>plateau</strong> where the heuristic values are uninformative</li></ol><ol type="1" id="1262e7d3-01e5-802b-86d9-cb1a3b1400b6" class="numbered-list" start="3"><li><strong>ridge</strong>; <em>local minimum</em> where n-step look-ahead might help</li></ol><p id="1122e7d3-01e5-8078-ae8a-f598e561c234" class="">
+</p><h3 id="1122e7d3-01e5-8084-bc77-c7d019ec5744" class=""><mark class="highlight-red"><strong>Randomized Greedy Descent </strong></mark></h3><p id="1122e7d3-01e5-8088-9bd3-db908b64665f" class="">on top of downward steps, can have: </p><ol type="1" id="1122e7d3-01e5-80a3-a246-c449f50ccb2e" class="numbered-list" start="1"><li><strong>Random steps:</strong> move to a random neighbour, OR</li></ol><ol type="1" id="1262e7d3-01e5-80af-9139-d8ce3e3e1dc2" class="numbered-list" start="2"><li><strong>Random restart: </strong>reassign random values to all variables</li></ol><p id="1122e7d3-01e5-80a0-8e48-cf5e8c20d45b" class="">(1) + (2) = <mark class="highlight-red"><strong>stochastic local search</strong></mark></p><p id="1122e7d3-01e5-802b-98e3-d3a899d8f9eb" class=""><strong>Ex — 1D Ordered Examples</strong></p><p id="1122e7d3-01e5-80f7-9214-f6a016c7a736" class="">Two 1D search spaces; step right or left:</p><figure id="1122e7d3-01e5-80ce-b5ed-cbf6c87e1697" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-30_at_20.21.27.png"><img style="width:528px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-30_at_20.21.27.png"/></a></figure><ul id="1122e7d3-01e5-80a8-8c56-c66eba0eb3a0" class="bulleted-list"><li style="list-style-type:disc">Which method would most easily find the global minimum?</li></ul><ul id="1122e7d3-01e5-80a9-acc7-ffd87b29b131" class="bulleted-list"><li style="list-style-type:disc">What happens in hundreds or thousands of dimensions?</li></ul><ul id="1122e7d3-01e5-800b-92a9-c6ba760fc1ff" class="bulleted-list"><li style="list-style-type:disc">What if different parts of the search space have different structure?</li></ul><p id="1122e7d3-01e5-8023-be18-fa0691c9c9f8" class=""><strong>High Dimensional Search Spaces</strong></p><ul id="1122e7d3-01e5-8005-8fa4-c5ecbd713160" class="bulleted-list"><li style="list-style-type:disc">The search space is less easy to visualize</li></ul><ul id="1122e7d3-01e5-8013-8370-d2b000353523" class="bulleted-list"><li style="list-style-type:disc">Often consists of long, nearly flat “<strong>canyons</strong>”</li></ul><ul id="1122e7d3-01e5-8012-8f27-f4749e940754" class="bulleted-list"><li style="list-style-type:disc">Hard to optimize using local search</li></ul><ul id="1122e7d3-01e5-806e-b31e-c42a2766fed4" class="bulleted-list"><li style="list-style-type:disc">Step-size can be adjusted</li></ul><h3 id="1122e7d3-01e5-8098-b801-dec71d577f48" class=""><mark class="highlight-red"><strong>Variant: Simulated Annealing</strong></mark></h3><p id="1122e7d3-01e5-8020-95c5-f4fd8e89c391" class="">Pick a variable &amp; value assignment at random:<div class="indented"><p id="1262e7d3-01e5-80ef-b7c2-d8699b6326ca" class="">If improvement: <div class="indented"><p id="1262e7d3-01e5-80e4-ae1b-df8b82cf0d4e" class="">adopt it</p></div></p><p id="1262e7d3-01e5-807a-872b-e638b3ad2529" class="">else: <div class="indented"><p id="1262e7d3-01e5-80b7-a9dc-c0c5f12f3be5" class=""> adopt it probabilistically; depending on a <em><span style="border-bottom:0.05em solid">temperature parameter, </span></em><em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></span><span>﻿</span></span></em><div class="indented"><p id="1262e7d3-01e5-80c9-985a-fada8525df31" class="">i.e. move to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">n&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> <em><mark class="highlight-gray">(proposed assignment)</mark></em> from <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> <em><mark class="highlight-gray">(current assignment) </mark></em>with probability<div class="indented"><p id="1262e7d3-01e5-80ad-b97c-c716a51d357f" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mrow><mo>−</mo><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>−</mo><mi>h</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>T</mi></mrow></msup></mrow><annotation encoding="application/x-tex">e^{-(h(n&#x27;)-h(n))/T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9425em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9425em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">h</span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8278em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">h</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">))</span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></div></p><p id="1262e7d3-01e5-80cb-a011-c7418f73abf0" class="">Greater <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></span><span>﻿</span></span> ⇒ higher prob of higher chance of adopting </p></div></p></div></p></div></p><h3 id="1122e7d3-01e5-800a-ab18-d1ac26745aaa" class=""><mark class="highlight-red"><strong>Tabu Lists</strong></mark></h3><p id="1262e7d3-01e5-80f3-a899-ffe1b4d4ef23" class="">Idea: </p><ul id="1122e7d3-01e5-80b0-9bac-f3f184d210f4" class="bulleted-list"><li style="list-style-type:disc">GSAT (Greedy SATisfiability): never choose same variable twice</li></ul><ul id="1122e7d3-01e5-80ef-9b00-d1c3853256cc" class="bulleted-list"><li style="list-style-type:disc">maintain a <strong>tabu list</strong> of the k last assignments (to prevent cycling)</li></ul><ul id="1122e7d3-01e5-801b-9adb-f2bd9e44f647" class="bulleted-list"><li style="list-style-type:disc">Don’t allow an assignment that is already on the tabu list</li></ul><h3 id="1122e7d3-01e5-8059-97ec-cd91861a1661" class=""><mark class="highlight-red"><strong>Parallel Search</strong></mark></h3><p id="1122e7d3-01e5-80f5-bc73-c2793bf36870" class="">A total assignment is called an <strong>individual</strong></p><ul id="1122e7d3-01e5-80bd-8e43-ee514dfcfad7" class="bulleted-list"><li style="list-style-type:disc">maintain a population of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span><span>﻿</span></span> individuals instead of one</li></ul><ul id="1122e7d3-01e5-808a-80ac-ff77570e118a" class="bulleted-list"><li style="list-style-type:disc">At every stage, <strong>update</strong> each individual in the population</li></ul><ul id="1262e7d3-01e5-80be-b7cf-f7ae66435c06" class="bulleted-list"><li style="list-style-type:disc">report individuals who are solutions</li></ul><ul id="1122e7d3-01e5-8032-80da-daef852604d6" class="bulleted-list"><li style="list-style-type:disc">Like <em>k-restarts</em>, but uses <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span><span>﻿</span></span> times the min-number of steps</li></ul><h3 id="1122e7d3-01e5-80a6-9bf5-c828cee3a9fb" class=""><mark class="highlight-red"><strong>Beam Search</strong></mark></h3><ul id="1122e7d3-01e5-8082-bcfc-fc7d00cc7849" class="bulleted-list"><li style="list-style-type:disc"><em>parallel search</em>, but choose k best out of all of the neighbours</li></ul><ul id="1122e7d3-01e5-80c1-8f72-fd5a386ebe0a" class="bulleted-list"><li style="list-style-type:disc">When k = 1, it is greedy descent</li></ul><ul id="1122e7d3-01e5-80b9-9231-e090b5164738" class="bulleted-list"><li style="list-style-type:disc">The value of k lets us limit space and parallelism</li></ul><h3 id="1122e7d3-01e5-80d1-a134-cc41dde7c2ee" class=""><strong>Stochastic Beam Search</strong></h3><ul id="1122e7d3-01e5-80bb-b9cd-d7e1b4c79323" class="bulleted-list"><li style="list-style-type:disc">Like beam search, but it probabilistically chooses the k individuals at the next generation.</li></ul><ul id="1122e7d3-01e5-805c-9641-ca19d84e29ed" class="bulleted-list"><li style="list-style-type:disc">The probability that a neighbor is chosen is proportional to its heuristic value : <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mrow><mo>−</mo><mi>h</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>T</mi></mrow></msup></mrow><annotation encoding="application/x-tex">e^{-h(n)/T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.888em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">h</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">)</span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></li></ul><ul id="1122e7d3-01e5-8088-8f98-c40aca162f8f" class="bulleted-list"><li style="list-style-type:disc">This maintains <strong>diversity</strong> amongst the individuals</li></ul><ul id="1122e7d3-01e5-8030-af32-e5ecfd645079" class="bulleted-list"><li style="list-style-type:disc">The heuristic value reflects the fitness of the individual</li></ul><ul id="1122e7d3-01e5-8037-ad5a-e27e1d3b5d67" class="bulleted-list"><li style="list-style-type:disc">each individual mutates and the fittest ones survive</li></ul><h2 id="1122e7d3-01e5-806e-ad9b-dad6d023f527" class=""><strong>Genetic Algorithms</strong></h2><ul id="1122e7d3-01e5-802d-9e01-c923aa3b10c6" class="bulleted-list"><li style="list-style-type:disc">Like stochastic beam search, but pairs of individuals are combined to create the offspring</li></ul><ul id="1122e7d3-01e5-803b-a5ac-c3395172f530" class="bulleted-list"><li style="list-style-type:disc">For each generation (Stop when a solution is found) <ul id="1122e7d3-01e5-8052-b54a-cdee6a663b20" class="bulleted-list"><li style="list-style-type:circle">Randomly choose pairs of individuals where the fittest individuals are more likely to be chosen</li></ul><ul id="1122e7d3-01e5-80ce-87c6-c70da549d51e" class="bulleted-list"><li style="list-style-type:circle">For each pair, perform a cross-over: form two offspring each taking different parts of their parents</li></ul><ul id="1122e7d3-01e5-80ba-bafc-e8466f27fb60" class="bulleted-list"><li style="list-style-type:circle">Mutate some values</li></ul></li></ul><p id="1122e7d3-01e5-80b0-bb9d-ec1704d4b6e4" class=""><strong>Crossover</strong></p><ul id="1122e7d3-01e5-802d-b4a5-c38b21e2f687" class="bulleted-list"><li style="list-style-type:disc">Given 2 individuals:<p id="1122e7d3-01e5-80d9-8a71-f7ff504d2641" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>=</mo><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>X</mi><mn>2</mn></msub><mo>=</mo><msub><mi>a</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>X</mi><mi>m</mi></msub><mo>=</mo><msub><mi>a</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">X_1=a_1,X_2=a_2, \dots, X_m=a_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p><p id="1122e7d3-01e5-8077-ac11-d5b897d10660" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>=</mo><msub><mi>b</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>X</mi><mn>2</mn></msub><mo>=</mo><msub><mi>b</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>X</mi><mi>m</mi></msub><mo>=</mo><msub><mi>b</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">X_1=b_1,X_2=b_2,\dots,X_m=b_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></li></ul><ul id="1122e7d3-01e5-80bb-8e57-fefc954516a6" class="bulleted-list"><li style="list-style-type:disc">Select <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span></span><span>﻿</span></span> at random </li></ul><ul id="1122e7d3-01e5-80ae-ac36-e68a49ca96c0" class="bulleted-list"><li style="list-style-type:disc">Form 2 offsprings<p id="1122e7d3-01e5-8022-ba02-effd35461128" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>=</mo><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>X</mi><mn>2</mn></msub><mo>=</mo><msub><mi>a</mi><mstyle mathcolor="#df0030"><mi>i</mi></mstyle></msub><mo separator="true">,</mo><msub><mi>X</mi><mrow><mstyle mathcolor="#df0030"><mi>i</mi></mstyle><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>b</mi><mrow><mstyle mathcolor="#df0030"><mi>i</mi></mstyle><mo>+</mo><mn>1</mn></mrow></msub><mo>…</mo><mo separator="true">,</mo><msub><mi>X</mi><mi>m</mi></msub><mo>=</mo><msub><mi>b</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">X_1=a_1,X_2=a_{\red{i}}, X_{\red{i}+1}= b_{\red{i}+1}\dots, X_m=b_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8917em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="color:#df0030;">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="color:#df0030;">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9028em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="color:#df0030;">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p><p id="1122e7d3-01e5-8033-98fe-ce98a5c9f139" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>=</mo><msub><mi>b</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>X</mi><mn>2</mn></msub><mo>=</mo><msub><mi>b</mi><mstyle mathcolor="#df0030"><mi>i</mi></mstyle></msub><mo separator="true">,</mo><msub><mi>X</mi><mrow><mstyle mathcolor="#df0030"><mi>i</mi></mstyle><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>a</mi><mrow><mstyle mathcolor="#df0030"><mi>i</mi></mstyle><mo>+</mo><mn>1</mn></mrow></msub><mo>…</mo><mo separator="true">,</mo><msub><mi>X</mi><mi>m</mi></msub><mo>=</mo><msub><mi>a</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">X_1=b_1,X_2=b_{\red{i}}, X_{\red{i}+1}= a_{\red{i}+1}\dots, X_m=a_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9028em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="color:#df0030;">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="color:#df0030;">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8917em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="color:#df0030;">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></li></ul><ul id="1122e7d3-01e5-8084-ba0a-ddaca32caba0" class="bulleted-list"><li style="list-style-type:disc">effectiveness depends on the ordering of the variables (many possible) </li></ul><h2 id="1122e7d3-01e5-80ad-a7fb-e503e3a5e84a" class=""><strong>Comparing Stochastic Algorithms</strong></h2><ul id="1122e7d3-01e5-8051-ac17-c7f2c3c89502" class="bulleted-list"><li style="list-style-type:disc">Summary statistics, such as mean run time, median run time, and mode run time don’t make much sense</li></ul><ul id="1122e7d3-01e5-805d-8674-cd1948b7a854" class="bulleted-list"><li style="list-style-type:disc"><strong>Runtime Distribution:  </strong>Plots runtime (or # steps) and the proportion (or number) of the runs that are solved within that runtime. <figure id="1122e7d3-01e5-80b0-b1cb-f2567ddbd3d5" class="image"><a href="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-30_at_20.36.26.png"><img style="width:384px" src="L04%201112e7d301e580909408f0bdb3ad9eb1/Screenshot_2024-09-30_at_20.36.26.png"/></a></figure></li></ul><p id="1122e7d3-01e5-8008-a5a6-de17c012a23d" class="">
+</p><p id="1122e7d3-01e5-8083-b32b-ccbc621c3670" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">R2 = project R onto its variables other than X</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Sep 30, 2024, 7:51 PM</time></span></span></div><div style="padding:0.2em">This leaves a new constraint on the other variables that <strong>incorporates the effects of A</strong></div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

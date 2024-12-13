@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>M8</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e832bdfc-ddcf-4e07-987c-0191606c22cf" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/book-closed_purple.svg"/></div><h1 class="page-title">M8</h1><p class="page-description"></p></header><div class="page-body"><table id="620e5a2f-fa2d-4cb1-9cbc-6cd53da319c2" class="simple-table"><tbody><tr id="4ca1a214-0323-42c3-a4c1-3cf10b108d8c"><th id="SMd[" class="simple-table-header-color simple-table-header" style="width:54px"><strong><strong><strong><strong><strong>Title</strong></strong></strong></strong></strong></th><td id="Ey&gt;Z" class="" style="width:274px">Logical Mapping</td></tr><tr id="a4b32925-88b2-40f2-8d9f-8cd0ca2c87be"><th id="SMd[" class="simple-table-header-color simple-table-header" style="width:54px"><strong><strong><strong><strong>Date</strong></strong></strong></strong></th><td id="Ey&gt;Z" class="" style="width:274px">Nov 9-14</td></tr></tbody></table><p id="9927e6cf-7d3a-4456-ae2d-f93a008375e3" class=""><strong><strong>Terms</strong></strong></p><ul id="bb57863e-b40e-45fd-9432-146f8e96203b" class="bulleted-list"><li style="list-style-type:disc">ES — entity set</li></ul><ul id="8d5a9c96-38be-46f7-ae08-8e5c50b32816" class="bulleted-list"><li style="list-style-type:disc">RS — relationship set</li></ul><ul id="26b6a610-e625-402c-9151-6348978bcfa7" class="bulleted-list"><li style="list-style-type:disc">PK — primary key</li></ul><ul id="893c4cdc-6acb-40b7-87af-b2a6fea8c645" class="bulleted-list"><li style="list-style-type:disc">FK — foreign key </li></ul><ul id="2d4b69af-4316-4f92-ab2a-d9167af43806" class="bulleted-list"><li style="list-style-type:disc">IRS  — Identifying RS</li></ul><hr id="bcb268f3-e39d-49fd-8978-d7a752ec0132"/><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="66395367-6924-4507-a966-c35d9c8180cd"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><mark class="highlight-red"><strong>Logical Mapping</strong></mark><p id="c63abbd1-6da8-4155-9c0d-aa71b5fc8305" class="">Obtaining a <mark class="highlight-purple">logical design</mark> for a database given a <mark class="highlight-purple">conceptual design</mark> as input</p><ul id="bbdd2531-14e6-48db-8291-b376791a3ccb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">logical design</mark> ← Relational DB Schema</li></ul><ul id="406af602-e388-43f6-a2c5-436cc31fe4ea" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">conceptual design</mark> ← ER diagram</li></ul></div></figure><h2 id="e4dc974b-a38b-43fc-8b2d-f58db43f6be8" class="">Methods</h2><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="a0fced25-f20c-4768-a9e9-39075af50350"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-red"><strong>ES</strong></mark><p id="86e35bf4-5ed2-419f-9f33-8d327d5b181a" class=""><strong>Entity Set</strong> <em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span></em><em>  → </em><strong>Table</strong> <em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span></em><em> </em></p><ul id="834308b6-785c-4b86-8ed8-e9fec42e8405" class="bulleted-list"><li style="list-style-type:disc">same attributes</li></ul><ul id="f3b6847b-9302-435d-806a-1b056c1db375" class="bulleted-list"><li style="list-style-type:disc">same PK</li></ul><ul id="50fd22e4-3aa3-4c6b-9c7c-cb635c523713" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><figure id="0cf8ab96-d14b-4a39-84b2-b6b369bf70a8" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_11.55.23_AM.png"><img style="width:288px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_11.55.23_AM.png"/></a></figure></details></li></ul><hr id="79ef08a1-367a-403f-94a3-21dd5d6bab57"/><p id="0b696e64-f112-4c4a-bb41-1c37b7b9570f" class=""><mark class="highlight-orange"><strong>Weak ES</strong></mark><div class="indented"><p id="11434295-0357-4cb1-9a51-d5e9623f1648" class="">Table should also <strong>include</strong>:</p><ol type="1" id="f4351974-a0e2-4249-89f9-954e7d6a15f7" class="numbered-list" start="1"><li><strong>All attributes</strong> of <em>Identifying RS</em></li></ol><ol type="1" id="6445c748-723a-44cd-88ae-7e885f74d1ac" class="numbered-list" start="2"><li>PK of <em>Dominant ES </em><mark class="highlight-default">as a FK</mark></li></ol><p id="8dfcab82-8b3a-4efc-a6d9-3922fe2f20e9" class=""><em><mark class="highlight-gray">Recall: PK = PK of dominant entity + discriminator </mark></em></p><ul id="f211a06c-d4c0-4471-8d3b-d2806476766b" class="toggle"><li><details open=""><summary><strong><strong>Example</strong></strong></summary><figure id="6822be49-3ce6-4eb7-b34f-d43e36d13a44" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_12.01.08_PM.png"><img style="width:1718px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_12.01.08_PM.png"/></a></figure><p id="d0ed09dd-f47b-4f25-beb1-d4a6f4b94b85" class="">Foreign key <code>AccNum</code> references <code>Account</code></p></details></li></ul></div></p></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="363d59fd-3f11-4f68-8891-3105ee3ab94d"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-red"><strong>RS</strong></mark><ul id="d44bb309-7734-4776-bc7e-8535c58ef0c3" class="toggle"><li><details open=""><summary><strong><strong><strong><strong>Idea</strong></strong></strong></strong></summary><p id="a1138a87-9b7e-4a2d-9b7d-ef06f031ca9d" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> is uniquely identified by it’s participating entities. If we create a new table for <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span>, it should have their PK’s. </p><p id="97088b25-5ebf-41e8-8de3-c60d4c36ffb1" class="">But, their are cases where having a new table is overkill: </p><ul id="da37786b-f8bf-44fd-b6f3-9473e5b7b412" class="bulleted-list"><li style="list-style-type:disc">If <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> is weak, then <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> only exists because of it (add it as columns to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span>)</li></ul><ul id="dc43814a-63ed-46ce-a555-51315588358d" class="bulleted-list"><li style="list-style-type:disc">If <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> is <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>, then <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> always exists with an entity of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> (add it as columns of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span>)</li></ul></details></li></ul><hr id="a362014a-7d13-4496-b7aa-6255ee5dcb3b"/><p id="3fd6d205-b631-4526-857d-380757800283" class=""><mark class="highlight-orange"><strong>Cases</strong></mark></p><div id="559f38c3-db09-4715-8d7d-e7267445dbdb" class="column-list"><div id="4f55c601-ff2c-4ab2-aabe-bf8cfefb390c" style="width:50%" class="column"><p id="444e616c-49d0-4d8f-8d7a-d3f1a3bb46d8" class=""><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span></strong><strong> is an IRS </strong></p><p id="95eb61f3-3898-4a1f-875b-c50bd8eb5520" class="">→ Add to WES table</p><p id="12f0e74c-5dec-4329-9467-01e074e03053" class="">
+</p></div><div id="481c70a0-d821-4528-bf97-bc8b3ffa20fb" style="width:50%" class="column"><figure id="c7bb3f5c-8553-4fba-b649-dc0f54720543" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/IMG_64F2612115C4-1.jpeg"><img style="width:288px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/IMG_64F2612115C4-1.jpeg"/></a></figure></div></div><hr id="f654e1a7-b493-46d8-a492-344551ad070a"/><div id="111e8fdb-4aaa-4f2e-8289-f4434d411618" class="column-list"><div id="b74c8053-e415-423c-8158-b62ffee816e5" style="width:50%" class="column"><p id="63bdd40d-5f14-47e4-8cb5-444fad4963e0" class=""><strong>Participant has </strong><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></strong><strong> constraint </strong></p><p id="720f0f7d-b580-4504-8729-aada4bba8c5c" class="">→ add columns to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span>: <div class="indented"><ul id="add87335-c075-4ad0-9843-978c9c57ef7d" class="bulleted-list"><li style="list-style-type:disc">attributes of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="8f3cc3e7-e318-4140-8e2e-db0f526bab4e" class="bulleted-list"><li style="list-style-type:disc">PK of all other participating ES’s </li></ul><p id="67a763c4-b0dc-414e-91c4-4696121c1c7f" class="">
+</p></div></p></div><div id="7eb9811c-0c5c-4faf-b6e2-797f150466cb" style="width:50%" class="column"><figure id="29b7736d-a2e9-4e38-94df-7b36aaf0dd5f" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/IMG_34C4AFCB4093-1.jpeg"><img style="width:288px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/IMG_34C4AFCB4093-1.jpeg"/></a></figure></div></div><hr id="c54d6c3e-ae20-4a53-bda1-bccfaf7ca925"/><div id="87338730-0cfd-4f2d-80f1-4a1f2a6f2a0e" class="column-list"><div id="6eb4fc0e-8333-4331-8ea7-aee464a5d651" style="width:50%" class="column"><p id="177f4376-a54b-4ecc-a08e-5855a2d27892" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Otherwise</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><div class="indented"><p id="c8684c6e-04a0-4a53-bd9a-190e01301c43" class="">→ <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> is a new table </p><ul id="5404e604-7f1e-4808-b0ba-908f8bfb4177" class="bulleted-list"><li style="list-style-type:disc">attributes of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="a67c00f7-2e03-47ed-8189-65e1aee2f28c" class="bulleted-list"><li style="list-style-type:disc">PK of <strong>every </strong>participating entity </li></ul><p id="4724681e-dff2-41d1-b6a1-9a628bca353a" class="">PK:<div class="indented"><p id="7cd11b22-5b93-4484-9ccf-2ee2567fbf6a" class="">if participant has a <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> constraint </p><p id="fbafb0ba-8ac1-4a0d-9b82-8c7a5ec4d487" class="">→ PK of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> </p><p id="04553bfa-8088-47ad-8944-cf707dc68110" class="">else </p><p id="8ce568d1-5655-4cfc-a6da-077dc8862770" class="">→ PK of <strong>every </strong>participant</p></div></p></div></p></div><div id="345518f5-8eed-4864-b7ec-e18dc0016594" style="width:50%" class="column"><figure id="2970154f-887a-4463-9574-c89aabefaed7" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/IMG_711CD0B5D40B-1.jpeg"><img style="width:288px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/IMG_711CD0B5D40B-1.jpeg"/></a></figure><p id="50acc7f8-8b8c-46b0-a842-58c3a377cff2" class="">
+</p></div></div><hr id="b2e1d6ba-cd4f-4661-b56e-ead58b68620f"/><ul id="1e9c34f9-73d0-457f-b5db-822c2eedf345" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><figure id="d7bdac35-7de0-437a-8298-df062c3e6d11" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_12.45.34_PM.png"><img style="width:528px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_12.45.34_PM.png"/></a></figure></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="38acecc1-07d8-4a6a-8de3-eb0864901eb7"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Aggregation</strong></mark><p id="53b13cb6-6414-4f3e-a6dc-529d7df1ebef" class=""><strong><strong><strong><strong><strong><strong>Idea: </strong></strong></strong></strong></strong></strong>Treat the aggregation <mark class="highlight-gray"><em>(RS between ES’s) </em></mark>as an ES</p><p id="f5236f21-db47-47e4-8f48-1478ce3da70d" class="">Aggregated <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> → new table</p><ul id="e8a257c3-9283-4ccd-b449-8b410d94d143" class="bulleted-list"><li style="list-style-type:disc">PK of table = PK of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span></li></ul><hr id="126176de-dff1-4da3-bedc-39159970cd0b"/><ul id="fca36c2b-c5b1-4958-8227-e2969b9f88a0" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></strong></summary><figure id="5e711187-7ba8-45a7-bcbd-f86b39e6c3f4" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_12.52.34_PM.png"><img style="width:1532px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screenshot_2023-11-14_at_12.52.34_PM.png"/></a></figure></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="de6f0145-674c-4d88-9c2f-f603a7d2da00"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Specialization</strong></mark><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="1b5a21f1-2616-4220-bf89-43e777371f5b" class="">If <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> is a specialization of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span></span><span>﻿</span></span> </p><ul id="c301c683-4ff8-4a69-851a-f42c5535d35c" class="bulleted-list"><li style="list-style-type:disc">attributes = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span>’s attributes + <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span></span><span>﻿</span></span>’s primary key </li></ul><ul id="bc5432b3-3b99-44c1-9851-f810a24bf637" class="bulleted-list"><li style="list-style-type:disc">PK = FK = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span></span><span>﻿</span></span>’s PK</li></ul><ul id="c1b3a795-3d49-4663-b343-8e7851ab3021" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><figure id="4edc3862-4e91-4ee4-8316-cf1eaef6d5ff" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.04.06.png"><img style="width:1246px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.04.06.png"/></a></figure></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="4d2bf44d-f532-43e1-88a0-b1054780ba55"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Generalization</strong></mark><p id="63c8dd0e-05b2-4173-aac6-1159af7a75fd" class="">Treat a generalization of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> sets as a specialization of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> sets. </p><p id="049de5f0-bff9-421a-bae7-4acc2ec59ef0" class="">Add additional constraints for: </p><ul id="4d7f2e99-3873-4fb3-913b-37d168f9b753" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong>covers</strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="66d3ae54-b5c7-413f-b6f3-b2963d3e004d" class="bulleted-list"><li style="list-style-type:disc"><strong>disjoint/overlaps </strong></li></ul><ul id="53b040a5-584b-41b4-b499-c83341ecad3a" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><figure id="bf715bf8-38f7-4ff9-a3fa-8ba72b0f92c2" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.11.58.png"><img style="width:1194px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.11.58.png"/></a></figure><p id="545b68e9-5340-45c2-8daf-50e2985ed421" class="">Constraints: </p><p id="67ce397f-86d5-446d-9379-2d9bd9150381" class=""><code>truck</code>: </p><ul id="b906383d-665b-4575-8561-c3a153f095ce" class="bulleted-list"><li style="list-style-type:disc">foreign key <code>LicenseNum</code> references <code>vehicle</code></li></ul><p id="7224a597-4563-49b0-becc-2b9eed91af35" class=""><code>car</code>:</p><ul id="dd5c5883-2bf8-4ea6-a429-355ef5c1dad3" class="bulleted-list"><li style="list-style-type:disc">foreign key <code>LicenseNum</code> references <code>vehicle</code></li></ul><p id="cb854b1f-9477-47ac-aa59-a09c425a0401" class=""><code>vehicle</code> <code>LicenseNum</code>’s are also also truck or car <code>LicenseNum</code>’s</p><p id="cf4f42be-a037-4bfe-9d60-6294735a6328" class=""><code>truck</code> <code>LicenseNum</code>&#x27;s are disjoint from <code>car</code> <code>LicenseNum</code>’s</p></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="531e3b34-83ab-425d-ae72-7edbb27c644d"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Multivalued Attributes</strong></mark><p id="ef80d221-dad0-41ca-9f1e-7540be29f3cd" class="">For multivalued attribute <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span><span>﻿</span></span></p><p id="66a135bb-3edc-4966-aeb6-c7568592bd52" class="">→ new Table <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span></span></span></span></span><span>﻿</span></span></p><ul id="d9f24d61-4a83-4369-8172-5d94fdfa413c" class="bulleted-list"><li style="list-style-type:disc">columns: a</li></ul><ul id="323a8fae-632c-467e-a734-94674d773c5f" class="bulleted-list"><li style="list-style-type:disc">PK: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span><span>﻿</span></span> + PK of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> which <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span><span>﻿</span></span> belongs to</li></ul><ul id="944e38a3-1f81-4f27-8522-2be62f18b417" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example</strong></strong></strong></strong></strong></strong></strong></summary><figure id="487ad293-c1c9-411c-b223-99fbe7505af8" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.04.06.png"><img style="width:1246px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.04.06.png"/></a></figure></details></li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="a313d5a8-dcb1-4b6a-9987-c14bccc56862"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-red"><strong>Map (Special/General)ization to Views</strong></mark><p id="3d5325b7-a114-4855-884d-45cfd85b985e" class=""><span style="border-bottom:0.05em solid">Sometimes</span> an ES can be mapped to a view instead of a table. <div class="indented"><p id="4f4d3983-e124-48e7-b62f-56a851389075" class="block-color-gray">→ Increases efficiency and improves transparency</p></div></p><p id="d36a2eb7-0d97-4187-b2cb-a6dedbdaa327" class=""><mark class="highlight-orange"><strong>Lower Level set </strong></mark></p><div id="2c421b27-bbc1-4ddf-969e-7931fd78e5ad" class="column-list"><div id="8fc6e47f-2cfb-4a8d-bda3-c399225cd0b4" style="width:50%" class="column"><p id="67ed9e4e-7826-4b48-b385-12bc79a82fd1" class=""><strong>When</strong></p><ol type="1" id="e34d5428-3b8d-4b38-bd20-595046d85f13" class="numbered-list" start="1"><li>1 parent</li></ol><ol type="1" id="06dde31e-58f5-4c1e-98f7-abde818cad32" class="numbered-list" start="2"><li>Only <mark class="highlight-red">typing attributes</mark></li></ol><ol type="1" id="c96d8b48-9d6c-4b56-be5e-aa7bee30ea88" class="numbered-list" start="3"><li>No FK references it </li></ol><ol type="1" id="1e57136f-cba0-433b-89ae-05a5f7235468" class="numbered-list" start="4"><li>(1-3) hold for specializations of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span> </li></ol></div><div id="e54d805d-7246-44f6-913c-ee6b1c87d40e" style="width:50%" class="column"><p id="7ebe7284-8119-4863-b001-b39aca321170" class=""><strong>How</strong></p><ol type="1" id="da4a91c0-4b94-4fc0-9085-76c40ed27ff9" class="numbered-list" start="1"><li>Add <mark class="highlight-red">typing attribute(s)</mark> to parent</li></ol><p id="71cc7d3f-135d-4930-ab85-2aaa24c7f98d" class=""><mark class="highlight-gray"><em>*Multiple typing attributes can be replaced with a single one when underlying entity sets are disjoint.</em></mark></p></div></div><p id="e44c9144-ea7d-44c3-98d4-a4da901f5168" class=""><mark class="highlight-orange"><strong>Higher Level set </strong></mark></p><div id="83aa0387-f936-418c-99d8-23a4e420285a" class="column-list"><div id="7fbe8867-eee9-4512-946f-1c109c667b30" style="width:50%" class="column"><p id="e6cbc918-528c-425c-8939-6f3f91697af3" class=""><strong>When</strong></p><ol type="1" id="22b1aae2-71a3-4e71-ac05-3770617f3ae8" class="numbered-list" start="1"><li>2+ children</li></ol><ol type="1" id="8671e818-e2ec-4496-a474-f5fdcc70b357" class="numbered-list" start="2"><li>No FK references it </li></ol></div><div id="46326f31-990c-42b4-99e5-d5ad65b47be5" style="width:50%" class="column"><p id="f858bb64-85b3-4aba-b04c-cae36b9655a5" class=""><strong>How</strong></p><ol type="1" id="46726e32-0836-4fb6-b85c-9ee6e118f7cc" class="numbered-list" start="1"><li>Ensure all it’s attributes are defined on each child ES		</li></ol></div></div><ul id="22143077-a970-48f3-8af4-cd09f26d910b" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Example (generalization as a view) </strong></strong></strong></strong></strong></strong></strong>						</summary><figure id="c86ff222-1a1b-4fab-9985-f57ace7ef652" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.26.01.png"><img style="width:528px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.26.01.png"/></a></figure></details></li></ul></div></figure><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-default">Example Mapping </mark></summary><div class="indented"><figure id="c6245f9e-55cc-4fa8-b3cd-313d06d64a8d" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.26.44.png"><img style="width:336px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.26.44.png"/></a></figure><h3 id="e92f5331-7036-4eb4-bb90-9a0a52d99aa1" class=""><mark class="highlight-orange"><strong>Entity Sets</strong></mark></h3><figure id="df324ae8-b485-4ff6-a107-083762d21a18" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.27.29.png"><img style="width:384px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.27.29.png"/></a></figure><h3 id="718b962c-dfa7-46d0-8125-09ad35cca405" class=""><mark class="highlight-orange">Specialization</mark></h3><figure id="db36838f-6103-4dfc-81fc-0135ead7fa40" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.28.34.png"><img style="width:336px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.28.34.png"/></a></figure><h3 id="38c1cf2c-903b-4613-80e1-faf9dbfba515" class=""><mark class="highlight-orange">Relationship Sets</mark></h3><figure id="cd811a21-226b-4a9b-9e89-bc64e27c1df2" class="image"><a href="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.32.54.png"><img style="width:336px" src="M8%20e832bdfcddcf4e07987c0191606c22cf/Screen_Shot_2023-11-14_at_16.32.54.png"/></a></figure><ul id="58393e83-6b83-40ec-ba73-e2463d76cf15" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-orange"><code>TaughtBy</code></mark> → column in <code>SECTION</code> table </li></ul><ul id="0a7c2ed1-8499-43a8-805c-1699a04ffb76" class="bulleted-list"><li style="list-style-type:disc"><code><mark class="highlight-orange">EnrolledIn</mark></code><mark class="highlight-orange"> </mark>→ new table </li></ul><p id="46ccbf4a-5197-47f8-94e2-9f65423d8903" class="">
+</p></div></details><p id="e4d3cd8e-4c2f-4c96-8c06-338f357f38a0" class="">
+</p><hr id="f244466a-567c-476e-ba69-e772ea1747cd"/><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="9784678c-3f68-4a38-a45b-7aab8542e8fb"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><mark class="highlight-red"><strong>Triple Store</strong></mark><p id="f284c429-d1b6-4bc3-b667-dce5668c3bb6" class=""><strong>What? </strong><div class="indented"><p id="58509b5c-f624-4827-8ac0-3256c347882f" class="">A type of schema with an additional view: <div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dfa5dcec-f130-4452-88c7-f77e778d09af" class="code"><code class="language-SQL">CREATE VIEW TRIPLE as (&lt;query&gt;); </code></pre></div></p><p id="4525ec72-9121-446a-9fa2-658f0329f5ce" class="">With the schema; <div class="indented"><p id="3223d95d-2179-41fe-b5f7-a995cde6b68a" class=""><mark class="highlight-default"><code>TRIPLE/(</code></mark><mark class="highlight-teal"><code>subject</code></mark><mark class="highlight-default"><code>, </code></mark><mark class="highlight-teal"><code>property</code></mark><mark class="highlight-default"><code>, </code></mark><mark class="highlight-teal"><code>object</code></mark><mark class="highlight-default"><code>)</code></mark></p></div></p></div></p><p id="6e36507c-9320-4c88-aad9-37c2e27daf33" class=""><strong><strong><strong><strong><strong>How? </strong></strong></strong></strong></strong><div class="indented"><p id="f9d1e981-5bf4-42ba-89e1-2867167b6aef" class="">Before a mapping is applied, an ER diagram is modified: </p><ol type="1" id="16e8efa5-2c35-43eb-ae7e-7bdda7f532f1" class="numbered-list" start="1"><li>Make all WES a regular ES</li></ol><ol type="1" id="5ae2f7d0-6cf5-4a62-a97d-b6f27e837b67" class="numbered-list" start="2"><li>For each ES, add an <code>OID</code> attribute and make this the primary key</li></ol></div></p><p id="740accc1-6c65-448d-91fa-b7c20ef45bdf" class=""><div class="indented"><p id="bd5310b2-52f1-46ac-8148-e900d064a62e" class=""><code>&lt;query&gt;</code> is a union of queries <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">QT_i </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">Q</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> over each of the other tables <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">T_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p><p id="fc5a0a21-70c2-4003-99eb-a0aeefd8dd58" class="">
+</p><p id="355bd4bf-a44c-4680-959c-b27eaea09b57" class="">If <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">T_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> has the schema: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>O</mi><mi>I</mi><mi>D</mi><mo separator="true">,</mo><msub><mi>A</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>A</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_i(OID,A_1,\dots,A_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>: </p><p id="5677351f-bf8a-49ef-948c-ad046eaa6a4b" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">QT_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">Q</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> is: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5c919216-7d88-45fd-b7bf-86fb719822e2" class="code"><code class="language-SQL">SELECT OID as subject, &#x27;in&#x27; as property, &#x27;Ti&#x27; as object from Ti
+UNION
+SELECT OID as subject, &#x27;A1&#x27; as property, A1 as object from Ti
+UNION
+...
+UNION
+SELECT OID as subject, &#x27;An&#x27; as property, An as object from Ti</code></pre></div></p><p id="792382f3-677b-4276-a09e-63ef31956dba" class="">
+</p><p id="5d93bb84-db10-40c6-ab02-609b13e275a4" class=""><strong><strong><strong><strong><strong>Why? </strong></strong></strong></strong></strong></p><ul id="74b44998-862a-4585-a3cc-9fbdb5652aeb" class="bulleted-list"><li style="list-style-type:disc">all queries over a <em>triple-store schema </em>have easily obtained equivalent formulations that only mention the table <code>TRIPLE</code> <ul id="c94d835f-0906-4630-b93d-b75c7b19d7ec" class="bulleted-list"><li style="list-style-type:circle">data in <code>TRIPLE</code> replicates data in all other tables</li></ul></li></ul><ul id="335008df-c391-438a-b108-dc85688f923c" class="bulleted-list"><li style="list-style-type:disc">A schema with a single <code>TRIPLE</code> table can replicate any relational database, and never need revision</li></ul><ul id="5d771552-5a7c-4f01-b0b8-a48c3a1980d5" class="bulleted-list"><li style="list-style-type:disc">Replicating attribute <code>OID</code> with and attribute <code>URI</code> (universal resource identifier) obtains an <code>RDF</code> (Resource Description Framework) encoding the data. </li></ul><ul id="bddd151c-b0d0-4228-9e65-8acb1f9b7247" class="bulleted-list"><li style="list-style-type:disc">Viewing each value occurring in either column <code>subject</code> or column <code>object</code> as a graph node and each tuple in <code>TRIPLE</code> as a labelled graph edge is the basis of all<br/><br/><strong><em>graphical data models</em></strong></li></ul></div></figure><p id="646275a4-50b7-4223-ac4d-cbdca4b1d38a" class="">
+</p><p id="a10f14ea-f846-4665-bd83-316031a5ce33" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">Add</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Dec 12, 2023, 11:22 AM</time></span></span></div><div style="padding:0.2em">1. New two-valued typing attribute is-E<br/>2. <br/><em>E</em>’s existing typing attributes</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

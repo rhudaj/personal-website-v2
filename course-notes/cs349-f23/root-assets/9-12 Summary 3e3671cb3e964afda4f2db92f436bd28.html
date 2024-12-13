@@ -1,0 +1,1350 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>9-12 Summary</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3e3671cb-3e96-4afd-a4f2-db92f436bd28" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">9-12 Summary</h1><p class="page-description"></p></header><div class="page-body"><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">Widgets</mark></summary><div class="indented"><ul id="4e0efed0-d61c-4c6c-b064-8385716bebe1" class="bulleted-list"><li style="list-style-type:disc">widgets are (in a way) MVC’s themselves</li></ul><ul id="6d886708-c3d2-4202-b5ae-0050aa745eb9" class="bulleted-list"><li style="list-style-type:disc">usually have a <code>state</code> variable</li></ul><ul id="de086cef-8d85-4981-9af0-552a9bc94c77" class="bulleted-list"><li style="list-style-type:disc">bounding box is always a rectangle (width/height)</li></ul><ul id="9c971507-f84d-4acd-8b33-3863b666639f" class="bulleted-list"><li style="list-style-type:disc">if your widget holds text, you need to <code>measure()</code> the text to determine the size of this rectangle</li></ul><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><code>SKElement</code> </summary><div class="indented"><p id="a263fd31-671d-422e-978f-6236c392457e" class="">Implements <code>Drawable</code></p><p id="6f22bfb2-659c-497f-b333-70c97bc5b597" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Constructor: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>(x,y,w,h)</p><p id="39a773a1-f782-4b15-86d0-83aae48c1cea" class=""><strong><strong><strong><strong><strong><strong>Data: </strong></strong></strong></strong></strong></strong></p><table id="bee6da53-3402-42d9-bf2c-42004d6f2abd" class="simple-table"><thead class="simple-table-header"><tr id="771b95d0-2bec-4461-9f8a-54bc08feb734"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">Name</th><th id="ftPa" class="simple-table-header-color simple-table-header" style="width:146.99609375px">Type</th><th id="e\C=" class="simple-table-header-color simple-table-header">Access</th><th id="wj&gt;Z" class="simple-table-header-color simple-table-header" style="width:92px">Notes</th></tr></thead><tbody><tr id="895f3a77-a6ca-4a45-8f68-b5992a114ec3"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">(x,y)</th><td id="ftPa" class="" style="width:146.99609375px">number</td><td id="e\C=" class="">public</td><td id="wj&gt;Z" class="" style="width:92px"></td></tr><tr id="c05e50f8-0ac1-493f-9dad-f914e83b0722"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">(width, height)</th><td id="ftPa" class="" style="width:146.99609375px">number | undefined</td><td id="e\C=" class="">protected</td><td id="wj&gt;Z" class="" style="width:92px">get &amp; set</td></tr><tr id="8f38e9f0-9945-4aa7-8a13-8945bcff9fce"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">box</th><td id="ftPa" class="" style="width:146.99609375px"><code>BoxModel</code></td><td id="e\C=" class="">public</td><td id="wj&gt;Z" class="" style="width:92px"></td></tr><tr id="00d4aa72-5387-4f7c-801e-895d0021b637"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">(fillWidth, fillHeight)</th><td id="ftPa" class="" style="width:146.99609375px">number | 0</td><td id="e\C=" class="">public</td><td id="wj&gt;Z" class="" style="width:92px"></td></tr><tr id="e169ab97-f7ba-4de5-8a11-7a5d3aa20844"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">dispatchTable</th><td id="ftPa" class="" style="width:146.99609375px"><code>DispatchRoute</code>[]</td><td id="e\C=" class="">private</td><td id="wj&gt;Z" class="" style="width:92px"></td></tr><tr id="f002684a-ff61-4b6d-96bf-7a4275147929"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">fill, border</th><td id="ftPa" class="" style="width:146.99609375px">strings</td><td id="e\C=" class="">public</td><td id="wj&gt;Z" class="" style="width:92px">style</td></tr><tr id="e1540672-45a5-4aa5-9b76-db00a4459c96"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:158.984375px">id, debug</th><td id="ftPa" class="" style="width:146.99609375px">string, boolean</td><td id="e\C=" class="">public</td><td id="wj&gt;Z" class="" style="width:92px">debugging</td></tr></tbody></table><p id="e654b90c-150c-460e-87de-2c53af29bcb6" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Methods: </strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="008f69ba-adec-48ff-b9d8-b775bb27fd00" class="code"><code>constructor(public x = 0, public y = 0, width?: number, height?: number
+
+set width(w: number | undefined) {
+  if (w !== undefined) w = Math.max(w, 0);
+  this._width = w;
+  // if no width specified, use 0
+  this.box.width = w || 0;
+}
+
+get width(): number | undefined {
+  return this._width;
+}
+
+set height(h: number | undefined) {
+  if (h !== undefined) h = Math.max(h, 0);
+  this._height = h;
+  // if no height specified, use 0
+  this.box.height = h || 0;
+}
+
+get height(): number | undefined {
+  return this._height;
+}
+
+// layout placeholder
+doLayout(width?: number, height?: number) {}
+
+protected dispatch(e: SKEvent, capture = false): boolean {
+  let handled = false;
+  this.dispatchTable.forEach((d) =&gt; {
+    if (d.type == e.type &amp;&amp; d.capture == capture) {
+      handled ||= d.handler(e) as boolean;
+    }
+  });
+  return handled;
+}
+
+addEventListener(type: string, handler: EventHandler, capture = false) {
+  this.dispatchTable.push({ type, handler, capture });
+}
+
+removeEventListener(type: string, handler: EventHandler, capture = false) {
+  this.dispatchTable = this.dispatchTable.filter((d) =&gt;
+      d.type != type &amp;&amp; d.handler != handler &amp;&amp; d.capture != capture
+  );
+}
+
+handleKeyboardEvent(ke: SKKeyboardEvent): boolean {
+  return false;
+}
+
+handleMouseEvent(ms: SKMouseEvent): boolean {
+  return false;
+}
+
+handleMouseEventCapture(ms: SKMouseEvent): boolean {
+  return false;
+}
+
+hittest(x: number, y: number) {
+  return false;
+}
+
+draw(gc: CanvasRenderingContext2D): void {
+  if (Style.debug || this.debug) {
+    gc.save();
+    gc.translate(this.x, this.y);
+    // draw the box model visualization
+    this.box.draw(gc);
+
+    // display element id
+    gc.strokeStyle = &quot;white&quot;;
+    gc.lineWidth = 2;
+    gc.textBaseline = &quot;top&quot;;
+    gc.textAlign = &quot;left&quot;;
+    gc.font = &quot;7pt sans-serif&quot;;
+    gc.strokeText(this.id, 2, 2);
+    gc.fillStyle = &quot;black&quot;;
+    gc.fillText(this.id, 2, 2);
+    gc.restore();
+  }
+}
+
+public toString(): string {
+  return `SKElement id:${this.id}`;
+}
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><code>SKContainer</code></summary><div class="indented"><ul id="28011d3d-ce6d-4d9e-873e-f3bba7e33e7f" class="bulleted-list"><li style="list-style-type:disc">extends <code>SKElements</code></li></ul><ul id="9bcf48f7-3bd5-485d-b809-678453f4a0b2" class="bulleted-list"><li style="list-style-type:disc"><strong>child</strong> widgets positioned relative to container (<strong>parent</strong>)</li></ul><p id="6f30ff46-501f-4ec0-b25a-1ce8225ccb3e" class=""><strong><strong><strong><strong>Data</strong></strong></strong></strong></p><table id="53139354-8c1a-4959-8604-f4b25a7bc500" class="simple-table"><thead class="simple-table-header"><tr id="57269bc8-af14-418e-b7a3-ae8bde55a4f5"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:109.984375px">Name</th><th id="ftPa" class="simple-table-header-color simple-table-header" style="width:191.9895782470703px">Type</th><th id="e\C=" class="simple-table-header-color simple-table-header" style="width:85.99478912353516px">Access</th></tr></thead><tbody><tr id="cbac6170-c77c-4ca8-8455-d092c570f4a5"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:109.984375px">children</th><td id="ftPa" class="" style="width:191.9895782470703px"><code>SKElement</code>[]</td><td id="e\C=" class="" style="width:85.99478912353516px">private</td></tr><tr id="1a92b329-52d2-47e1-abe3-c612d4c85550"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:109.984375px">layoutMethod</th><td id="ftPa" class="" style="width:191.9895782470703px"><code>LayoutMethod</code> | undefined</td><td id="e\C=" class="" style="width:85.99478912353516px">protected</td></tr></tbody></table><p id="f09538dd-75ac-4d62-8ba0-711274317edb" class=""><strong><strong><strong><strong><strong><strong><strong>Methods</strong></strong></strong></strong></strong></strong></strong></p><pre id="53f1b3cf-3c42-439d-94f1-208dbb1493dc" class="code"><code>constructor();
+
+constructor(x: number, y: number);
+
+constructor(x: number, y: number, width: number, height: number);
+
+constructor(x: number = 0, y: number = 0, width?: number, height?: number) {
+  super(x, y, width, height);
+}</code></pre><pre id="a82888b1-e3f5-4e8c-a793-62becb21c5d0" class="code"><code>get children(): readonly SKElement[] {
+  return this._children;
+}
+
+addChild(element: SKElement) {
+  this._children.push(element);
+  invalidateLayout();
+}
+
+removeChild(element: SKElement) {
+  this._children = this._children.filter((el) =&gt; el != element);
+  invalidateLayout();
+}
+
+clearChildren() {
+  this._children = [];
+  invalidateLayout();
+}	</code></pre><pre id="34ee272b-0c3b-41ae-b73f-0ad99dc75c44" class="code"><code>//event handling
+
+handleMouseEventCapture(me: SKMouseEvent) {
+  switch (me.type) {
+    case &quot;click&quot;:
+      return this.dispatch(
+        {
+          source: this,
+          timeStamp: me.timeStamp,
+          type: &quot;action&quot;
+        },
+        true
+      );
+      break;
+  }
+  return false;
+}
+
+handleMouseEvent(me: SKMouseEvent) {
+  switch (me.type) {
+    case &quot;click&quot;:
+      return this.dispatch({
+        source: this,
+        timeStamp: me.timeStamp,
+        type: &quot;action&quot;,
+      });
+      break;
+  }
+  return false;
+}</code></pre><pre id="1af02763-ecbd-4a35-bd37-0882374ac87d" class="code"><code>// hit test ignores margin
+hittest(mx: number, my: number): boolean {
+  return insideHitTestRectangle(
+    mx,
+    my,
+    this.x + this.box.margin,
+    this.y + this.box.margin,
+    this.box.paddingBox.width,
+    this.box.paddingBox.height
+  );
+}
+
+draw(gc: CanvasRenderingContext2D) {
+  // to avoid typing &quot;this&quot; so much
+  const box = this.box;
+
+  gc.save();
+  // set coordinate system to padding box
+  gc.translate(this.x, this.y);
+  gc.translate(box.margin, box.margin);
+
+  // draw background colour if set
+  if (this.fill) {
+    gc.fillStyle = this.fill;
+    gc.fillRect(0,0,box.paddingBox.width,box.paddingBox.height);
+  }
+
+  // draw border if set
+  if (this.border) {
+    gc.strokeStyle = this.border;
+    gc.lineWidth = 1;
+    gc.strokeRect(0,0,box.paddingBox.width,box.paddingBox.height);
+  }
+
+  gc.restore();
+
+  // let element draw debug if flag is set
+  super.draw(gc);
+
+  // now draw all the children
+  gc.save();
+  // set coordinate system to container content box
+  gc.translate(this.x, this.y);
+  gc.translate(box.margin, box.margin);
+  gc.translate(box.padding, box.padding);
+  // draw children
+  this._children.forEach((el) =&gt; el.draw(gc));
+  gc.restore();
+}</code></pre><pre id="3b529905-4f89-4e50-9d62-e33a22f0f3d5" class="code"><code>//#region layout children
+set layoutMethod(lm: LayoutMethod) {
+  this._layoutMethod = lm;
+}
+
+doLayout() {
+  if (this._layoutMethod &amp;&amp; this._children.length &gt; 0) {
+    // run the layout method (returns new bounds, but we ignore it for now)
+    this._layoutMethod(
+      this.box.contentBox.width,
+      this.box.contentBox.height,
+      this._children
+    );
+
+    this._children.forEach((el) =&gt; el.doLayout());
+  } else if (this._children.length &gt; 0) {
+    console.warn(`${this.id} has children but no layout method`);
+  }
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><code>SKButton</code></summary><div class="indented"><ul id="212849d0-d498-46fe-addb-087f18370ac2" class="bulleted-list"><li style="list-style-type:disc">uses Style.ts for: font, box.padding</li></ul><ul id="b311305e-cab9-48b2-80d0-f0d591d0d1f5" class="bulleted-list"><li style="list-style-type:disc">(w,h) is set based on <code>text</code> &amp; <code>font</code> if no (w,h) specified </li></ul><p id="bfe4b47d-0c3c-40c9-b262-3f96df6e824e" class=""><strong>Data</strong></p><table id="d4b21b83-d759-4be8-9396-de07525a6a9e" class="simple-table"><thead class="simple-table-header"><tr id="4fba0b04-356c-4579-adc9-90b9b810b6cf"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">Name</th><th id="ftPa" class="simple-table-header-color simple-table-header" style="width:241.97915649414062px">Type</th><th id="e\C=" class="simple-table-header-color simple-table-header" style="width:85.99478912353516px">Access</th><th id="FYD&gt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong>Notes</strong></strong></strong></strong></strong></strong></th></tr></thead><tbody><tr id="cebed986-029d-4d67-aaa5-2ca3771a507a"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">state</th><td id="ftPa" class="" style="width:241.97915649414062px">&quot;idle&quot; | &quot;hover&quot; | &quot;down&quot; = &quot;idle&quot;</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="2c4ffab4-f2d4-4629-bf71-59a80ad5c973"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">font</th><td id="ftPa" class="" style="width:241.97915649414062px">string = Style.font</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="6c852b29-6515-4919-bc0d-045859a0bbd8"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">text</th><td id="ftPa" class="" style="width:241.97915649414062px">string</td><td id="e\C=" class="" style="width:85.99478912353516px">private</td><td id="FYD&gt;" class="">get &amp; set</td></tr></tbody></table><p id="df792b44-5468-4d26-afd0-0dd91844608f" class=""><strong><strong><strong><strong><strong><strong><strong>Methods</strong></strong></strong></strong></strong></strong></strong></p><pre id="01d090db-07a3-42ab-a66b-d4151086ab66" class="code"><code>constructor(text: string, x = 0, y = 0, width?: number, height?: number){
+  super(x, y, width, height);
+  this.box.padding = Style.textPadding;
+  this.text = text;
+}
+
+set text(t: string) {
+  this._text = t;
+  this.setMinimalSize(this.width, this.height);
+}
+
+setMinimalSize(width?: number, height?: number) {
+  width = width || this.width;
+  height = height || this.height;
+  // need this if w or h not specified
+  const m = measureText(this.text, this.font);
+
+  this.box.height = height || (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent + this.box.padding * 2;
+
+  this.box.width = width || m.width + this.box.padding * 2;
+  
+	// enforce a minimum width here (if no width specified)
+  if (!width) this.box.width = Math.max(this.box.width, 80);
+}
+
+handleMouseEvent(me: SKMouseEvent) {
+  switch (me.type) {
+    case &quot;mousedown&quot;:
+      this.state = &quot;down&quot;;
+      return true;
+      break;
+    case &quot;mouseup&quot;:
+      this.state = &quot;hover&quot;;
+      // return true if a bubble listener was registered
+      return this.dispatch({
+        source: this,
+        timeStamp: me.timeStamp,
+        type: &quot;action&quot;,
+      } as SKEvent);
+      break;
+    case &quot;mouseenter&quot;:
+      this.state = &quot;hover&quot;;
+      return true;
+      break;
+    case &quot;mouseexit&quot;:
+      this.state = &quot;idle&quot;;
+      return true;
+      break;
+  }
+  return false;
+}
+
+hittest(mx: number, my: number): boolean {
+  return insideHitTestRectangle(
+    mx,
+    my,
+    this.x,
+    this.y,
+    this.box.paddingBox.width,
+    this.box.paddingBox.height
+  );
+}
+
+draw(gc: CanvasRenderingContext2D) {
+  // to save typing &quot;this&quot; so much
+  const box = this.box;
+
+  gc.save();
+
+  const w = box.paddingBox.width;
+  const h = box.paddingBox.height;
+
+  gc.translate(this.box.margin, this.box.margin);
+
+  // thick highlight rect
+  if (this.state == &quot;hover&quot; || this.state == &quot;down&quot;) {
+    gc.beginPath();
+    gc.roundRect(this.x, this.y, w, h, 4);
+    gc.strokeStyle = Style.highlightColour;
+    gc.lineWidth = 8;
+    gc.stroke();
+  }
+
+  // normal background
+  gc.beginPath();
+  gc.roundRect(this.x, this.y, w, h, 4);
+  gc.fillStyle =
+    this.state == &quot;down&quot; ? Style.highlightColour : &quot;lightgrey&quot;;
+  gc.strokeStyle = &quot;black&quot;;
+  // change fill to show down state
+  gc.lineWidth = this.state == &quot;down&quot; ? 4 : 2;
+  gc.fill();
+  gc.stroke();
+  gc.clip(); // clip text if it&#x27;s wider than text area
+
+  // button label
+  gc.font = Style.font;
+  gc.fillStyle = &quot;black&quot;;
+  gc.textAlign = &quot;center&quot;;
+  gc.textBaseline = &quot;middle&quot;;
+  gc.fillText(this.text, this.x + w / 2, this.y + h / 2);
+
+  gc.restore();
+
+  // element draws debug viz if flag is set
+  super.draw(gc);
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><code>SKLabel</code></summary><div class="indented"><p id="e3890b0a-d60d-44a3-8276-3c3a29144445" class=""><strong><strong><strong><strong>Data</strong></strong></strong></strong></p><table id="eb458831-4a7e-4702-872b-3ab688c0d6e0" class="simple-table"><thead class="simple-table-header"><tr id="57084b8c-bbb4-41b0-bc0e-91624dd15d7f"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">Name</th><th id="ftPa" class="simple-table-header-color simple-table-header" style="width:256.9791564941406px">Type</th><th id="e\C=" class="simple-table-header-color simple-table-header" style="width:85.99478912353516px">Access</th><th id="FYD&gt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong>Notes</strong></strong></strong></strong></strong></strong></th></tr></thead><tbody><tr id="70101f8a-2dba-409f-91f2-1d40ffa42868"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">align</th><td id="ftPa" class="" style="width:256.9791564941406px">&quot;centre&quot; | &quot;left&quot; | &quot;right&quot; = &quot;centre&quot;;</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="2278f751-42d8-4366-93ce-e791ca5646a9"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">font</th><td id="ftPa" class="" style="width:256.9791564941406px">string = Style.font</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="377ea79a-16d2-4475-90cc-e17222ac63cc"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">text</th><td id="ftPa" class="" style="width:256.9791564941406px">string</td><td id="e\C=" class="" style="width:85.99478912353516px">protected</td><td id="FYD&gt;" class="">get &amp; set</td></tr></tbody></table><p id="95f262ad-9f43-4c44-bb8e-3d4bbbbfb75b" class=""><strong>Methods</strong></p><pre id="098856b8-266e-47f7-a574-ed967a5a8e4c" class="code"><code>constructor(text: string, x = 0, y = 0, width?: number, height?: number) {
+  super(x, y, width, height);
+  this.box.padding = Style.textPadding;
+  // defaults
+  this.fill = &quot;&quot;;
+  this.border = &quot;&quot;;
+  this.text = text;
+}
+
+set text(t: string) {
+  this._text = t;
+  this.setMinimalSize(this.width, this.height);
+}
+
+setMinimalSize(width?: number, height?: number) {
+  // need this if w or h not specified
+  const m = measureText(this.text || &quot; &quot;, this.font);
+
+  this.box.height =
+    height ||
+    m.fontBoundingBoxAscent +
+      m.fontBoundingBoxDescent +
+      this.box.padding * 2;
+
+  this.box.width = width || m.width + this.box.padding * 2;
+}
+
+draw(gc: CanvasRenderingContext2D) {
+  gc.save();
+
+  gc.translate(this.x, this.y);
+  gc.translate(this.box.margin, this.box.margin);
+
+  if (this.fill) {
+    gc.fillStyle = this.fill;
+    gc.fillRect(0, 0, this.box.width, this.box.height);
+  }
+
+  if (this.border) {
+    gc.strokeStyle = this.border;
+    gc.lineWidth = 1;
+    gc.strokeRect(0, 0, this.box.width, this.box.height);
+  }
+
+  // render text
+  gc.font = this.font; 
+  gc.fillStyle = &quot;black&quot;;
+  gc.textBaseline = &quot;middle&quot;;
+
+  switch (this.align) {
+    case &quot;left&quot;:
+      gc.textAlign = &quot;left&quot;;
+      gc.fillText(this.text, this.box.padding, this.box.height / 2);
+
+      break;
+    case &quot;centre&quot;:
+      gc.textAlign = &quot;center&quot;;
+      gc.fillText(
+        this.text,
+        this.box.width / 2,
+        this.box.height / 2
+      );
+
+      break;
+    case &quot;right&quot;:
+      gc.textAlign = &quot;right&quot;;
+      gc.fillText(
+        this.text,
+        this.box.width - this.box.padding,
+        this.box.height / 2
+      );
+
+      break;
+  }
+
+  gc.restore();
+
+  // element draws debug viz if flag is set
+  super.draw(gc);
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><code>TextField</code></summary><div class="indented"><p id="0742b2fd-0105-4a2a-90c9-b82c4ddefc1e" class=""><strong><strong><strong><strong>Data</strong></strong></strong></strong></p><table id="0090c0ea-c5a7-42f1-afa7-7e6faf89ae12" class="simple-table"><thead class="simple-table-header"><tr id="46c5273d-f32b-419a-bc16-345bfc1d35ff"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">Name</th><th id="ftPa" class="simple-table-header-color simple-table-header" style="width:256.9791564941406px">Type</th><th id="e\C=" class="simple-table-header-color simple-table-header" style="width:85.99478912353516px">Access</th><th id="FYD&gt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong>Notes</strong></strong></strong></strong></strong></strong></th></tr></thead><tbody><tr id="38086f8b-5a85-45f8-a5e7-5861e2c8ecf1"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">state</th><td id="ftPa" class="" style="width:256.9791564941406px">&quot;idle&quot; | &quot;hover&quot; = &quot;idle&quot;</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="f915101d-97e1-4c87-bd52-e8c150f8d812"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">focus</th><td id="ftPa" class="" style="width:256.9791564941406px">boolean = false</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="544fe99b-e264-4701-bc58-5d7b9e5b5d5b"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">font</th><td id="ftPa" class="" style="width:256.9791564941406px">string = Style.font</td><td id="e\C=" class="" style="width:85.99478912353516px">public</td><td id="FYD&gt;" class=""></td></tr><tr id="b2b11fe4-6790-481a-b4c9-24a84edc643a"><th id="{p^\" class="simple-table-header-color simple-table-header" style="width:114.984375px">text</th><td id="ftPa" class="" style="width:256.9791564941406px">string</td><td id="e\C=" class="" style="width:85.99478912353516px">protected</td><td id="FYD&gt;" class=""></td></tr></tbody></table><p id="eb4f6a65-2b4b-44ac-ae7e-9cb92b07f1ae" class=""><strong><strong><strong><strong><strong><strong><strong>Methods</strong></strong></strong></strong></strong></strong></strong></p><pre id="fa590c83-07ca-4ee3-b4e0-24158fb6f424" class="code"><code>constructor(text: string = &quot;&quot;, x = 0, y = 0, width?: number, height?: number) {
+  super(x, y, width, height);
+  this.box.padding = Style.textPadding;
+  this.text = text;
+}
+
+set text(t: string) {
+  this._text = t;
+  this.setMinimalSize(this.width, this.height);
+}
+
+setMinimalSize(width?: number, height?: number) {
+  //same as label
+}
+
+protected applyEdit(text: string, key: string): string {
+  if (key == &quot;Backspace&quot;) {
+    return text.slice(0, -1);
+  } else if (key.length == 1) {
+    return text + key;
+  } else return text;
+}
+
+handleKeyboardEvent(ke: SKKeyboardEvent) {
+  switch (ke.type) {
+    case &quot;focusout&quot;:
+      this.focus = false;
+      return true;
+      break;
+    case &quot;focusin&quot;:
+      this.focus = true;
+      return true;
+      break;
+    case &quot;keypress&quot;:
+      if (this.focus &amp;&amp; ke.key) {
+        this._text = this.applyEdit(this.text, ke.key);
+      }
+      return this.dispatch({
+        source: this,
+        timeStamp: ke.timeStamp,
+        type: &quot;textchanged&quot;,
+      });
+      break;
+  }
+
+  return false;
+}
+
+handleMouseEvent(me: SKMouseEvent) {
+  switch (me.type) {
+    case &quot;mouseenter&quot;:
+      this.state = &quot;hover&quot;;
+      return true;
+      break;
+    case &quot;mouseexit&quot;:
+      this.state = &quot;idle&quot;;
+      return true;
+      break;
+    case &quot;click&quot;:
+      KeyboardDispatcher.requestFocus(this);
+      return true;
+      break;
+    case &quot;mousedown&quot;:
+      return false;
+      break;
+    case &quot;mouseup&quot;:
+      return false;
+      break;
+  }
+  return false;
+}
+
+hittest(mx: number, my: number): boolean {
+  return insideHitTestRectangle(
+    mx,
+    my,
+    this.x + this.box.margin,
+    this.y + this.box.margin,
+    this.box.width,
+    this.box.height
+  );
+}
+
+draw(gc: CanvasRenderingContext2D) {
+  const w = this.box.width;
+  const h = this.box.height;
+
+  gc.save();
+
+  gc.translate(this.x, this.y);
+  gc.translate(this.box.margin, this.box.margin);
+
+  // thick highlight rect
+  if (this.state == &quot;hover&quot;) {
+    gc.beginPath();
+    gc.rect(0, 0, w, h);
+    gc.strokeStyle = Style.highlightColour;
+    gc.lineWidth = 8;
+    gc.stroke();
+  }
+
+  // border
+  gc.beginPath();
+  gc.rect(0, 0, w, h);
+  gc.fillStyle = &quot;white&quot;;
+  gc.fill();
+  gc.lineWidth = 1;
+  gc.strokeStyle = this.focus ? &quot;mediumblue&quot; : &quot;black&quot;;
+  gc.stroke();
+  gc.clip(); // clip text if it&#x27;s wider than text area
+
+  // text
+  gc.font = Style.font;
+  gc.fillStyle = &quot;black&quot;;
+  gc.textBaseline = &quot;middle&quot;;
+  gc.textAlign = &quot;left&quot;;
+  gc.fillText(this.text, this.box.padding, h / 2);
+
+  gc.restore();
+
+  // element draws debug viz if flag is set
+  super.draw(gc);
+}</code></pre></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">Layout</mark></summary><div class="indented"><h2 id="a39cafff-014b-4c95-afb0-473867ede0a1" class="">Box Model</h2><p id="dcd22325-528f-413e-a332-063d87fa3ea4" class="">→ Layout of a widget </p><div id="1c49cf08-bee4-4b8d-bd8e-6a0347556332" class="column-list"><div id="841fdc23-f0a5-42df-86c4-44cd77f6f678" style="width:37.5%" class="column"><ol type="1" id="a93b62c6-18d7-4a11-a594-72945b1c7b38" class="numbered-list" start="1"><li>Margin</li></ol><ol type="1" id="98a0354a-98eb-4f38-80ca-f43de125085b" class="numbered-list" start="2"><li>Padding</li></ol><ol type="1" id="141229e2-c4c2-4f26-be75-458913016a26" class="numbered-list" start="3"><li>Content</li></ol><p id="1a1bfb65-daa8-4c1a-89bb-77f185c0310c" class="">(w,h) → content (w,h) + padding</p></div><div id="5f96328b-7f1f-4cdf-9b7e-c05cbdb2b6fc" style="width:62.5%" class="column"><figure id="487e8e8a-5176-483a-a940-a072bed9c7d4" class="image"><a href="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_15.06.27.png"><img style="width:288px" src="11%20-%20Layout%202460490eaca74b66bfcdd8d8b0a6ec4a/Screen_Shot_2023-10-20_at_15.06.27.png"/></a></figure></div></div><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Code</summary><div class="indented"><table id="f68e55af-fd62-416f-88a2-085a7ff40995" class="simple-table"><thead class="simple-table-header"><tr id="05e0b0ae-caff-4921-b713-005dfb82443c"><th id="GF@s" class="simple-table-header-color simple-table-header">Name</th><th id="M={k" class="simple-table-header-color simple-table-header" style="width:85px">Type</th><th id="}y&gt;z" class="simple-table-header-color simple-table-header">Access</th><th id="cVbp" class="simple-table-header-color simple-table-header"></th><th id="@Ych" class="simple-table-header-color simple-table-header" style="width:181.1028594970703px">Notes</th></tr></thead><tbody><tr id="fce70050-0c35-4184-b220-5f29e99b8b9e"><th id="GF@s" class="simple-table-header-color simple-table-header">margin</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">set → onUpdate</td></tr><tr id="715579b1-6b6b-4dfd-aece-15bc2f246304"><th id="GF@s" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong><strong><strong><strong>marginBox</strong></strong></strong></strong></strong></strong></strong></strong></strong></th><td id="M={k" class="" style="width:85px">Size</td><td id="}y&gt;z" class="">read only</td><td id="cVbp" class="">get</td><td id="@Ych" class="" style="width:181.1028594970703px"></td></tr><tr id="352ea2ee-85c0-4bf3-9401-0b7e13c3e9ca"><th id="GF@s" class="simple-table-header-color simple-table-header">padding</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">set → onUpdate</td></tr><tr id="c08c5ec9-7784-44ef-803a-4dd6409eb726"><th id="GF@s" class="simple-table-header-color simple-table-header">paddingBox</th><td id="M={k" class="" style="width:85px">Size</td><td id="}y&gt;z" class="">read only</td><td id="cVbp" class="">get</td><td id="@Ych" class="" style="width:181.1028594970703px"></td></tr><tr id="33e1428c-bac7-4f0b-8db6-f9caf6ddc453"><th id="GF@s" class="simple-table-header-color simple-table-header">contentWidth</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">set → onUpdate</td></tr><tr id="c11fe05f-10b3-4ccb-b267-a73da58ebc6f"><th id="GF@s" class="simple-table-header-color simple-table-header">contentHeight</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">set → onUpdate</td></tr><tr id="2d8c6f24-9e84-4c40-a937-c02978cd2f98"><th id="GF@s" class="simple-table-header-color simple-table-header">contentBox</th><td id="M={k" class="" style="width:85px"></td><td id="}y&gt;z" class=""></td><td id="cVbp" class=""></td><td id="@Ych" class="" style="width:181.1028594970703px"></td></tr><tr id="35093bcf-8d45-417c-81e6-6f47b899abf5"><th id="GF@s" class="simple-table-header-color simple-table-header">fullWidth</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">Adjust the content width</td></tr><tr id="a4bad271-8d47-41a2-aef4-099cdf2d6e17"><th id="GF@s" class="simple-table-header-color simple-table-header">fullHeight</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">Adjust the content height</td></tr><tr id="7d961cad-b1e0-46a5-bb86-d94a9d41f87b"><th id="GF@s" class="simple-table-header-color simple-table-header">width</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">Adjust the content width</td></tr><tr id="0a50914b-527f-4749-88b5-d3289be285b1"><th id="GF@s" class="simple-table-header-color simple-table-header">height</th><td id="M={k" class="" style="width:85px">number</td><td id="}y&gt;z" class="">private</td><td id="cVbp" class="">get/set</td><td id="@Ych" class="" style="width:181.1028594970703px">Adjust the content height</td></tr></tbody></table><pre id="33e4e15f-18ac-40b5-94f7-0fdf406fc853" class="code"><code>onUpdate() {
+	invalidateLayout();
+}
+
+  get marginBox(): Size {
+    return {
+      width: this.contentWidth + 2 * this.padding + 2 * this.margin,
+      height: this.contentHeight + 2 * this.padding + 2 * this.margin,
+    };
+  }
+ 
+  get paddingBox(): Size {
+    return {
+      width: this.contentWidth + 2 * this.padding,
+      height: this.contentHeight + 2 * this.padding,
+    };
+  }
+
+  get contentBox(): Size {
+    return { width: this.contentWidth, height: this.contentHeight };
+  }
+
+  set fullWidth(w: number) {
+    w = Math.max(0, w);
+    this.contentWidth = w - 2 * this.padding - 2 * this.margin;
+  }
+
+  get fullHeight() {
+    return this.marginBox.height;
+  }
+
+  set fullHeight(h: number) {
+    h = Math.max(0, h);
+    this.contentHeight = h - 2 * this.padding - 2 * this.margin;
+  }
+
+  // width and height include padding
+
+  // width
+  set width(w: number) {
+    // width must be at least 2 * padding
+    w = Math.max(2 * this.padding, w);
+    this.contentWidth = w - 2 * this.padding;
+  }
+  get width() {
+    return this.contentWidth + 2 * this.padding;
+  }
+
+  // height
+  set height(h: number) {
+    // height must be at least 2 * padding
+    h = Math.max(2 * this.padding, h);
+    this.contentHeight = h - 2 * this.padding;
+  }
+
+  get height() {
+    return this.contentHeight + 2 * this.padding;
+  }</code></pre><p id="21718737-1875-47c2-a523-c50605bbd091" class="">
+</p></div></details><p id="25ac79e9-12e6-4a83-80ec-da8f86e7c4ea" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">In what Order are sizes/positions set? </summary><div class="indented"><p id="17e39f64-eb31-4990-96f4-23300b21f93f" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>From the Constructor: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ol type="1" id="ac8abe84-32b7-4113-864d-76215e27b1d7" class="numbered-list" start="1"><li>Create a container (set nothing) </li></ol><pre id="6e4493dd-a8b0-4757-8b8c-7819cdbf575c" class="code"><code>let c = new SKContainer(); </code></pre><ol type="1" id="997cd1c7-e93e-4897-8b3f-f7ab3a20b75e" class="numbered-list" start="2"><li>calls default SKElement::constructor</li></ol><ul id="9a21c804-31e8-414e-abad-2868a43b748f" class="bulleted-list"><li style="list-style-type:disc">(x,y) → (0,0)</li></ul><pre id="71cf5d66-a5c5-4b38-bb12-3fe5a87f7105" class="code"><code>constructor(public x = 0, public y = 0, width?: number, height?: number) {
+    this.width = width;
+    this.height = height;
+  }</code></pre><ol type="1" id="60e5173b-0a6b-429a-bacb-6e926a17473d" class="numbered-list" start="3"><li>Calls the w/h <strong>setters</strong></li></ol><ul id="eda07044-ce9d-42d0-9d57-27545cd2f6af" class="bulleted-list"><li style="list-style-type:disc">(w,h) → (undefined, undefined)</li></ul><div id="3bc32f43-658e-4bff-aacd-640109ce2c4d" class="column-list"><div id="0ad94b17-d638-4a35-9088-d94f4f6c13c7" style="width:50%" class="column"><pre id="a65d370e-a5af-480c-87f9-f20e89451b50" class="code"><code>set width(w: number | undefined) {
+    if (w !== undefined) w = Math.max(w, 0);
+    this._width = w;
+    // if no width specified, use 0
+    this.box.width = w || 0;
+  }</code></pre></div><div id="cea5e361-09ef-483a-8d90-f1522126ada4" style="width:50%" class="column"><pre id="7190602e-7f22-4cdb-8506-dab3845cdbab" class="code"><code>set height(h: number | undefined) {
+    if (h !== undefined) h = Math.max(h, 0);
+    this._height = h;
+    // if no height specified, use 0
+    this.box.height = h || 0;
+  }</code></pre></div></div><ol type="1" id="f1879dec-b6ac-47e3-b49c-984530aaaf02" class="numbered-list" start="4"><li>Calls the box w/h <strong><strong><strong><strong><strong><strong><strong>setters (</strong></strong></strong></strong></strong></strong></strong>with 0)</li></ol><ul id="4eb124d9-9f3f-43df-a863-9db15b2f14af" class="bulleted-list"><li style="list-style-type:disc">(box.w, box.h) → (0, 0)</li></ul><div id="06fccc9d-4332-4ead-ab92-9522db1eb0ed" class="column-list"><div id="968384b1-1af6-4a60-bf3f-e2de3433e9b1" style="width:50%" class="column"><pre id="e5889880-719f-4d36-91c9-2972bad7d728" class="code"><code>set width(w: number) {
+    // width must be at least 2 * padding
+    w = Math.max(2 * this.padding, w);
+    this.contentWidth = w - 2 * this.padding;
+  }</code></pre></div><div id="4ca95d21-6f86-43c8-bda9-f1357bd1dc0b" style="width:50%" class="column"><pre id="341d9a56-52dc-48ab-968c-a7b08777c3e2" class="code"><code>set height(h: number) {
+    // height must be at least 2 * padding
+    h = Math.max(2 * this.padding, h);
+    this.contentHeight = h - 2 * this.padding;
+  }</code></pre></div></div><ol type="1" id="a280924a-dc4e-4fe5-8fe1-5621ebd5e6f8" class="numbered-list" start="5"><li>Calls box.content.(w,h) <strong><strong><strong><strong><strong><strong><strong><strong>setters </strong></strong></strong></strong></strong></strong></strong></strong>(with 0) </li></ol><ul id="faaa0020-69e1-4e9a-bbef-608904f227f8" class="bulleted-list"><li style="list-style-type:disc">box.content.(w,h) → (0,0)</li></ul><div id="691b1edd-05a0-4ccd-8a3d-2dd58982a631" class="column-list"><div id="9e5b2f9d-405a-46a7-b5c2-39f1d6f85d45" style="width:50%" class="column"><pre id="d45b2fab-b620-42f8-83b4-7b37092d807d" class="code"><code>set contentWidth(w: number) {
+    w = Math.max(0, w);
+    this._contentWidth = w;
+    this.onUpdate();
+  }</code></pre></div><div id="7b38da43-4924-4527-b0e7-8549ec1c59c4" style="width:50%" class="column"><pre id="c184d159-d649-4424-950f-3027b3cb9680" class="code"><code>set contentHeight(h: number) {
+    h = Math.max(0, h);
+    this._contentHeight = h;
+    this.onUpdate();
+  }</code></pre></div></div><p id="d9d86423-46bf-480f-9586-fa9bbc62800c" class=""><strong>Result:
+</strong>(x,y) =&gt; (0,0)
+(w,h) =&gt; (undefined, undefined)
+box.(w,h) =&gt; (0,0)
+box.content.(w,h) =&gt; (0,0);</p><p id="27bdd6d3-a859-425d-b170-db06c7a41c22" class="">
+</p><p id="d44e57da-b8d9-4070-aaba-e2bd211630fc" class=""><strong>If we add </strong><strong><code>c</code></strong><strong> to root: </strong></p><pre id="b00f1ec5-1b17-465a-92af-faa28d951853" class="code"><code>root.addChild(c)</code></pre><ol type="1" id="9e858da6-697b-4567-964d-c85a92dc9a81" class="numbered-list" start="1"><li>SKContainer::addChild(c)</li></ol><pre id="9ce0593a-161f-4b0c-88e1-4f69e4f98d2b" class="code"><code>addChild(element: SKElement) {
+    this._children.push(element);
+    invalidateLayout();
+  }</code></pre><ol type="1" id="6792d152-6585-4cd7-92fe-31edfd34c352" class="numbered-list" start="2"><li>invalidateLayout()</li></ol><ul id="bb779d2a-0380-4e6d-96d7-c5af03ce2cd6" class="bulleted-list"><li style="list-style-type:disc">tells SimpleKit to run layout process next frame → calls <code>layoutRoot()</code></li></ul><pre id="0397b213-d1bc-4648-af40-8e119f7fc125" class="code"><code>function invalidateLayout() {
+  // console.log(`invalidateLayout`);
+  layoutDirty = true;
+}</code></pre><ol type="1" id="5c5a5c3a-0c51-4630-96ba-c434cd58240a" class="numbered-list" start="3"><li>Does the layout process down the tree…<p id="40cc8db9-4a4d-4246-b73e-295d83babc68" class="">→ sets root(w,h) to canvas size<div class="indented"><p id="82cb76a6-e6fa-4ad8-9f50-8ef52ad69f43" class="">→ calls root.doLayout()<div class="indented"><p id="07a322bd-84fd-4a39-97a3-841152c7d9d6" class="">→ <strong><strong><strong><strong><strong><strong><strong><strong><strong>DOES NOT </strong></strong></strong></strong></strong></strong></strong></strong></strong>calls root.layoutMethod (not set) </p></div></p></div></p></li></ol></div></details><h2 id="f8a8aeca-76d1-40ba-89f8-fb435f897dcd" class="">Layouts</h2><p id="f74c237a-2f92-4ddf-85dc-0bc5c53c2a77" class=""><code>SKContainers</code> have a <code>LayoutMethod</code></p><p id="c596f2a9-fe56-4d72-a3d2-cea309a1ed72" class=""><code>LayoutMethod</code></p><ul id="88d6c812-a140-4186-9d2d-f6ff39ecf06d" class="bulleted-list"><li style="list-style-type:disc">returns the size of box needed to hold all of the elements (depends on the type of layout) </li></ul><p id="e61e578f-55dd-4c7c-8418-aa0484687a7e" class="">To set a container’s <code>LayoutMethod</code>, you call a <code>FactoryFunction</code> which returns a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>specific instance </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>of a function (each container refers to it’s own) </p><pre id="fa0b9b5c-8208-4685-ba98-9dcc82f2fab1" class="code"><code>//Factory Function
+export function makeSomeLayout(params: {} = {}): LayoutMethod {
+  return (
+    boundsWidth: number,
+    boundsHeight: number,
+    elements: SKElement[]
+  ) =&gt; {
+    return someLayout(boundsWidth, boundsHeight, elements, params);
+  };
+}
+
+function someLayout(
+  boundsWidth: number,
+  boundsHeight: number,
+  elements: SKElement[],
+  params: {}
+): Size {
+	//Define what it does with the given parameters
+	const newBounds: Size = { width: 0, height: 0 };
+	...
+	//how do the bounds change based on the elements added? 
+	...
+	return newBounds;
+}</code></pre><p id="44d688e6-09e6-46a5-bc4e-f6fade1b7766" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Steps for Layout:</summary><div class="indented"><p id="02523bdf-bc30-41f0-9fea-2fc94066ef0a" class="">For container <code>c</code> </p><ol type="1" id="47d6f0c4-eae0-41f6-835d-5fc52aec68ac" class="numbered-list" start="1"><li><code>c</code> has it’s own reference to a <code>LayoutMethod</code>, <code>c._layoutMethod</code><p id="1160396b-2bf2-4de0-a76b-134381ac6bd9" class="block-color-teal">→ Private, but can be set </p><pre id="09e23f7a-f933-44d8-b357-f3554b02bc6b" class="code"><code>type LayoutMethod = (
+	boundsWidth: number,
+	boundsHeight: number, 
+	elements: SKElement[]
+) =&gt; Size; </code></pre></li></ol><ol type="1" id="b4e2a555-95c2-467f-9f60-a7d5d2dfcd4b" class="numbered-list" start="2"><li><code>c._layoutMethod</code> is used in <code>c.doLayout</code><ol type="a" id="4660346b-f188-4e2e-b862-e5450d3f4f71" class="numbered-list" start="1"><li>Runs the layout method using <code>box.contentBox</code> as the bounds, and on <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>all of it’s children</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><p id="92c870c8-8fef-4546-8171-d2d0fbada90d" class=""><mark class="highlight-gray">→ returns new bounds, but we ignore it for now</mark></p></li></ol><ol type="a" id="2774bc04-68ba-4981-9d9b-a98ff1bd5fd8" class="numbered-list" start="2"><li>Calls <code>doLayout</code> for all children<p id="fb48d3ed-46b0-4179-8ee4-1b9778f25d66" class=""><mark class="highlight-gray">→ widgets have one, but it doesn’t do anything</mark></p><p id="5381681a-5eb3-4355-a148-fb68f4d375e0" class=""><mark class="highlight-gray">→ bounds = content box always</mark></p></li></ol><pre id="7ee1471b-3abd-41a2-aa9b-e57e3f06a061" class="code"><code>doLayout() {
+    if (this._layoutMethod &amp;&amp; this._children.length &gt; 0) {
+      this._layoutMethod(
+        this.box.contentBox.width, this.box.contentBox.height,
+        this._children
+      ); 
+
+      this._children.forEach((el) =&gt; el.doLayout());
+    }
+  }</code></pre></li></ol><ol type="1" id="da9f62f9-c437-4819-a554-e1555bea235d" class="numbered-list" start="3"><li>In <code>run-loop.ts</code>, the <code>root.doLayout</code> is called. Eventually, <code>c.doLayout</code> will be called<pre id="f24ac26d-8d30-48e2-8659-97909878b08a" class="code"><code>function layoutRoot() {
+  if (uiTreeRoot &amp;&amp; canvas) {
+    // make the root fill up the WHOLE canvas
+    uiTreeRoot.x = 0;
+    uiTreeRoot.y = 0;
+    uiTreeRoot.box.margin = 0; // no margin allowed on root
+    uiTreeRoot.box.width = canvas.width;
+    uiTreeRoot.box.height = canvas.height;
+    // layout root and all children
+    uiTreeRoot.doLayout();
+    layoutDirty = false;
+  }
+}</code></pre><p id="39540c91-a22f-4992-96ed-67ae6676ddc4" class="">
+</p></li></ol></div></details><h3 id="5c059b48-5025-4e36-b01e-741c222603d7" class="">Layout Types</h3><table id="4dbdda0f-5b86-4e1f-83ab-3708f6463311" class="simple-table"><thead class="simple-table-header"><tr id="9fa836a9-7166-483b-82e7-7c5d9a064251"><th id="JZYM" class="simple-table-header-color simple-table-header" style="width:122.984375px"><strong>Name</strong></th><th id="{d}G" class="simple-table-header-color simple-table-header" style="width:305px"><strong>Size Returned</strong></th><th id="jF&lt;P" class="simple-table-header-color simple-table-header" style="width:483.9921875px"><strong><strong><strong><strong><strong>Notes</strong></strong></strong></strong></strong></th><th id="W=N^" class="simple-table-header-color simple-table-header" style="width:81px">Changes</th><th id=":cJX" class="simple-table-header-color simple-table-header" style="width:107px">Params when making</th></tr></thead><tbody><tr id="34782433-1a95-46b9-b032-06d8a398095e"><td id="JZYM" class="" style="width:122.984375px"><code>fixedLayout</code></td><td id="{d}G" class="" style="width:305px">(w,h) needed to hold all the elements in their existing positions</td><td id="jF&lt;P" class="" style="width:483.9921875px">• simplest layout type
+• does not adjust to canvas resize, does not adjust w/h, x/y of elements</td><td id="W=N^" class="" style="width:81px">none</td><td id=":cJX" class="" style="width:107px"></td></tr><tr id="24394c94-f7ff-49a5-bff0-7e2f5b6f42cb"><td id="JZYM" class="" style="width:122.984375px"><code>centredLayout</code></td><td id="{d}G" class="" style="width:305px">(w,h) needed to hold all the elements in the center</td><td id="jF&lt;P" class="" style="width:483.9921875px">• all elements centred in container, stacked back to front
+• sets new x and y for each element to → center of container
+• still does not adjust element height/width</td><td id="W=N^" class="" style="width:81px">pos</td><td id=":cJX" class="" style="width:107px"></td></tr><tr id="3bda3497-6614-4538-810d-b51e838451a1"><td id="JZYM" class="" style="width:122.984375px"><code>wrapLayout</code></td><td id="{d}G" class="" style="width:305px">(w,h) needed to hold all the elements when arranged in rows </td><td id="jF&lt;P" class="" style="width:483.9921875px">• places widgets in rows, wrapping to next row as needed
+• does not change widget size </td><td id="W=N^" class="" style="width:81px">pos</td><td id=":cJX" class="" style="width:107px"><code>gap</code></td></tr><tr id="b92f8471-14d0-4214-abd6-3d8a171a4a70"><td id="JZYM" class="" style="width:122.984375px"><code>fillLayout</code></td><td id="{d}G" class="" style="width:305px">(w,h) needed to hold all the elements when they are allowed to grow or shrink.</td><td id="jF&lt;P" class="" style="width:483.9921875px">• dynamic layout
+• lays out elements in a row, they can grow or shrink to fit space.
+• (fillWidth, fillHeight) property on SKElement sets proportional change (if it’s not set, they don’t grow or shrink) </td><td id="W=N^" class="" style="width:81px">pos, size</td><td id=":cJX" class="" style="width:107px"><code>gap</code></td></tr></tbody></table></div></details><h1 id="cc5570a4-3b32-4ddc-98d2-5b5f85a69f28" class="block-color-red">Dispatch </h1><p id="51c6228d-490f-4941-b363-7ed87e6e6da1" class="">there actually does not seem to be any capture event propagation supported in SimpleKit, just bubble up in the mouseDispatcher. Although as mentioned in lecture, most UI toolkits will support both.</p><h1 id="a3471a2a-c86b-4bfc-8d85-265656b7ee01" class=""><mark class="highlight-red">MVC</mark></h1><ul id="497b985a-2686-4471-9872-3ce09dcd105e" class="bulleted-list"><li style="list-style-type:disc">The model doesn’t know about the connection between widget actions and model state changes. That’s the <strong>controller’s </strong>concern.</li></ul><ul id="8bd6045d-31bd-4621-ae79-5c8c7640ea5d" class="bulleted-list"><li style="list-style-type:disc">The model doesn’t know about the connection between its state and how it’s displayed. That’s the <strong>view’s</strong> concern.</li></ul><table id="19659b20-c1ba-4858-93ae-35ca6962f53e" class="simple-table"><thead class="simple-table-header"><tr id="cec47b49-ed6b-41fc-9efe-fb4b1cd16c6c"><th id="INHF" class="simple-table-header-color simple-table-header" style="width:35px"></th><th id="o}:A" class="simple-table-header-color simple-table-header" style="width:185.9921875px">Manages</th><th id="&gt;wIx" class="simple-table-header-color simple-table-header" style="width:130.99087524414062px">Can change implementation?</th><th id="WqRg" class="simple-table-header-color simple-table-header" style="width:95px"><strong><strong><strong><strong><strong>Is a </strong></strong></strong></strong></strong></th><th id="_Q[V" class="simple-table-header-color simple-table-header" style="width:221.9934844970703px"><strong><strong><strong><strong><strong>Has a</strong></strong></strong></strong></strong></th><th id="PRuk" class="simple-table-header-color simple-table-header">Access</th></tr></thead><tbody><tr id="ce924891-34ef-41ab-aadc-ade7ba1e6a57"><th id="INHF" class="simple-table-header-color simple-table-header" style="width:35px">M</th><td id="o}:A" class="" style="width:185.9921875px">app <span style="border-bottom:0.05em solid">data/state</span> and it’s <span style="border-bottom:0.05em solid">modification</span> </td><td id="&gt;wIx" class="" style="width:130.99087524414062px">no</td><td id="WqRg" class="" style="width:95px"><code><strong>subject</strong></code></td><td id="_Q[V" class="" style="width:221.9934844970703px">[views]</td><td id="PRuk" class=""></td></tr><tr id="ba0eca45-6ebf-4874-853c-066fbced3fb8"><th id="INHF" class="simple-table-header-color simple-table-header" style="width:35px">V</th><td id="o}:A" class="" style="width:185.9921875px">interface to present data </td><td id="&gt;wIx" class="" style="width:130.99087524414062px">yes</td><td id="WqRg" class="" style="width:95px"><code><strong>observer</strong></code></td><td id="_Q[V" class="" style="width:221.9934844970703px">model(ref)
+→ adds itself as observer
+controller (ref)
+*Pass in controllers just for constructor to connects to widgets, OR, view has controllers</td><td id="PRuk" class="">only uses <strong>getters</strong></td></tr><tr id="a2632ff4-6212-4fd0-97f2-bf074ca45df2"><th id="INHF" class="simple-table-header-color simple-table-header" style="width:35px">C</th><td id="o}:A" class="" style="width:185.9921875px">interaction to modify data</td><td id="&gt;wIx" class="" style="width:130.99087524414062px">yes</td><td id="WqRg" class="" style="width:95px"></td><td id="_Q[V" class="" style="width:221.9934844970703px">model (ref)</td><td id="PRuk" class="">can use <strong><strong><strong><strong><strong><strong><strong>setters</strong></strong></strong></strong></strong></strong></strong></td></tr></tbody></table><h3 id="25945089-63ff-46f4-a88d-a2241108f770" class="">Observer Pattern</h3><div id="08622e60-e319-4e7a-8322-4f4e7692ecb0" class="column-list"><div id="d11c14b0-5e49-4fb4-bb37-43ff8656329b" style="width:50%" class="column"><figure id="005140f1-f83f-40e1-82a2-2bec1c5c8bbf" class="image" style="text-align:left"><a href="12%20-%20MVC%20ef5fbe9a5a8a49a38a7271e72d85339e/Screen_Shot_2023-10-22_at_17.03.02.png"><img style="width:288px" src="12%20-%20MVC%20ef5fbe9a5a8a49a38a7271e72d85339e/Screen_Shot_2023-10-22_at_17.03.02.png"/></a></figure></div><div id="f14961bf-659b-4a5a-ae9d-4bc2888c31ce" style="width:50%" class="column"><p id="da92b81b-d651-4b15-a55b-96b6d8f33745" class="">When <code>set state</code> is called → <code>notifyObservers</code> is called</p><p id="70416257-ae66-4915-8ab1-e6e3f5f76706" class="">
+</p><p id="eaaf4e0e-dc7b-4eab-b6bc-74e127e3b2c7" class="">
+</p></div></div><hr id="bf5fa577-1215-4985-b1f1-d024e1601244"/><ul id="d1824bdd-1e0c-4753-9630-c5cb084eeebb" class="bulleted-list"><li style="list-style-type:disc">Some view-level data manipulations don’t make sense to handle through model (ie: <strong>validating input</strong>) </li></ul><p id="166c2902-003a-4276-8047-3cf271656d28" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">KeyboardDispatcher</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 22, 2023, 10:47 PM</time></span></span></div><div style="padding:0.2em">global</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">uiTreeRoot.doLayout();</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 24, 2023, 5:09 PM</time></span></span></div><div style="padding:0.2em">Lays out all children as well. </div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

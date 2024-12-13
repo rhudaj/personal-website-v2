@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>05 - Drawing</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cf3c9621-a7a4-46b9-8be6-bcb35cde22e3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">05 - Drawing</h1><p class="page-description"></p></header><div class="page-body"><table id="e18768bf-529e-4d77-8b21-324a77713e3f" class="simple-table"><tbody><tr id="f7e4f216-5459-4dba-9bdc-833f0f4fd93f"><th id="aHdc" class="block-color-gray_background simple-table-header">Title</th><td id="&lt;SCr" class="" style="width:421.4609375px"><strong>Drawing</strong></td></tr><tr id="df505a45-4772-4ea0-830b-14d9ed9c5021"><th id="aHdc" class="block-color-gray_background simple-table-header"><strong>Date</strong></th><td id="&lt;SCr" class="" style="width:421.4609375px">2023 - SEP 18</td></tr></tbody></table><figure id="ac6c67ca-dee5-4ec2-8338-62ea627b149d" class="link-to-page"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/drawable-object%20(demo)%20ac6c67cadee54ec2833862ea627b149d.html"><span class="icon">🧑🏽‍💻</span>drawable-object (demo)</a></figure><hr id="78feb1d6-ed7d-4b5b-b6f1-4fad1cf754f4"/><p id="4f220a62-72bb-4447-abe4-c7e379f28eb7" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>MVC - Update</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><figure id="f4ea7047-8a8d-4f25-ad5f-f1a4cf9563aa" class="image" style="text-align:left"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_455E93CB0E72-1.jpeg"><img style="width:288px" src="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_455E93CB0E72-1.jpeg"/></a></figure><h1 id="17d9755c-e351-4046-a0bd-097de068471b" class="block-color-red">Windowing System</h1><figure id="c155fb7d-d403-4b29-928d-2257e7af1249" class="image" style="text-align:left"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_F38117E94353-1.jpeg"><img style="width:240px" src="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_F38117E94353-1.jpeg"/></a></figure><p id="b7e94e97-fcb8-47ea-810e-6e28261708bf" class=""><strong><strong><strong><strong><strong><strong><strong>In General</strong></strong></strong></strong></strong></strong></strong></p><p id="e950b6cc-c623-44b3-8080-3cdf2573f001" class="">3 Jobs: </p><ol type="1" id="9b57cdb7-a1f8-4f80-823c-e711da7ed724" class="numbered-list" start="1"><li>Manage list of windows: create, resize, focus, render</li></ol><ol type="1" id="9f0c48a9-4da1-4b97-b92c-de98a810399e" class="numbered-list" start="2"><li>Provide each <strong><strong><strong><strong>app </strong></strong></strong></strong>with independent <strong><strong><strong><strong><strong><strong><strong><strong><strong>drawing area </strong></strong></strong></strong></strong></strong></strong></strong></strong><ol type="a" id="ef91b1ed-b7fc-4bc2-ba21-fc97e116fc31" class="numbered-list" start="1"><li>Every window belongs to an <strong>app</strong> </li></ol></li></ol><ol type="1" id="7fc2d50c-fcf7-4511-a8e0-aeb049b9454d" class="numbered-list" start="3"><li>Dispatch <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>input events </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>to the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>focused window</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ol type="a" id="8bd2f8f1-aa43-47e9-92c5-53c56ae5c95c" class="numbered-list" start="1"><li>Only 1 window can have <strong>focus</strong> (to receive user input)</li></ol></li></ol><p id="efee12d1-8fa6-43cf-9339-6ae0e57cf413" class="">
+</p><div id="c9be8c06-cf54-4889-9b94-df32b3198470" class="column-list"><div id="bc385f8d-55ec-49bb-b3e5-e2bcbfc2716e" style="width:50%" class="column"><h3 id="8d1db9ac-a701-408f-a7a2-fcfb39e1419b" class=""><strong>OS</strong></h3><p id="6b881fdc-4abc-44d1-af30-3a7e8561a735" class=""><strong>Window Manager</strong></p><p id="b2eec7e6-d209-492c-bf86-22124c433111" class="">Renders the “chrome” window</p><p id="48500f61-040d-4631-977f-0220db050212" class="">Provides window UI</p><ul id="39155d72-1ac3-4a84-86c2-d081b6fdc77d" class="bulleted-list"><li style="list-style-type:disc"> minimize, close buttons</li></ul><ul id="e05d86f2-7aa6-4032-8a1e-191d09ecd0f2" class="bulleted-list"><li style="list-style-type:disc">draggable for resize / move</li></ul><figure id="77b65e42-830e-48cc-93c9-85967c22e725" class="image"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_9EB734B0DA7D-1.jpeg"><img style="width:288px" src="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_9EB734B0DA7D-1.jpeg"/></a></figure><p id="e1aee217-e8ce-4cac-a17d-8a866377c217" class=""><strong>Canvas</strong></p><p id="6e08eda8-1be7-4c5a-a142-d08c6316dfb3" class="">Each app has a designated canvas</p><p id="5027b0fd-fa72-48ea-af49-d4223111ef8c" class="">Starts at [0,0] (relative to window)</p><figure id="c58a2f38-ba14-45d9-897d-9148e3a604cb" class="image" style="text-align:left"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_C44FBE779F9B-1.jpeg"><img style="width:384px" src="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/IMG_C44FBE779F9B-1.jpeg"/></a></figure></div><div id="3af510d6-428b-44e8-a9a2-2f9759e53992" style="width:50%" class="column"><h3 id="5c44649c-affd-425f-8375-c60604175816" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Web Browser</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></h3><p id="c358a775-e5ad-4d5a-9dff-202535667d37" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>acts like </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>windowing system</p><ol type="1" id="86712a2d-7d72-4c4e-a34b-954bcebf951c" class="numbered-list" start="1"><li>manages list of tabs</li></ol><ul id="0c39104f-eb2e-4239-99c8-6bc96944365f" class="bulleted-list"><li style="list-style-type:disc">create</li></ul><ul id="5eaf8dd9-c8d1-40ab-aa1d-341c31df0534" class="bulleted-list"><li style="list-style-type:disc">focus</li></ul><ol type="1" id="fc811cce-15fd-454b-99c5-3dcf4cf6214d" class="numbered-list" start="1"><li>provides each tab with canvas </li></ol><ul id="3ebc76de-ea2a-47b0-9c3e-8a1a1111bd7d" class="bulleted-list"><li style="list-style-type:disc">dispatches events to tab</li></ul></div></div><hr id="5f589726-7009-4731-af69-4125fb9f31b6"/><table id="74368368-89da-4bf0-8978-8dec6e2f7eb9" class="simple-table"><thead class="simple-table-header"><tr id="b7a54351-96d3-48dd-8def-95713edb78a6"><th id="P&lt;Po" class="simple-table-header-color simple-table-header" style="width:197.140625px">GUI</th><th id="hHBa" class="simple-table-header-color simple-table-header" style="width:321px">UI</th></tr></thead><tbody><tr id="4b09bbda-64c2-4971-a471-333f4d22da29"><td id="P&lt;Po" class="" style="width:197.140625px">drawing of shapes</td><td id="hHBa" class="" style="width:321px">how shapes change (respond to input) </td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bed2be44-4ccb-4041-9330-1ea31fc6e45c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>UI Toolkits </strong><p id="41687b4b-b5c4-40ec-acaa-0350cec2ed26" class="">Provides ready made UI items (abstract away the GUI part)</p></div></figure><h1 id="89f7e783-9c5e-4860-80d0-5b024e644ff7" class=""><mark class="highlight-red">Drawing (GUI)</mark></h1><h2 id="97472e64-62e2-4b85-8963-d4a7df7147b9" class="block-color-orange">Graphics Context </h2><ul id="36c4f142-2551-4f05-a44f-3a63d5364794" class="bulleted-list"><li style="list-style-type:disc"><strong>state</strong> of<strong> drawing style</strong></li></ul><ul id="98fba3c7-0100-4ec3-b6d8-bfdd487d76dd" class="bulleted-list"><li style="list-style-type:disc">drawing methods are called <strong><strong><strong><strong>on the context object</strong></strong></strong></strong></li></ul><p id="32cdc9d7-d289-4f79-9dbb-2e165a6ba9e8" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Basic Routine</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="55521ed6-5c82-41ee-b570-a1c747a54d31" class="code"><code>const canvas = document.createElement(&quot;canvas&quot;);
+document.body.appendChild(canvas); 
+const gc = canvas.getContext(&quot;2d&quot;); 
+// draw...</code></pre><hr id="064751b4-42f1-4aef-aa7b-926dc5ea7900"/><figure id="8ef28c22-508a-4acd-afba-031c1bdcba70" class="block-color-orange_background link-to-page"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70.html"><span class="icon">🧑🏽‍💻</span>minimal-canvas (demo)</a></figure><hr id="f5de053c-b4a8-40e8-a9c7-7849f783e8ee"/><h3 id="eacb7c30-033e-4b0c-b235-42ca66b561c0" class="block-color-yellow">Context State</h3><div id="506b72af-ec17-47a8-93d3-e491e323a4bb" class="column-list"><div id="a07f3523-f4c6-47ee-96d3-9db02c5f6707" style="width:37.5%" class="column"><p id="c9b6008c-4fbc-4a78-96a1-0f32fea5ca36" class=""><code>save()</code> </p><p id="0f970505-ac4c-4eed-b822-e9265bafa66e" class="">push to <strong>stack</strong> ← <code>gc</code></p></div><div id="661fa678-76a3-4829-b5f7-6ad67305d424" style="width:62.5%" class="column"><p id="f1c798ad-0b54-49db-88ec-9635225a88b8" class=""><code>restore()</code></p><p id="5be9c0ee-9313-4565-844d-1f6d7030ab69" class=""><code>gc</code> ← Pop from stack</p></div></div><h3 id="fb964fed-c8e0-4837-942a-c08c8aadcbbf" class="block-color-orange">GC properties</h3><div id="2aaa0f45-2e55-49f9-85bd-559646c1ceda" class="column-list"><div id="51d4fe57-8d1e-4501-b034-a2778e435e78" style="width:37.5%" class="column"><h3 id="270bf3ab-399b-4579-9ab5-ed345903dae4" class=""><strong>Style Attributes</strong></h3><table id="acceca76-fe64-4446-ba4a-a6e955da77ac" class="simple-table"><tbody><tr id="2a20391d-eaa7-4246-8bc8-b8ce643c4cc7"><td id="zJbO" class="" style="width:181.78125px"><code>fillStyle: color</code></td></tr><tr id="c673fc11-a955-4b88-a68d-749206742731"><td id="zJbO" class="" style="width:181.78125px"><code>strokeStyle: color</code></td></tr><tr id="3ad4e874-e899-4d33-a0f1-e2bbabaa8924"><td id="zJbO" class="" style="width:181.78125px"><code>lineWidth: string</code></td></tr><tr id="f2a62dc6-870c-4b8e-831f-352dfa0f18ca"><td id="zJbO" class="" style="width:181.78125px"><code>font: &quot;size, font&quot;</code>
+<code>textAlign: string
+textBaseline: str</code></td></tr></tbody></table><p id="a3e9408f-3931-44ba-998b-a048d2cc24a2" class=""><strong>Colors</strong></p><table id="90f62bf1-5fa3-4f59-bd87-d7b01cfb54a6" class="simple-table"><thead class="simple-table-header"><tr id="9f344a83-9667-4783-bcc6-cc9d06d95034"><th id="GrEa" class="simple-table-header-color simple-table-header" style="width:70px">type</th><th id="|l``" class="simple-table-header-color simple-table-header">ex</th></tr></thead><tbody><tr id="12444ed8-e178-4c3d-b939-0e366b280892"><th id="GrEa" class="simple-table-header-color simple-table-header" style="width:70px"><strong>named</strong></th><td id="|l``" class=""><mark class="highlight-teal"><code>“blue”</code></mark>, <mark class="highlight-teal"><code>“red”</code></mark></td></tr><tr id="f9d73fb9-7b9b-4fb0-8551-fc50dad93666"><th id="GrEa" class="simple-table-header-color simple-table-header" style="width:70px"><strong>rgb</strong></th><td id="|l``" class=""><mark class="highlight-teal"><code>rgb(r, g, b) </code></mark></td></tr><tr id="00387c0d-aa3d-49bf-8997-f0892c2601ff"><th id="GrEa" class="simple-table-header-color simple-table-header" style="width:70px"><strong>hsl</strong></th><td id="|l``" class=""><mark class="highlight-teal"><code>hsl(180 deg, 80% 90%)</code></mark></td></tr></tbody></table><p id="d4076ae6-f267-47ed-9b9a-3f4a7bb9f073" class="">
+</p></div><div id="710812d9-82c9-417e-8b3c-40306d47d23f" style="width:62.5%" class="column"><h3 id="42385126-783e-4594-95f6-a29925766b73" class=""><strong>Methods</strong></h3><p id="9ad1abe3-3af6-4b44-aa84-0d8392498089" class=""><code>stroke</code> - draw with current style </p><p id="e2e9da7e-e97c-42c4-a3c1-a60a94cde6ac" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Rectangle</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><table id="997a5129-6184-48f8-8b2b-ba9031d7d41c" class="simple-table"><tbody><tr id="001e1705-a334-496b-ae6f-182c20eb729d"><td id="aBjy" class=""><code>rect</code></td><td id="s=kP" class="" style="width:62px">x,y,w,h</td></tr><tr id="ac7f3a18-9a82-4dde-b82e-b355fa8040d0"><td id="aBjy" class=""><code>fillRect</code></td><td id="s=kP" class="" style="width:62px">x,y,w,h</td></tr><tr id="50860753-6081-47b9-95b9-fc882f39fb6f"><td id="aBjy" class=""><code>strokeRect</code></td><td id="s=kP" class="" style="width:62px">x,y,w,h</td></tr></tbody></table><p id="e4160ea3-eec0-4e2f-96f3-0d328ef150df" class=""><strong><strong><strong><strong><strong>Paths</strong></strong></strong></strong></strong></p><p id="f3978d77-cb22-48c6-bf78-70b14c81cfd6" class="">Polygons</p><ol type="1" id="7ef049aa-1f37-49c9-949b-aa67e81441ad" class="numbered-list" start="1"><li><code>beginPath()</code></li></ol><ol type="1" id="188da847-5ca7-42dc-85fd-935e94bd7515" class="numbered-list" start="2"><li>Optional: <code>moveTo(x,y)</code></li></ol><ol type="1" id="748666bd-ffa4-4084-a52a-2bbf057f3e19" class="numbered-list" start="3"><li>repeat: <code>lineTo(x,y)</code></li></ol><ol type="1" id="a13574af-78fb-46fa-bcfa-a9fcaf04a965" class="numbered-list" start="4"><li>Optional: <code>closePath()</code></li></ol><ol type="1" id="4b9735af-855d-4f6a-ab50-cbd1aeb14588" class="numbered-list" start="5"><li><code>stroke</code> &amp;/or <code>fill</code></li></ol><p id="5006451e-d8ac-40c6-a0e0-1011765ebd3e" class="">Circles</p><ol type="1" id="30a925f8-b391-4d0f-b198-fa253175158b" class="numbered-list" start="1"><li><code>beginPath()</code></li></ol><ol type="1" id="d2c35d1d-dbf9-478d-93d8-fddde56922da" class="numbered-list" start="2"><li><code>ellipse</code> or <code>arc</code></li></ol><ol type="1" id="c7e0288e-40d6-4cea-aa7d-defe7c958073" class="numbered-list" start="3"><li><code>stroke</code> &amp;/or <code>fill</code></li></ol><p id="0df036b4-d90a-4267-ad1f-4bcd9c04cfe0" class=""><strong><strong><strong><strong>Text</strong></strong></strong></strong></p><table id="5ccf8067-ddcc-43ff-a2d2-0d4c59c85c27" class="simple-table"><tbody><tr id="90b349ab-d3df-4fce-93a3-c2f9f24df4a8"><td id="SXAy" class=""><code>fillText</code></td><td id="CGc&gt;" class="">text, x, y</td></tr></tbody></table></div></div><h2 id="e42fbc43-87b6-448f-9056-7abfc392916b" class="block-color-orange"><strong>Drawable Objects</strong></h2><div id="8964fd8c-e4a0-4fa6-845f-126473e5e729" class="column-list"><div id="9151c819-218d-4c03-aa27-2fa6a7e76340" style="width:31.25%" class="column"><ol type="1" id="9fc6d1d7-92aa-4783-a901-5a6b6fe8baad" class="numbered-list" start="1"><li><strong>Interface</strong> </li></ol><p id="40f930f0-f2a5-45df-b2f8-836380b82308" class="">
+</p><p id="fb7f17de-c0bc-4c26-81bf-3900636cf2c5" class="">
+</p><p id="69fb9342-2528-4389-b5e3-557b67bb0eeb" class="">
+</p><ol type="1" id="5d5a0f36-9d1c-4613-a750-9f37a589d7d6" class="numbered-list" start="2"><li><strong>drawable object</strong></li></ol><p id="68fe950b-791b-40b1-b89f-2dcd1d761c54" class="">
+</p><p id="40ef094a-e5b3-433e-8ea5-5b7aa743cc0e" class="">
+</p></div><div id="0f6d6c74-32e0-4261-bff8-cd51382d7e86" style="width:68.75%" class="column"><pre id="453cf01e-44b7-4821-8c34-3d065c773467" class="code"><code>export interface Drawable {
+	draw: (gc: CanvasRenderingContext2D) =&gt; void
+}</code></pre><pre id="bbe355fc-5abf-4d59-9ab6-0e98a6ab8325" class="code"><code>export class MyShape implements Drawable {
+	... 
+	draw(gc: CanvasRenderingContext2D) {...}
+	...
+}</code></pre></div></div><p id="5c90e7ff-93f6-4f28-aab6-d3338525092a" class="block-color-orange_background"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/drawable-object%20(demo)%20ac6c67cadee54ec2833862ea627b149d.html"><span class="icon">🧑🏽‍💻</span>drawable-object (demo)</a> </p><h1 id="b0eb2580-4019-4952-b2a8-f1f87a25360f" class="">Painters Algorithm</h1><p id="99d6d960-6422-40d1-91fa-40a45bce79e9" class="">Draw from back to front</p><figure id="d35ba61c-b95f-43a1-aad3-f3b8aa35781b" class="image" style="text-align:left"><a href="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/Screen_Shot_2023-09-19_at_21.42.44.png"><img style="width:384px" src="05%20-%20Drawing%20cf3c9621a7a446b98be6bcb35cde22e3/Screen_Shot_2023-09-19_at_21.42.44.png"/></a></figure><hr id="587b7324-4b48-4f5e-b11f-d712dc692d86"/><h3 id="800778e8-7109-475f-84ee-46ab8b6bf18b" class="">Strategy for Drawing Complex Shapes</h3><ul id="d277ddbb-54d4-4a0d-81f7-f58069699e1c" class="bulleted-list"><li style="list-style-type:disc">pick a convenient coordinate frame that makes it easier to draw(ie: center) </li></ul><ul id="4794e075-8f29-4a1b-a6e7-97ca72b4730c" class="bulleted-list"><li style="list-style-type:disc">transform shapes to a desired location <ul id="be506ce7-3f6b-4224-96b8-48fa378ffcb1" class="bulleted-list"><li style="list-style-type:circle">ie: <code>translate()</code></li></ul></li></ul><h2 id="6de14ac1-643f-4856-b668-d214a4d5a60a" class="">Display List</h2><ul id="f093d034-8240-42f5-9319-98391c726f97" class="bulleted-list"><li style="list-style-type:disc">keep an ordered display list of drawable objects</li></ul><ul id="3b51fc81-7aa4-44f7-9b41-ee17e4b9f09e" class="bulleted-list"><li style="list-style-type:disc">iterate through array and draw them (from back to front)</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,719 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>M8 - Virtual Memory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26a9e258-0cc6-48ef-863a-bd8f77807d5c" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/book-closed_purple.svg"/></div><h1 class="page-title">M8 - Virtual Memory</h1><p class="page-description"></p></header><div class="page-body"><ul id="aae4b554-6b45-4564-9e12-a242170cae46" class="bulleted-list"><li style="list-style-type:disc">The # addresses can be greater then whats available in physical memory (because of virtual memory. </li></ul><ul id="c475fc9a-ce7c-4909-b3d2-966416987962" class="bulleted-list"><li style="list-style-type:disc">Multiple virtual address spaces, 1 physical addresss space. </li></ul><ul id="a91d3a08-1840-4a68-a84e-3a6bba74ae54" class="bulleted-list"><li style="list-style-type:disc">Each process has the view that it’s the only one running. </li></ul><ul id="05ac5597-476b-4598-918c-ae913ec89ff3" class="bulleted-list"><li style="list-style-type:disc">VM stores info for the program running in the process (code, data, stack). </li></ul><ul id="534e84e8-a1ab-47bc-9125-1ec270209e63" class="bulleted-list"><li style="list-style-type:disc">Process will never see a physical address; ie: uses virtual addresses for: <ul id="07800ff4-9bdb-4b9f-af34-f078fa041b99" class="bulleted-list"><li style="list-style-type:circle">Program Counter, Stack Pointer</li></ul><ul id="d2b2d7d1-af1e-4c49-98a3-64edccc2731e" class="bulleted-list"><li style="list-style-type:circle">Pointers to variables</li></ul></li></ul><ul id="1cc3fbc8-d58b-4f56-99fb-9e12a1fdf41d" class="bulleted-list"><li style="list-style-type:disc">They also won’t see an address from another P’s VM. </li></ul><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">Example</mark></summary><div class="indented"><figure id="0abd580d-f2bc-43ef-a7d3-6592d86b6739" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_A432E7471DBB-1.jpeg"><img style="width:576px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_A432E7471DBB-1.jpeg"/></a></figure><div id="bc489872-ff4c-4b68-a6b8-6e31a90f2503" class="column-list"><div id="e1ca5709-7b02-461e-9906-1b82608f2c2b" style="width:37.5%" class="column"><p id="482d9b65-d74d-40aa-9339-e68f26249581" class="">Total physical memory:  256 KB <div class="indented"><p id="d618b7bc-7726-4296-af27-7926016b2271" class="">⇒ # addresses = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>18</mn></msup></mrow><annotation encoding="application/x-tex">2^{18}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">18</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> </p><p id="e30f92e0-e5bd-4bfc-9e28-cae3ed1c7d4a" class="">⇒ 18 bit addresses </p></div></p></div><div id="7d4a9163-64f2-4fb1-9ea3-0d4a65babeaf" style="width:62.5%" class="column"><p id="57cb1aa6-844b-44d1-8921-8fa0b129f4ad" class="">If virtual addresses are <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">V=16</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">16</span></span></span></span></span><span>﻿</span></span> bits: <div class="indented"><p id="527bb701-c16f-4a69-ae0f-1691c2c3bbfe" class="">⇒ # virtual addresses = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup><mo>=</mo><mn>64</mn><mo separator="true">,</mo><mn>000</mn><mo>=</mo><mn>6</mn><msub><mn>4</mn><mrow><mi>k</mi><mi>B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">2^{16}=64,000=64_{kB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">64</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">000</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord">6</span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p><p id="aa7f5c73-7fe7-4646-b6de-352373aa7c2b" class="">⇒ Each process gets an address space of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><msub><mn>4</mn><mrow><mi>k</mi><mi>B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">64_{kB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord">6</span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></div></p></div></div></div></details><h1 id="abc0bff1-52e8-4f59-938e-97841b99895a" class="block-color-red">Address Translation </h1><ul id="1248fbc1-307a-4954-9f0f-606f75abaaef" class="bulleted-list"><li style="list-style-type:disc">Any access of memory by a process requires translation. </li></ul><ul id="73b02808-de51-430b-8a46-40cb6445241d" class="bulleted-list"><li style="list-style-type:disc">Performed by a hardware unit — <strong>Memory Management Unit (MMU)</strong></li></ul><ul id="eddb8fcd-a221-4412-b1f7-42f1f6446aa0" class="bulleted-list"><li style="list-style-type:disc">Many different methods … </li></ul><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-orange">#1 — Dynamic Relocation</mark></summary><div class="indented"><p id="2091b238-21b3-494c-83e2-a02bb02cf871" class=""><strong>Overview </strong></p><ul id="b1453b6a-5814-48f1-afc6-524f09aa30b7" class="bulleted-list"><li style="list-style-type:disc">Contigous block of PM for each process. </li></ul><ul id="ed8e3d46-eeb9-4244-880e-3085cefb0150" class="bulleted-list"><li style="list-style-type:disc">Where we place it them is “Dynamic”. Specified by <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mstyle mathsize="0.5em"><mrow><mi>i</mi><mi>m</mi><mi>i</mi><mi>t</mi></mrow><mo separator="true">,</mo><mstyle mathsize="1em"><mi>R</mi><mstyle mathsize="0.5em"><mrow><mi>e</mi><mi>l</mi><mi>o</mi><mi>c</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow><mstyle mathsize="1em"><mo stretchy="false">)</mo></mstyle></mstyle></mstyle></mstyle></mrow><annotation encoding="application/x-tex">(L\tiny{imit},\normalsize R\tiny{elocation}\normalsize )</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mord sizing reset-size6 size1"><span class="mord mathnormal">imi</span><span class="mord mathnormal">t</span></span><span class="mpunct sizing reset-size6 size1">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal sizing reset-size6 size6" style="margin-right:0.00773em;">R</span><span class="mord sizing reset-size6 size1"><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">oc</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span></span><span class="mclose sizing reset-size6 size6">)</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="f1eb1b31-5aac-4491-9569-c4d9de2b096f" class="bulleted-list"><li style="list-style-type:disc">CPU has 2 registers for the current process <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo separator="true">,</mo><mi>R</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(L,R)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> (change during context switch)</li></ul><figure id="6ea70248-9c98-48eb-803c-1d2c11c45d1a" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_96B3DA751C88-1.jpeg"><img style="width:480px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_96B3DA751C88-1.jpeg"/></a></figure><p id="dd99962a-4874-4aec-8354-f5489e0be6a2" class=""><strong>Translation:</strong> <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>→</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">v \rarr p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c613a046-cf6e-4d5e-89c0-7432545e8bf0" class="code"><code class="language-Python">if v &gt;= l: 	ERROR      # program can&#x27;t access an address past the limit + offset
+else: 	    p = v + R </code></pre><ul id="99007d37-36dd-4699-bdf3-bb8b57074cfc" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Example</strong></mark><strong> </strong></summary><p id="7ea857d9-e0c7-4df4-b8f0-e82a7c235b47" class="">Process A<div class="indented"><p id="9270a685-c987-4d6f-8a88-153cb964ff5a" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>0</mn><mi>x</mi><mtext> </mtext><mn>0000</mn><mtext> </mtext><mn>7000</mn></mrow><annotation encoding="application/x-tex">L=0x\ 0000\ 7000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mspace"> </span><span class="mord">0000</span><span class="mspace"> </span><span class="mord">7000</span></span></span></span></span><span>﻿</span></span></p><p id="aa9f3964-e711-4713-802e-e172c9190b21" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>0</mn><mi>x</mi><mtext> </mtext><mn>0002</mn><mtext> </mtext><mn>4000</mn></mrow><annotation encoding="application/x-tex">R=0x\ 0002 \ 4000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mspace"> </span><span class="mord">0002</span><span class="mspace"> </span><span class="mord">4000</span></span></span></span></span><span>﻿</span></span></p><table id="a48c9054-2fd6-49e3-aee7-33e25291ba40" class="simple-table"><thead class="simple-table-header"><tr id="ab074e65-319c-46d9-81ae-8f3d28113a14"><th id="j^d?" class="simple-table-header-color simple-table-header" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span></th><th id="&gt;l}l" class="simple-table-header-color simple-table-header"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span></th></tr></thead><tbody><tr id="abe17601-3951-45e4-bdfe-ec0da9c0f062"><td id="j^d?" class="" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>102</mn><mi>c</mi></mrow><annotation encoding="application/x-tex">0x102c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">102</span><span class="mord mathnormal">c</span></span></span></span></span><span>﻿</span></span></td><td id="&gt;l}l" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>2502</mn><mi>c</mi></mrow><annotation encoding="application/x-tex">0x2502c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">2502</span><span class="mord mathnormal">c</span></span></span></span></span><span>﻿</span></span></td></tr><tr id="592834e4-6df1-4094-8df1-d2dfc79e8826"><td id="j^d?" class="" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>8800</mn></mrow><annotation encoding="application/x-tex">0x8800</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">8800</span></span></span></span></span><span>﻿</span></span></td><td id="&gt;l}l" class="">ERROR</td></tr><tr id="79549381-d3fe-4f2a-b655-792054425b56"><td id="j^d?" class="" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>0000</mn></mrow><annotation encoding="application/x-tex">0x0000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">0000</span></span></span></span></span><span>﻿</span></span></td><td id="&gt;l}l" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>24000</mn></mrow><annotation encoding="application/x-tex">0x24000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">24000</span></span></span></span></span><span>﻿</span></span></td></tr></tbody></table></div></p><p id="87cb625c-98f9-46d4-b273-1ffd13b49256" class="">Process B<div class="indented"><p id="fb4f194a-af40-40a2-aa75-dac05fecc01b" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>0</mn><mi>x</mi><mtext> </mtext><mn>0000</mn><mtext> </mtext><mi>c</mi><mn>000</mn></mrow><annotation encoding="application/x-tex">L=0x\ 0000\ c000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mspace"> </span><span class="mord">0000</span><span class="mspace"> </span><span class="mord mathnormal">c</span><span class="mord">000</span></span></span></span></span><span>﻿</span></span></p><p id="02b6d477-b84f-4805-a80d-e9b6dc75f8de" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>0</mn><mi>x</mi><mtext> </mtext><mn>0001</mn><mtext> </mtext><mn>3000</mn></mrow><annotation encoding="application/x-tex">R=0x\ 0001 \ 3000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mspace"> </span><span class="mord">0001</span><span class="mspace"> </span><span class="mord">3000</span></span></span></span></span><span>﻿</span></span></p><table id="5274876b-c411-49b5-942c-52d9a24befd3" class="simple-table"><thead class="simple-table-header"><tr id="84691e59-539e-4bf9-ae6e-c42ca29a5495"><th id="j^d?" class="simple-table-header-color simple-table-header" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span></th><th id="&gt;l}l" class="simple-table-header-color simple-table-header"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span></th></tr></thead><tbody><tr id="ba7a7eb8-23bd-40df-b174-3e9d4261b1f9"><td id="j^d?" class="" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>102</mn><mi>c</mi></mrow><annotation encoding="application/x-tex">0x102c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">102</span><span class="mord mathnormal">c</span></span></span></span></span><span>﻿</span></span></td><td id="&gt;l}l" class=""></td></tr><tr id="c5f5b9f9-85df-4131-a353-9d6f5e6f2048"><td id="j^d?" class="" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>8800</mn></mrow><annotation encoding="application/x-tex">0x8800</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">8800</span></span></span></span></span><span>﻿</span></span></td><td id="&gt;l}l" class=""></td></tr><tr id="4b3b7fae-3a29-46d0-8aaf-f6ea36be11c9"><td id="j^d?" class="" style="width:78px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>0000</mn></mrow><annotation encoding="application/x-tex">0x0000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">0000</span></span></span></span></span><span>﻿</span></span></td><td id="&gt;l}l" class=""></td></tr></tbody></table></div></p></details></li></ul><hr id="bc202c4e-08a3-4c5a-81b7-ce729aee5d9d"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6ce0404f-3696-4aeb-9cfc-cde56b97c9ab"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">What’s an appropraite physical memory size<p id="281a6f90-958e-492c-a94f-2b4c3ba2b738" class="">You want a balance of<div class="indented"><p id="8ebd4ba2-3eb3-4d75-b678-e6ebe2fe61d4" class="">Not having too much extra unused memory (wasted space and resources) </p><p id="00e7c278-e610-4f10-916e-03cc6270421c" class="">And enough so that you processes fill it up.  </p></div></p></div></figure><hr id="d36a0ce3-c20e-4e21-b502-c7f468c5c344"/><p id="15cfd41b-6857-478d-ae27-6c761dfb5b26" class=""><strong>Pros</strong><div class="indented"><p id="d71409cb-887b-495d-87e6-11edd6dfbc6d" class="">Easy translation</p></div></p><p id="5a9890bd-91a8-4315-97df-fc87690decf2" class=""><strong>Cons</strong></p><ul id="b9dbd924-ae0d-4358-8bd7-110d23db0d05" class="toggle"><li><details open=""><summary><mark class="highlight-red">External Fragmentation </mark></summary><p id="37e4fb32-66fd-41e3-90ca-4d2aa0fb5e60" class="">Since processes take up a contigous block in memory</p><p id="7eaee8a1-6a4a-4ce0-90d5-988e93146e5d" class="">Unused fragments of memory, which add up. </p><p id="204d843b-384b-458a-818e-34dee8041980" class="">External — external to the memory you allocated for the process. </p><p id="96c520de-5976-458d-988e-d3e65c43c1bf" class="">Note: fragmentation becomes a problem once processes start to complete. At the start, we can pack them all together nicely. If. your memory is full, and your trying to give a new P some PM and no hole is big enough. That P is stuck waiting. </p></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-orange">#2 — Paging </mark></summary><div class="indented"><p id="37c97a92-7526-4dda-a969-1e162d1ca2f6" class="">Divide PM/VM into equally sized blocks: <strong>pages</strong> for VM, <strong>frames</strong> for PM<div class="indented"><p id="cfb2047d-295c-4e57-8f60-a4cebb0d6b4b" class="">We will use size = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mn>4</mn><mrow><mi>k</mi><mi>b</mi></mrow></msub><mo>=</mo><mn>408</mn><msub><mn>6</mn><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">4_{kb}=4086_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">kb</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord">408</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></div></p><figure id="154ac5a1-94cb-4c4c-84b6-485bea31c22c" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_E10F63D7800E-1.jpeg"><img style="width:432px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_E10F63D7800E-1.jpeg"/></a></figure><p id="f2554e76-5fa5-4eb5-a4f6-075f8cebdbc5" class="">Each individual page is mapped to a frame (non sequentially)</p><figure id="31bc9315-427a-4796-be31-16c256b00072" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_01D81E944241-1.jpeg"><img style="width:336px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_01D81E944241-1.jpeg"/></a></figure><p id="c6537977-8763-4cc6-b047-2c664316448b" class=""><mark class="highlight-red"><strong>Internal Fragmentation</strong></mark></p><div id="0d09060e-788b-4703-ac67-0337b9b83493" class="column-list"><div id="6ce35d89-fbd4-4589-bd20-5e908a27116f" style="width:18.75%" class="column"><figure id="97c5f8b4-f5fa-40d9-92bf-731a8d74f7c5" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_57EE53152AC4-1.jpeg"><img style="width:192px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_57EE53152AC4-1.jpeg"/></a></figure></div><div id="cb52408c-3504-491c-be92-7819f6fcab78" style="width:81.25%" class="column"><p id="a1960481-d9f0-4b49-8076-d24e2bea2bf2" class="">It’s possible that you have a page using a few byes of memory (we needed a new page for the memory but it does not use all of it). </p><p id="62009c8a-a3df-435e-b64a-f09f75ca5108" class="">Overall all the processes, this can add up. </p><p id="eb9ee889-9908-4313-aaa6-575e5ca93d25" class="">
+</p></div></div><h3 id="a95b30ea-c2c1-4dea-ae76-f725fdd9c534" class="">Page Tables </h3><ul id="2d1eed87-d983-4d8f-b5b2-1cc4f8707a1d" class="bulleted-list"><li style="list-style-type:disc">Stores the <em>page ↔ frame</em> mapping (in kernel memory) </li></ul><ul id="6186510f-af83-4d3e-8bc1-4b8664f15cdb" class="bulleted-list"><li style="list-style-type:disc">Each process has its own. </li></ul><ul id="03855dca-25c4-4428-a2be-7c9ad9a39e2c" class="toggle"><li><details open=""><summary><strong>Entries</strong> </summary><ul id="2e0ca160-9b44-4916-995f-9dfe51ccd6e4" class="bulleted-list"><li style="list-style-type:disc">frame # </li></ul><ul id="ff3bb82b-31d0-45f7-aa73-346d4e98a0e1" class="bulleted-list"><li style="list-style-type:disc">valid bit</li></ul><p id="51a76fe9-178b-4005-81ce-c08ddc121680" class="">May contain:</p><ul id="253b51ed-083d-44cd-bc19-2b9bc74b35eb" class="bulleted-list"><li style="list-style-type:disc">present bit </li></ul><ul id="5bd14ce5-fb5f-4cc6-92bd-4028fa058365" class="bulleted-list"><li style="list-style-type:disc">recently used bit </li></ul></details></li></ul><figure id="da911f80-1421-4921-a963-ed859f2074c3" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.09.57.png"><img style="width:240px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.09.57.png"/></a><figcaption>Page: page number, Frame: offset</figcaption></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ace42b72-dbbe-48c2-861a-61b31186da0c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Page Size ↔ Internal Fragmentation, Tradeoff </strong><p id="88aca40f-df9b-43b7-a113-0daaeed73970" class="">Smaller page size ⇒ less internal fragmentation, larger page table <div class="indented"><p id="cf3d8686-ad51-40b9-9da0-37d00f716410" class="">page table might now take up more space then the internal fragments did</p></div></p><p id="ce836ade-fb52-449b-afe5-43e346aa469d" class="">Larger Page size ⇒ more internal fragmentation, smaller page table <div class="indented"><p id="405f00ba-e301-46de-868c-2fc7a4760d46" class="">fragments might take up more space then the table </p></div></p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e8b5a48f-36cd-4001-b4e3-9109b3db0211"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">If VM is large enough, the PT could take up more space the program itself. </div></figure><h3 id="c9e33b37-b5df-411d-b8e1-75e762ed3238" class="">Translation </h3><ul id="dea8e846-81d6-4af0-bb95-82a72d7fbcbf" class="bulleted-list"><li style="list-style-type:disc">MMU has the <strong>page table base register (PTBR); </strong>location of the current process’s PT</li></ul><ul id="c85c65a6-b683-44b9-a4c9-7011b2e817a9" class="bulleted-list"><li style="list-style-type:disc">Context switch ⇒ change the value in the PTBR <figure id="45e99158-daab-4e25-80a7-df72f987bce6" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.39.15.png"><img style="width:336px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.39.15.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fe80efa8-7ad6-4b39-9158-61b02fe86f41" class="code"><code class="language-Python">PAGE_SIZE = PAGE_SIZE = 4 kB
+def translate(v):
+	page_num = v / PAGE_SIZE # or fist 4 bits (2^4 = 16 pages)
+	page_off = v % PAGE_SIZE # or last 12 bits (2^12 = 4k page size)
+	#------
+	PTE = PageTable(page_num) # Look up page’s PTE in the curr-process-PT
+	#------
+	if PTE.valid = false: 
+		raise ERROR
+	else: 
+		p = (PTE.frame_num * FRAME_SIZE) + offset
+	#------
+	return p</code></pre></li></ul><p id="cffa0fc0-f8c7-485e-96a1-8bd97b7cd9f1" class="">
+</p><ul id="fb9f21d5-4c4b-4598-9946-c8db19f032eb" class="toggle"><li><details open=""><summary><strong><mark class="highlight-purple">Example</mark></strong></summary><div id="79bf6609-1f6d-45f1-aaa4-c28d598810c3" class="column-list"><div id="2ce7217c-c89d-421e-ba38-a4210ac6e5b3" style="width:50%" class="column"><figure id="f35ed512-7342-4ff5-befa-4e8ab2a14eeb" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.43.22.png"><img style="width:120px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.43.22.png"/></a></figure></div><div id="7438f53a-90b9-4da3-a33a-908d0b587eab" style="width:106.25%" class="column"><table id="9e177457-14d6-4206-97be-3d963a07993b" class="simple-table"><thead class="simple-table-header"><tr id="67840ab5-1a84-48a1-946a-45161399069e"><th id="Whu`" class="simple-table-header-color simple-table-header" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span></th><th id="MrUk" class="simple-table-header-color simple-table-header">→</th><th id="WSPk" class="simple-table-header-color simple-table-header"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span></th></tr></thead><tbody><tr id="da018390-3468-4c79-aae5-65f1cef19f0f"><td id="Whu`" class="" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>102</mn><mi>c</mi></mrow><annotation encoding="application/x-tex">0x102c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">102</span><span class="mord mathnormal">c</span></span></span></span></span><span>﻿</span></span></td><td id="MrUk" class="">page# = 1<br/>offset = 2c<br/></td><td id="WSPk" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>0x2602c</mtext></mrow><annotation encoding="application/x-tex">\text{0x2602c}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord text"><span class="mord">0x2602c</span></span></span></span></span></span><span>﻿</span></span></td></tr><tr id="89e75c42-4d73-450d-bbe6-448ba9437c76"><td id="Whu`" class="" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>9800</mn></mrow><annotation encoding="application/x-tex">0x9800</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">9800</span></span></span></span></span><span>﻿</span></span></td><td id="MrUk" class="">page# = 9<br/>offset = 800<br/></td><td id="WSPk" class="">ERROR</td></tr><tr id="149db14c-3c1b-4a9b-8a70-0b1bcc7b9d0a"><td id="Whu`" class="" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>0024</mn></mrow><annotation encoding="application/x-tex">0x0024</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">0024</span></span></span></span></span><span>﻿</span></span></td><td id="MrUk" class="">page# = 0 <br/>offset = 024<br/></td><td id="WSPk" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>0x0f024</mtext></mrow><annotation encoding="application/x-tex">\text{0x0f024}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord text"><span class="mord">0x0f024</span></span></span></span></span></span><span>﻿</span></span></td></tr></tbody></table><p id="dc0e8fec-044f-40fd-aadb-490bbf6ed504" class="">
+</p></div></div><div id="cb92d5bc-6b5f-4d62-a77a-6184b675a9da" class="column-list"><div id="0551fb63-e1c9-461c-b953-6f582c918502" style="width:31.25%" class="column"><figure id="c354d4bb-8f55-4c9b-9478-69c3a9260533" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.48.50.png"><img style="width:132px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_17.48.50.png"/></a></figure></div><div id="cec2a35f-3076-4ce7-b17e-7ce5cd312f83" style="width:68.75%" class="column"><table id="75ac95bc-86e7-4312-b798-6f6bd9f55dfc" class="simple-table"><thead class="simple-table-header"><tr id="da109892-4a33-4e51-877f-2badc6887284"><th id="Whu`" class="simple-table-header-color simple-table-header" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span></th><th id="MrUk" class="simple-table-header-color simple-table-header">→</th><th id="WSPk" class="simple-table-header-color simple-table-header"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span></th></tr></thead><tbody><tr id="7ad6954b-7869-488f-80ff-ae77a0e09040"><td id="Whu`" class="" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>102</mn><mi>c</mi></mrow><annotation encoding="application/x-tex">0x102c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">102</span><span class="mord mathnormal">c</span></span></span></span></span><span>﻿</span></span></td><td id="MrUk" class="">page# = 1<br/>offset = 2c<br/></td><td id="WSPk" class="">?</td></tr><tr id="b1d36b41-a6e1-42ed-a212-663b4ad4348b"><td id="Whu`" class="" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>9800</mn></mrow><annotation encoding="application/x-tex">0x9800</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">9800</span></span></span></span></span><span>﻿</span></span></td><td id="MrUk" class="">page# = 9<br/>offset = 800<br/></td><td id="WSPk" class="">?</td></tr><tr id="d95d818d-414b-4d31-a564-54aee1f0d8c2"><td id="Whu`" class="" style="width:79.99777221679688px"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>0024</mn></mrow><annotation encoding="application/x-tex">0x0024</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">0024</span></span></span></span></span><span>﻿</span></span></td><td id="MrUk" class="">page# = 0 <br/>offset = 024<br/></td><td id="WSPk" class="">?</td></tr></tbody></table></div></div></details></li></ul><h3 id="b7ac4d85-2632-445a-a870-6982622b1e4f" class="">Summary</h3><div id="397ae386-13bf-4470-838c-705ae3949b40" class="column-list"><div id="8ce81b39-f959-4075-a32d-4648b4d25f05" style="width:50%" class="column"><p id="6eb05815-af57-46cb-846b-6bad3e507113" class=""><strong>Kernel</strong></p><ul id="ba84c111-038c-4529-a04e-d7f4551cf7e0" class="bulleted-list"><li style="list-style-type:disc">manages MMU registers on address space switches (during context switch) <ul id="94711565-6bd4-4692-83ff-8170d99cc545" class="bulleted-list"><li style="list-style-type:circle">PTBR</li></ul><ul id="8c58cf37-ea4d-4732-8797-e859cedb37e2" class="bulleted-list"><li style="list-style-type:circle"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> registers</li></ul></li></ul><ul id="d2a8fd7b-83c1-4143-8a27-7764fce0a69c" class="bulleted-list"><li style="list-style-type:disc">Manage PTs </li></ul><ul id="a4a841cc-5051-479d-9226-ade1264b2161" class="bulleted-list"><li style="list-style-type:disc">Manage (allocate/deallocate) physical memory</li></ul><ul id="952bb6bd-b9eb-465b-b7d8-a24dca979145" class="bulleted-list"><li style="list-style-type:disc">Handle MMU exceptions </li></ul></div><div id="de4f9616-e4e5-47f5-a9c6-4285fb955d76" style="width:50%" class="column"><p id="01f0cbbc-08d0-4673-b1b7-cbe09084adf6" class=""><strong>MMU (hardware) </strong></p><ul id="6fb3b93c-8ec5-4a04-b181-403a5107c867" class="bulleted-list"><li style="list-style-type:disc">Translates <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>→</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">v \rarr p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="fbd6ff84-0e45-4a06-b1f0-a1a22c141e1b" class="bulleted-list"><li style="list-style-type:disc">Raise exceptions </li></ul><p id="3bdc7527-6f44-4dca-a43d-bac0b2c92cb8" class="">
+</p></div></div></div></details><hr id="382bef87-ef04-43df-bec7-d1a9d51a4408"/><h2 id="73133312-6bc1-4938-9dd5-2d53fe0b1062" class=""><mark class="highlight-red">TLB</mark></h2><ul id="99d91327-5ac5-4158-8f27-5f912a872378" class="toggle"><li><details open=""><summary><strong>Motivation </strong></summary><p id="c95683f1-5c36-4e09-9f63-93aa00cccdbc" class="">When your trying to executie a program instruction:</p><ol type="1" id="ca051966-aa5e-4881-ab5b-4095b7d748dd" class="numbered-list" start="1"><li>Fetch instruction</li></ol><ol type="1" id="1623241f-79ca-4f16-98b7-57c6bf49aff3" class="numbered-list" start="2"><li>Fetch the instruction operands</li></ol><p id="11167bb3-f4fc-4dda-91d1-f15b3dd8fbd2" class="">2 memory lookups. Each requires address translation through a PT ⇒ 1 extra memory operation, PT lookup, foreach memory operation of a program. </p><p id="711aadb5-2aa2-4f75-8213-4b53332538ff" class="">To reduce this overhead, the TLB (small cache) stores page # to frame # mapping, allowing for quicker lookups). </p></details></li></ul><ul id="48bbf401-3f1e-4453-8935-bf74132ea2d4" class="bulleted-list"><li style="list-style-type:disc">Small, fast, cache of page↔frame translations </li></ul><ul id="ed66ea1c-0ee1-4a5b-9e73-d305a6d65d68" class="bulleted-list"><li style="list-style-type:disc"><strong>1 per core</strong><ul id="c46f2f92-5cb0-44c4-966b-aea4dd244f98" class="bulleted-list"><li style="list-style-type:circle">context swith: same TLB ⇒ <strong>flush TLB </strong>(new address space ⇒ entries not valid)</li></ul></li></ul><h3 id="fba0e97f-070a-4221-a0ce-4986b26e405a" class="">TLB Use</h3><p id="cb7c4626-b237-414a-9d73-6180b4a27af0" class="">Translating <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span> on page, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cd2464fc-206c-4e49-910b-f7a9ca441db9" class="code"><code class="language-Python">def TLB(p, f): 
+	if (p,f) in TLB: # hit
+		return f
+	else: # miss 
+		f &lt;- PT_find_frame_num(p)
+		add (p,f) to TLB
+		return f</code></pre><h3 id="1128849e-0d65-4ea8-8e1a-20c98a69d5a5" class="">TLB Flush</h3><p id="4cc65cc2-886f-42ce-9296-ee01e0dff33e" class="">If the MMU can’t distinguish TLB entries between diff address spaces, kernel must clear or invalidate the TLB on each context switch from one P to another. </p><h2 id="427e5380-7291-47a7-b343-ac8c43c6556a" class=""><mark class="highlight-red">More Realistic View of Memory</mark></h2><ol type="1" id="443e0c9e-f04c-4f11-af8a-386d9e59a0fd" class="numbered-list" start="1"><li>For a simple app, its VAS is <strong>sparse</strong><p id="9dee2223-e016-41e5-8452-235d31aa27d4" class="">⇒ wasted space for dynamic memory</p></li></ol><figure id="b762c62d-0d75-4c81-9235-24ede5c4a806" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_16A7B8C902D0-1.jpeg"><img style="width:288px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_16A7B8C902D0-1.jpeg"/></a><figcaption>Simple app, mainly empty space (<strong>sparse</strong>)</figcaption></figure><ol type="1" id="80e47d6a-c38b-4e85-b31e-2a10d712f53b" class="numbered-list" start="2"><li>Many invalid PTEs<p id="319aa1a0-40c6-4049-bfbc-2b56186f473b" class="">⇒ wasted resources for Page Tables </p><p id="55e8c995-78ed-4f80-8717-2e64910ef1ce" class="">The PT could end taking more space than the program itself. </p></li></ol><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-orange">#1.2 — D.R + Segmentation</mark></summary><div class="indented"><p id="15593e1e-2e23-458c-8012-159f565e8294" class="">Seperate the segments of the program &amp; map them seperately. </p><div id="691052b9-e692-4e17-9dea-e5c8d24f512a" class="column-list"><div id="962e13da-40ff-481f-acbb-df5a34a676c3" style="width:43.75%" class="column"><p id="662ac307-2ab4-43ac-b40e-77e3963dec85" class="">Now, a VA encodes 2 peices of info: </p><ol type="1" id="6fb2be5b-d097-4d82-834d-07cac91206a6" class="numbered-list" start="1"><li>Segment ID</li></ol><ol type="1" id="57cafc06-d825-4d90-93cb-2e5ccc0502f1" class="numbered-list" start="2"><li>Byte Offset within segment</li></ol></div><div id="483501f6-08c0-40d2-a9a3-b2078798c622" style="width:56.25%" class="column"><figure id="55def9e7-2d1d-40ad-b913-5fa4824ff460" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_3282B754A396-1.jpeg"><img style="width:336px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_3282B754A396-1.jpeg"/></a></figure></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c19b87cf-5cad-414a-a98a-4a5dd14b97df"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Solves the <strong>sparse</strong> address space problem. <p id="c39a3fe4-7a0e-4145-9647-78f46d2ea1a0" class=""><strong>External-fragmentation</strong> is reduced, by allocating <span style="border-bottom:0.05em solid">smaller</span> chunks of memory. </p></div></figure><h3 id="6f44353b-fecc-4446-845c-e009822e5f7b" class="">Translation</h3><ul id="54522f66-5b80-47c1-b187-39c90c4d63b9" class="toggle"><li><details open=""><summary><strong>Approach 1 </strong>- multiple registers</summary><p id="8e92aa46-c302-4f74-a852-bde89b08234a" class="">MMU has a for each segment <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>R</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>L</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(R_i, L_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><figure id="643453d7-7790-4695-82b2-3b8303f2fdcf" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_39321763AD60-1.jpeg"><img style="width:528px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_39321763AD60-1.jpeg"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fc2a4f83-f5f2-47d2-acf9-0cbfb63d63d9" class="code"><code class="language-Python">def translate(v): 
+	split v into: 
+		s = segment number
+		a = address within segment
+	if a &gt;= L[s]: generate exception
+	else: p = R[s] = a</code></pre><ul id="36c46c52-293a-4902-ab88-de68cf788039" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Example</strong></mark></summary><p id="fbf86e87-9875-4f24-bfda-044370bd7bf8" class="">Given 16 bit addresses for VM and 1 bit for segment: </p><figure id="c2fd77b5-eeab-4870-88dc-1c26f9d4e8a2" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_6C262D9550B6-1.jpeg"><img style="width:656.0025634765625px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_6C262D9550B6-1.jpeg"/></a></figure><p id="889df063-7547-43f6-b0f4-d07b55e2dffe" class="">
+</p><p id="7c069ee1-b92d-4df3-aea4-3405b0d643cb" class="">
+</p></details></li></ul><p id="ad492df1-dce5-4649-886d-d327b7d3bd43" class=""><mark class="highlight-red"><strong>Problem</strong></mark></p><ul id="4e4c8ea8-9b22-4ce3-90ad-b766e38e5c5a" class="bulleted-list"><li style="list-style-type:disc">context switch ⇒ swap <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo separator="true">,</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">R,L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> in MMU registers. </li></ul><ul id="19e5a489-10c0-4232-89f8-8fccbe99c67d" class="bulleted-list"><li style="list-style-type:disc">many segments ⇒ many registers to update on a context switch</li></ul></details></li></ul><ul id="00cfb143-25de-45c6-983a-b7487eb0ad00" class="toggle"><li><details open=""><summary><strong>Approach 2 </strong>- multiple segment-tables</summary><p id="691636f0-49c1-480d-b09d-363d901ab69e" class="">Instead of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo separator="true">,</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">R,L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> register that get’s swapped, maintain: </p><ol type="1" id="b0db8065-89b2-4d0c-b123-5fd811b1e3f9" class="numbered-list" start="1"><li>Create a <strong>segment table</strong> for <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> &amp; <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span> values<ul id="3ccc849c-5af5-47f6-84f7-38b7bb162516" class="bulleted-list"><li style="list-style-type:disc">Each Process has its own.</li></ul><ul id="a58f5ab3-a1ed-4737-94f0-881da1838b5e" class="bulleted-list"><li style="list-style-type:disc">stored in kernel memory</li></ul></li></ol><ol type="1" id="f38691e3-e4cd-4cbc-857f-98e62a2fc938" class="numbered-list" start="2"><li>Kernel updates 2 MMU registers: location of table and length. </li></ol><p id="ad414fe0-8aec-4cc1-8d57-0c11c503d6c3" class=""><strong>Steps </strong></p><p id="c61cc037-cd15-4422-b13f-0089a63d61b7" class="">Assuming the kernel correctly updates the MMU registers: </p><figure id="ca58a94c-cd91-4ff2-91a4-1b58afb37f39" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_21.18.55.png"><img style="width:528px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_21.18.55.png"/></a></figure></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-orange">#2.2 — Multi-Level Paging</mark></summary><div class="indented"><p id="78acecd7-5841-401d-8da7-ff1356fa8b81" class="">Solving the problem of the PT tracking many invalid pages / being too large.  </p><p id="9ec16f6c-a2cb-4ef6-b76f-d6949130c995" class="">2 levels: </p><ol type="1" id="48d4c091-1c7a-4161-9d58-70834df7aeed" class="numbered-list" start="1"><li>entries = pointer to a second level table (<strong>page table directory</strong>)</li></ol><ol type="1" id="7b6b7628-a037-4cc3-96a2-2153db533fb8" class="numbered-list" start="2"><li>entires = ponters to actual pages</li></ol><figure id="e6857479-dfe6-4bdd-939b-0104acb4b737" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_6439E2F4BDEE-1.jpeg"><img style="width:432px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_6439E2F4BDEE-1.jpeg"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f2c6f79b-529c-4573-9ccd-f970da4abb02"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Save a lot of PM for a sparse VM</strong><p id="a517c45d-9a93-4fc3-8748-b11328af89bd" class="">If all PTEs in a smaller table are invalid, we can avoid creating that table entirely</p></div></figure><hr id="88378164-85a3-4026-a349-04cb587c8b5e"/><hr id="e0c80174-d9b8-4fdc-b48a-9522192ee67c"/><p id="63ee93ed-dc81-4e57-9e8f-7670243c1ffa" class=""><mark class="highlight-red"><strong>Problems</strong></mark><div class="indented"><p id="d75e9f17-460f-43d6-a805-85a5109b5b01" class="">2 memory reads now required for getting the PTE </p><p id="3672e63f-2d73-4db1-be4a-cfe71ccaa44a" class="">relies on TLB having high hit rate, so not that important). </p></div></p><hr id="de29c506-4ce2-47ca-a737-396d1850bdfe"/><ul id="01e5be41-2c58-41cb-81b3-f5901121d713" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Example</strong></mark></summary><figure id="70462fc6-ee00-4ee9-80c8-541316b41b28" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_21.30.45.png"><img style="width:707.9910278320312px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_21.30.45.png"/></a></figure></details></li></ul><hr id="40ce558f-c101-4dc2-aa7f-1f4a6ea95e5e"/><p id="46d051f8-64f2-4fbd-b457-cc05249a9e55" class=""><strong>Translation</strong><div class="indented"><figure id="ae921f03-726a-4548-ad70-79e5c78e6de8" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_A1D822232B41-1.jpeg"><img style="width:576px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_A1D822232B41-1.jpeg"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="44ae6f2b-73bd-412e-b864-10752ebec87f" class="code"><code class="language-Python">def translation(v): 
+	p2 = index into PT-DIR using p1 # pointer to 2nd level PT
+	if p2 not valid: raise ERROR
+	PTE = index into 2ND-LEVEL-PT using p2 # PTE for the page 
+	if PTE not valid: raise ERROR
+	p = PTE.frame_num + o
+	return p</code></pre><ul id="8cceaa77-4d9a-490c-82a5-17f424d99bc1" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Example</strong></mark></summary><figure id="8b99481b-7616-4efb-b2d6-923784854b38" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_21.48.06.png"><img style="width:432px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-16_at_21.48.06.png"/></a></figure></details></li></ul></div></p><hr id="4e620a66-dbb5-4f80-958a-327573bb143f"/><p id="17024aea-27cb-4a1d-ad4b-f71da9877529" class=""><strong>How many levels to use? </strong></p><p id="e7433fdc-fb97-47db-8186-96c573fdaf30" class="">Enough for each page directory / table to fit into a singe block (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>k</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">4kB</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">4</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span></span><span>﻿</span></span>)</p><p id="fea3791b-5b5d-4214-8177-7458b02f9e6c" class="">So that we can easily swap page-table from memory to disk if we don&#x27;t use it often. <div class="indented"><figure id="56b16137-5345-4c31-82ba-12f42b65105b" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_53DDD3CC76C4-1.jpeg"><img style="width:336px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_53DDD3CC76C4-1.jpeg"/></a><figcaption>Example showing the need for more than 1 level. </figcaption></figure></div></p><div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fe223457-72bf-48ee-be72-8cebcef67a8b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Tradeoff</strong><p id="72aa64f4-ed27-479c-81dd-07f8d3d7f75a" class="">TLB misses become more expensive as the number of levels goes up. </p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b9f5f1f6-470c-4741-8e53-0c7b977a29d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Tradeoff</strong> <p id="4c26235b-b84c-4cb6-bb81-6e0218782c2c" class="">Need to figure out how to best split up the bits: </p><div id="259224fe-62a1-4e5e-b8b0-fbe6fe97d17e" class="column-list"><div id="890ed2a3-62e7-4182-b503-1fd5380016de" style="width:50%" class="column"><p id="829446ed-1b09-438d-ab01-3855557ffb72" class="">Having all pages / directories / tables fit into a block</p></div><div id="7530468d-a6f7-4f89-9171-61729682eecb" style="width:50%" class="column"><p id="c3cc9647-a3d1-409f-b9cd-288749188af4" class="">Having each block be full</p><p id="c40f89f4-4785-4dc7-81ea-dbaa7deed965" class="">
+</p></div></div></div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0"><mark class="highlight-red">VM for the Kernel</mark></summary><div class="indented"><figure id="1cfce121-76a8-4bba-9b84-bef255502232" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_56DDEF88855E-1.jpeg"><img style="width:192px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_56DDEF88855E-1.jpeg"/></a><figcaption>Without VM for kernel, many translations. </figcaption></figure><p id="29945785-64c3-4626-8ce7-eaafd0038247" class="">Kernel shares VM with the process: don’t need to change address-space to copy data. </p><ul id="8fa237ee-c316-44b7-810f-5ab4a53af3d9" class="bulleted-list"><li style="list-style-type:disc">Kernel occupies <strong>top</strong> <strong>half</strong> of every process V-AS: <ul id="0e84626b-d540-4616-9361-2b1746141b11" class="bulleted-list"><li style="list-style-type:circle">kernel can still setup VM for other processes. </li></ul><ul id="4f1f5eba-89b6-4045-b57c-e91f41ab2bd2" class="bulleted-list"><li style="list-style-type:circle">don’t want to have to change VAS for any process. </li></ul></li></ul><figure id="c792121c-0c2e-4f41-854e-bcdafaa5b96f" class="image" style="text-align:center"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-17_at_11.47.03.png"><img style="width:240px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-17_at_11.47.03.png"/></a><figcaption>The kernel’s “in process” address space </figcaption></figure><p id="36589259-52a4-4f9b-85ac-eba06c5e68dd" class=""><strong>Translation </strong></p><div id="68c9a2e3-ccad-4788-9dab-19a5fac455e4" class="column-list"><div id="2bf06561-3353-4cea-86e4-4eb3bf4b30c6" style="width:50%" class="column"><figure id="c21152ce-e4c0-40e6-8bd6-67fdc515c31f" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_67E499814A0F-1.jpeg"><img style="width:288px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_67E499814A0F-1.jpeg"/></a></figure></div><div id="4c5680fe-6c40-43d1-b85b-ff612066f5db" style="width:50%" class="column"><p id="e3e34660-43fd-4055-8f1d-b71a70cef288" class=""><strong>Top half:</strong>Kernel maps to same fixed location. </p><p id="abaec120-e3c2-4507-8db3-dc46f59bbca1" class=""><strong>Bottom half: </strong>Use the translation rule provided by the kernel (ie: pawge table, …)</p></div></div><h3 id="f9cb3456-dc13-4280-bf5d-48cf546a1036" class=""><mark class="highlight-purple">MIPS, Example</mark></h3><figure id="903b2467-b41a-4561-8f94-731cdf71e782" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_E4AE65FC5EE8-1.jpeg"><img style="width:1448px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/IMG_E4AE65FC5EE8-1.jpeg"/></a><figcaption><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mn>2</mn><mrow><mi>G</mi><mi>B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">2_{GB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">GB</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> VAS, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mn>1</mn><mrow><mi>G</mi><mi>B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">1_{GB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">GB</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> PAS</figcaption></figure><p id="4f1c1bce-e2d2-4018-962c-3da1fd737f3d" class="">
+</p><p id="59e0e324-c401-42d0-8027-685071f2d6f5" class="">
+</p><p id="7f209e23-11fe-41ba-81ca-f283ee813029" class="">
+</p></div></details><h2 id="62217e90-eaa6-4b8c-b260-a9ba1426e2cd" class=""><mark class="highlight-red">Swapping</mark></h2><p id="27e1420b-c649-45d1-a934-f6e4da10171f" class="">If pages of a process memory are not being used ⇒ <strong>swap to disk </strong></p><ul id="aaf1ff4f-e5d8-45cf-8cc5-b4c1538ea3d5" class="bulleted-list"><li style="list-style-type:disc">frees up space </li></ul><ul id="c26a9751-efc8-4059-9800-8e0895c2d8a3" class="bulleted-list"><li style="list-style-type:disc">slow (use only when needed) </li></ul><ul id="3a1fafaa-20f1-45d2-a940-984252845e52" class="bulleted-list"><li style="list-style-type:disc">To the process: still<strong> in VM </strong>but actual data is <strong>not in PM</strong>, it’s <strong>in disk</strong><ul id="3c335761-421e-4ed3-888f-4c4813419e81" class="bulleted-list"><li style="list-style-type:circle"><strong>resident set: </strong>pages in PM</li></ul></li></ul><ul id="39fded3e-ebc3-46eb-8c0d-58161d12d177" class="bulleted-list"><li style="list-style-type:disc">Add a <strong>present bit </strong>to PTE (indicate presence in PM)  </li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e0a56b24-b3aa-4d83-835f-b40d12ff7bba"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>Thrashing</strong><p id="22cfe29a-2c53-42b5-a8e8-fa2013133859" class="">When you use FAR more VM then PM ⇒ lots of <strong>swapping </strong>⇒ very slow</p></div></figure><table id="151c83c2-dedc-4045-a7fe-751c4f7025cf" class="simple-table"><thead class="simple-table-header"><tr id="260f821d-4434-4494-be26-3edca07d3797"><th id="nRHJ" class="simple-table-header-color simple-table-header" style="width:69.99478912353516px">valid</th><th id="flcy" class="simple-table-header-color simple-table-header" style="width:69.99609375px">present</th><th id="hGXO" class="simple-table-header-color simple-table-header" style="width:377.99737548828125px">? </th></tr></thead><tbody><tr id="d8f35c9d-ba32-4e64-a583-1c837d8fd321"><td id="nRHJ" class="" style="width:69.99478912353516px">1</td><td id="flcy" class="" style="width:69.99609375px">1</td><td id="hGXO" class="" style="width:377.99737548828125px">page maps to a correctly allocated (valid) frame which  actually holds data for the page (present). </td></tr><tr id="872bcbf3-b7a5-4604-b6e0-0a5afae92a08"><td id="nRHJ" class="" style="width:69.99478912353516px">1</td><td id="flcy" class="" style="width:69.99609375px">0</td><td id="hGXO" class="" style="width:377.99737548828125px">the page is on disk, and something else temporarily occupies the frame</td></tr><tr id="1e6be765-ffd2-4498-965b-8f185494576e"><td id="nRHJ" class="" style="width:69.99478912353516px">0</td><td id="flcy" class="" style="width:69.99609375px">x</td><td id="hGXO" class="" style="width:377.99737548828125px">present bit does not matter</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="78d7b427-84ad-49ec-b44c-1ae942b43664"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>Page Fault </strong><p id="03864b02-43d1-4616-866d-59cc2c3b4fd5" class="">Accessing a page not in memory (present bit = 0)</p><ul id="562f3bf3-6885-4621-b6e5-dd0b823df126" class="bulleted-list"><li style="list-style-type:disc">MMU creates a <strong>“</strong><strong><em>PAGE FAULT” </em></strong><strong>exception</strong> which needs to be handled by the kernel</li></ul><ul id="641b5beb-7f72-4ade-9685-54557846b482" class="bulleted-list"><li style="list-style-type:disc">It’s up to the kernel to handle the situation: <ul id="fb2302e8-33be-42c4-a290-4d0cd3ec0e53" class="bulleted-list"><li style="list-style-type:circle">swap the page into memory from secondary storage. </li></ul><ul id="cf7cfca5-f283-4a2c-b690-bda4dfc4a841" class="bulleted-list"><li style="list-style-type:circle">update the PTE (set the present bit) </li></ul></li></ul></div></figure><h3 id="b962f44a-d2af-47b7-9d0c-eaf833fdd7cf" class="">Page Replacement</h3><p id="6efb2534-00a0-4483-a82c-0bc7dc36aea7" class="">If there’s no free space, how do we choose which page to <strong>evict</strong> for the <strong>swap</strong> to occur? </p><ul id="c6a77af6-511c-40b4-8b26-1f8f1e36d9b8" class="bulleted-list"><li style="list-style-type:disc">If we could predict the future, the optimal choice: replace the page that will not be referenced for the longest time. </li></ul><table id="6de2a972-9052-43f6-979b-40a544c6acf0" class="simple-table"><thead class="simple-table-header"><tr id="e0c0b8f1-6ac0-4b6b-b1fb-0db73922e3cc"><th id="aKcd" class="simple-table-header-color simple-table-header" style="width:61px"></th><th id="TZIn" class="simple-table-header-color simple-table-header" style="width:261.99609375px">?</th></tr></thead><tbody><tr id="ea99eb35-d18e-4125-b96e-528b88c69f20"><th id="aKcd" class="simple-table-header-color simple-table-header" style="width:61px">FIFO</th><td id="TZIn" class="" style="width:261.99609375px">Replace the page that has been in memory the longest</td></tr><tr id="6f32821b-c2cf-473c-9129-b77be6e35db2"><th id="aKcd" class="simple-table-header-color simple-table-header" style="width:61px">LRU</th><td id="TZIn" class="" style="width:261.99609375px">Exploits <strong>temporal</strong> <strong>locality</strong>; swap least recently used page. </td></tr><tr id="0afb6e50-6d91-4d0b-9761-45b74c20536c"><th id="aKcd" class="simple-table-header-color simple-table-header" style="width:61px">Clock</th><td id="TZIn" class="" style="width:261.99609375px">FIFO except: remove the first page without a second chance. Give page a second chance if it is accessed. Remove the second chance if its used. </td></tr></tbody></table><ul id="22b0c7f2-fd6c-4e0c-99f6-00b1e75bdb6a" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>FIFO</strong></mark></summary><figure id="6fcacc87-d057-47bf-a051-198a0e7c40b8" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-17_at_12.58.30.png"><img style="width:518.0078125px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-17_at_12.58.30.png"/></a><figcaption>frame # (arbitrarily chosen), refs = page</figcaption></figure></details></li></ul><ul id="4205ad79-75a5-49eb-b6d7-40fec7ca7d11" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>LRU</strong></mark></summary><figure id="25d2a86f-bca4-41f3-85c1-1a6e8ea3160a" class="image"><a href="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-17_at_13.02.44.png"><img style="width:432px" src="M8%20-%20Virtual%20Memory%2026a9e2580cc648ef863abd8f77807d5c/Screen_Shot_2024-04-17_at_13.02.44.png"/></a><figcaption>In this example, has 1 more page fault than FIFO. But in general, in the longer run, LRU is better. </figcaption></figure></details></li></ul><p id="e97e7438-0948-4201-aaf2-b94ade03cc96" class="">
+</p><p id="21bf5c01-376b-4362-b23c-f4d1d02433fe" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">valid</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Apr 19, 2024, 5:16 PM</time></span></span></div><div style="padding:0.2em">correctly allocated</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">present</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Apr 19, 2024, 5:16 PM</time></span></span></div><div style="padding:0.2em">actually holds data for the page</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">valid</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Apr 19, 2024, 5:16 PM</time></span></span></div><div style="padding:0.2em">correctly allocated</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">present</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Apr 19, 2024, 5:16 PM</time></span></span></div><div style="padding:0.2em">actually holds data for the page</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong>segment table</strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Apr 19, 2024, 1:28 PM</time></span></span></div><div style="padding:0.2em">where?</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Resolved inline comments</summary><div class="indented"><div><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Apr 19, 2024, 4:46 PM</time></span></span></div><div style="padding:0.2em">Example showing the need for more than 1 level. </div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

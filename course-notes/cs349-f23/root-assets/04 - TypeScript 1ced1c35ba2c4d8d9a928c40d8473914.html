@@ -1,0 +1,830 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>04 - TypeScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1ced1c35-ba2c-4d8d-9a92-8c40d8473914" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📓</span></div><h1 class="page-title">04 - TypeScript</h1><p class="page-description"></p></header><div class="page-body"><table id="5ded5053-5694-4945-b7b0-c67091f4f114" class="simple-table"><tbody><tr id="ab56c9cd-2693-43e7-a970-d594f8f91d3b"><th id="aHdc" class="block-color-gray_background simple-table-header">Title</th><td id="&lt;SCr" class="" style="width:553.4559631347656px"><strong>TypeScript</strong></td></tr><tr id="19107145-12f2-4007-b862-c77dfb58299c"><th id="aHdc" class="block-color-gray_background simple-table-header"><strong>Date</strong></th><td id="&lt;SCr" class="" style="width:553.4559631347656px">2023 - SEP 11</td></tr></tbody></table><hr id="44f50e4b-2ac8-402c-86db-e703a120c8a4"/><h1 id="c5b187ce-e9ed-4a74-a8c2-900f3f0a6a06" class="block-color-red">JavaScript</h1><ul id="0f0f568d-8c3f-4b0a-9eee-94bedaa0aa64" class="bulleted-list"><li style="list-style-type:disc">Object-oriented</li></ul><ul id="9dbda4ea-c49c-4c32-8cc9-d07ff195906a" class="bulleted-list"><li style="list-style-type:disc">Dynamic type checking</li></ul><ul id="fd19f4e2-c4fd-4cff-ab33-e604659d8916" class="bulleted-list"><li style="list-style-type:disc"><code>;</code> optional</li></ul><h2 id="5f83e76a-67c8-4ab7-ae07-c2d7ca7ec1cc" class="block-color-orange"><strong>Basics</strong></h2><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="8c6758d4-2c39-47ab-a654-7462ccebae77"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>Printing</strong><pre id="b1cf7765-8c47-4ef1-a903-9b256e468ac0" class="code"><code>console.log(&quot;message&quot;);</code></pre></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="eb542d36-6bca-4708-bd9f-43e894a6f54d"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>String Template Literals</strong><p id="c6d36e87-8c54-46d1-997a-1d2c30a156fb" class="">String literal with back-tick <code>``</code> enables</p><ol type="1" id="8fd2889e-c9f2-46a9-9ef5-bc2e1111ec66" class="numbered-list" start="1"><li>Interpolation</li></ol><ol type="1" id="771e1a77-8e8a-4ead-9e83-7339d3d0b837" class="numbered-list" start="2"><li>multi-line strings</li></ol><div id="8b699437-d187-4ec0-9a70-5af16ed3164c" class="column-list"><div id="9e461088-e6fb-4e36-97f6-14ab298865ba" style="width:50%" class="column"><p id="4ed1bba8-cca7-43ba-a8b5-e91ab6e024f5" class=""><strong><strong><strong><strong><strong><strong><strong>Without</strong></strong></strong></strong></strong></strong></strong></p><pre id="dbb8f0bf-2e46-4839-9486-c0c58096855c" class="code"><code>&quot;Length is&quot; + v + &quot; &quot; + units + &quot;.&quot;</code></pre></div><div id="a1e2b87d-8c67-4a85-a37d-5e5041efdd1b" style="width:50%" class="column"><p id="c592a433-14d4-4689-923c-6c59d55889fb" class=""><strong><strong><strong><strong><strong>With </strong></strong></strong></strong></strong></p><pre id="6258fe5d-4f57-441e-b957-ca56f77dc93e" class="code"><code>`Length is ${v} ${units}.`</code></pre></div></div></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="a766c2eb-385f-462e-8ba5-263a7a35294a"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>Variable</strong> <strong><strong><strong><strong><strong>Types</strong></strong></strong></strong></strong><div id="1b9aadcc-4547-4382-8398-994c4889866d" class="column-list"><div id="de570133-6d57-4055-a67e-051878790d0b" style="width:100%" class="column"><p id="7be4006f-ea0f-4150-96dc-dfb358f15eeb" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Variables</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ol type="1" id="d6252e4e-c946-4132-bafb-3fb0ae4c15c9" class="numbered-list" start="1"><li><mark class="highlight-blue"><code>let</code></mark></li></ol><ol type="1" id="66f5e2de-d856-4e7c-b0e6-8e5bc093bf11" class="numbered-list" start="2"><li><mark class="highlight-blue"><code>const</code></mark><ul id="2103cffd-36b5-49f0-8727-59bb52bc356c" class="block-color-gray bulleted-list"><li style="list-style-type:disc">can’t be reassigned </li></ul></li></ol><ol type="1" id="ca513314-3e1f-4c00-a9cd-bb0ec7c4d54b" class="numbered-list" start="3"><li><del><mark class="highlight-blue"><code>var</code></mark></del><ul id="d822b7ed-8be0-4902-af83-0799676f1221" class="block-color-gray bulleted-list"><li style="list-style-type:disc"><mark class="highlight-gray">has non-block scope (we won’t use)</mark></li></ul></li></ol></div><div id="89729a4b-74b0-4318-860b-9deda956d96a" style="width:100%" class="column"><p id="dbc10767-18e2-40c3-b8eb-a32f8555e816" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Primitives</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="62229548-257d-44fe-bf24-2d643cdc443a" class=""><mark class="highlight-blue"><code>boolean</code></mark></p><p id="b5ff4f37-4b28-4c34-8c4b-3fbd02f780ba" class=""><mark class="highlight-blue"><code>number</code></mark></p><p id="bdfe0482-2c5e-4e12-8a79-86576cf9bebf" class=""><mark class="highlight-blue"><code>string</code></mark></p><p id="c3e0ed63-7b28-45cb-b7c5-738b19f01b27" class=""><mark class="highlight-blue"><code>null</code></mark></p><p id="32b93a39-cd91-4d61-801c-e0c81c647ffa" class=""><mark class="highlight-blue"><code>undefined</code></mark></p></div></div></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="2d49eca8-dcee-46b9-ac3d-df29be893b82"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong><strong><strong><strong><strong>True/False</strong></strong></strong></strong></strong><table id="aa8c17b1-005d-483e-a1f7-71fd8c5e7c5d" class="simple-table"><thead class="simple-table-header"><tr id="9bed88ca-45ff-4161-808b-61f47e43c002"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"></th><th id="kn^F" class="simple-table-header-color simple-table-header" style="width:48.99005126953125px"><strong><code>==</code></strong></th><th id="cBri" class="simple-table-header-color simple-table-header" style="width:53.99999237060547px"><strong><code>===</code></strong></th></tr></thead><tbody><tr id="514ad58b-9bfc-4436-819d-5b8e4b01e7ad"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><strong><code>0</code></strong><strong>, </strong><strong><code>0</code></strong></th><td id="kn^F" class="" style="width:48.99005126953125px">T</td><td id="cBri" class="" style="width:53.99999237060547px">T</td></tr><tr id="fdbc11ef-2f77-4966-9ca3-48dcca9032cb"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><strong><code>1</code></strong><strong>, </strong><strong><code>1</code></strong></th><td id="kn^F" class="" style="width:48.99005126953125px">T</td><td id="cBri" class="" style="width:53.99999237060547px">T</td></tr><tr id="514a09cc-103b-4bb0-b2b6-b1a23789072f"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><strong><code>0</code></strong><strong>, </strong><strong><code>&#x27;&#x27;</code></strong></th><td id="kn^F" class="" style="width:48.99005126953125px"><strong>T</strong></td><td id="cBri" class="" style="width:53.99999237060547px"><strong>F</strong></td></tr><tr id="0f1afdf7-e49c-40b5-89ca-e6b2810f5950"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><strong><code>1</code></strong><strong>, </strong><strong><code>&#x27;1&#x27;</code></strong></th><td id="kn^F" class="" style="width:48.99005126953125px"><strong>T</strong></td><td id="cBri" class="" style="width:53.99999237060547px"><strong>F</strong></td></tr></tbody></table></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="e706ed57-875d-496e-bd28-9319b284092e"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><code><strong>if(...)</strong></code><strong> </strong>uses <code><strong>... === null/undefined</strong></code><strong> </strong><p id="39a8520a-cfec-4c4f-8167-071dc4367916" class=""><strong><strong><strong><strong><strong>Ex’s</strong></strong></strong></strong></strong></p><pre id="7f65caa8-3612-466f-874f-5a31e9b512fe" class="code"><code>if(&#x27;0&#x27;) ... //RUNS
+if(object) ... //cheks if object is null/undefined</code></pre></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="659cea31-2384-4e7c-8dea-03f2fbb90634"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong><mark class="highlight-blue"><code>null</code></mark></strong><strong> vs </strong><strong><mark class="highlight-blue"><code>undefined</code></mark></strong><p id="803ce396-4dfb-4763-814b-b89a75c5bc01" class="">Something hasn&#x27;t been initialized : <code>undefined</code>.</p><p id="ac613641-42af-40e0-ae77-47e8816b77b8" class="">Something is currently unavailable: <code>null</code></p><pre id="8c5f6cd7-c0e4-4a69-b74f-0852e02889a1" class="code"><code>null == undefined // T</code></pre><table id="d74bfbb3-a93b-4bea-91be-7add9a07403b" class="simple-table"><thead class="simple-table-header"><tr id="0175e500-ec20-464b-b544-0de189919ca0"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"></th><th id="kn^F" class="simple-table-header-color simple-table-header" style="width:81.97868347167969px"><code>== null</code></th><th id="cBri" class="simple-table-header-color simple-table-header" style="width:117.99856567382812px"><code>== undefined</code></th></tr></thead><tbody><tr id="53732347-4866-4537-92ed-7eeba3cba844"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><code>0</code></th><td id="kn^F" class="" style="width:81.97868347167969px">F</td><td id="cBri" class="" style="width:117.99856567382812px">F</td></tr><tr id="69bba9b8-b195-4245-b8d8-d9ac61593b1e"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><code>&#x27;&#x27;</code></th><td id="kn^F" class="" style="width:81.97868347167969px">F</td><td id="cBri" class="" style="width:117.99856567382812px">F</td></tr><tr id="40c17696-4d51-4c47-ac9a-a5bc27fd338b"><th id="C?lO" class="simple-table-header-color simple-table-header" style="width:77.99715423583984px"><code>false</code></th><td id="kn^F" class="" style="width:81.97868347167969px">F</td><td id="cBri" class="" style="width:117.99856567382812px">F</td></tr></tbody></table><p id="4aeb7f4e-c121-4780-958a-6226c57b0bc8" class="">To Check if not assigned:</p><pre id="393addd9-044e-450b-b286-e0f4abadaf4a" class="code"><code>(typeof someglobal !== &#x27;undefined&#x27;)</code></pre></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="441e3af0-8aa9-465e-900b-40edd2c932f3"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong><code>||</code></strong><strong> - </strong><code><strong>??</strong></code><div id="d2baf75c-c9f4-4b0c-a380-5f589d5b940f" class="column-list"><div id="d232784e-f34d-4565-a1f9-f3adae7b2fa9" style="width:50%" class="column"><p id="718ca6f5-a613-4c00-ad91-239cacf30769" class=""><code>||</code></p><p id="9b84e663-e503-43c7-b82c-d3282cbe3f78" class="">Assign default variable by<mark class="highlight-default"> </mark><mark class="highlight-red"><code>==</code></mark></p><p id="bb05a87b-210c-4993-b9b5-4a7bb5864544" class=""><mark class="highlight-gray">→</mark> <mark class="highlight-gray">falsy</mark><mark class="highlight-gray"><em> or </em></mark><mark class="highlight-gray">null/undefined</mark></p><pre id="0f20f85e-c106-4b6e-a9c8-e7ae7fa892c6" class="code code-wrap"><code>let v; //undefined
+v = v || 10;  //v &lt;- 10</code></pre></div><div id="adf6edd7-a518-4955-8245-478a4c7ef3f6" style="width:50%" class="column"><p id="9b93d2f5-05c0-4175-b94e-fed5f1ac12ad" class="">
+</p><p id="80d42b91-5df8-4ab0-935b-1fe1d5743efe" class=""><code>??</code></p><p id="d3938b0a-8b45-4f35-b8e9-356f47dfe5f8" class="">Assign default variable by<mark class="highlight-default"> </mark><code><mark class="highlight-red">===</mark></code></p><p id="d319e41d-9f34-41be-812d-3c4cd71b1270" class=""><mark class="highlight-gray">→</mark> <mark class="highlight-gray">null/undefined</mark></p><pre id="b04a51f5-6c53-4d04-bf9d-701799970e92" class="code code-wrap"><code>let v = 0; 
+v = v ?? 10;   //if v undefined, use default 10</code></pre></div></div></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="656f2ecf-4f85-474f-9f92-431fa99f8966"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><code>parameter?: type</code> is equal <code>parameter: type | undefined = undefined</code></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d2fd8d2d-a2f9-4c4e-9b07-b037a3acb67a"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>Don’t use non-null assertion operator </strong><strong><code>(!)</code></strong><div id="861ceb90-cce8-4ccd-a151-a69ad02b72e4" class="column-list"><div id="9d3ffc1b-6d98-4e07-8771-091298faceba" style="width:50%" class="column"><p id="072a614a-18bd-470f-aaf1-ddc8d84c3346" class=""><strong>Bad</strong></p><pre id="bfaf5d99-54e3-4c61-a02f-f2d672130c5c" class="code"><code>function f(s: string | null) {
+	s!.toUpperCase(); // error!
+}</code></pre></div><div id="14352cba-ba67-40ac-92e0-e8d1a0841a91" style="width:50%" class="column"><p id="241908d3-3302-409e-9e39-ab9fa93856d7" class=""><strong>Good</strong></p><pre id="213527b6-d13b-41f4-8466-ccecd61e8afb" class="code"><code>function f(s: string | null) {
+	s??.toUpperCase(); 
+}</code></pre></div></div></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="d51b24b8-4f11-40fd-9bbe-448338112eb8"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>Destructuring Assignment</strong><p id="5e1850c7-d6ff-4233-85dc-10bbe1d050f7" class="">Unpack <span style="border-bottom:0.05em solid">array values</span>, or <span style="border-bottom:0.05em solid">object properties</span> </p><p id="8163e80a-0ad3-4543-9da4-70153e3b7803" class=""><strong>Arrays</strong></p><pre id="54a4c8ab-5356-4b34-8084-d6ed28108b42" class="code"><code>let arr = [1,2,3,4,5];
+let [a,b] = arr;
+// a = 1, b = 2</code></pre><p id="17f708e0-041f-400f-b4cb-639e2a3064bc" class=""><strong><strong><strong><strong><strong><strong><strong>Objects</strong></strong></strong></strong></strong></strong></strong></p><pre id="12000e75-3f34-4aac-a02b-6242f5a8c964" class="code"><code>let obj = { &quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3 };
+let {a,b} = obj; 
+//a = 1, b = 2</code></pre><p id="3464c39f-94f1-470f-b6a7-10286a73f169" class="">Or rename them: </p><pre id="364971d8-122c-499b-af28-85f5666c0b72" class="code"><code>let {a:x,b:y} = obj; 
+//x=1, y=2</code></pre></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="f0a6bdb6-bf5d-4d5b-8e35-a9d103abe809"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong>Spread &amp; Rest </strong><code><strong>. . .</strong></code><p id="f2bea2a4-d18b-41a6-b26a-88927e4a3232" class="">For iterable objects</p><div id="47b138fc-794d-4764-b987-cc45084e2b8e" class="column-list"><div id="4f21f4e6-7a4a-444d-95cc-3c1da2280446" style="width:50%" class="column"><p id="f9460ddd-a2ce-4bad-831e-2999a11bb063" class=""><strong>Spread - </strong>expands</p><pre id="c1cad099-c1d5-44d7-ac61-85bbe083f01d" class="code"><code>let arr = [1,2,3,4,5];
+let arr2 = [-1, 0, ...arr, 6, 7];  
+//-1, 0, 1, 2, 3, 4, 5, 6, 7</code></pre></div><div id="a70eab7d-15cd-4bda-b1b9-0857edd718c8" style="width:50%" class="column"><p id="6a74a969-cf2f-4989-84d3-5bbfec5ba4a7" class=""><strong>Rest - </strong>condense</p><pre id="851a834d-bb3e-4965-a277-fdfe35904b5a" class="code"><code>let arr = [1,2,3,4,5]; 
+let [a,b,...c] = arr;   
+//[3, 4, 5] </code></pre></div></div></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="8d68b880-9798-403e-810e-5c37dd9bfc8d"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Type Assertion</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><pre id="04eb26c3-64c3-4459-8fc6-a3b38f6ec53d" class="code"><code>&lt;variable&gt; as &lt;some-type&gt;</code></pre></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="0979f0c5-4954-4c3a-a24a-963fc5ea5ed8"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/code_gray.svg"/></div><div style="width:100%"><strong><strong><strong><strong><strong>Enums</strong></strong></strong></strong></strong><div id="1b07a156-c437-4f30-9ad8-47399e0d2a68" class="column-list"><div id="617f6c8d-5878-42a1-bc86-8d003811005b" style="width:50%" class="column"><pre id="af43c026-5f16-4090-a212-7efc7f79b39d" class="code"><code>enum state {
+	Idle,
+	Down,
+	Up
+}
+
+let state1: State = State.Idle; </code></pre></div><div id="cc73b08e-c860-4480-a068-b212df9c80f0" style="width:50%" class="column"><p id="31657290-7bfc-4561-8b8a-35d48dd956d1" class=""><strong>Literal String Type</strong></p><ul id="6cd3a690-28a4-4e06-8039-9ecf37f99cb0" class="bulleted-list"><li style="list-style-type:disc">basically enum </li></ul><pre id="23dc08de-446e-48b9-ac45-a7e6e723254c" class="code"><code>let state1: &quot;idle&quot; | &quot;down&quot; | &quot;up&quot; = &quot;idle&quot;; </code></pre></div></div></div></figure><h2 id="e102fdea-7b96-4ce6-be43-cb58c944469a" class="block-color-orange">Functions</h2><p id="56815f87-068b-4e42-8bd6-d57a5aa4b286" class=""><strong><strong><strong><strong>Uses</strong></strong></strong></strong></p><ol type="1" id="5d77d6bc-a4f2-4c95-bba1-426ce67c1cb0" class="numbered-list" start="1"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Declaration </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><pre id="63b4e2ad-d751-4f00-b76a-f6350201865f" class="code code-wrap"><code>function add(a,b) {
+  return a + b;
+}</code></pre></li></ol><ol type="1" id="cbfc2067-8321-4398-88b8-da0a046c84b6" class="numbered-list" start="2"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Expression</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><pre id="b0eed9a2-25f3-44da-90b5-7ffacf5e7dac" class="code code-wrap"><code>const add = function(a,b) { return a+b; };</code></pre><pre id="9ba3d441-1276-4d67-9b64-98c42d7d4859" class="code code-wrap"><code>const add3 = (a,b) =&gt; a+b;</code></pre></li></ol><h3 id="09a433a7-e037-492a-acb4-8f035ccbf245" class="">First Class Functions</h3><ol type="1" id="f5619192-54ee-41f7-a4d2-5765bce26ec1" class="numbered-list" start="1"><li>variable ← function </li></ol><pre id="b9ebe0ad-1818-40bb-8300-db6e718bfd1b" class="code code-wrap"><code>function sayHello() { return &quot;Hello, &quot;; }
+
+const saySomething = sayHello; 
+
+console.log(saySomething())     // &quot;Hello, &quot; </code></pre><ol type="1" id="380b9105-cbc1-4ab9-a98c-397d02db4388" class="numbered-list" start="2"><li>Pass Functions</li></ol><pre id="1a7335b4-fa55-451b-98bd-8b0fa61a426a" class="code code-wrap"><code>function greeting(func, name) {
+  return func() + name;
+}
+
+console.log(greeting(sayHello, &quot;Bob&quot;)) // &quot;Hello, Bob&quot;</code></pre><ol type="1" id="1139af2d-f533-4b03-b5c1-51ab010b8340" class="numbered-list" start="3"><li>Return Function</li></ol><pre id="7ef28179-3c89-49f5-9503-2d869f24335e" class="code code-wrap"><code>function makeGreeting(msg) {
+  return function(name) { return msg + name; };
+}
+const greeting = makeGreeting(&quot;Hi, &quot;);  //variable &lt;- function 
+const greeting2 = greeting(&quot;Bob&quot;);    //call variable
+console.log(greeting2);  // &quot;Hi, bob&quot;</code></pre><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="de297eb6-514d-41a7-858b-0e40d7a1ca4e"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>Closure</strong><p id="0d515a23-61dc-4c0c-a8f7-3613e184ca27" class=""><code>inner()</code> can <strong>persist</strong> values from <code>outer()</code></p><pre id="94f1a97f-7cdf-41c5-a1d3-a1bdd2454be8" class="code"><code>function makeRandomGreeting() {
+  const msg = (Math.random() &gt; 0.5) ? &quot;Hi, &quot; : &quot;Hello, &quot;; 
+  return function(name) { return msg + name; }  //persists &#x27;msg&#x27;</code></pre><p id="a07efe2c-21cd-4b76-9312-8e78516ff276" class="">Can also use parameters from <code>outer()</code></p><pre id="35edc36c-e1ed-4f0a-ad96-bce8d35f722a" class="code"><code>function makeGreeting(msg) {
+  return function(name) { return msg() + name; }  
+}</code></pre></div></figure><h1 id="b285a016-3325-4bc0-abb4-dab3f04c4e87" class="block-color-red">Objects</h1><h3 id="071c33ca-a03d-429e-9395-18dd61df3844" class="block-color-yellow"><strong>Prototype</strong></h3><ul id="dabbfcd2-c549-4e1a-af37-fddd348d7100" class="bulleted-list"><li style="list-style-type:disc">Objects are <em><strong>linked</strong></em> to their prototype → has it’s stuff</li></ul><ul id="0fb6fbe3-7bfb-4af2-8035-ff64d18554dc" class="bulleted-list"><li style="list-style-type:disc">Multiple prototypes can link to form a <em><strong>chain</strong></em><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong><ul id="1b7e967b-631c-4ac9-a061-5c40d9b1f493" class="bulleted-list"><li style="list-style-type:circle">chain only has 1 branch (<strong>no multiple inheritance</strong>)</li></ul></li></ul><p id="ad304b2f-e184-431d-9138-b2680a5ff19e" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="983c3ec9-3dd2-4825-b130-0cd47928354c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>this</code> <p id="5c9e2202-bf41-4572-b9d8-3bf10b7b462f" class="">refers to object executing the current piece of code (the current function)</p><ul id="43d7c1f7-2bb9-409d-bb0e-d41a34551e43" class="bulleted-list"><li style="list-style-type:disc">regular function: <code>this</code> ⇒ <strong>global object</strong></li></ul><ul id="512ec96f-5b38-4912-904e-35915fe5972d" class="bulleted-list"><li style="list-style-type:disc"> object method: <code>this</code> ⇒ <strong>object</strong></li></ul></div></figure><h2 id="b2975a0f-fd59-4fd9-ab1f-6b080363fec9" class="block-color-orange">Inheritance</h2><table id="f899b193-84df-45b4-8aca-acdabba3b1bb" class="simple-table"><tbody><tr id="f17c9f38-ffb9-4f92-bd21-b8015c569268"><td id="|Jzu" class="block-color-blue_background"></td><td id="TD=&lt;" class="block-color-blue_background" style="width:305px"><strong>C++</strong></td><td id="tqQ;" class="block-color-blue_background" style="width:369px"><strong>JS</strong></td></tr><tr id="1c0efd0e-81d9-4424-97c9-197cc115ef37"><td id="|Jzu" class=""><code>class</code></td><td id="TD=&lt;" class="" style="width:305px">definition</td><td id="tqQ;" class="" style="width:369px">syntactic sugar</td></tr><tr id="a5792994-a637-4aef-bab1-942305058e18"><td id="|Jzu" class=""><code>object</code></td><td id="TD=&lt;" class="" style="width:305px">instance</td><td id="tqQ;" class="" style="width:369px">definition &amp; instance</td></tr><tr id="4dcedf22-3c9a-41cf-8230-4a9ae64122dd"><td id="|Jzu" class=""><strong>Inheritance</strong></td><td id="TD=&lt;" class="" style="width:305px">1 - Define class <code>B</code> (Inherit class<code>A</code>)
+2 - Create Instance of <code>B</code></td><td id="tqQ;" class="" style="width:369px">1 - Create object <code>B</code> (link <code>A</code> as prototype)<strong>
+</strong>2 -<strong> </strong>Use <code>B</code></td></tr><tr id="6461c5c9-9e5b-4a60-be00-4a33a007065a"><td id="|Jzu" class=""><strong>Constructor</strong></td><td id="TD=&lt;" class="" style="width:305px">Method (inside class) to make class <strong>instance</strong></td><td id="tqQ;" class="" style="width:369px"><em>(optional)</em>
+Function to <strong>define</strong> the object</td></tr></tbody></table><h3 id="77f30203-bc18-4ca7-a1d4-7cb8b844d2d6" class=""><mark class="highlight-yellow">No Constructor</mark></h3><p id="56482dc7-88e3-4d36-9807-04b1f8a66f24" class=""><strong>J</strong><mark class="highlight-gray">ava</mark><strong>S</strong><mark class="highlight-gray">cript</mark> <strong>O</strong><mark class="highlight-gray">bject </mark><strong>N</strong><mark class="highlight-gray">otation (JSON): </mark></p><pre id="6f9c78a1-369c-4f24-9074-7833fe91b2a8" class="code"><code>const square = {
+  colour: &quot;red&quot;,
+  size: 10, 
+  draw: () =&gt; `A ${this.size} pixel ${this.colour} square.`
+}</code></pre><h3 id="8af5463c-b9bf-48d6-ba8e-fb8454b131dc" class=""><mark class="highlight-yellow">Constructor</mark></h3><p id="3ea7fb83-73d9-4fd2-a9e2-7daa0ff5e222" class=""><strong>Create Objects</strong></p><p id="c75fa1fc-5d4f-4b89-936a-a1352d1dee03" class="">Use <code>constructor</code> and <code>new</code></p><pre id="b1949fb2-05b1-4cb0-8ad8-72f8017e8b7d" class="code"><code>const square = new Square(&quot;red&quot;, 10)  //new is needed</code></pre><div id="7c09b65d-3bd9-47bb-8e3d-bc8f67523803" class="column-list"><div id="e79e4706-94f8-4f00-8268-28739d2bf882" style="width:50%" class="column"><p id="c40df9ad-c296-4484-9055-84f5799c778c" class=""><span style="border-bottom:0.05em solid"><strong>Method 1</strong></span></p><pre id="3ba539ab-f40f-4c75-887c-e371f38490cf" class="code"><code>function Shape(colour) {
+  this.colour = colour; 
+  this.draw = function() {...}; 
+}
+
+
+
+function Square(colour, size) {
+  Shape.call(this, colour);
+  this.size = size;
+  this.draw = function() {...}
+}</code></pre></div><div id="5774ebc1-36c6-47fe-bbf9-00aee2e2e703" style="width:50%" class="column"><p id="69076105-6899-43f1-8d86-79376cd26159" class=""><span style="border-bottom:0.05em solid"><strong>Method 2</strong></span></p><pre id="13f004b0-b5da-45a0-987a-f5a6fe62dcff" class="code"><code>class Shape {
+  constructor(colour) {
+    this.colour = colour; 
+  }
+  draw = function() {...}
+}
+
+class Square {
+  constructor(colour, size) {
+    super(colour);        
+    this.size = size;
+  }
+  draw = function() {...}
+}</code></pre></div></div><hr id="54d1df45-b71c-4c0c-a733-14962b017785"/><h1 id="94ed1b8f-aa90-4548-9cb6-3e204ec4780d" class="block-color-red">Arrays</h1><h3 id="a3bafe59-6a89-456d-867e-314c96c8e266" class="">D<strong>eclare</strong></h3><pre id="879d24da-2c3c-40f7-8559-6a4923953a9e" class="code"><code>let arr = []          //empty, length = 0
+let arr = Array(5);   //empty, length = 5 ***
+let arr = [1,2,3,4,5] //full, length = 5</code></pre><h3 id="460806ff-50cb-4573-9342-5442ae82635b" class="">Iterate</h3><pre id="0624da66-b338-4964-8d34-016ce92d450e" class="code"><code>for (let i = 0; i &lt; arr.length; i++) {...}
+for (const x of arr) {...}
+arr.forEach((x) =&gt; {...})</code></pre><p id="841d7d68-3456-4b8b-b7b4-f6255ae75831" class="">
+</p><hr id="68a5c02b-cb0e-4a94-b52a-2a256db9e8fe"/><h1 id="ec663a61-02c5-4d29-a917-c74af19d9abd" class="block-color-red">TypeScript</h1><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="e3f401e2-74fd-45f0-87ff-aa6c09efe71e"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>TypeScript </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>=<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>JavaScript + <strong>Type Checking</strong></div></figure><table id="18597ed6-915a-4b26-8e39-b3ed531f8148" class="simple-table"><tbody><tr id="af361058-6f12-4308-b3e3-b044b108c4eb"><td id="HrYe" class="block-color-gray_background" style="width:211.9957275390625px"></td><td id="OMBP" class="block-color-gray_background" style="width:201.0283966064453px"><strong>JS</strong></td><td id="VbN~" class="block-color-gray_background" style="width:179.05538940429688px"><strong>TS</strong></td></tr><tr id="285af73b-c2e4-4d46-9703-42a183da5fbc"><td id="HrYe" class="" style="width:211.9957275390625px">Types <strong>can</strong> be passed with parameter</td><td id="OMBP" class="" style="width:201.0283966064453px">❌</td><td id="VbN~" class="" style="width:179.05538940429688px">✅</td></tr><tr id="a66c7817-255f-4ecb-ba67-5ee1bad54d48"><td id="HrYe" class="" style="width:211.9957275390625px">object and class distinction</td><td id="OMBP" class="" style="width:201.0283966064453px">❌ *prototypal inheritance</td><td id="VbN~" class="" style="width:179.05538940429688px">✅ *class in c++ way</td></tr><tr id="714f1f32-2b86-458b-b32e-8c190844e916"><td id="HrYe" class="" style="width:211.9957275390625px">has class keyword</td><td id="OMBP" class="" style="width:201.0283966064453px">✅ * syntactic sugar</td><td id="VbN~" class="" style="width:179.05538940429688px">✅</td></tr><tr id="0a5f3f8b-3c08-4a78-bc99-fc878e02b155"><td id="HrYe" class="" style="width:211.9957275390625px"><strong>Type Checking
+</strong>Typo in Function Name
+Uncalled Functions
+Unused variables
+Unreachable Code</td><td id="OMBP" class="" style="width:201.0283966064453px">run-time</td><td id="VbN~" class="" style="width:179.05538940429688px">translation</td></tr><tr id="80b9b79f-79a8-4704-b697-b53a5245ec83"><td id="HrYe" class="" style="width:211.9957275390625px">Type Behaviour</td><td id="OMBP" class="" style="width:201.0283966064453px"><strong><strong><strong><strong><strong><strong><strong><strong>Dynamic:</strong></strong></strong></strong></strong></strong></strong></strong>
+can re-assign to new type with no error
+operations assuming types work fine or silently fail </td><td id="VbN~" class="" style="width:179.05538940429688px">types = <strong>annotations</strong></td></tr><tr id="1439b35d-f391-4e81-88cd-5f0624f6efb0"><td id="HrYe" class="" style="width:211.9957275390625px">Invalid Function Arguments</td><td id="OMBP" class="" style="width:201.0283966064453px">no checks on # / type of arguments</td><td id="VbN~" class="" style="width:179.05538940429688px">checks</td></tr><tr id="0d4b7ada-4a08-4258-bcf8-0edf5d539aec"><td id="HrYe" class="" style="width:211.9957275390625px">Typo in property Name</td><td id="OMBP" class="" style="width:201.0283966064453px">creates new property</td><td id="VbN~" class="" style="width:179.05538940429688px">fails</td></tr><tr id="de6a27d0-5724-46ce-9db4-9935cb457105"><td id="HrYe" class="" style="width:211.9957275390625px">Function does not always return a value</td><td id="OMBP" class="" style="width:201.0283966064453px">returns undefined</td><td id="VbN~" class="" style="width:179.05538940429688px"></td></tr></tbody></table><ul id="d0d00be3-f574-42ae-91b7-4b4207ac9eea" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong>EX’s</strong></strong></strong></strong></strong></summary><pre id="043534fe-25a5-4339-9124-b387c17de8b5" class="code"><code>let a = 123; 
+a = a + &quot;hello&quot;; //error: &quot;String not assignable to type number&#x27; </code></pre><pre id="1fc4ed4a-297c-4d49-be72-8bd2305a20e8" class="code"><code>const obj = {a:1, b:2};
+obj.aa = 123;   //error: &quot;Property aa does not exist</code></pre></details></li></ul><h2 id="9693bfec-4049-487f-a20e-ec260767cd53" class="block-color-orange">Translation</h2><p id="ec0ee18f-7558-404f-9258-83bbd9497561" class="">Browsers <strong>translate (compiles)</strong> TS to JS</p><p id="f48cff9f-11bb-4cea-adeb-656d9b476b1f" class="">At the same time, it does <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>type checking</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><h2 id="0715f18e-521a-4d8b-af36-36ff01633fde" class="block-color-orange">Type Annotations</h2><h3 id="58a02762-b31e-4865-ad1c-87579bcb362a" class=""><strong>Primitive Types</strong></h3><div id="14a7d247-5488-4d8f-b94c-4d180d69ae4d" class="column-list"><div id="daab2924-7b08-40db-a075-8cd6dd2b7fd7" style="width:50%" class="column"><p id="ad62687d-ebdd-4d82-a671-15652c006990" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Explicit</strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="178bb146-8c53-4f02-8054-46fe00f93e66" class="code"><code>let n: number = 123;
+let b: boolean = true;
+let s: string = &quot;hello&quot;;</code></pre></div><div id="38ce9271-27eb-4957-b31b-14a7c2b19d66" style="width:50%" class="column"><p id="343c0aad-5a34-48ec-9e42-d4a8813226ea" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Implicit</strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="b235ffef-fa19-4b13-aa4d-2c36b5b98f64" class="code"><code>let n = 123;    //number
+let s = &quot;hello&quot; //string
+let b = true;   //boolean</code></pre></div></div><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="6efb77b1-61ac-46a4-881f-0c58dd5e5063"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong>Implicit →  </strong></strong></strong></strong></strong></strong></strong></strong></strong>can result in the <strong><strong><strong><strong>any </strong></strong></strong></strong>type<pre id="174ede03-84cc-4547-8633-83ce71ef767b" class="code"><code>let x;         //any
+x = 123;       //valid
+x = x + &quot;ABC&quot;  //valid</code></pre></div></figure><h3 id="2c0839b5-3119-4687-9652-4eac4b9f4eb0" class="">Array</h3><pre id="55068126-8d20-4dba-82f9-dce4a60a5684" class="code"><code>let arr: number[];      //array of numbers
+let arr: Array&lt;number&gt;; //generic</code></pre><h3 id="d64e8892-e256-4210-98c8-f157f4899c72" class="">Object</h3><pre id="97db7248-b4a6-414e-95e9-2aa15034ed2c" class="code"><code>let obj: {a:number, b: string} = {
+	a: 1,
+	b: &quot;hello&quot;,
+};</code></pre><h3 id="0dc47e74-a46d-4e62-bb12-44da179a32f0" class="">Function</h3><pre id="6c53fc1d-bcba-42d9-9ffd-f73bd0edeef6" class="code"><code>function add(a: number, b: number): number {
+	return a + b; 
+}</code></pre><h3 id="7c396b6c-b597-4933-932d-0ce2cf6eff7a" class=""><code>type</code> Alias</h3><pre id="640d125c-d014-42a3-89ef-8fe7084440c4" class="code"><code>type Point = {x: number, y: number}; 
+type simpleCallback = (data: string) =&gt; void;</code></pre><h2 id="88353f69-959d-4fba-939b-83c7e0336d59" class="block-color-orange">Interfaces</h2><p id="912612a7-79c4-47ae-9b53-55dadafc7a3d" class="">Define a <em>type of object  </em><mark class="highlight-gray"><em>(what types of data/functions)</em></mark></p><ul id="5621bced-dc1c-4282-8ff9-006f51435649" class="bulleted-list"><li style="list-style-type:disc">not an object itself</li></ul><ul id="6033bc8e-be48-4ef5-831b-58d476a76cce" class="bulleted-list"><li style="list-style-type:disc">but can be <strong>extended</strong><strong> </strong>by a real object</li></ul><div id="61cbd8c4-1d65-4054-a6c9-59a81927e74d" class="column-list"><div id="59cc2893-5fd2-43e3-bed0-c5861796b230" style="width:50%" class="column"><p id="af43e4bc-cc1a-4670-9815-2037dcba284f" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Interface</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="8fb37098-2fe8-45df-871e-9eec87dcc30d" class="code"><code>interface Point {
+	x: number; 
+	y: number;
+}</code></pre></div><div id="1ebd0a1a-8d75-406c-970f-cc0b4bbcf35a" style="width:50%" class="column"><p id="3231b8ba-a889-41ac-8a20-ef376570798d" class=""><strong><strong><strong><strong><strong><strong>Extend</strong></strong></strong></strong></strong></strong></p><pre id="3c4b6903-daaa-49f0-97ad-60f4c065892d" class="code"><code>interface 3DPoint extends Point {
+	z: number; 
+}</code></pre></div></div><p id="81da3828-0b0d-4a0a-b050-2acee96fc08b" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Create &lt;Object&gt; with &lt;Interface&gt;</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="0db3c3b4-b3b2-4d55-91da-b39ff5f19479" class="code"><code>let Square = {colour: &quot;red&quot;, size: 10} as Square;</code></pre><h2 id="75aeb34a-c1b7-41f4-8222-b12b4771c4f8" class="block-color-orange">Structural Type Checking </h2><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="e306c202-52f8-4f5c-af5a-ad888a32d9f9"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><mark class="highlight-default">Only the </mark><strong><em><mark class="highlight-default">structure</mark></em></strong><mark class="highlight-default"> </mark><em><mark class="highlight-default">of a</mark></em><mark class="highlight-default"> </mark><strong><mark class="highlight-default">type</mark></strong><mark class="highlight-default"> matters </mark></div></figure><p id="c4af9422-ac98-49be-b9c2-ecba79fec496" class=""><strong><strong>EX</strong></strong></p><p id="75f681ae-b320-4c90-b42e-4b58442d9aa8" class="">This function asks for a square. So that it can get it’s <code>colour</code> &amp; <code>size</code> (of <strong>any type</strong>)</p><pre id="dabc05cc-db36-43c3-9fd8-c828221364cb" class="code"><code>function renderSquare(square: Square) {
+	console.log(`A ${square.colour} square of size ${square.size}`);
+}</code></pre><p id="ee52db80-1d81-4dd0-9ebb-3bdd99d8a1a7" class="">You have to pass the <mark class="highlight-purple"><code>square</code></mark> type…</p><p id="5a2d0337-11d0-4c8d-8400-82e34c259ba8" class="">But, specifically, any <mark class="highlight-purple"><code>square</code></mark> type with the following properties: </p><ul id="12be0043-77a3-4b29-a629-73343e7927ee" class="bulleted-list"><li style="list-style-type:disc">[<code>colour</code> : <strong><strong><strong><strong>any </strong></strong></strong></strong>] </li></ul><ul id="1c93c192-041e-4829-8039-753f3e0b53ec" class="bulleted-list"><li style="list-style-type:disc">[<code>size</code> : <strong><strong><strong><strong>any </strong></strong></strong></strong>] </li></ul><div id="9b52e335-e81d-4c24-a8d0-a2a2de5a5d87" class="column-list"><div id="79f4b409-c513-4c00-913b-87e85e3bc60f" style="width:50%" class="column"><pre id="04ad9c25-cb27-4750-a299-0c25f9649add" class="code"><code>let square = {
+	colour: &quot;red&quot;, 
+	size: 10 };  //any type
+renderSquare(square) //still works</code></pre></div><div id="52844550-0e5d-47a7-980c-7d7328e27d52" style="width:50%" class="column"><pre id="8bb74a6c-09fd-4276-af2f-df593e11dd05" class="code"><code>let square2 = {
+	colour: &quot;blue&quot;, 
+	size: 20,    //
+	alpha: 0.5}; 
+renderSquare(square2) //also works</code></pre></div></div><h2 id="9ff0235f-f187-4875-949d-82b092817585" class=""><mark class="highlight-orange">Union Types</mark></h2><p id="a6496305-1b77-4c51-9b84-0146d3697c71" class="">Use multiple types with <code>|</code></p><pre id="16b755a5-5718-4d32-959a-7a152336e4ba" class="code"><code>function printID(id: number | string) {
+	console.log(`Your ID is: ${id}`);
+}</code></pre><h2 id="5ce85bc9-8548-442f-a0b3-21dbbd082953" class="block-color-orange">Type Guarding</h2><pre id="63e6b729-7ef2-4ad7-a1c6-a4102f9af1bf" class="code"><code>const el = document.getElementById(&quot;apple&quot;); 
+
+if (el) el.setAttribute(&quot;class&quot;, &quot;red&quot;); </code></pre><p id="6869262a-00d2-4b60-8638-5d3bc0261ba0" class="">Needed for <strong>union types</strong></p><pre id="20be855a-83b4-4509-afc2-91d53978c5b2" class="code"><code>function formatId(id: number | string): string {
+	if (typeof id === &quot;number&quot;) {
+		return `${id}`
+	} 
+	else {
+		return id.toUpperCase(); 
+	}
+}</code></pre><h2 id="d248005a-eaaf-4f4b-99a4-7b055d854c9a" class="block-color-orange"><strong>Optional Parameters</strong></h2><ul id="b2cffd99-6fe0-4ab4-bde9-cfb64c264086" class="bulleted-list"><li style="list-style-type:disc">function parameters, object properties</li></ul><ul id="56fe5814-e616-483a-aa86-b445a1da92eb" class="bulleted-list"><li style="list-style-type:disc"><strong>guarding</strong> usually needed</li></ul><div id="14fe9ec9-b74b-424c-9a14-ea3c6fa767ff" class="column-list"><div id="535d0607-ef3b-4a85-8053-11d1abd8ac05" style="width:50%" class="column"><p id="3a03513b-6e83-4a30-8bb2-d2742b84fc19" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>With Default</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="8746641b-21b4-4ecf-8de2-25d4c92d54ac" class="code"><code>function add(a: number, b: number = 0) {
+	return a + b; 
+}</code></pre></div><div id="828cb010-3bbe-4c8d-b1f1-da48368dc8c1" style="width:50%" class="column"><p id="b60aa1c9-2632-4378-a38b-12b07af85790" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Optional</strong></strong></strong></strong></strong></strong></strong></strong></p><pre id="7ab24018-3bc9-4409-9971-5e2a00026f46" class="code"><code>functon add(a: number, b?: number) { 
+	if(c) {
+		return a + b; 	
+	}
+	else {
+		return a + b; 
+	}
+}</code></pre></div></div><h2 id="0db5983e-08ce-46cb-be72-5032ae0277f0" class="block-color-orange">Class Annotations</h2><h3 id="6cc30fb6-7a01-4e7c-beed-0068e2d52ca8" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>private, public, protected</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></h3><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="7f442d7a-d206-40ec-9404-a52d37f17dd8"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>Shortcut</strong><ul id="790d1286-d99c-40dd-aa89-5545f3fd6054" class="bulleted-list"><li style="list-style-type:disc">public in constructor → new property </li></ul><pre id="a2dd73ef-be34-4a59-a915-85f3badc2ba9" class="code"><code>class Shape {
+	constructor(public colour: string) {} //colour is a property
+}
+
+const shape = new Shape(&quot;red&quot;)
+shape.colour = &quot;blue&quot;; </code></pre></div></figure><h3 id="3e9f2555-2410-4dd9-900b-1da0ee62d4aa" class=""><strong><strong>abstract </strong></strong></h3><ul id="9120ebda-8e1e-4eee-a903-23c35ba5cd42" class="bulleted-list"><li style="list-style-type:disc">methods and classes</li></ul><h3 id="02f17cb5-e322-4886-baba-a4b8272d8b7c" class="">get &amp; set</h3><ul id="35790ffd-0631-4fde-b87e-4116f67296c4" class="bulleted-list"><li style="list-style-type:disc">Makes property read only</li></ul><pre id="096c254f-17c3-45b4-9ce2-f3b3a84feca9" class="code"><code>class Shape {
+	private _colour: string 
+		
+	get _colour() {
+		return this._colour; 
+	}		
+
+	set _colour(c: string) {
+		this._colour = c; 
+	}
+
+	constructor(colour: string) {
+		this._colour = colour; 
+	}
+
+}</code></pre><h1 id="a6797ee4-0bec-4780-9c16-979adcf092a6" class=""><mark class="highlight-red">Modules</mark></h1><p id="b56f8b4c-378a-46a1-9368-29cf851ace6f" class="">*Everything is <em>local</em> unless <em>exported</em></p><p id="e967fa4c-b4bd-4675-bffc-de17d35ccfa1" class=""><strong><strong><strong><strong><strong><strong>Import</strong></strong></strong></strong></strong></strong></p><pre id="a66f2aa2-a250-403a-8894-7abafbf2a8b9" class="code"><code>import {...} from &quot;...&quot;</code></pre><p id="8ec69d60-f790-4309-8dd0-34e2d52319d2" class=""><strong>Force as a Module</strong> (if no imports or exports): </p><pre id="e072c173-db72-458d-bc96-cb81862615d2" class="code"><code>export {};</code></pre><p id="c15e7594-ebed-489c-b60b-2337b2435717" class=""><strong>Load Module → HTML document</strong></p><pre id="d1058568-8cc2-47f4-ac9c-ca8f1a659792" class="code"><code>&lt;script type=&quot;module&quot; src=&quot;...&quot;&gt;&lt;&lt;/script&gt;</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">Browsers <strong>translate</strong> TS to JS with a <strong>compiler </strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 11:56 AM</time></span></span></div><div style="padding:0.2em">Our <em>Vite dev-environement</em> already translates to TS. There is no need to install/call it. </div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">Square</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 12:10 PM</time></span></span></div><div style="padding:0.2em">object</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><strong><em><mark class="highlight-default">structure</mark></em></strong></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 12:21 PM</time></span></span></div><div style="padding:0.2em"><em><mark class="highlight-default">(</mark></em><em>name &amp; type match)</em></div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">el</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 12:33 PM</time></span></span></div><div style="padding:0.2em">Checks if null or undefined</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">function Shape(colour)</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 11:38 AM</time></span></span></div><div style="padding:0.2em">shape constructor</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">function Square</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 11:38 AM</time></span></span></div><div style="padding:0.2em">linked to shape</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid"><strong>Method 2</strong></span></mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 11:40 AM</time></span></span></div><div style="padding:0.2em">syntactic sugar</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">	s<span style="border-bottom:0.05em solid"><strong>??</strong></span>.toUpperCase(); </mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 17, 2023, 12:48 PM</time></span></span></div><div style="padding:0.2em">if s is not null/undefined → call toUpperCase(); on it</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

@@ -1,0 +1,709 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>M6 - IO &amp; Disk</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="58cc54c1-fb74-4db8-8170-fd459ad2bf4f" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/document_purple.svg"/></div><h1 class="page-title">M6 - IO &amp; Disk</h1><p class="page-description"></p></header><div class="page-body"><h1 id="d3f5ab70-5b54-4e03-b4f9-5c123b5a4287" class=""><mark class="highlight-red">IO</mark></h1><h2 id="bef16e1e-6f9f-4a60-8a36-9721a141aa3d" class=""><mark class="highlight-orange">Buses </mark></h2><div id="5a70b3a7-70d5-4ddf-9292-ccba5a1880f4" class="column-list"><div id="4c93afd9-89e9-4682-8e1c-74b4e5c9258b" style="width:62.5%" class="column"><figure id="4cbdfdb6-086a-422a-86d4-6bacdb55ddc4" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_A29A1D7A64E0-1.jpeg"><img style="width:576px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_A29A1D7A64E0-1.jpeg"/></a></figure></div><div id="e886b4b6-bd3a-4faf-b136-63237296d877" style="width:37.5%" class="column"><p id="b2a2eafb-cfbd-475a-84bf-9c54c424bdc5" class="">Buses transfer data, for both <strong>IO </strong>and <strong>Memory. </strong></p><p id="72b0e278-2806-43ac-9763-f4d23aee16bd" class="">The memory bus has the higher bandwith compared to IO buses. </p><p id="62d2b747-9376-48eb-aa57-fd085412ab85" class="">
+</p></div></div><h2 id="43484a32-11f4-40af-81e2-b9d405650daa" class=""><mark class="highlight-orange"><strong>Device Drivers</strong></mark></h2><div id="20d2789b-ad39-49a7-a780-2a9ee7cae2d7" class="column-list"><div id="a506bd15-d220-4d22-9119-492f5b9b766e" style="width:50%" class="column"><figure id="9f3e3117-7ca3-4d82-bd12-249802ee5128" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_FD119910DDDE-1.jpeg"><img style="width:330.99609375px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_FD119910DDDE-1.jpeg"/></a></figure></div><div id="783bed01-abe8-4463-b9fa-22a8a5689a56" style="width:50%" class="column"><ul id="8f407ac6-a7db-414b-bdcb-9cd1a1e8d325" class="bulleted-list"><li style="list-style-type:disc"><em>kernel </em>program</li></ul><ul id="75ded46e-d85a-4e39-a8dd-5495f070ab0b" class="bulleted-list"><li style="list-style-type:disc">controls reading and writing between CPU and device</li></ul><ul id="7d076f02-b39d-4ea9-91d5-c7371ca98119" class="bulleted-list"><li style="list-style-type:disc">2 methods</li></ul></div></div><div id="d770cde6-2d0c-47c0-8a64-0a317e2fac05" class="column-list"><div id="f1a709ae-54a4-4ec0-9a6b-c71595218e09" style="width:50%" class="column"><h3 id="4c2c7bf8-f2be-4c74-9015-d60066467942" class=""><strong>#1 — Special  I/O instructions</strong></h3><ul id="bdb8499f-d79f-4717-bf27-71f7622cf9e9" class="bulleted-list"><li style="list-style-type:disc">Device registers are assigned <strong>port #’s </strong></li></ul><ul id="2d09a739-faa4-4ef1-9712-903d9b8d8426" class="bulleted-list"><li style="list-style-type:disc"> instructions (<code>in</code>, <code>out</code>) transfer data between a specified port and a CPU register </li></ul><figure id="effa060c-7873-4aa6-84c2-9577ccc2fa52" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_8066F155B0B4-1.jpeg"><img style="width:316.9986877441406px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_8066F155B0B4-1.jpeg"/></a></figure></div><div id="e8b6a67a-152e-4977-a500-aa9767c02255" style="width:50%" class="column"><h3 id="ff66da95-e957-4447-8587-cc2b38de600b" class=""><strong>#2 — Memory-Mapped I/O</strong></h3><ul id="93d76425-f385-4310-aee9-8e8382e6f777" class="bulleted-list"><li style="list-style-type:disc">Device registers are mapped to physical-memory</li></ul><ul id="7f22ce2c-21e3-4246-af80-2492aec3a07b" class="bulleted-list"><li style="list-style-type:disc">use <code>load/store</code> from these locations to read/write the device. </li></ul><ul id="374b7eb8-4ddb-43e2-9991-df9d81b69bdd" class="bulleted-list"><li style="list-style-type:disc">Need <strong><em>mutual exclusion</em></strong>: multiple drivers could access the memory (shared resource) </li></ul><figure id="a6a92da9-fa38-4cda-b1cb-2244de649c40" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_3961094A165E-1.jpeg"><img style="width:330.99609375px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_3961094A165E-1.jpeg"/></a></figure></div></div><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">Example (#1)</mark></summary><div class="indented"><p id="b259da2e-0b3b-4106-81f1-e9e5258454ba" class=""><strong>Device: </strong>parallel port</p><table id="86f93461-21fb-4611-bbd7-114e5b2a595e" class="simple-table"><thead class="simple-table-header"><tr id="398ad127-e8f4-4233-a12f-440c7a7dfcba"><th id="tmEz" class="simple-table-header-color simple-table-header" style="width:63px">port #</th><th id="xw[n" class="simple-table-header-color simple-table-header" style="width:66px">name</th><th id="sk|t" class="simple-table-header-color simple-table-header">? </th></tr></thead><tbody><tr id="6902c724-8045-4be8-8d34-4ff4f5d40f46"><td id="tmEz" class="" style="width:63px">0x378</td><td id="xw[n" class="" style="width:66px">data </td><td id="sk|t" class="">where you write data</td></tr><tr id="8f387b87-e3ad-4066-9e64-71e59227913c"><td id="tmEz" class="" style="width:63px">0x379</td><td id="xw[n" class="" style="width:66px">status</td><td id="sk|t" class="">get the status</td></tr><tr id="3b273891-0607-4014-b281-47f0b367f98b"><td id="tmEz" class="" style="width:63px">0x37a</td><td id="xw[n" class="" style="width:66px">control</td><td id="sk|t" class="">give instruction </td></tr></tbody></table><p id="523d4162-33a6-45b9-8ee0-0153d7b32877" class=""><strong>Write a byte to the device (driver code): </strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="57a6c159-8326-4d4f-9a08-28eeaf9fa713" class="code"><code class="language-C">void sendbyte(uint8_t byte) {
+	//wait until BSY bit is 1
+	while ( inb(0x379) &amp; (0x80) == 0) delay(); // while status is busy 
+	// write the byte to it: 
+		outb(0x378, byte); 
+	// Pulse strobe line to inform that byte is available:
+	uint8_t ctrl_val = inb (0x37a); // read ctrl register
+	outb(0x37a, ctrlval | 0x01);    // turn on strobe line
+	delay();                        // wait a tiny bit 
+	ourb(0x37a, ctrlval);           // set it back to the OG value 
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">Example 1 (#2) </mark></summary><div class="indented"><p id="53069fe0-8fbf-45b2-ac2d-36bdb51ce5a4" class=""><strong>Device: </strong>serial console </p><table id="0ee301a4-0fa8-443b-b52e-c03fc96a200e" class="simple-table"><thead class="simple-table-header"><tr id="4f2e8a53-1eb7-4ddb-b049-c9f5c112eafe"><th id="`gfV" class="simple-table-header-color simple-table-header" style="width:62.15234375px">offset</th><th id="Ry~;" class="simple-table-header-color simple-table-header" style="width:93px">type</th><th id="ywo_" class="simple-table-header-color simple-table-header" style="width:314px">Descr</th></tr></thead><tbody><tr id="771d0823-2948-451d-9ef0-4d3cdff89360"><th id="`gfV" class="simple-table-header-color simple-table-header" style="width:62.15234375px">0</th><td id="Ry~;" class="" style="width:93px">cmd &amp; data</td><td id="ywo_" class="" style="width:314px">Char buffer (to write data to console)</td></tr><tr id="ec8c99b1-7bbf-4235-b6fc-41aba2298ec3"><th id="`gfV" class="simple-table-header-color simple-table-header" style="width:62.15234375px">4</th><td id="Ry~;" class="" style="width:93px">status</td><td id="ywo_" class="" style="width:314px">write IRQ register </td></tr><tr id="d07c0f81-8955-4874-80cb-729caae80742"><th id="`gfV" class="simple-table-header-color simple-table-header" style="width:62.15234375px">8</th><td id="Ry~;" class="" style="width:93px">status</td><td id="ywo_" class="" style="width:314px">read IRQ register</td></tr></tbody></table><p id="cd32d4b3-3d14-4559-81b1-9a5944b3b6a7" class=""><strong>Write a char to it: </strong></p><ul id="273d06ab-2125-4849-922e-f89c9fbc3926" class="toggle"><li><details open=""><summary><strong>Polling Approach </strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="52658f83-3098-42cb-a219-afa0383034a1" class="code"><code class="language-C">sem = output device write semaphore
+sem_wait(sem)
+	write chara to data-reg
+	while(status != completed)
+		read writeIRQ
+	//make the device ready again
+	clear writeIRQ // to acknowledge completion (make device ready again)
+sem_post(sem)
+// another thread can write char</code></pre></details></li></ul><ul id="9d529001-43b6-4601-a531-5d18128c029e" class="toggle"><li><details open=""><summary><strong>Interrupt Based Approach</strong></summary><p id="20c66074-59b0-49ce-8d1c-b954dea9423f" class="">Driver Write Handler: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="586da0e9-0d99-4571-8f7d-e42dbf6e7a26" class="code"><code class="language-C">sem_wait(sem)
+write character to device data register
+// &lt;- device raises an interrupt</code></pre><p id="936b1b2e-4435-4177-8aac-2b6483e0ae42" class="">Interrupt Handler (in CPU): </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7c26f358-340d-4eb7-9568-23769d423b47" class="code"><code class="language-C">clear writeIRQ to acknoledge completion
+sem_post(sem)</code></pre></details></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="38c0fa57-718a-41e7-88cf-5e6db021da17"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Can we use a mutex instead? </strong><p id="54ed69c0-7063-46b5-af04-1638da2c8245" class="">For a mutex, the thread that acquries the mutex needs to be the thread releasing the mutex. <mark class="highlight-yellow_background">Which is not necessarily the case here (exception would be thrown by </mark><em><mark class="highlight-yellow_background">mutex_unlock</mark></em><mark class="highlight-yellow_background">)</mark></p></div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">Example 2 (#2) </mark></summary><div class="indented"><p id="89219b74-021b-4611-8b5c-2034b3288279" class=""><strong>Device: </strong>Disk</p><table id="60d45dc9-73b2-4402-9bae-20e177e5092b" class="simple-table"><thead class="simple-table-header"><tr id="bbe53190-617d-477c-bba7-309c92593733"><th id="&lt;s_v" class="simple-table-header-color simple-table-header" style="width:74.9921875px">Register</th><th id="Db_{" class="simple-table-header-color simple-table-header"></th></tr></thead><tbody><tr id="f373498d-ac45-46f2-a6a0-13d5aba83ab4"><td id="&lt;s_v" class="" style="width:74.9921875px">status</td><td id="Db_{" class="">completed / not</td></tr><tr id="c5b533e6-6e6d-4040-a4f8-7de2ff0cd264"><td id="&lt;s_v" class="" style="width:74.9921875px">sector #</td><td id="Db_{" class="">of disk</td></tr><tr id="c0188719-31c8-4919-a454-0bff1ce83468"><td id="&lt;s_v" class="" style="width:74.9921875px">cmd</td><td id="Db_{" class="">read / write</td></tr></tbody></table><p id="3d299153-72ec-437d-b4aa-241a777309a5" class=""><strong>Read 1 Sector from Disk</strong></p><p id="a9326c93-c052-4202-905c-8e2c6bac81f6" class="">Device Driver, Read Handler: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8aae5649-11b3-46c3-b2a9-2bb2bc885799" class="code"><code class="language-C">sem_wait(disk_sem)
+	write: target sector -&gt; sector#-reg // tell disk what sector your interested in 
+	write: &quot;Read&quot; -&gt; cmd-reg // tell the disk what you want to do with that sector (read or write)
+	sem_wait(disk_completion_sem) 	// wait for request to complete
+	copy: data from device transfer buffer -&gt; memory
+	// &lt;- once this data becomes available, device raises an interrupt
+sem_post(disk_sem) </code></pre><p id="36a19250-b486-465b-957e-f67146e2f653" class="">Interrupt Handler: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="745486e1-12b8-4f0e-b249-cd213989a39b" class="code"><code class="language-C">// &lt;- safe to copy from buffer to memory
+write: disk status register to acknowledge completion  // make device ready again: 
+sem_post(disk completion semaphore)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="296c31ba-b808-4759-bfbb-cb970f0f418a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>This time, Safe to use Mutex</strong><p id="adb045a1-d030-48e6-bae3-7e839398c754" class="">Because the same thread calls <code>sem_wait</code> and <code>sem_post</code></p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a0249dfc-b6c4-4b98-9de8-80c120273108"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>2 Semaphores</strong><p id="e9743075-5a95-4989-a71d-20cbc9091938" class="">1 for mutual exclusion. The other for signaling. </p></div></figure></div></details><h2 id="b937e6af-20f8-4d94-905b-3077eefdbf18" class=""><mark class="highlight-orange">DMA</mark></h2><p id="c9744ef3-8ce9-4666-973f-9d48bff2159e" class=""><em>Direct memory access</em></p><p id="854d5f8f-4d8e-4a79-8c05-d477bcdb067a" class="">The device (ie: disk) directly transfers entire blocks of data itself using it’s own <strong>DMA controller. </strong></p><figure id="15ea61dd-faf9-4c98-a57b-5bb15d17ede4" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_E2EA5BAA5092-1.jpeg"><img style="width:633.0078125px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_E2EA5BAA5092-1.jpeg"/></a></figure><p id="ffc01e6c-3014-4a79-b7c5-95426ab386f3" class="">
+</p><div id="436c3ac9-5ef9-4a25-af4b-9ec220caffdf" class="column-list"><div id="4eceb53b-b222-4529-ba2f-136d6af10b6b" style="width:25%" class="column"><figure id="37608f73-0a84-4a4c-b066-17d7ea9bd7ad" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/Screen_Shot_2024-03-07_at_18.34.15.png"><img style="width:192px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/Screen_Shot_2024-03-07_at_18.34.15.png"/></a></figure></div><div id="8a797ce8-4e68-4310-8296-70cd69eb0a60" style="width:75%" class="column"><ol type="1" id="b22a1aca-7b8f-4bd1-a3f3-8319266de60f" class="numbered-list" start="1"><li><mark class="highlight-red">CPU issues DMA request to device</mark></li></ol><ol type="1" id="b1ea9779-c8bb-4b1e-89c3-6cb213dfd0b0" class="numbered-list" start="2"><li><mark class="highlight-blue">Device directs bus / data transfer</mark></li></ol><ol type="1" id="5fd81694-a996-4352-a153-04727616775d" class="numbered-list" start="3"><li><mark class="highlight-teal">Device interrupts CPU on completion</mark></li></ol><p id="99432b54-e7df-4376-8525-104452c884b3" class="">
+</p></div></div><p id="9bbfabbe-6c12-4d49-b57f-cad762d39125" class="">Instead of requesting a read to 1 sector at a time on disk, it asks the DMA controller for <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span></span><span>﻿</span></span> bytes at one time. Instead of reading the device register into your own register and then storing into memory, it writes directlty to memory and notifies when complete. </p><h1 id="f7b39a6e-5bc9-44e5-bfe9-02eaa32d863d" class=""><mark class="highlight-red">Disk</mark></h1><h2 id="68ae3b8a-0d55-42e7-b05e-f7f810970f5a" class="">Physical View </h2><figure id="5e96dca1-8858-4e3f-90b6-48acb558b2c2" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_0B85685C746F-1.jpeg"><img style="width:528px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_0B85685C746F-1.jpeg"/></a></figure><p id="9c08e6f9-52d3-4f08-82bd-6284ddf2f16c" class=""><strong>Heads </strong></p><ul id="fbb779d1-7c38-4e4b-818a-6db4393edbe7" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">seek</span><em> </em>the<em> </em>sector</li></ul><ul id="d5257b73-aee0-44d9-9415-ca147da868c7" class="bulleted-list"><li style="list-style-type:disc">all on the same <em>cylinder </em></li></ul><ul id="fa66f73a-ed30-48f3-9b3f-d9d6676d1bc4" class="bulleted-list"><li style="list-style-type:disc">read / write the data</li></ul><ul id="42b9f61b-4418-4444-a70a-408ab89bf3d7" class="bulleted-list"><li style="list-style-type:disc">Only 1 head <span style="border-bottom:0.05em solid">active</span> at a time</li></ul><p id="e75eda27-f60a-4b1b-a839-cfdc2b07ca3c" class=""><strong>Notes</strong></p><ul id="33a7470c-9d49-4ab6-aefc-b6fddcfcd835" class="bulleted-list"><li style="list-style-type:disc">same time to spin around inner vs. outer tracks but more sectors read on outer. </li></ul><ul id="4d06d940-fc40-433e-a1e5-262184779d22" class="bulleted-list"><li style="list-style-type:disc">data persists without power (unlike ram) </li></ul><h2 id="a547e17a-5e27-474f-95a2-44fb98e2c4b5" class="">Logical View</h2><p id="69a4fc05-f00d-4816-ac15-98b485e3f38e" class="">An array of numbered <strong>sectors</strong>: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>51</mn><msub><mn>2</mn><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">512_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7944em;vertical-align:-0.15em;"></span><span class="mord">51</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>, unit of transfer between disk ↔ memory</p><h2 id="47fab77c-9da8-4bb3-836f-7cebef39994c" class=""><strong>Seek </strong></h2><p id="747d7af0-a8d4-45da-a951-ab96664bad7b" class="">Moving heads to specific sector. </p><p id="55324f00-6595-48e5-a681-c7703f33ba33" class=""><strong>4 phases: </strong></p><figure id="72ecb866-5cdd-4a0a-acf8-6c0e0ae2b11a" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_E628F3F3C335-1.jpeg"><img style="width:707.9947509765625px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_E628F3F3C335-1.jpeg"/></a><figcaption><strong>speedup: </strong>to max speed || half way point </figcaption></figure><ul id="d4811c67-1ad4-4240-9d5a-61b615e195fa" class="bulleted-list"><li style="list-style-type:disc">very-short seek: mostly<strong> </strong><strong><em>settle</em></strong><strong> </strong></li></ul><ul id="e67c4360-1f01-476a-a979-e775f2ff5de1" class="bulleted-list"><li style="list-style-type:disc">short seek: mostly <strong><em>speedup</em></strong></li></ul><h3 id="88034ca5-dd21-4f62-8039-44ff6a11fe16" class=""><strong>Cost Model</strong></h3><p id="52c89b34-193c-434f-84c0-65543fb4bcde" class=""><strong>Request Service Time</strong> = <code>Seek Time</code> + <code>Rotational Latency</code> + <code>Transfer Time</code></p><figure id="b56ea316-8f84-4799-91c0-f4f7a76b827c" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_FF65857EFDAD-1.jpeg"><img style="width:707.9947509765625px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_FF65857EFDAD-1.jpeg"/></a></figure><table id="7c378fa3-db8c-444d-99cb-011210f2db1b" class="simple-table"><thead class="simple-table-header"><tr id="f57e0b3a-4a18-426b-8f9d-1fcaa6c6d536"><th id="AUFb" class="simple-table-header-color simple-table-header" style="width:118.51821899414062px">Factor</th><th id="{b{\" class="simple-table-header-color simple-table-header" style="width:169.7825469970703px">Time to </th><th id="JRp&gt;" class="simple-table-header-color simple-table-header" style="width:156.09243774414062px"><strong>Depends On</strong></th><th id="RX}D" class="simple-table-header-color simple-table-header">Average</th></tr></thead><tbody><tr id="e7a617b7-f7ac-4c6b-959b-32af2884c5b9"><th id="AUFb" class="simple-table-header-color simple-table-header" style="width:118.51821899414062px"><strong>Seek Time</strong></th><td id="{b{\" class="" style="width:169.7825469970703px">move head to right track</td><td id="JRp&gt;" class="" style="width:156.09243774414062px"># tracks<br/><br/></td><td id="RX}D" class="">1/2 * max seek</td></tr><tr id="1d5bab1d-b3c8-4b2e-9b9d-6e794be36eec"><th id="AUFb" class="simple-table-header-color simple-table-header" style="width:118.51821899414062px"><strong>Rotational Latency</strong></th><td id="{b{\" class="" style="width:169.7825469970703px">spin to put head over correct sector</td><td id="JRp&gt;" class="" style="width:156.09243774414062px">1 / RPS</td><td id="RX}D" class="">1/2 * full rotation</td></tr><tr id="d1213a20-791a-450b-b603-078e750a8a80"><th id="AUFb" class="simple-table-header-color simple-table-header" style="width:118.51821899414062px"><strong>Transfer Time</strong></th><td id="{b{\" class="" style="width:169.7825469970703px">time for head to go over he blocks you read</td><td id="JRp&gt;" class="" style="width:156.09243774414062px">R-Latency * fraction of sectors read</td><td id="RX}D" class=""></td></tr></tbody></table><h3 id="5358733c-48fa-461d-9203-701052a518bf" class="">Disk Performance</h3><p id="f5b58204-740e-4348-8a53-a3cfae25eb03" class="">Disk access is much slower than main memory. </p><p id="efb09772-594e-430a-ade1-66f7ba4d0794" class="">2 Methods: </p><ol type="1" id="a707b40c-0f43-440d-9ae0-e3e14a77a9f6" class="numbered-list" start="1"><li>Placement of data: <strong>minimize rotational latency</strong><ul id="6081e25a-cbc1-40d4-8f09-054564437ac1" class="bulleted-list"><li style="list-style-type:disc">want contiguous access (consecutive sectors, same track)  </li></ul></li></ol><ol type="1" id="74ae9de8-98f1-43ca-b846-741194a22085" class="numbered-list" start="2"><li>Schedule requests: <strong>minimize seek distance</strong></li></ol><h2 id="be1776e0-db6f-41ff-9f1d-d41ddbbb8c7f" class="">Scheduling </h2><p id="855644c6-4c0c-441e-a876-b50a4e9dd24d" class="">How to handle <em>concurrent requests</em> ? </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8a88ddc1-17c5-4d4f-bc40-b96bfe91ef37"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Here, we <strong>assume each request is on a different track</strong>. If 2 requests were on the same track, we could read them at the same time very quickly. </div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="68392a69-9a45-42c2-8005-31adba6ee9ab"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Note</strong><p id="5b7487d0-3019-4fe8-a633-473300f6455a" class="">The OS does the <strong>schedueling </strong>based on all its requests from diff processes. The <strong>DMA-controller </strong>blindly performs the operations in that order. </p><ol type="1" id="d8b80d98-9ddd-41bb-898a-765995c3ddf0" class="numbered-list" start="1"><li>Program sends requests to DMA (ie: sector, track) in a specific order. </li></ol><ol type="1" id="e5b4d874-cd5b-4bbe-bc5c-efeeee310aa7" class="numbered-list" start="2"><li>DMA performs those operations in that order. </li></ol></div></figure><figure id="d3f3d801-c149-4a19-bf9f-b145acba7d56" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_A6F9E1C42F67-1.jpeg"><img style="width:633.0078125px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_A6F9E1C42F67-1.jpeg"/></a></figure><table id="fd441145-3718-4522-a5a2-b9c15f9044e2" class="simple-table"><thead class="simple-table-header"><tr id="e1043334-938d-4a16-8a02-1c0f0f90fc6a"><th id="cANR" class="simple-table-header-color simple-table-header"><strong>Type</strong></th><th id="se&gt;D" class="simple-table-header-color simple-table-header">?</th><th id="wfry" class="simple-table-header-color simple-table-header">PROS</th><th id="zbVr" class="simple-table-header-color simple-table-header">CONS</th></tr></thead><tbody><tr id="e957425c-21fd-4071-b693-26d011dfb200"><th id="cANR" class="simple-table-header-color simple-table-header"><strong>FIFO</strong></th><td id="se&gt;D" class=""></td><td id="wfry" class="">• simple<br/>• fair <br/></td><td id="zbVr" class="">• doesnt consider  locality<br/>• increases <br/><em>average-latency</em><br/>• decreases <br/><em>throughput</em></td></tr><tr id="05302c36-3811-4437-975f-e168de6df9bc"><th id="cANR" class="simple-table-header-color simple-table-header"><strong>SPTF</strong></th><td id="se&gt;D" class="">Shortest Positioning Time First: Always pick closest request (by seek time). </td><td id="wfry" class="">• exploits locality<br/>• total dist (seek time) is smaller ⇒ higher throughput<br/></td><td id="zbVr" class="">starvation (earlier request could keep waiting if not close) ⇒ can have higher average latency</td></tr><tr id="4ebd2afb-f3c8-4e3b-870f-49a9ddb22794"><th id="cANR" class="simple-table-header-color simple-table-header"><strong>SCAN</strong></th><td id="se&gt;D" class="">Elevator: SPTF + next seek must be in the same direction, otherwise go in the other direction  </td><td id="wfry" class="">• explots locaility<br/>• bounded waiting<br/>• minimizes total distance<br/></td><td id="zbVr" class="">• middle cylinders serviced more<br/>• might miss very close one<br/></td></tr><tr id="662ad863-a0fa-47a3-9c30-f4b8934e1973"><th id="cANR" class="simple-table-header-color simple-table-header">C-SCAN</th><td id="se&gt;D" class="">Circular: <br/>SCAN + only go 1 direction<br/></td><td id="wfry" class="">Switching directions is expensive (here, only have to do it once). </td><td id="zbVr" class=""></td></tr><tr id="385e922a-d45d-45f4-aeed-e04aadf566ab"><th id="cANR" class="simple-table-header-color simple-table-header">V-SCAN(R)</th><td id="se&gt;D" class="">Continuum between SPTF &amp; SCAN </td><td id="wfry" class="">leverage the pros/cons of either of them depending on the situation</td><td id="zbVr" class="">More complicated</td></tr></tbody></table><figure id="09810861-ded6-4f32-be62-9bccf162c71e" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_42CFD4831204-1.jpeg"><img style="width:633.0078125px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_42CFD4831204-1.jpeg"/></a></figure><h1 id="c8a339f6-02ed-44fa-a94f-6d9cfc84d089" class=""><mark class="highlight-red">Flash Memory </mark></h1><ul id="d3b869ce-9ed8-44d5-807a-e42d6460670c" class="bulleted-list"><li style="list-style-type:disc">secondary storage without moving parts or constant power</li></ul><ul id="b805a54c-1465-4c6e-8066-b65f87292161" class="bulleted-list"><li style="list-style-type:disc">Data is put onto smaller <strong>pages</strong> within <strong>blocks</strong></li></ul><figure id="a1d2ef1b-8eef-4465-bc76-d1c34953cee4" class="image"><a href="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_1DBB27BE920A-1.jpeg"><img style="width:240px" src="M6%20-%20IO%20&amp;%20Disk%2058cc54c1fb744db88170fd459ad2bf4f/IMG_1DBB27BE920A-1.jpeg"/></a></figure><h2 id="6ce9ade2-852b-470d-9532-534a3b7733f2" class="">Read/Write</h2><ol type="1" id="6009e0be-0bd4-4490-aba4-5c9214a814bf" class="numbered-list" start="1"><li>On a page, you can only change <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span>s to a <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span><span>﻿</span></span>s. </li></ol><ol type="1" id="1cc6d6de-9548-4b34-8b23-d2829cab11a1" class="numbered-list" start="2"><li>A new unallocated page contains all <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span>s.  </li></ol><p id="806e0965-a249-4b14-9d75-a1e9ab434c15" class="">⇒ can only write data once.  </p><hr id="9a55a47f-23db-4180-a6e6-6410aad798e1"/><ol type="1" id="e9fc422b-73e6-4f8c-b129-c057d4776f45" class="numbered-list" start="1"><li>To write over data, need to <strong>flash the pages </strong>(reset to all <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span>s) </li></ol><ol type="1" id="03434b51-c036-4534-8b17-584b7f373ffc" class="numbered-list" start="2"><li><strong>Flashing </strong>can only be done at the <strong>block-level </strong></li></ol><p id="b55ff51b-cbe6-4dad-b50a-8709b9106c73" class="">⇒ <div class="indented"><h3 id="b7508434-d0fb-4164-ac78-5f84dc0ccb0c" class=""><mark class="highlight-teal"><strong>Solution 1 </strong></mark></h3><ol type="1" id="5f004fc5-bcb1-4a96-8da5-e15cc9a7462d" class="numbered-list" start="1"><li>Copy page to memory</li></ol><ol type="1" id="d4d07431-4154-4777-a40c-e99da0c3f8b0" class="numbered-list" start="2"><li>Update block in memory</li></ol><ol type="1" id="b8825191-cd6e-4b0a-b7dc-ec61f6a96f77" class="numbered-list" start="3"><li>Flash block (all 1s)</li></ol><ol type="1" id="90c26d5a-0b02-4199-96c2-6fa3cfa2f1d4" class="numbered-list" start="4"><li>Write back whole page. </li></ol><p id="4f3c5496-dd63-4e86-95ca-bb9917358553" class=""><mark class="highlight-red">Problem: </mark>Wastefull if you only want to write to 1 byte to a page</p><h3 id="d77e4092-6259-4672-af94-e31ec3329d6a" class=""><mark class="highlight-teal"><strong>Solution 2</strong></mark><strong> — Transition Layer</strong></h3><p id="f1871d15-761b-4339-bd2f-305829f9e44f" class="">Remap pages to reduce flashing as your updating a page, but later doing garbage collection to collect all the invalid pages and make them available again. </p><ol type="1" id="bff9f7a5-1109-44d2-97eb-aead4828ebcb" class="numbered-list" start="1"><li>mark page to be overwritten as invalid </li></ol><ol type="1" id="d4bc12fe-c6df-4507-81d0-2505a152931a" class="numbered-list" start="2"><li>write to unused page (no flash needed) </li></ol><ol type="1" id="a0d1e6b7-e7d4-45c4-9477-fd21d2adbeb0" class="numbered-list" start="3"><li>update block in memory</li></ol><ol type="1" id="109045f5-3850-4954-9c43-91cdde39bdbd" class="numbered-list" start="4"><li>write back to SSD<p id="8140d4d8-6f81-4c61-9982-0d3ae821c026" class=""><mark class="highlight-red">Problem: </mark>requires <strong>garbage collection. </strong>When your almost at full capacity in your flash memory, you have to find an unused page → garbage collect to free pages (slow). </p></li></ol></div></p><h3 id="7a8f814e-d927-4e0b-b898-d41d0045ac36" class=""><mark class="highlight-red">Wear Leveling </mark></h3><p id="52141cc4-6639-4cd8-ae4f-482d6ac1a1e1" class="">We can only flash a block so many times. After, they become read-only.</p><p id="c9cb8d93-98d8-4dfb-b407-130fd2ed614e" class="">Need to spread the writes across all blocks </p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">(0x379) &amp; (0x80)</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Mar 7, 2024, 6:01 PM</time></span></span></div><div style="padding:0.2em">read the NOT BUSY bit</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

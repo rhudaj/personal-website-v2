@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>minimal-canvas (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="8ef28c22-508a-4acd-afba-031c1bdcba70" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">minimal-canvas (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="c41d10c9-ab4a-4131-ae9e-dd6b6a9f6c24" class="image"><a href="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/Screen_Shot_2023-09-19_at_18.48.01.png"><img style="width:432px" src="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/Screen_Shot_2023-09-19_at_18.48.01.png"/></a></figure><div><h1 id="1bca4c05-ce49-4a67-b096-5ed6ca35a0f6" class="">main.ts</h1><pre id="d2a9379d-3c17-4994-a7d5-f0645c1d0d3d" class="code"><code>function draw()
+{
+  // add canvas element to DOM
+  const canvas = document.createElement(&quot;canvas&quot;);
+  document.body.appendChild(canvas);
+
+  // set a background style to make it easier to see the canvas
+  canvas.style.setProperty(&quot;background&quot;, &quot;lightgrey&quot;);
+
+  // get graphics context
+  const gc = canvas.getContext(&quot;2d&quot;);
+  if (!gc) return;
+
+  // draw something
+  gc.fillRect(10, 10, 50, 50);
+}
+
+// called when page is loaded
+draw();</code></pre></div><p id="90a08b6b-119d-4a0f-8d1e-3ddb54464f52" class="">
+</p><figure id="ada9e1b7-af32-4281-be78-8b6fb4fbaafd" class="link-to-page"><a href="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/rectangle%20(demo)%20ada9e1b7af324281be788b6fb4fbaafd.html"><span class="icon">🧑🏽‍💻</span>rectangle (demo)</a></figure><figure id="cf95b287-ccb8-423b-9195-d1a2caf1b9d7" class="link-to-page"><a href="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/path%20(demo)%20cf95b287ccb8423b9195d1a2caf1b9d7.html"><span class="icon">🧑🏽‍💻</span>path (demo)</a></figure><figure id="795c412f-f158-4ffc-bb75-4f8cf290b032" class="link-to-page"><a href="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/pathHouse%20(demo)%20795c412ff1584ffcbb754f8cf290b032.html"><span class="icon">🧑🏽‍💻</span>pathHouse (demo)</a></figure><figure id="c514e92d-20af-4a34-8fe1-5be5cbeaf5e5" class="link-to-page"><a href="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/text%20(demo)%20c514e92d20af4a348fe15be5cbeaf5e5.html"><span class="icon">🧑🏽‍💻</span>text (demo)</a></figure><figure id="ec7ac392-4501-4745-942a-9ffd0eaadebb" class="link-to-page"><a href="minimal-canvas%20(demo)%208ef28c22508a4acdafba031c1bdcba70/colourDemo.html"><span class="icon">🧑🏽‍💻</span>colourDemo</a></figure><p id="188ff4f7-c174-4ab0-98a6-3781ce58200d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

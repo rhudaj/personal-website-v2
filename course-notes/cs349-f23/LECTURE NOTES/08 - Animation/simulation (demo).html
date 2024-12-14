@@ -1,0 +1,77 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>simulation (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="c0b2d596-62e8-4f75-9901-849524376db7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">simulation (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="5ae47f88-931b-430b-87b5-ee74cecb0deb"><div class="source"><a href="simulation%20(demo)%20c0b2d59662e84f759901849524376db7/Screen_Recording_2023-09-28_at_22.33.05.mov">https://prod-files-secure.s3.us-west-2.amazonaws.com/21423f49-a365-4487-8460-041e9674e478/1ceda513-6f45-4efe-843f-2c028e72ac71/Screen_Recording_2023-09-28_at_22.33.05.mov</a></div></figure><h1 id="155ed4d3-4ef2-4649-bc69-21c3d89bc16e" class="">main.ts</h1><pre id="7f96b31d-12ae-4b30-9f7b-18be19a19c71" class="code code-wrap"><code>export {}; // force module
+import { random } from &quot;../../../simplekit/utility&quot;;
+import {startSimpleKit,setSKDrawCallback,setSKAnimationCallback} from &quot;../../../simplekit&quot;;
+
+const dot = {
+  x: 0,
+  y: 0,
+  r: 32,
+  draw(gc: CanvasRenderingContext2D) {
+    gc.save();
+    gc.beginPath();
+    gc.fillStyle = &quot;red&quot;;
+    gc.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    gc.fill();
+    gc.restore();
+  },
+};
+
+const box = {
+  width: 250,
+  height: 250,
+  draw(gc: CanvasRenderingContext2D) {
+    gc.save();
+    gc.fillStyle = &quot;white&quot;;
+    gc.strokeStyle = &quot;black&quot;;
+    gc.lineWidth = 1;
+    gc.beginPath();
+    gc.rect(0, 0, this.width, this.height);
+    gc.fill();
+    gc.stroke();
+    gc.restore();
+  },
+};
+
+setSKDrawCallback((gc) =&gt; {
+  // clear canvas and draw it
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  box.draw(gc);
+  dot.draw(gc);
+});
+
+dot.x = random(dot.r, box.width - dot.r);
+dot.y = random(dot.r, box.height - dot.r);
+
+// random starting direction
+let dx = random(1, 3) * (random(0, 1) &lt; 0.5 ? -1 : 1);
+let dy = random(1, 3) * (random(0, 1) &lt; 0.5 ? -1 : 1);
+
+// set the animation callback
+setSKAnimationCallback(simulationFunction);
+
+startSimpleKit();</code></pre><h2 id="93357747-4e8c-4804-9636-9e09ac32e32a" class="">Simulations</h2><ol type="1" id="1cf02301-af45-42b6-ad9a-045698477430" class="numbered-list" start="1"><li><strong>Bounce</strong></li></ol><pre id="01c3f9f1-6588-4599-9212-06bec6803c91" class="code"><code>// bounce the dot around the box
+function bounce(time: number)
+{
+  // if dot hits the edge of the canvas, change direction
+  if (dot.x &lt; dot.r || dot.x &gt; box.width - dot.r) {
+    dx *= -1.0;
+  }
+  if (dot.y &lt; dot.r || dot.y &gt; box.height - dot.r) {
+    dy *= -1.0;
+  }
+
+  // update the dot position
+  dot.x += dx;
+  dot.y += dy;
+}</code></pre><ol type="1" id="86c7effd-19b4-4a66-b542-860fa80d7d62" class="numbered-list" start="2"><li><strong>Circle</strong></li></ol><pre id="42e384e5-4054-41de-896b-5b70e1187196" class="code"><code>// animates the dot in a circle centered inside the box
+function circle(time: number)
+{
+  const cx = box.width / 2;
+  const cy = box.height / 2;
+  const r = Math.min(cx, cy) - dot.r;
+
+  // uses time to control the animation
+  const theta = time / 1000;
+  dot.x = cx + r * Math.cos(theta);
+  dot.y = cy + r * Math.sin(theta);
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

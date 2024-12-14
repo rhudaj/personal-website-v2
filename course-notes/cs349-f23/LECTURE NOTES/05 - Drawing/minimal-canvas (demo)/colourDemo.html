@@ -1,0 +1,10 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>colourDemo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="ec7ac392-4501-4745-942a-9ffd0eaadebb" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">colourDemo</h1><p class="page-description"></p></header><div class="page-body"><figure id="25098146-2b09-4aae-ba14-0fb10bc6fc91" class="image" style="text-align:left"><a href="colourDemo/Screen_Shot_2023-09-19_at_20.59.30.png"><img style="width:332px" src="colourDemo/Screen_Shot_2023-09-19_at_20.59.30.png"/></a></figure><pre id="29fccdd3-b6ab-451b-99e2-47400c67c03a" class="code"><code>//create 10 rects. Random colors for each.
+
+function colourDemo(gc: CanvasRenderingContext2D) {
+  for (let i = 0; i &lt; 10; i++) {
+    const h = Math.random() * 360;
+    gc.fillStyle = `hsl(${h}deg 80% 50%)`;
+    gc.fillRect(i * 20, 20, 20, 20);
+  }
+}</code></pre><p id="bc7d1591-658e-446e-84ea-4da7e4a01da9" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

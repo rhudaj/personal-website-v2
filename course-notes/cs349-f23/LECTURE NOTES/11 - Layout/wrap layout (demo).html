@@ -1,0 +1,82 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>wrap layout (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="7ca6190b-e3fc-4421-8ba3-bcd175350f99" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">wrap layout (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="bbdc194f-9746-4e69-8404-43491490cae5" class="image" style="text-align:left"><a href="wrap%20layout%20(demo)%207ca6190be3fc44218ba3bcd175350f99/Screen_Shot_2023-10-21_at_17.47.40.png"><img style="width:480px" src="wrap%20layout%20(demo)%207ca6190be3fc44218ba3bcd175350f99/Screen_Shot_2023-10-21_at_17.47.40.png"/></a></figure><h2 id="33f2d813-d741-49c6-ac13-e680994705d8" class="">wrap</h2><pre id="cef3ef75-1a5f-4920-a28a-563ed236c6f1" class="code"><code>export function makeWrapRowLayout(params: { gap: number } = { gap: 0 }): LayoutMethod {
+  return (
+    boundsWidth: number,
+    boundsHeight: number,
+    elements: SKElement[]
+  ) =&gt; {
+    return wrapRowLayout(boundsWidth, boundsHeight, elements, params);
+  };
+}
+
+// places elements in rows, wrapping to next row as needed
+export function wrapRowLayout(
+  boundsWidth: number,
+  boundsHeight: number,
+  elements: SKElement[],
+  params: { gap: number }
+): Size {
+  const newBounds: Size = { width: 0, height: 0 };
+
+  let x = 0;
+  let y = 0;
+  let rowHeight = 0;
+
+  elements.forEach((el) =&gt; {
+    if (el.box.fullWidth &gt; boundsWidth) {
+      // warn if element overflows
+    } else if (x + el.box.fullWidth &gt; boundsWidth) {
+      // wrap to next row and clear rowHeight
+      x = 0;
+      y += rowHeight + params.gap;
+      rowHeight = 0;
+    }
+
+    // set the element position
+    el.x = x;
+    el.y = y;
+    // update the row height
+    rowHeight = Math.max(rowHeight, el.box.fullHeight);
+    // get x ready for next element
+    x += el.box.fullWidth + params.gap;
+
+    // update bounds that were actually used
+    newBounds.width = Math.max(newBounds.width, el.box.width);
+    newBounds.height = Math.max(newBounds.height, y + rowHeight);
+  });
+
+  // warn if rows of elements overflow
+  if (newBounds.height &gt; boundsHeight) {
+    console.warn(`vertical overflow`);
+  }
+
+  return newBounds;
+}</code></pre><h2 id="719f281f-5580-4b7b-9f0d-e2d4ab2fe251" class="">main</h2><pre id="fc5b65e0-dc35-4a89-a0f4-beae1827cbe4" class="code"><code>function makeContainer(id: string, fill: string): SKContainer {
+  const container = new SKContainer();
+  container.id = id;
+  container.fill = fill;
+  return container;
+}
+
+const root = makeContainer(&quot;root&quot;, &quot;lightyellow&quot;);
+root.box.padding = 10;
+// root.debug = true;
+
+for (let i = 0; i &lt; 10; i++) {
+  const a = makeContainer(`${i + 1}`, &quot;lightblue&quot;);
+  a.box.padding = 10;
+  a.box.margin = 10;
+  a.x = 50;
+  a.y = 50;
+  a.width = random(50, 150);
+  a.height = random(50, 100);
+  a.debug = true;
+
+  root.addChild(a);
+}
+
+// set layout method
+root.layoutMethod = Layout.makeWrapRowLayout({ gap: 10 });
+
+setSKRoot(root);
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

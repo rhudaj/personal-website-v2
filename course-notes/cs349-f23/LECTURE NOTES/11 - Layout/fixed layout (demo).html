@@ -1,0 +1,72 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>fixed layout (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="b0db4e8b-4d87-4599-aaad-4d58eb4c3b4f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">fixed layout (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="b40cc2e3-bedf-4487-949e-a3466114c0d8" class="image" style="text-align:left"><a href="fixed%20layout%20(demo)%20b0db4e8b4d874599aaad4d58eb4c3b4f/Screen_Shot_2023-10-21_at_17.29.11.png"><img style="width:336px" src="fixed%20layout%20(demo)%20b0db4e8b4d874599aaad4d58eb4c3b4f/Screen_Shot_2023-10-21_at_17.29.11.png"/></a></figure><h2 id="85ca5593-3f2a-4380-a00f-55394b9bd8e8" class="">fixed layout </h2><pre id="50a927f0-2ae5-4273-b074-e96a1f1b97ac" class="code"><code>//Factory Function
+export function makeFixedLayout(params: {} = {}): LayoutMethod {
+  return (
+    boundsWidth: number,
+    boundsHeight: number,
+    elements: SKElement[]
+  ) =&gt; {
+    return fixedLayout(boundsWidth, boundsHeight, elements, params);
+  };
+}
+
+//Returns the (w,h) needed to hold all the elements in their existing positions
+function fixedLayout(
+  boundsWidth: number,
+  boundsHeight: number,
+  elements: SKElement[],
+  params: {}
+): Size {
+  const newBounds: Size = { width: 0, height: 0 };
+
+	// Just use the elements existing (x,y) pos
+  elements.forEach((el) =&gt; {
+    // warn if element is outside bounds
+    if (el.x &lt; 0 || el.y &lt; 0 ||  el.x + el.box.width &gt; boundsWidth || el.y + el.box.height &gt; boundsHeight) {
+      console.warn(`element ${el.toString()} outside parent bounds`);
+    }
+
+    // update bounds that were actually used
+    // ignore margins for fixed layout
+    newBounds.width = Math.max(newBounds.width, el.x + el.box.width);
+    newBounds.height = Math.max(newBounds.height, el.y + el.box.height);
+  });
+
+  return newBounds;
+}</code></pre><h2 id="37afebcc-556f-4d9c-ad8c-92051c173662" class="">main</h2><pre id="19483d16-fd28-4c9f-9324-67c4b15705ba" class="code"><code>// helper function to make a container
+function makeContainer(id: string, fill: string): SKContainer {
+  const container = new SKContainer();
+  container.id = id;
+  container.fill = fill;
+  return container;
+}
+
+const root = makeContainer(&quot;root&quot;, &quot;lightyellow&quot;);
+root.box.padding = 10;
+// root.debug = true;
+
+const a = makeContainer(&quot;A&quot;, &quot;lightblue&quot;);
+a.box.padding = 10;
+a.x = 50;
+a.y = 50;
+a.width = 100;
+a.height = 50;
+a.debug = true;
+
+root.addChild(a);
+
+const b = makeContainer(&quot;B&quot;, &quot;pink&quot;);
+b.box.padding = 10;
+b.x = 200;
+b.y = 50;
+b.width = 50;
+b.height = 100;
+b.debug = true;
+
+root.addChild(b);
+
+// set layout method
+root.layoutMethod = Layout.makeFixedLayout();
+
+setSKRoot(root);
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

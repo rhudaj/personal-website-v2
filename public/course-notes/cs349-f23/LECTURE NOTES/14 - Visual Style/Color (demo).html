@@ -1,0 +1,70 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Color (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="c39181c9-2fa5-4574-aecc-ddd799c490df" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">Color (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="d4ce13b1-eeaf-4765-a72c-9d49efd766db" class="image"><a href="Color%20(demo)%20c39181c92fa54574aeccddd799c490df/Screen_Shot_2023-11-06_at_10.40.36.png"><img style="width:1802px" src="Color%20(demo)%20c39181c92fa54574aeccddd799c490df/Screen_Shot_2023-11-06_at_10.40.36.png"/></a></figure><h3 id="db06e124-291b-4d63-a751-02f35ac8405a" class="">HTML</h3><pre id="64f585c7-3997-482e-99ad-83f7f5fb88bd" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta
+      name=&quot;viewport&quot;
+      content=&quot;width=device-width, initial-scale=1.0&quot;
+    /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;colour&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Title&lt;/h1&gt;
+    &lt;button class=&quot;primary&quot;&gt;Continue&lt;/button&gt;    &lt;button&gt;Cancel&lt;/button&gt;
+    &lt;div class=&quot;danger&quot;&gt;
+      &lt;p&gt;Danger Text&lt;/p&gt;
+      &lt;button&gt;Ok&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="bbb47714-21b4-46b9-892b-04965ce3362b" class="">CSS</h3><pre id="c9720aa6-ee4f-4be9-a458-2b0555545101" class="code"><code>/*
+CSS variables for colours
+Note different ways of defining colours
+*/
+
+:root {
+  --primary1: #5e00ff;
+  --primary2: rgb(33 35 44);
+  --primary3: white;
+  --primary4: lightgrey;
+
+  --secondary1: hsl(353 55% 50%);
+  --secondary2: #e6bd19;
+}
+
+h1 {
+  color: var(--primary1);
+}
+
+button {
+  background-color: var(--primary4);
+  color: var(--primary2);
+  min-width: 80px;
+}
+
+button.primary {
+  background-color: var(--primary1);
+  color: var(--primary3);
+}
+
+/* danger div */
+
+div.danger {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--secondary1);
+  border-left: 10px solid var(--secondary1);
+  color: var(--secondary1);
+}
+
+div.danger &gt; p {
+  margin: 0;
+}
+
+div.danger &gt; button {
+  margin-top: 10px;
+  background-color: var(--secondary1);
+  color: var(--primary3);
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">button.primary</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 10:36 AM</time></span></span></div><div style="padding:0.2em">Targets <code>button</code> that is part of class <code>primary</code></div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">div.danger &gt; p</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 10:36 AM</time></span></span></div><div style="padding:0.2em">targets <code>p</code> inside a <code>div</code> that is class <code>danger</code> </div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">border: 1px solid var(--secondary1);
+  border-left: 10px solid var(--secondary1);</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 10:42 AM</time></span></span></div><div style="padding:0.2em">order matters; border-left comes after border</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

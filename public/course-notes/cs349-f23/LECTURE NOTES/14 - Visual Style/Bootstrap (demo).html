@@ -1,0 +1,87 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Bootstrap (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="c6c63aa6-d89b-4bdf-9d40-ae626215187d" class="page sans"><header><h1 class="page-title">Bootstrap (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="4631d4f4-cae3-489c-bdaa-6f28538296bf" class="image"><a href="Bootstrap%20(demo)%20c6c63aa6d89b4bdf9d40ae626215187d/Screen_Shot_2023-11-06_at_11.43.09.png"><img style="width:1306px" src="Bootstrap%20(demo)%20c6c63aa6d89b4bdf9d40ae626215187d/Screen_Shot_2023-11-06_at_11.43.09.png"/></a></figure><p id="0a694286-4806-468d-8a04-0f16a8e01841" class=""><strong><strong><strong><strong>Keys</strong></strong></strong></strong></p><ul id="38e9143d-221a-4a2a-8f3b-ea5a1c5ebbcb" class="bulleted-list"><li style="list-style-type:disc">Using via CDN links</li></ul><ul id="3f6bbbc6-2575-4277-935b-13f5c502c0ce" class="bulleted-list"><li style="list-style-type:disc">Using bootstrap <mark class="highlight-gray">(no CSS sheets)</mark><ul id="954f9a10-62b2-46c8-8833-091fa2ca86d1" class="bulleted-list"><li style="list-style-type:circle">Baseline typography</li></ul><ul id="bfb192ba-ad04-4e2f-a9f5-80f25fe1c677" class="bulleted-list"><li style="list-style-type:circle">Ready-to-use grid system <ul id="0813bce3-248a-4d5f-932b-af819aa90c79" class="bulleted-list"><li style="list-style-type:square">responsive, e.g. col-sm means column when size larger than small</li></ul></li></ul><ul id="f69076f1-bb91-4b4a-b6a8-c78de9475ec3" class="bulleted-list"><li style="list-style-type:circle">Widgets <ul id="3995ca28-c09a-4430-a3d3-b6143a0d7b57" class="bulleted-list"><li style="list-style-type:square">buttons, collapse/expand, etc.</li></ul></li></ul><ul id="94540a7f-5922-4ece-ab19-5feb4996431a" class="bulleted-list"><li style="list-style-type:circle">Icons<ul id="aaba412d-c0c9-459f-b5cf-317561044b43" class="bulleted-list"><li style="list-style-type:square">webfont and svg</li></ul></li></ul></li></ul><hr id="a09491be-ae9a-4d4b-b6d9-68269800655f"/><h3 id="5beb1c23-63de-4569-8ee0-dba198fc46a6" class="">HTML</h3><pre id="d2b305f1-f702-4727-8fd6-74333788fffe" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta
+      name=&quot;viewport&quot;
+      content=&quot;width=device-width, initial-scale=1.0&quot;
+    /&gt;
+    &lt;link
+      href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css&quot;
+      rel=&quot;stylesheet&quot;
+      integrity=&quot;sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN&quot;
+      crossorigin=&quot;anonymous&quot;
+    /&gt;
+    &lt;title&gt;bootstrap&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-sm&quot;&gt;
+          &lt;h4&gt;Section 1&lt;/h4&gt;
+          &lt;p&gt;
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Provident laborum voluptates vel blanditiis, cumque
+            praesentium sint dicta fuga culpa quo, facere quas ipsa,
+            sed cum! Exercitationem excepturi fugiat vero optio.
+          &lt;/p&gt;
+          &lt;button class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;
+          &lt;button class=&quot;btn btn-secondary&quot;&gt;Secondary&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-sm&quot;&gt;
+          &lt;h4&gt;Section 2&lt;/h4&gt;
+          &lt;p&gt;
+            Voluptates autem non veritatis necessitatibus enim
+            quisquam! Et neque dolorum cupiditate eveniet aperiam
+            impedit possimus itaque repudiandae nulla ullam tempore
+            illo voluptates accusantium veritatis porro necessitatibus
+            laboriosam, alias illum quam!
+          &lt;/p&gt;
+
+					//Settings button (collapsable)
+          &lt;p class=&quot;d-inline-flex gap-1&quot;&gt;
+            &lt;a
+              class=&quot;btn btn-primary&quot;
+              data-bs-toggle=&quot;collapse&quot;
+              href=&quot;#collapseExample&quot;
+            &gt;
+              &lt;svg
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+                width=&quot;16&quot;
+                height=&quot;16&quot;
+                fill=&quot;currentColor&quot;
+                class=&quot;bi bi-gear&quot;
+                viewBox=&quot;0 0 16 16&quot;
+              &gt;
+                &lt;path d=&quot;M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z&quot;/&gt;
+                &lt;path d=&quot;M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z&quot;/&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+          &lt;/p&gt;
+          &lt;div class=&quot;collapse&quot; id=&quot;collapseExample&quot;&gt;
+            &lt;div class=&quot;card card-body&quot;&gt;
+              Neque totam numquam necessitatibus ut deleniti voluptate
+              repellat, beatae blanditiis ab, nemo atque corrupti
+              explicabo. Amet laborum recusandae libero fuga
+              cupiditate illum nobis nulla optio omnis! Nobis,
+              architecto? Libero, quae.
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script
+      src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js&quot;
+      integrity=&quot;sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL&quot;
+      crossorigin=&quot;anonymous&quot;
+    &gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">&lt;div class=&quot;container&quot;&gt;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:46 AM</time></span></span></div><div style="padding:0.2em">Bootstrap does stuff with a <code>div</code> with the class <code>container</code>. </div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">class=&quot;row&quot;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:46 AM</time></span></span></div><div style="padding:0.2em">bootstrap <code>container</code> can have <code>rows</code></div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">class=&quot;col-sm&quot;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:48 AM</time></span></span></div><div style="padding:0.2em">only apply this class, <code>col-sm</code> when the width is a certain amount (turn to columns when it’s more than a small (<code>sm</code>) size screen)</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">class=&quot;btn btn-primary&quot;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:48 AM</time></span></span></div><div style="padding:0.2em">base class = <code>btn</code></div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">&lt;svg
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+                width=&quot;16&quot;
+                height=&quot;16&quot;
+                fill=&quot;currentColor&quot;
+                class=&quot;bi bi-gear&quot;
+                viewBox=&quot;0 0 16 16&quot;
+              &gt;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:50 AM</time></span></span></div><div style="padding:0.2em">icon</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>text (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="c514e92d-20af-4a34-8fe1-5be5cbeaf5e5" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">text (demo)</h1><p class="page-description"></p></header><div class="page-body"><pre id="74e64eb0-019e-4a78-b3a1-a5b80f6633b1" class="code"><code>function textDemo(gc: CanvasRenderingContext2D)
+{
+  const x = 150;
+  const y = 75;
+
+  // string uses same style as CSS font property
+  gc.font = &quot;32pt sans-serif&quot;;
+  // standard alignment
+  gc.fillStyle = &quot;blue&quot;;
+  gc.fillText(&quot;Hello&quot;, x, y);
+
+  // fully centred alignment
+  gc.textAlign = &quot;center&quot;;
+  gc.textBaseline = &quot;middle&quot;;
+  gc.fillStyle = &quot;green&quot;;
+  gc.fillText(&quot;Hello&quot;, x, y);
+
+  // dot to show x,y location
+  gc.fillStyle = &quot;red&quot;;
+  gc.fillRect(x - 2, y - 2, 4, 4);
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

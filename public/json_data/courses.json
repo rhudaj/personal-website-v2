@@ -89,5 +89,11 @@
         "title": "Computational Audio",
         "descr": "This is an 'Advanced Topics' course, offered at both the undergraduate and graduate level. The course will provide a self contained sound processing by computer. The course will have a strong practical focus.  Students will be encouraged to explore various hardware and software platforms for audio.",
         "tech": "Languages: Python - Libraries: Numpy, Scipy, Matplotlib, PyAudio"
+    },
+    {
+        "code": "MATH 239",
+        "sem_year": "w23",
+        "title": "Combinatorics",
+        "descr": "Introduction to graph theory: colourings, matchings, connectivity, planarity. Introduction to combinatorial analysis: generating series, recurrence relations, binary strings, plane trees."
     }
 ]

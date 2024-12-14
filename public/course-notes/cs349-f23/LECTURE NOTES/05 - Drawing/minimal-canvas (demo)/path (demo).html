@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>path (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="cf95b287-ccb8-423b-9195-d1a2caf1b9d7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">path (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="8d3b45f0-3ee1-448a-8604-aae5472915e1" class="image" style="text-align:left"><a href="path%20(demo)%20cf95b287ccb8423b9195d1a2caf1b9d7/Screen_Shot_2023-09-19_at_18.57.48.png"><img style="width:384px" src="path%20(demo)%20cf95b287ccb8423b9195d1a2caf1b9d7/Screen_Shot_2023-09-19_at_18.57.48.png"/></a></figure><h1 id="014da407-5792-4bc6-83f3-b41c81ad350c" class="">Path Demo</h1><pre id="b513d24e-be25-4d04-957f-e03cb6327e4d" class="code"><code>function pathDemo(gc: CanvasRenderingContext2D)
+{
+  gc.lineWidth = 3;
+
+  // line
+  gc.strokeStyle = &quot;black&quot;;
+  gc.beginPath();
+  gc.moveTo(10, 10);
+  gc.lineTo(60, 60);
+  gc.stroke();
+
+  // polyline or polygon
+  gc.strokeStyle = &quot;green&quot;;
+  gc.beginPath();
+  gc.moveTo(100, 10);
+  gc.lineTo(150, 60);
+  gc.lineTo(100, 60);
+  gc.closePath();      // line back to first point
+  gc.stroke();
+
+  // BLUE circle (using ellipse)
+  gc.strokeStyle = &quot;blue&quot;;
+  gc.beginPath();
+  gc.ellipse(200, 30, 25, 25, 0, 0, 2 * Math.PI);
+  gc.stroke();
+
+  // RED circle (using arc)
+  gc.strokeStyle = &quot;red&quot;;
+  gc.beginPath();
+  gc.arc(200, 30, 20, 0, 2 * Math.PI);
+  gc.stroke();
+}</code></pre><pre id="6ebf5943-3d83-4aae-91ce-de6247e2dfc9" class="code"><code>//note:
+  gc.fillStyle = &quot;green&quot;;
+  gc.beginPath();
+  gc.moveTo(100, 10);
+  gc.lineTo(150, 60);
+  gc.lineTo(100, 60);
+  //gc.closePath();      not needed; auto-closes
+  gc.fill();</code></pre><div id="2effb37b-5c02-451f-906e-367407e25495" class="column-list"><div id="b7583262-8ff2-43c3-9139-0379d575d086" style="width:50%" class="column"><pre id="979bec3e-1d9b-4ee7-909e-f955ce8731b9" class="code"><code>//Note:
+gc.lineWidth = 10;
+
+// line
+gc.strokeStyle = &quot;black&quot;; // STYLE SET
+gc.beginPath();           //***
+gc.moveTo(10, 10);
+gc.lineTo(60, 60);
+gc.stroke();
+
+gc.lineWidth = 3;
+gc.strokeStyle = &quot;green&quot;; // STYLE SET
+//gc.beginPath();         //***
+gc.moveTo(100, 10);
+gc.lineTo(150, 60);
+gc.lineTo(100, 60);
+gc.closePath();      // line back to first point
+gc.stroke();</code></pre></div><div id="7ee4cc56-b8d6-42e7-995a-2dbe5ecd17c3" style="width:50%" class="column"><p id="5a82f773-a528-4094-a6c6-02e67a9f407a" class="">path begins </p><p id="b93f9d59-fb31-47b2-8345-90584c5e11a0" class="">the first (<em>black)</em> line is drawn.</p><p id="96983203-e40b-4fd0-8c21-2c91e5a418c5" class="">the style is changed</p><p id="c34a7864-7a7a-4b0d-8295-3c928ee0b4de" class="">* a new path has not begun (the moveTo &amp; lineTo are disregarded)</p><p id="fb109e0a-4fb0-4e1c-84d4-4e8c3f42b953" class="">When stroke() is called again, it’s on the 1st path with a different style</p><p id="bb9a2746-0e4e-41f5-8bf7-982edbabac07" class=""><strong><strong><strong><strong><strong><strong><strong><strong>result: </strong></strong></strong></strong></strong></strong></strong></strong></p><figure id="ecaad715-3cbb-42f7-beb2-4ab05e59facc" class="image"><a href="path%20(demo)%20cf95b287ccb8423b9195d1a2caf1b9d7/Screen_Shot_2023-09-19_at_19.20.12.png"><img style="width:254px" src="path%20(demo)%20cf95b287ccb8423b9195d1a2caf1b9d7/Screen_Shot_2023-09-19_at_19.20.12.png"/></a></figure></div></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

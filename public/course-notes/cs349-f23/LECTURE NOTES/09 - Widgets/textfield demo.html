@@ -1,0 +1,164 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>textfield demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="58af58a9-d09a-493d-bfc6-d04f57b1a8a6" class="page sans"><header><h1 class="page-title">textfield demo</h1><p class="page-description"></p></header><div class="page-body"><hr id="a6acb17f-a600-41dc-b3e8-a149791848b7"/><p id="9793c9ea-6b4e-4d56-a08e-fcf988cd92fe" class="">
+</p><hr id="0dfadd26-0908-4e77-92be-c739ea662fb7"/><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><strong><strong><strong><strong><strong><strong><strong><strong><strong>textfield</strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><div class="indented"><ul id="48f5159d-86e1-4403-93c7-bd405503d04a" class="bulleted-list"><li style="list-style-type:disc">short text entry<ul id="2c2d1989-3540-4bae-a6dd-4a5188b11aa2" class="bulleted-list"><li style="list-style-type:circle"><strong>focus state</strong><ul id="c843c481-6ca2-494f-a5fe-7878667f2e65" class="bulleted-list"><li style="list-style-type:square">only focused if it was the last one clicked</li></ul></li></ul><ul id="bee72b3e-dfb8-4ed2-96ea-973028eb0985" class="bulleted-list"><li style="list-style-type:circle">applyEdit method</li></ul></li></ul><ul id="09ce713b-fb96-466f-8cad-cbe5ca0d4b65" class="bulleted-list"><li style="list-style-type:disc"><code><strong>state</strong></code><strong><strong><strong><strong><strong><strong>: </strong></strong></strong></strong></strong></strong>idle, hover</li></ul><ul id="b8302592-0a08-4f5b-b871-363bb37fbc0b" class="bulleted-list"><li style="list-style-type:disc">testing in main.ts<ul id="0c74b94c-6482-4aa5-afde-6866a8bb1f74" class="bulleted-list"><li style="list-style-type:circle">simulate dispatch &amp; focus events</li></ul></li></ul><ul id="c291672b-d5f3-4b8d-b3c5-1725d91a9de7" class="bulleted-list"><li style="list-style-type:disc"><strong>TODO</strong>:<ul id="c7f2e0c8-54a8-44c6-99ed-350f7e10e1ea" class="bulleted-list"><li style="list-style-type:circle">add text insert cursor</li></ul><ul id="5f2fe728-5ce5-49a9-b9e7-03d7eb29340c" class="bulleted-list"><li style="list-style-type:circle">insert text inside cursor </li></ul><ul id="68e4a1b1-81dc-4919-98e3-9aea2c6e4d7a" class="bulleted-list"><li style="list-style-type:circle">support cursor keys</li></ul><ul id="2b0a36e5-340d-44f5-94c7-56f2fdfd8e72" class="bulleted-list"><li style="list-style-type:circle">highlight text to replace or delete </li></ul></li></ul><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="d1e9d883-8c49-4b97-9132-9a38634eb410"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%"><strong>only 1 textedit can have focus</strong></div></figure><pre id="68f98962-6f83-4490-b967-3febe82267f2" class="code"><code>export class SKTextfield extends SKElement {
+  state: &quot;idle&quot; | &quot;hover&quot; = &quot;idle&quot;;
+  focus = false;
+  font = Style.font;
+
+  // find size of text to set height (and width if not specified)
+  constructor(
+    public text: string,
+    x: number,
+    y: number,
+    width?: number
+  ) {
+    super(x, y);
+    this.text = text;
+
+    // if no width or height is specified, calculate the size
+    const m = measureText(text, this.font);
+
+    if (!m) {
+      console.warn(`measureText failed in SKTextfield for ${text}`);
+      return;
+    }
+
+    this.height =
+      m.fontBoundingBoxAscent +
+      m.fontBoundingBoxDescent +
+      Style.textPadding;
+    this.width = width || m.width + Style.textPadding * 2;
+  }
+
+  applyEdit(text: string, key: string): string {
+    if (key == &quot;Backspace&quot;) {
+      return text.slice(0, -1);
+    } else if (key.length == 1) {
+      return text + key;
+    } else return text;
+  }
+
+  hittest(mx: number, my: number): boolean {
+    return insideHitTestRectangle(
+      mx,
+      my,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+
+  draw(gc: CanvasRenderingContext2D) {
+    const padding = 10;
+
+    gc.save();
+
+    // thick highlight rect
+    if (this.state == &quot;hover&quot;) {
+      gc.beginPath();
+      gc.rect(this.x, this.y, this.width, this.height);
+      gc.strokeStyle = Style.highlightColour;
+      gc.lineWidth = 8;
+      gc.stroke();
+    }
+
+    // border
+    gc.beginPath();
+    gc.rect(this.x, this.y, this.width, this.height);
+    gc.fillStyle = &quot;white&quot;;
+    gc.fill();
+    gc.lineWidth = 1;
+    gc.strokeStyle = this.focus ? Style.focusColour : &quot;black&quot;;
+    gc.stroke();
+
+    // TODO: highlight text
+    if (false) {
+      gc.fillStyle = Style.highlightColour;
+      gc.fillRect(
+        this.x + padding,
+        this.y + padding / 2,
+        50,
+        this.height - padding
+      );
+    }
+
+    // text
+    gc.font = Style.font;
+    gc.fillStyle = &quot;black&quot;;
+    gc.textBaseline = &quot;middle&quot;;
+    gc.textAlign = &quot;left&quot;;
+    gc.fillText(
+      this.text,
+      this.x + padding,
+      this.y + this.height / 2
+    );
+
+    gc.restore();
+  }
+
+  public toString(): string {
+    return `SKTextfield &#x27;${this.text}&#x27; id:${this.id}`;
+  }
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">main</summary><div class="indented"><pre id="414ef84a-6df0-44ca-9605-372b57b47391" class="code"><code>const textfield = new SKTextfield(&quot;Hello Textfield&quot;, 50, 50, 150);
+
+setSKEventListener((e) =&gt; {
+  switch (e.type) {
+    case &quot;mousemove&quot;:
+      {
+        // testing mouseexit/mouseenter behaviour
+        const { x, y } = e as SKMouseEvent;
+        if (textfield.hittest(x, y)) {
+          textfield.state = &quot;hover&quot;;
+        } else {
+          textfield.state = &quot;idle&quot;;
+        }
+      }
+      break;
+    case &quot;click&quot;:
+      {
+        // test getting and losing keyboard focus
+        const { x, y } = e as SKMouseEvent;
+        if (textfield.hittest(x, y)) {
+          textfield.focus = true;
+        } else {
+          textfield.focus = false;
+        }
+      }
+      break;
+
+    case &quot;keypress&quot;:
+      const { key } = e as SKKeyboardEvent;
+      // test editing text
+      if (textfield.focus &amp;&amp; key) {
+        textfield.text = textfield.applyEdit(textfield.text, key);
+      }
+      break;
+  }
+});
+
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  textfield.draw(gc);
+});
+
+startSimpleKit();</code></pre></div></details><p id="04be6b7c-72bf-433b-9ee2-83a5602b8499" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">measureText</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 14, 2023, 5:53 PM</time></span></span></div><div style="padding:0.2em">!!!</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">// TODO: highlight text
+    if (false) {
+      gc.fillStyle = Style.highlightColour;
+      gc.fillRect(
+        this.x + padding,
+        this.y + padding / 2,
+        50,
+        this.height - padding
+      );
+    }</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 14, 2023, 5:54 PM</time></span></span></div><div style="padding:0.2em">not implemented yet</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">case &quot;click&quot;:
+      {
+        // test getting and losing keyboard focus
+        const { x, y } = e as SKMouseEvent;
+        if (textfield.hittest(x, y)) {
+          textfield.focus = true;
+        } else {
+          textfield.focus = false;
+        }
+      }
+      break;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 14, 2023, 5:52 PM</time></span></span></div><div style="padding:0.2em">!!!</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">textfield.applyEdit(textfield.text, key);</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 14, 2023, 5:52 PM</time></span></span></div><div style="padding:0.2em">edit text (it handles if it’s a backspace or not)…</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">setSKEventListener</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Oct 14, 2023, 5:53 PM</time></span></span></div><div style="padding:0.2em">once we learn about dispatch…this will be inside of textedit</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

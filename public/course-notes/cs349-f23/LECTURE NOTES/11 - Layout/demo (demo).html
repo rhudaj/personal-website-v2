@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>demo (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="aeeaf676-c045-4543-b808-6736833d1d5c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">demo (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="2d0f65de-8fcc-4b2a-9a5f-7c964554ffb2" class="image"><a href="demo%20(demo)%20aeeaf676c0454543b8086736833d1d5c/Screen_Shot_2023-10-23_at_20.32.32.png"><img style="width:2658px" src="demo%20(demo)%20aeeaf676c0454543b8086736833d1d5c/Screen_Shot_2023-10-23_at_20.32.32.png"/></a></figure><ul id="93d35b83-83cd-4576-91f2-98214395b480" class="bulleted-list"><li style="list-style-type:disc">root (white) container has a <strong>centred-layout</strong></li></ul><ul id="7b411f9d-1a34-4bcf-82cd-d8ca3b6c0ca5" class="bulleted-list"><li style="list-style-type:disc">The panel (w’ label, textField and button) has a <strong><strong><strong><strong><strong><strong><strong><strong>fill-layout</strong></strong></strong></strong></strong></strong></strong></strong></li></ul><h2 id="415aa392-64f3-42fe-930c-c92460f3be03" class="">main</h2><pre id="f7e926b1-e071-4048-b9c3-6b5c6eb8d764" class="code"><code>const root = new SKContainer();
+root.box.padding = 10;
+root.fill = &quot;whitesmoke&quot;;
+
+setSKRoot(root);
+
+// fixed size panel in centre
+const panel = new SKContainer();
+panel.fill = &quot;white&quot;;
+panel.border = &quot;black&quot;;
+panel.box.padding = 20;
+panel.width = 400;
+panel.height = 150;
+
+// label
+const label = new SKLabel(&quot;Name:&quot;);
+label.align = &quot;right&quot;;
+
+// texfield
+const name = new SKTextfield();
+name.width = 100;
+name.fillWidth = 1;
+
+// button
+const hello = new SKButton(&quot;Hello&quot;);
+
+// add them to panel
+root.addChild(panel);
+root.layoutMethod = Layout.makeCentredLayout();
+	panel.addChild(label);
+	panel.addChild(name);
+	panel.addChild(hello);
+	panel.layoutMethod = Layout.makeFillRowLayout({ gap: 10 });
+
+startSimpleKit();</code></pre><pre id="1f1cb5a9-6d7b-4904-a1b8-d5f55656493a" class="code"><code>// set an event handler for button &quot;action&quot; event
+hello.addEventListener(&quot;action&quot;, () =&gt; {
+  const msg =
+    name.text == &quot;&quot; ? &quot;Anyone there?&quot; : `Hello ${name.text}`;
+  console.log(msg);
+});</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,117 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Templates (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="f93eab21-db1f-4111-ada1-54a904fa1bde" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">Templates (demo)</h1><p class="page-description"></p></header><div class="page-body"><h3 id="2cbd2c16-b3cc-4367-9ced-47896de7e031" class="">html</h3><pre id="354b3633-9640-40c9-ae96-ed90c5c8c717" class="code"><code>...
+  &lt;body&gt;
+    &lt;!-- MAIN PANEL --&gt;
+    &lt;div id=&quot;panel&quot;&gt;???&lt;/div&gt;
+
+    &lt;!-- TEMPLATES --&gt;
+
+    &lt;template id=&quot;left-view&quot;&gt;
+      &lt;div id=&quot;left&quot;&gt;
+        &lt;button id=&quot;increment&quot;&gt;?&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/template&gt;
+
+    &lt;template id=&quot;right-view&quot;&gt;
+      &lt;div id=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/template&gt;
+
+    &lt;template id=&quot;number-square&quot;&gt;
+      &lt;div&gt;?&lt;/div&gt;
+    &lt;/template&gt;
+
+    &lt;script type=&quot;module&quot; src=&quot;./main.ts&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+...</code></pre><h3 id="54749718-6bc8-4e39-a3cd-2b566e302b71" class="">main.ts</h3><pre id="6a3ee12a-9795-4cfb-889c-f83507a71c4c" class="code"><code>const model = new Model();
+
+// get reference to panel
+const panel = document.getElementById(&quot;panel&quot;) as HTMLElement;
+if (!panel) throw new Error(&quot;panel not found&quot;);
+
+// clear the panel of any content
+panel.innerHTML = &quot;&quot;;
+
+// setup the two views
+const leftView = new LeftView(panel, model);
+const rightView = new RightView(panel, model);</code></pre><h3 id="e1b6f4df-b07f-41d9-a948-03054a6691ee" class="">leftView.ts</h3><pre id="828cba7b-84d6-4f86-8359-479a0860ef93" class="code"><code>// local imports
+import { Observer } from &quot;./observer&quot;;
+import { Model } from &quot;./model&quot;;
+
+export class LeftView implements Observer {
+
+	button: HTMLButtonElement;
+
+  constructor(parent: HTMLElement, private model: Model) {
+    // GET THE TEMPLATE
+    const template = document.getElementById(&quot;left-view&quot;) as HTMLTemplateElement;
+    if (!template) throw new Error(&quot;leftView template not found&quot;);
+
+    // CLONE THE TEMPLATE
+    const view = template.content.cloneNode(true) as DocumentFragment;
+
+    // important to do this before inserting into the DOM
+    const el = view.querySelector(&quot;button#increment&quot;) as HTMLButtonElement;
+    if (!el) throw new Error(&quot;leftView button not found&quot;);
+    this.button = el;
+
+    // ADD TO PANEL
+    parent.appendChild(view);
+
+    // // this is the Controller
+    this.button.addEventListener(&quot;click&quot;, () =&gt; {
+      model.increment();
+    });
+
+    // register with the model
+    this.model.addObserver(this);
+  }
+
+	update(): void {
+    this.button.innerText = `${this.model.count}`;
+  }
+}</code></pre><h3 id="5161d017-3d78-4749-838a-42f0948d3388" class="">rightView.ts</h3><pre id="32683f95-77c3-40f3-9127-e9ef5bb1f66d" class="code"><code>// local imports
+import { Observer } from &quot;./observer&quot;;
+import { Model } from &quot;./model&quot;;
+
+export class RightView implements Observer {
+
+  container: HTMLElement;
+  numberSquare: HTMLTemplateElement;
+
+  constructor(parent: HTMLElement, private model: Model) {
+    // GET THE TEMPLATE
+    const template = document.getElementById(
+      &quot;right-view&quot;
+    ) as HTMLTemplateElement;
+    if (!template) throw new Error(&quot;rightView template not found&quot;);
+
+    // CLONE THE TEMPLATE
+    const view = template.content.cloneNode(true) as DocumentFragment;
+
+    // important to do this before inserting into the DOM
+    const el = view.getElementById(&quot;right&quot;) as HTMLElement;
+    if (!el) throw new Error(&quot;rightView div not found&quot;);
+    this.container = el;
+
+    // ADD TO PANEL
+    parent.appendChild(view);
+
+    // get reference to template for a single &quot;number square&quot;
+    this.numberSquare = document.getElementById(
+      &quot;number-square&quot;
+    ) as HTMLTemplateElement;
+
+    // register with the model
+    this.model.addObserver(this);
+  }
+
+  update(): void {
+    this.container.innerHTML = &quot;&quot;;
+    for (let i = 0; i &lt; this.model.count; i++) {
+      const view = this.numberSquare.content.cloneNode(True) as DocumentFragment;
+      const div = view.querySelector(&quot;div&quot;) as HTMLDivElement;
+      div.innerText = `${i + 1}`;
+      this.container.appendChild(view);
+    }
+  }
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">    // important to do this before inserting into the DOM
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 8, 2023, 2:34 PM</time></span></span></div><div style="padding:0.2em">!</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">// important to do this before inserting into the DOM</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 8, 2023, 2:37 PM</time></span></span></div><div style="padding:0.2em">!</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

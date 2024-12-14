@@ -1,0 +1,70 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>tweening demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="09f21b54-61ac-4300-b8ff-634dc5cfb687" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">tweening demo</h1><p class="page-description"></p></header><div class="page-body"><h1 id="e3b8145f-f979-4fb8-bd14-b478e03abfb4" class="">animater.ts</h1><pre id="6082cd7b-a4a9-4279-b30b-a5cc31b716ef" class="code code-wrap"><code>export class Animater
+{
+  constructor(
+    public startValue: number,
+    public endValue: number,
+    public duration: number,
+    public updateValue: (p: number) =&gt; void
+  ) {}
+
+  private startTime: number | undefined;
+
+  start(time: number) {
+    this.startTime = time;
+    this._isRunning = true;
+  }
+
+  get isRunning() {
+    return this._isRunning;
+  }
+  private _isRunning = false;
+
+  update(time: number) {
+    if (!this._isRunning || this.startTime === undefined) return;
+
+    // proportion of time elapsed
+    const t = (time - this.startTime) / this.duration;
+
+    // calculate the new value
+    const value = lerp(this.startValue, this.endValue, t);
+
+    // call the update callback
+    this.updateValue(value);
+
+    if (t &gt;= 1) {
+      this.startTime = undefined;
+      this._isRunning = false;
+    }
+  }
+}</code></pre><h1 id="520ce914-4644-4a36-8acb-23509b398133" class="">main.ts</h1><pre id="31b8226d-9d7f-48e0-a0c9-10b02a09c1e5" class="code code-wrap"><code>import { Animater } from &quot;./animater&quot;;
+
+const dot = {
+  x: 0,
+  y: 0,
+  r: 32,
+  draw(gc: CanvasRenderingContext2D) {...},
+};
+
+// draw callback
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  dot.draw(gc);
+});
+
+// animation callback
+setSKAnimationCallback((time) =&gt; {
+  animateDotX.update(time);
+});
+
+
+dot.y = 75;
+
+// setup the animation object
+const animateDotX = new Animater(50, 300, 3000, (value) =&gt; {
+  dot.x = value;
+});
+
+// could also use performance.now() to get current time to start
+animateDotX.start(0);
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

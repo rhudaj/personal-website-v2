@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Binding Demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="b46ee335-3d89-4076-b924-2208b0e41a40" class="page sans"><header><h1 class="page-title">Binding Demo</h1><p class="page-description"></p></header><div class="page-body"><h1 id="fc32ae77-dbf5-44d5-848c-62fd23c0f558" class="">main</h1><pre id="a855790d-426e-4c99-a59c-621171714d61" class="code"><code>const button = new SKButton(&quot;Button&quot;, 30, 30, 100);
+
+button.addEventListener(&quot;action&quot;, (e) =&gt; {
+  console.log(&quot;button was clicked!&quot;);
+});
+
+setSKEventListener((e) =&gt; {
+  if (e.type == &quot;mouseup&quot;) {
+    const me = e as SKMouseEvent;
+    if (button.hittest(me.x, me.y)) {
+      button.handleMouseEvent(me);
+    }
+  }
+});
+
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  button.draw(gc);
+});
+
+startSimpleKit();</code></pre><h2 id="96adfc0d-86ef-4000-9db4-31b84942fc28" class="">SimpleKit/widget/Button</h2><pre id="68658e06-d050-4ddf-8458-3d3193358153" class="code"><code>export class SKButton extends SKElement
+{
+	...
+  handleMouseEvent(me: SKMouseEvent)
+	{
+    switch (me.type)
+		{
+      ...
+      case &quot;mouseup&quot;:
+        ...
+
+				let result = this.dispatch({
+          source: this,
+          timeStamp: me.timeStamp,
+          type: &quot;action&quot;,
+        } as SKEvent);
+
+        return result
+      ...
+    }
+  }
+	...
+}</code></pre><h2 id="0af95b28-d5ee-4f75-9437-a362ab251cee" class="">SimpleKit/widget/element</h2><pre id="c5fa47c2-9f2f-4e51-b9ad-d074de94966b" class="code"><code>protected dispatch(e: SKEvent, capture = false): boolean {
+    ...
+
+    this.dispatchTable.forEach((dr) =&gt;
+		{
+      if (dr.type == e.type &amp;&amp; dr.capture == capture)
+			{
+        handled ||= dr.handler(e) ...
+      }
+    });
+
+    ...
+  }</code></pre><p id="0f90ebf2-8d5a-4e7f-a1a6-002188246cb7" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

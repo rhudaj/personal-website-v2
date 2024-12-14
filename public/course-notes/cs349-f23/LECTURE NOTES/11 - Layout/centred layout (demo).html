@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>centred layout (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="46724fa8-205c-47f4-8889-f6e330c38dad" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">centred layout (demo)</h1><p class="page-description"></p></header><div class="page-body"><h2 id="9e1cc556-79f5-430e-b594-cd2bc52ef36e" class="">centred layout</h2><pre id="e8972e83-83ee-4e1b-b4f1-843d6e2e33de" class="code"><code>export function makeCentredLayout(): LayoutMethod {
+  return (
+    boundsWidth: number,
+    boundsHeight: number,
+    elements: SKElement[]
+  ) =&gt; {
+    return centredLayout(boundsWidth, boundsHeight, elements);
+  };
+}
+
+export function centredLayout(
+  boundsWidth: number,
+  boundsHeight: number,
+  elements: SKElement[]
+): Size {
+  const newBounds: Size = { width: 0, height: 0 };
+
+  // stacks all children in the centre of the container
+  elements.forEach((el) =&gt; {
+    // centre element
+    el.x = boundsWidth / 2 - el.box.fullWidth / 2;
+    el.y = boundsHeight / 2 - el.box.fullHeight / 2;
+
+    // warn if element is outside bounds
+		...
+
+    // update bounds that were actually used,ignore margins
+    newBounds.width = Math.max(newBounds.width, el.box.width);
+    newBounds.height = Math.max(newBounds.height, el.box.height);
+  });
+
+  return newBounds;
+}</code></pre><h2 id="6709fbe1-4139-4e04-9806-882893821142" class="">main</h2><pre id="076e21ad-ddaf-4368-962c-7f916b4f7c86" class="code"><code>const root = makeContainer(&quot;root&quot;, &quot;lightyellow&quot;);
+root.box.padding = 10;
+
+const a = makeContainer(&quot;A&quot;, &quot;lightblue&quot;);
+a.box.padding = 10;
+a.x = 50;
+a.y = 50;
+a.width = 100;
+a.height = 50;
+a.debug = true;
+
+const b = makeContainer(&quot;B&quot;, &quot;pink&quot;);
+b.box.padding = 10;
+b.x = 200;
+b.y = 50;
+b.width = 50;
+b.height = 100;
+b.debug = true;
+
+
+root.addChild(a);
+root.addChild(b);
+
+// set layout method
+root.layoutMethod = Layout.makeCentredLayout();
+
+setSKRoot(root);
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

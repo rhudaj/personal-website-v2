@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>manager (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="cca65f36-39ab-4870-9b91-49cbd00ba387" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">manager (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="e93f8295-f822-44d7-bdf1-a28f39ff0a15"><div class="source"><a href="manager%20(demo)%20cca65f3639ab48709b9149cbd00ba387/Screen_Recording_2023-09-29_at_10.33.15.mov">https://prod-files-secure.s3.us-west-2.amazonaws.com/21423f49-a365-4487-8460-041e9674e478/ab8d7c75-16a9-4d07-b0c7-0e69336dd5ac/Screen_Recording_2023-09-29_at_10.33.15.mov</a></div></figure><h1 id="21b7576c-d6dd-426b-89ce-257c3852a129" class="">manager.ts</h1><pre id="b6ea1a8a-e8c2-4940-897d-7d59f76462b4" class="code code-wrap"><code>import { Animater } from &quot;./animater&quot;;
+
+class AnimationManager
+{
+  protected animations: Animater[] = [];
+
+  add(animation: Animater) {
+    this.animations.push(animation);
+    // TODO: should have more flexible way to start animation
+    animation.start(performance.now());
+  }
+
+  update(time: number)
+	{
+    if (this.animations.length === 0) return;
+
+    // update every animation currently running
+    this.animations.forEach((a) =&gt; a.update(time));
+
+    // remove any animations that finished
+    this.animations = this.animations.filter((a) =&gt; a.isRunning);
+  }
+}
+
+// create the singleton *(there&#x27;s ways around this)
+export const animationManager = new AnimationManager();</code></pre><h1 id="b024a156-2bec-4cc3-82da-2d261b4853a1" class="">main.ts</h1><pre id="b7dfc243-80d5-45ba-b56a-348bd8e4e180" class="code code-wrap"><code>import {
+  animationManager,
+  Animater,
+  easeIn,
+  easeOut,
+} from &quot;./animationManager&quot;;
+
+// simple Drawable dots
+const dot1 = {... y: 50 ...};
+
+// make copies
+const dot2 = { ...dot1, y: 100 };
+const dot3 = { ...dot1, y: 150 };
+
+// animaters
+
+const animater_1 = new Animater(50, 300, 3000, (p) =&gt; {dot1.x = p})
+const animater_2 = new Animater(50, 350, 2500, (p) =&gt; {dot2.x = p}, easeIn)
+const animater_3 = new Animater(50, 400, 3500, (p) =&gt; {dot3.x = p}, easeOut)
+
+
+// add animations
+animationManager.add(animater_1);
+animationManager.add(animater_2);
+animationManager.add(animater_3);
+
+setSKAnimationCallback((time) =&gt; {animationManager.update(time)})
+
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  dot1.draw(gc);
+  dot2.draw(gc);
+  dot3.draw(gc);
+});
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

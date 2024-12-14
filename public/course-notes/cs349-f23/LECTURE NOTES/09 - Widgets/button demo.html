@@ -1,0 +1,124 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>button demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="255e2fd3-6c6c-4f3b-b131-5c76acd389a9" class="page sans"><header><h1 class="page-title">button demo</h1><p class="page-description"></p></header><div class="page-body"><hr id="5c145f2e-968b-49ca-99b0-a89e09f32e50"/><figure id="7a60c291-21ca-4bf2-8a97-80c0d216e235"><div class="source"><a href="button%20demo/Screen_Recording_2023-10-14_at_17.18.36.mov">https://prod-files-secure.s3.us-west-2.amazonaws.com/21423f49-a365-4487-8460-041e9674e478/5e9530b3-b37c-4831-a5e3-789abb04c2d3/Screen_Recording_2023-10-14_at_17.18.36.mov</a></div></figure><hr id="dd83e083-7b1b-4926-9330-045392a62045"/><p id="c8954832-cfea-41b1-80ae-85e3ea33da1a" class="">
+</p><p id="14e55270-1fa8-4580-9fed-a5abcf37b35c" class=""><code>SKElement</code></p><pre id="a58ff35b-e9cb-47de-859c-4129aa9d65db" class="code"><code>export abstract class SKElement {
+  constructor() {}
+  x = 0;
+  y = 0;
+  width = 32;
+  height = 32;
+  abstract draw(gc: CanvasRenderingContext2D): void;
+}</code></pre><h1 id="7196d7e8-e8db-4306-9c7a-8c93917eff6f" class="">Style</h1><p id="a8d98fff-9aca-40d8-8b17-6d57b931b294" class="">Exports default style values. So we can use them with <code>Style.value</code></p><pre id="ba8f5225-72a4-4bb6-8101-76b200ec5993" class="code"><code>// standard SimpleKit widget style
+export let debug = true;
+export let font = &quot;12pt sans-serif&quot;;
+export let textPadding = 10;
+export let widgetHeight = 32;
+export let defaultColour = &quot;lightgrey&quot;;
+export let highlightColour = &quot;lightskyblue&quot;;
+export let focusColour = &quot;mediumblue&quot;;</code></pre><p id="cfe138ad-c410-4786-ae5f-cc1d1e0cf26a" class="">In <code>button.ts</code></p><pre id="7635845d-5803-4d16-8fc7-953b7585a99e" class="code"><code>import * as Style from &quot;./style&quot;;</code></pre><p id="fe1d0ca4-4904-4c55-9d82-b10bd9dceadf" class="">Now we can reference it like this: </p><pre id="c418b0d8-0c8c-4a92-9a24-e8b9473fdafd" class="code"><code>gc.fillStyle = this.state == &quot;down&quot; ? Style.highlightColour : Style.defaultColour;</code></pre><h1 id="ba310648-9ab1-4447-afd3-71e0472cdecd" class="">Button</h1><ol type="1" id="72e4e9eb-cd5b-491e-8ea3-73e527480057" class="numbered-list" start="1"><li>3 <strong>States</strong>: idle, hover, down</li></ol><ol type="1" id="ca8dd3f1-02dc-47d6-bc4e-918d1b9f1dfd" class="numbered-list" start="2"><li><strong>Drawing</strong>: depends on state</li></ol><ol type="1" id="da8bc1d5-fe76-43dd-a4bd-23a6493a7daa" class="numbered-list" start="3"><li><strong><strong><strong><strong><strong><strong><strong>Style: </strong></strong></strong></strong></strong></strong></strong>depends on state</li></ol><ol type="1" id="08ccad8d-b812-4b2e-bd88-7a02fb8c243d" class="numbered-list" start="4"><li><strong><strong><strong><strong><strong><strong>Events: </strong></strong></strong></strong></strong></strong>change state<figure id="c469829d-90da-456b-b487-60e79e42c22f" class="image"><a href="button%20demo/Screen_Shot_2023-10-14_at_17.16.59.png"><img style="width:288px" src="button%20demo/Screen_Shot_2023-10-14_at_17.16.59.png"/></a></figure></li></ol><p id="2245730b-a36c-40b7-a551-98fd4a80cbf9" class="">
+</p><pre id="75b657d7-cde9-4f4a-b06b-6366a81fb1c0" class="code"><code>export class SKButton extends SKElement
+{
+  state: &quot;idle&quot; | &quot;hover&quot; | &quot;down&quot; = &quot;idle&quot;;
+
+  font = Style.font;
+
+  constructor(
+    public text: string,
+    x: number,
+    y: number,
+    width: number,
+    height?: number
+  ) {
+    super();
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height || Style.widgetHeight;
+  }
+
+  hittest(mx: number, my: number): boolean {
+    return insideHitTestRectangle(
+      mx,
+      my,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+
+  draw(gc: CanvasRenderingContext2D) {
+    gc.save();
+
+    // thick highlight rect
+    if (this.state == &quot;hover&quot; || this.state == &quot;down&quot;) {
+      gc.beginPath();
+      gc.roundRect(this.x, this.y, this.width, this.height, 4);
+      gc.strokeStyle = Style.highlightColour;
+      gc.lineWidth = 8;
+      gc.stroke();
+    }
+
+    // normal background
+    gc.beginPath();
+    gc.roundRect(this.x, this.y, this.width, this.height, 4);
+    gc.fillStyle =
+      this.state == &quot;down&quot; ? Style.highlightColour : Style.defaultColour;
+    gc.strokeStyle = &quot;black&quot;;
+    // change fill to show down state
+    gc.lineWidth = this.state == &quot;down&quot; ? 4 : 2;
+    gc.fill();
+    gc.stroke();
+
+    // button label
+    gc.font = this.font;
+    gc.fillStyle = &quot;black&quot;;
+    gc.textAlign = &quot;center&quot;;
+    gc.textBaseline = &quot;middle&quot;;
+    gc.fillText(this.text, this.x + this.width / 2, this.y + this.height / 2);
+
+    gc.restore();
+  }
+}</code></pre><h1 id="4a614e7d-16b1-4a28-8b65-995a618b5a20" class="">Main</h1><pre id="d09b48d1-7757-4b0a-9a61-d2d654f35036" class="code"><code>const button = new SKButton(&quot;Test&quot;, 50, 50, 120);
+
+setSKEventListener((e) =&gt; {
+  // test button behaviour
+  switch (e.type) {
+    case &quot;mousemove&quot;:
+      {
+        if (button.state !== &quot;down&quot;) {
+          const { x, y } = e as SKMouseEvent;
+          if (button.hittest(x, y)) {
+            button.state = &quot;hover&quot;;
+          } else {
+            button.state = &quot;idle&quot;;
+          }
+        }
+      }
+      break;
+
+    case &quot;mousedown&quot;:
+      {
+        const { x, y } = e as SKMouseEvent;
+        if (button.hittest(x, y)) {
+          button.state = &quot;down&quot;;
+        }
+      }
+      break;
+
+    case &quot;mouseup&quot;:
+      {
+        if (button.state === &quot;down&quot;) {
+          console.log(&quot;button click action&quot;);
+          button.state = &quot;idle&quot;;
+        }
+      }
+      break;
+  }
+});
+
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  button.draw(gc);
+});
+
+startSimpleKit();</code></pre><p id="d0ec031f-4f11-47b7-9bd1-bd188597c045" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

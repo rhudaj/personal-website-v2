@@ -1,0 +1,77 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Grid Demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="2bcad66f-0eaa-4066-a7e8-2e3d68f4041c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">Grid Demo</h1><p class="page-description"></p></header><div class="page-body"><div id="1d70777a-7b5a-49e3-a2cf-5d4084df4746" class="column-list"><div id="dfd37475-4ebe-4d5a-9b71-f84a3358ee6f" style="width:50%" class="column"><p id="43934c61-54fe-4a62-9dae-aa9dce91981c" class=""><strong><strong><strong><strong><strong>Phone</strong></strong></strong></strong></strong></p><figure id="3b0ed0c2-4138-4341-8f7d-aa5ae82cae52" class="image"><a href="Grid%20Demo/Screen_Shot_2023-11-06_at_11.34.26.png"><img style="width:988px" src="Grid%20Demo/Screen_Shot_2023-11-06_at_11.34.26.png"/></a></figure></div><div id="5e235a83-83e7-45b5-943e-50ddad52cbe8" style="width:50%" class="column"><p id="41b396ee-fb40-4548-8fbf-6e1e53f64a8a" class=""><strong><strong><strong><strong><strong><strong>Screen</strong></strong></strong></strong></strong></strong></p><figure id="1104e5f8-6ef3-41c9-bea8-010b961bd9a6" class="image"><a href="Grid%20Demo/Screen_Shot_2023-11-06_at_11.29.09.png"><img style="width:1716px" src="Grid%20Demo/Screen_Shot_2023-11-06_at_11.29.09.png"/></a></figure></div></div><hr id="9ce3f62c-f63e-49b6-acb4-81195b8c06c5"/><p id="067d9192-312d-4ed7-8fb2-828a11ebfb2f" class=""><strong><strong><strong><strong>Keys</strong></strong></strong></strong></p><ul id="03204073-a016-4b1c-9777-3312d361b9ec" class="bulleted-list"><li style="list-style-type:disc">use flex-box</li></ul><ul id="1b45d63e-b4b1-45e8-be79-ee1e1551ff17" class="bulleted-list"><li style="list-style-type:disc">uses typography.css from previous demo </li></ul><ul id="e799d563-7b69-4917-b0df-d08fe338bcb5" class="bulleted-list"><li style="list-style-type:disc">mobile first design — set CSS for a phone, than for a screen</li></ul><hr id="26200755-54b1-4e5a-90b4-c684302af2c6"/><h3 id="4af15166-064e-447a-9a52-5a1233ff2923" class="">HTML</h3><pre id="4da017f4-aecc-4d11-9337-08d6f0761c08" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta
+      name=&quot;viewport&quot;
+      content=&quot;width=device-width, initial-scale=1.0&quot;
+    /&gt;
+    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+    &lt;link
+      rel=&quot;preconnect&quot;
+      href=&quot;https://fonts.gstatic.com&quot;
+      crossorigin
+    /&gt;
+    &lt;link
+      href=&quot;https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;500;600;700&amp;display=swap&quot;
+      rel=&quot;stylesheet&quot;
+    /&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;typography.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;grid&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Grid&lt;/h1&gt;
+    &lt;div id=&quot;main&quot;&gt;
+      &lt;div&gt;
+        &lt;h4&gt;Section 1&lt;/h4&gt;
+        &lt;p&gt;
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Provident laborum voluptates vel blanditiis, cumque
+          praesentium sint dicta fuga culpa quo, facere quas ipsa, sed
+          cum! Exercitationem excepturi fugiat vero optio.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h4&gt;Section 2&lt;/h4&gt;
+        &lt;p&gt;
+          Voluptates autem non veritatis necessitatibus enim quisquam!
+          Et neque dolorum cupiditate eveniet aperiam impedit possimus
+          itaque repudiandae nulla ullam tempore illo voluptates
+          accusantium veritatis porro necessitatibus laboriosam, alias
+          illum quam!
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="174da464-d6be-42c0-bc0c-2a08194ad832" class="">CSS</h3><ul id="551aa1a6-a5bb-48dc-8876-a256f5d25749" class="bulleted-list"><li style="list-style-type:disc">mobile first design — set CSS for a phone </li></ul><pre id="6fa3ae1a-cce3-46ea-9af0-a1eef7ad70ef" class="code"><code>/* mobile devices under 600px */
+
+body {
+  padding: 10px;
+}
+
+div#main {
+  display: flex;
+  flex-flow: column;
+  gap: 30px;
+}
+
+div#main &gt; div {
+  flex: 1;
+}
+
+/* tablet and desktop devices over 600px */
+
+@media only screen and (min-width: 600px) {
+  body {
+    padding: 50px;
+  }
+
+  div#main {
+    flex-flow: row;
+  }
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">  flex-flow: column;
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:32 AM</time></span></span></div><div style="padding:0.2em">layout divs in column</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">/* mobile devices under 600px */
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:32 AM</time></span></span></div><div style="padding:0.2em">start with mobile device css</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">@media only screen and (min-width: 600px) {
+</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a/ALm5wu2D7opyGPhg1IC5ZBqM5ZYIOR8MwAIakj3yS20lKw=s100" class="icon user-icon"/><span><b>roman hudaj</b> <time style="font-size:0.8em">Nov 6, 2023, 11:32 AM</time></span></span></div><div style="padding:0.2em">media rule: (for screens) </div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

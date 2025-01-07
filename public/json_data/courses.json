@@ -17,7 +17,8 @@
         "code": "CS 486",
         "sem_year": "f24",
         "title": "Artificial Intelligence",
-        "descr": "Goals and methods of artificial intelligence. Methods of general problem solving. Knowledge representation and reasoning. Planning. Reasoning about uncertainty. Machine learning. Multi-agent systems. Natural language processing."
+        "descr": "Goals and methods of artificial intelligence. Methods of general problem solving. Knowledge representation and reasoning. Planning. Reasoning about uncertainty. Machine learning. Multi-agent systems. Natural language processing.",
+        "tech": "Languages: Python - Libraries: Pandas, Numpy, MatplotLib"
     },
     {
         "code": "CS 456",
@@ -49,7 +50,8 @@
         "code": "CS 241",
         "sem_year": "w23",
         "title": "Foundations of Sequential Programs",
-        "descr": "The relationship between high-level languages and the computer architecture that underlies their implementation, including basic machine architecture, assemblers, specification and translation of programming languages, linkers and loaders, block-structured languages, parameter passing mechanisms, and comparison of programming languages."
+        "descr": "The relationship between high-level languages and the computer architecture that underlies their implementation, including basic machine architecture, assemblers, specification and translation of programming languages, linkers and loaders, block-structured languages, parameter passing mechanisms, and comparison of programming languages.",
+        "tech": "Languages: C, C++"
     },
     {
         "code": "CS 245",

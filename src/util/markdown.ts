@@ -5,7 +5,7 @@ export function get_markdown(url: string) {
 
     useEffect(() => {
         fetch(url)
-        .then(r => r.text())
+        .then(r => r.ok ? r.text() : "")
         .then(setMD);
     }, []);
 

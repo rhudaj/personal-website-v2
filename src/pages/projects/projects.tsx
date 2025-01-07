@@ -9,8 +9,10 @@ import { Project } from "../../types/types";
 //---------------------------------------------------------------------
 
 function ProjectInfo(props: Project) {
+
     const comment_regex = /<!--[\s\S]*?-->/g;
-    const markdown = get_markdown(props.readme).replace(comment_regex, "");
+    let markdown = get_markdown(props.readme).replace(comment_regex, "")
+    if (markdown === "") markdown = "Description not available at this time."
 
     return (
         <div className="ProjectInfo">

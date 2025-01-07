@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./menu.css";
 
 function Navigation() {
@@ -24,9 +24,15 @@ function Navigation() {
 }
 
 function FullMenu() {
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate("/"); // Navigate to the home page
+    };
+
     return (
         <div id="FullMenu">
-            <p id="Logo">
+            <p id="Logo" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
                 <span style={{ color: "red" }}>R</span>oman.
             </p>
             <Navigation />

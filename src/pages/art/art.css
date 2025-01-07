@@ -67,14 +67,15 @@
     padding: 0 20% 0 20%;
     /*CONTENT*/
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px 25px;
     display: grid;
 }
 
 /* <img> is wrapped in div (ImageContainer) to smooth the animations */
 
 #ImageDisplay > img {
+    object-fit:cover;   /*Don't resize image to fit the container*/
     /*STRUCTURE*/
     width: 100%; /*Important*/
     height: 100%; /*Important*/
@@ -88,6 +89,10 @@
     cursor: pointer;
 }
 
+/*----------------------------------------
+  Image Select Arrows
+----------------------------------------*/
+
 .img-select {
     font-size: 2em;
     color: rgb(133, 133, 133);
@@ -100,6 +105,10 @@
     color: white;
     transform: scale(1.1);
 }
+
+/*----------------------------------------
+  Selected Image Popup
+----------------------------------------*/
 
 #ImageContainer {
     min-height: 200px;

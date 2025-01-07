@@ -1,0 +1,233 @@
+#Home
+    display: flex
+    flex-direction: column
+    gap: 100px
+
+#Home #Head
+    // Main Style
+    background-image: url("https://cdn.wccftech.com/wp-content/uploads/2021/08/martin-sanchez-G78c3DPmD_A-unsplash-scaled.jpg")
+    height: 100vh
+    margin: -50px
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    // Children
+    display: flex
+    align-items: center
+    // Fade the edges
+    border-radius: 40%
+    box-shadow: 0 0 80px 80px black inset
+
+#IntroText
+    user-select: none
+
+#Head > h1
+    margin-left: 50px
+
+//--------------------------------------------------
+//                About Me (img + resume)
+//--------------------------------------------------
+
+#AboutMe
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    gap: 3em 3em
+
+    & > img
+        flex: 1 0 100px
+        max-width: 44%
+        height: 100%
+        object-fit: cover
+        border-radius: 5%
+
+    & > .resume-content
+        flex: 1 1 400px
+        min-width: 300px
+        line-height: 35px
+        display: flex
+        flex-direction: column
+        gap: 40px
+
+        & p
+            font-size: 20px
+
+//---------------------------------------------------
+// Resume Section Select (list of <h3> items)
+//---------------------------------------------------
+
+#resume-section-select
+    display: flex
+    gap: 8%
+    & > h3
+        width: max-content
+        font-weight: 500
+    & > h3:hover
+        text-decoration: underline
+        text-decoration-color: red
+        text-underline-offset: 5px
+    & > h3.selected
+        font-weight: bold
+
+//---------------------------------------------------
+// Resume Section (holds list of <SectionItemUI/>)
+//---------------------------------------------------
+
+// Child flex-boxes, that alternates flex-direction
+.alternate-flex-dir
+
+    display: flex
+
+    & > .SectionItem.even
+        flex-direction: row-reverse
+        & > .col2
+            justify-content: flex-start
+
+    & > .SectionItem.odd
+        flex-direction: row
+        & > .col2
+            justify-content: flex-end
+
+#resume-section
+    display: flex
+    flex-direction: column
+    gap: 10%
+
+//--------------------------------------------------
+//   Resume Section Item
+//--------------------------------------------------
+
+.SectionItem
+    width: 100%
+    height: 100%
+    display: flex
+    gap: 5%
+
+    // divider between items
+    margin-top: -15px
+    &:not(:last-child)
+        border-bottom: 5px solid #161616
+        border-radius: 5px
+        padding-bottom: 15px
+
+    & > .col1
+        flex: 0 1 25%
+        flex-direction: row
+        & > .logo
+            object-fit: cover // don't resize image
+            width: 100%
+            height: 100%
+            border-radius: 8%
+
+    // list of <p> items
+    & > .col2
+        // for parent:
+        flex: 1 1 100%
+        // for children:
+        display: flex
+        flex-wrap: wrap
+        gap: 3%
+
+        & > .title
+            font-weight: 800
+            white-space: nowrap
+
+        & > .descr
+            color: darkgrey
+
+    &::after
+        content: ""
+        border: 3px solid #525252
+
+//--------------------------------------------------
+//   Specific Resume Sections
+//--------------------------------------------------
+
+.sec-skills > .SectionItem
+    display: flex
+
+    & > .col2
+        flex-direction: column
+
+    &.even
+        flex-direction: row-reverse
+        & > .col2
+            align-items: flex-start
+
+    &.odd
+        flex-direction: row
+        & > .col2
+            align-items: flex-end
+
+.sec-experience > .SectionItem > .col2
+    align-content: flex-start
+
+.sec-education > .SectionItem
+    display: flex
+    align-content: flex-start
+
+//--------------------------------------------------
+//                My Work (section)
+//--------------------------------------------------
+
+#MyWork
+    display: flex
+    flex-direction: column
+    gap: 3em
+
+
+#WorkItems
+    display: flex
+    flex-wrap: wrap
+    gap: 3em 3em
+    justify-content: center
+
+
+.MyWorkItem
+    min-width: 20em
+    flex: 1 0 100px
+    border-radius: 10px
+    position: relative
+    overflow: hidden
+
+
+.MyWorkItem img
+    /*fill the container*/
+    height: 100%
+    width: 100%
+    object-fit: cover
+    /*Own Animation*/
+    transition: transform 0.5s
+
+
+.MyWorkItem:hover img
+    transform: scale(1.1) /*scale up image on hover*/
+
+
+//--------------------------------------------------
+//              MyWorkItem Animation
+//--------------------------------------------------
+
+.MyWorkItem:hover .AnimatedCover
+    height: 100% /*0-->100% height on hover*/
+
+.AnimatedCover #NavLink
+    /*Style*/
+    color: #ff004f
+    text-decoration: none
+    font-size: 18px
+    background: #fff
+    /*Shape*/
+    width: 60px
+    height: 60px
+    border-radius: 100%
+    /*Content*/
+    display: flex
+    justify-content: center
+    align-items: center
+    /*Animate*/
+    transition: transform 0.3s
+
+
+.AnimatedCover #NavLink:hover
+    transform: scale(1.2)

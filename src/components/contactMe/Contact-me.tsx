@@ -40,10 +40,6 @@ function ContactInfo() {
         loadJson<any>("contact_info").then(setInfo)
     }, []);
 
-	React.useEffect(()=>{
-		console.log(`info = ${info}`)
-	}, [info])
-
 	if (! info) return <></>;
     return (
         <div id="ContactInfo">

@@ -1,65 +1,123 @@
 // ---- CSS
-import "./home.css";
+import "./home.sass";
 // ---- MODULES
 import { useEffect, useState } from "react";
 import { useTypingEffect } from "../../hooks/typing-effect";
 import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
 import { NavLink } from "react-router-dom";
 // ---- ASSETS
-import { Resume } from "../../types/types";
+import { Resume, ResumeSection, SectionItem } from "../../types/types";
 import { loadJson } from "../../util/loadJson";
 // ----------------------------------
 
 const assetsPath = "/home-assets";
 
-function AboutMe() {
-    const [curSec, setCurSec] = useState("Skills");
+const SectionItemUI = (props: SectionItem & { className?: string;}) => {
+    const logoUI = props.logo && (
+        <img className="logo" src={`${assetsPath}/resume/${props.logo}`} />
+    );
+
+    const classNames = [
+        "SectionItem",
+        props.className
+    ].join(" ");
+
+    const descrUIs = props.descr.map((str, i) => (
+        <p key={i} className="descr">
+            {str}
+        </p>
+    ));
+
+    return (
+        <div className={classNames}>
+            {logoUI && <div className="col1">{logoUI}</div>}
+            <div className="col2">
+                <p className="title">{props.title}</p>
+                {descrUIs}
+            </div>
+        </div>
+    );
+};
+
+const SectionUI = (props: ResumeSection) => {
+
+    // const alternateFlexDir = props.items[0].logo !== undefined
+    const alternateFlexDir = false;
+
+    const classNames = [
+        `sec-${props.title}`,
+        alternateFlexDir && "alternate-flex-dir",
+    ];
+
+    const getClassNames = (i: number) => ([
+        i%2===0 || !alternateFlexDir ? "even" : "odd",
+        i==props.items?.length-1 ? "last" : ""
+    ].join(" "))
+
+    return (
+        <div id="resume-section" className={classNames.join(" ")}>
+            {props.items?.map((item, i) => (
+                <SectionItemUI key={i} {...item} className={getClassNames(i)} />
+            ))}
+        </div>
+    );
+};
+
+function ResumeUI() {
     const [resume, setResume] = useState<Resume | null>(null);
+    const [curSecTitle, setCurSecTitle] = useState<string>("");
+    const [curSec, setCurSec] = useState<ResumeSection | null>(null);
 
     useEffect(() => {
-        loadJson<Resume>("resume").then(setResume);
+        let isMounted = true; // To prevent setting state if unmounted
+        loadJson<Resume>("resume").then((data) => {
+            if (isMounted) setResume(data);
+        });
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
-    const resumeSection = (sectionItems: string[][]) =>
-        sectionItems.map((sectionItem, sec) => (
-            <div className="SectionItem" key={sec}>
-                {sectionItem.map((item, i) => (
-                    <p key={i} className={i == 0 ? "title" : "description"}>
-                        {item}
-                    </p>
-                ))}
-            </div>
-        ));
+    useEffect(() => {
+        if (resume) {
+            if (!curSecTitle) setCurSecTitle("skills");
+        }
+    }, [resume, curSecTitle]);
 
+    useEffect(() => {
+        if (!resume || !curSecTitle) return;
+        const sec = resume.sections.find((sec) => sec.title === curSecTitle);
+        setCurSec(sec ?? null);
+    }, [resume, curSecTitle]);
 
+    if (!resume) return <div>Check back later...</div>;
 
-    if (resume == null) return <div>Loading...</div>;
+    const secSelectHeads = resume.sections.map((sec, i) => (
+        <h3
+            key={i}
+            className={sec.title === curSecTitle ? "selected" : ""}
+            onClick={() => setCurSecTitle(sec.title)}
+        >
+            {sec.title.charAt(0).toUpperCase() + sec.title.slice(1)}
+        </h3>
+    ));
+
     return (
-		<div id="AboutMe">
-			<img src={`${assetsPath}/me.png`} />
-			<div className="content">
-				<h1>About Me</h1>
-				<p>{resume.summary}</p>
-				<div id="resume-section-select">
-					<h3 key={1} onClick={() => setCurSec("Skills")}>
-						Skills
-					</h3>
-					<h3 key={2} onClick={() => setCurSec("Experience")}>
-						Experience
-					</h3>
-					<h3 key={3} onClick={() => setCurSec("Education")}>
-						Education
-					</h3>
-				</div>
-				<div id="resume-section">
-					{curSec == "Skills"
-						? resumeSection(resume.skills)
-						: curSec == "Experience"
-						? resumeSection(resume.experience)
-						: resumeSection(resume.education)}
-				</div>
-			</div>
-		</div>
+        <div className="resume-content">
+            <h1>About Me</h1>
+            <p>{resume.summary}</p>
+            <div id="resume-section-select">{secSelectHeads}</div>
+            {curSec && <SectionUI {...curSec} />}
+        </div>
+    );
+}
+
+function AboutMe() {
+    return (
+        <div id="AboutMe">
+            <img src={`${assetsPath}/me.png`} />
+            <ResumeUI />
+        </div>
     );
 }
 

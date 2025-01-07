@@ -6,11 +6,20 @@ export interface Course {
     tech?: string
 }
 
+export interface SectionItem {
+    title: string,
+    descr: string[],
+    logo?: string
+}
+
+export interface ResumeSection {
+    title: string,
+    items: SectionItem[]
+};
+
 export interface Resume {
     summary: string,
-    skills: string[][],
-    experience: string[][],
-    education: string[][]
+    sections: ResumeSection[]
 }
 
 export interface Project {

@@ -71,7 +71,7 @@ export function Projects() {
                     <ProjectThumbnail
                         key={i}
                         title={proj.name}
-                        img={`${thumbnails_dir}/proj-${i}.png`}
+                        img={`${thumbnails_dir}/proj-${i}.jpg`}
                         n={i}
                         onClick={() => setSelected(i)}
                     />

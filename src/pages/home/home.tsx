@@ -115,7 +115,7 @@ function ResumeUI() {
 function AboutMe() {
     return (
         <div id="AboutMe">
-            <img src={`${assetsPath}/me.png`} />
+            <img src={`${assetsPath}/me.jpg`} />
             <ResumeUI />
         </div>
     );
@@ -153,13 +153,13 @@ export function MyWork() {
                     body="Check them out"
                 />
                 <MyWorkItem
-                    img={`${assetsPath}/work-2.png`}
+                    img={`${assetsPath}/work-2.jpg`}
                     page="/school"
                     heading="School"
                     body="See my Coursework"
                 />
                 <MyWorkItem
-                    img={`${assetsPath}/work-3.png`}
+                    img={`${assetsPath}/work-3.jpg`}
                     page="/art"
                     heading="Art"
                     body="View my Artwork"

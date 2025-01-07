@@ -116,8 +116,6 @@
 
 .SectionItem
 
-    // height: auto
-
     display: flex
     gap: 20px
 
@@ -134,7 +132,8 @@
         & > .logo
             object-fit: cover // don't resize image
             width: 100%
-            height: 100%
+            max-width: 7em
+            // height: 100% // *** removed
             border-radius: 8%
 
     // list of <p> items

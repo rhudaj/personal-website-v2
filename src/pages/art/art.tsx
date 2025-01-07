@@ -3,7 +3,6 @@ import { loadJson } from "../../util/loadJson";
 import { useState, useEffect } from "react";
 import { useItemScroll } from "../../hooks/itemScroll";
 import { FocusedView } from "../../components/focusedView/focusedView";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 /* Version 2.0: getting images via http-request
 const Images: React.FC<{}> = () => {

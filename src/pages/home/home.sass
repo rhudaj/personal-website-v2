@@ -127,12 +127,11 @@
         padding-bottom: 15px
 
     & > .col1
-        flex: 0 1 25%
-        flex-direction: row
+        flex: 0 1 auto
+        max-width: 7em
         & > .logo
             object-fit: cover // don't resize image
             width: 100%
-            max-width: 7em
             // height: 100% // *** removed
             border-radius: 8%
 
@@ -152,7 +151,7 @@
         & > .descr
             color: darkgrey
 
-    &::after
+    &::before
         content: ""
         border: 3px solid #525252
 
@@ -161,27 +160,15 @@
 //--------------------------------------------------
 
 .sec-skills > .SectionItem
-    display: flex
-
     & > .col2
         flex-direction: column
 
-    &.even
-        flex-direction: row-reverse
-        & > .col2
-            align-items: flex-start
+// .sec-experience > .SectionItem > .col2
+//     align-content: flex-start
 
-    &.odd
-        flex-direction: row
-        & > .col2
-            align-items: flex-end
-
-.sec-experience > .SectionItem > .col2
-    align-content: flex-start
-
-.sec-education > .SectionItem
-    display: flex
-    align-content: flex-start
+// .sec-education > .SectionItem
+//     display: flex
+//     align-content: flex-start
 
 //--------------------------------------------------
 //                My Work (section)

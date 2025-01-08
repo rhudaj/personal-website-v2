@@ -3,18 +3,19 @@ import "./home.sass";
 // ---- MODULES
 import { useEffect, useState } from "react";
 import { useTypingEffect } from "../../hooks/typing-effect";
-import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
+import { AnimatedCover } from "../../components/animatedCover/animatedCover";
 import { NavLink } from "react-router-dom";
 // ---- ASSETS
 import { Resume, ResumeSection, SectionItem } from "../../types/types";
 import { loadJson } from "../../util/loadJson";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 // ----------------------------------
 
 const assetsPath = "/home-assets";
 
 const SectionItemUI = (props: SectionItem & { className?: string;}) => {
     const logoUI = props.logo && (
-        <img className="logo" src={`${assetsPath}/resume/${props.logo}`} />
+        <LazyLoadImage className="logo" src={`${assetsPath}/resume/${props.logo}`} />
     );
 
     const classNames = [
@@ -114,8 +115,8 @@ function ResumeUI() {
 
 function AboutMe() {
     return (
-        <div id="AboutMe">
-            <img src={`${assetsPath}/me.jpg`} />
+        <div id="about-me-div">
+            <LazyLoadImage src={`${assetsPath}/me.jpg`} effect="blur"/>
             <ResumeUI />
         </div>
     );
@@ -129,7 +130,7 @@ function MyWorkItem(props: {
 }) {
     return (
         <div className="MyWorkItem">
-            <img src={props.img} />
+            <LazyLoadImage src={props.img} />
             <AnimatedCover>
                 <h3>{props.heading}</h3>
                 <p>{props.body}</p>

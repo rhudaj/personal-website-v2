@@ -1,6 +1,6 @@
+import "./menu.sass";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./menu.css";
 
 function Navigation() {
     return (

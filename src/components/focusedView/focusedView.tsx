@@ -1,4 +1,4 @@
-import './focusedView.css'
+import './focusedView.sass'
 import React from "react";
 
 export const FocusedView = (props: {

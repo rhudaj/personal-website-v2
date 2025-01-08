@@ -1,5 +1,5 @@
 import React from "react";
-import "./contact-me.css";
+import "./contact-me.sass";
 import { loadJson } from "../../util/loadJson";
 
 function ContactForm() {

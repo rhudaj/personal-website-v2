@@ -1,11 +1,12 @@
-import "./projects.css";
+import "./projects.sass";
 import { get_markdown } from "../../util/markdown";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
-import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
+import { AnimatedCover } from "../../components/animatedCover/animatedCover";
 import { loadJson } from "../../util/loadJson";
 import { FocusedView } from "../../components/focusedView/focusedView";
 import { Project } from "../../types/types";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 //---------------------------------------------------------------------
 
 function ProjectInfo(props: Project) {
@@ -31,7 +32,7 @@ function ProjectThumbnail(props: {
     return (
         <div id={`Project-${props.n}`} className="Thumbnail">
             <div className="ProjectPreview">
-                <img src={props.img} />
+                <LazyLoadImage src={props.img} effect="blur" wrapperProps={{style: {display: "contents"}}} />
                 <AnimatedCover>
                     <h3 onClick={props.onClick}>Read More</h3>
                 </AnimatedCover>

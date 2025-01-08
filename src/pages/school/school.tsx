@@ -1,4 +1,4 @@
-import "./school.css";
+import "./school.sass";
 import { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 //Course info is stored in a JSON file

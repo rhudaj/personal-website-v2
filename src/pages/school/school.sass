@@ -1,0 +1,49 @@
+// School Page
+
+#Courses
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+    .Course
+        display: flex
+        align-items: center
+        gap: 10px
+        row-gap: 0px /*Prevent gap between a hidden div*/
+        flex-wrap: wrap
+        border: solid
+        border-radius: 5px
+        transition: 0.5s
+        vertical-align: top     // Grow top-down
+
+        // SELECT only the immediate children of .Course but not the rest
+        & > *
+            user-select: none
+
+
+        &.nonFocus
+            background-color: transparent
+            color: grey
+            padding: 20px
+
+
+        &.focus
+            background-color: #2b2b2b
+            color: white
+            padding: 30px
+            cursor:pointer
+
+
+.ToggleInfo
+    display: flex
+    flex-direction: column
+    gap: 10px
+
+.techDiv
+    border-top: 1px solid white
+    margin-top: 1rem
+    padding-top: 1rem
+
+.CourseInfo
+    user-select: auto
+    line-height: 1.5rem

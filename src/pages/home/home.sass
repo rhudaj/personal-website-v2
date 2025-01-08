@@ -28,7 +28,7 @@
 //                About Me (img + resume)
 //--------------------------------------------------
 
-#AboutMe
+#about-me-div
 
     display: flex
     flex-wrap: wrap
@@ -36,7 +36,10 @@
 
     min-height: 0
 
-    & > img
+    & > span
+        display: contents !important
+
+    & > * > img
         flex: 0 0 500px // Prevent shrinking and growing; image keeps its intrinsic size
         min-width: 500px // Limits the maximum width but won't shrink beyond intrinsic size
         object-fit: cover
@@ -44,7 +47,6 @@
 
         min-height: 0
         height: auto
-
 
     & > .resume-content
         flex: 1 1 0   // Allows the resume content to grow and shrink as needed
@@ -64,12 +66,15 @@
 
 // Responsive media query for layout change
 @media (max-width: 1000px)  // Adjust 800px to your desired breakpoint
-  #AboutMe
+  #about-me-div
     flex-direction: column
     // Both take full width
-    & > img
+
+    & > * > img
+        padding: 0 10% 0 10%
         flex: 1 0 100%
         max-width: 100%
+
     & > .resume-content
         flex: 1 0 100%
         max-width: 100%

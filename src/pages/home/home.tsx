@@ -3,7 +3,7 @@ import "./home.sass";
 // ---- MODULES
 import { useEffect, useState } from "react";
 import { useTypingEffect } from "../../hooks/typing-effect";
-import { AnimatedCover } from "../../components/animatedCover/animatedCover";
+import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
 import { NavLink } from "react-router-dom";
 // ---- ASSETS
 import { Resume, ResumeSection, SectionItem } from "../../types/types";

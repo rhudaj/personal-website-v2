@@ -7,7 +7,7 @@ import ReactDOM from "react-dom/client";
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'; // replaced BrowserRouter w' HashRouter
 import { Home, Projects, School, Art } from "./pages/index"
 import { Menu } from './components/menu/menu'
-import { ContactMe } from './components/contactMe/contact-me';
+import { ContactMe } from './components/contactMe/Contact-me';
 
 // Main:
 function Main() {

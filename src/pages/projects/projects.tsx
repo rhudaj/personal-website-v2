@@ -2,7 +2,7 @@ import "./projects.sass";
 import { get_markdown } from "../../util/markdown";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
-import { AnimatedCover } from "../../components/animatedCover/animatedCover";
+import { AnimatedCover } from "../../components/animatedCover/AnimatedCover";
 import { loadJson } from "../../util/loadJson";
 import { FocusedView } from "../../components/focusedView/focusedView";
 import { Project } from "../../types/types";

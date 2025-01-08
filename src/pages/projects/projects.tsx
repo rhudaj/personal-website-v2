@@ -7,6 +7,7 @@ import { loadJson } from "../../util/loadJson";
 import { FocusedView } from "../../components/focusedView/focusedView";
 import { Project } from "../../types/types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+// ...
 //---------------------------------------------------------------------
 
 function ProjectInfo(props: Project) {

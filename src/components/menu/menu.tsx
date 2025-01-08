@@ -2,6 +2,7 @@ import "./menu.sass";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+// Navigation
 function Navigation() {
     return (
         <nav>

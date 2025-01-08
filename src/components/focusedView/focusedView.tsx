@@ -1,6 +1,7 @@
 import './focusedView.sass'
 import React from "react";
 
+// FocusedView
 export const FocusedView = (props: {
 	id?: any,
 	onClose: () => void,

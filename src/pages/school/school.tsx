@@ -11,7 +11,7 @@ const opacity_transition = "0.7s";
 /**
  * 3 Requirements
  * 1. c.code format: "[subject]( )+[couse number]" (e.g. 'CS 111')
- * 2. c.sem_year format: "[f|w|s][yy]" (e.g. 'f24')
+ * 2. c.sem_year format:  "[f|w|s][yy]" (e.g. 'f24')
  * 3. root html for course notes are in "course-notes/[...]/root.html"
  * @return path, relative to the public folder
  */

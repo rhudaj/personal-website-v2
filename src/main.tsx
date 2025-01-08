@@ -9,6 +9,7 @@ import { Home, Projects, School, Art } from "./pages/index"
 import { Menu } from './components/menu/menu'
 import { ContactMe } from './components/contactMe/contact-me';
 
+// Main:
 function Main() {
   // Scroll to top anytime page changes
   const active_page = useLocation();

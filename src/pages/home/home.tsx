@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 import { Resume, ResumeSection, SectionItem } from "../../types/types";
 import { loadJson } from "../../util/loadJson";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-// ----------------------------------
+// -------------------------------------
 
 const assetsPath = "/home-assets";
 

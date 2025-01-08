@@ -1,0 +1,15 @@
+# Installation
+> `npm install --save @types/react-lazy-load-image-component`
+
+# Summary
+This package contains type definitions for react-lazy-load-image-component (https://github.com/Aljullu/react-lazy-load-image-component#readme).
+
+# Details
+Files were exported from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-lazy-load-image-component.
+
+### Additional Details
+ * Last updated: Tue, 16 Apr 2024 08:35:30 GMT
+ * Dependencies: [@types/react](https://npmjs.com/package/@types/react), [csstype](https://npmjs.com/package/csstype)
+
+# Credits
+These definitions were written by [Dan Vanderkam](https://github.com/danvk), [Diego Chavez](https://github.com/diegochavez), [Truong Hoang Dung](https://github.com/revskill10), and [Kodai Suzuki](https://github.com/kodai3).

@@ -32,7 +32,7 @@ function ContactForm() {
 
 function ContactInfo() {
 
-    const cv_path = "cv/roman-hudaj-cv.pdf";
+    const cv_path = "cv/RomanHudaj_cv.pdf";
 	const [info, setInfo] = React.useState<any>(null);
 
 	// Load assets

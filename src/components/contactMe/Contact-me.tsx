@@ -61,7 +61,7 @@ function ContactInfo() {
 					))
 				}
             </div>
-            <a href={cv_path} download="" className="red-button">
+            <a id="download-cv-button" href={cv_path} download="" className="red-button">
                 Download CV
             </a>
         </div>

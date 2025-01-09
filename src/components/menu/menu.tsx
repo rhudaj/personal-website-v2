@@ -4,9 +4,43 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 // Navigation
 function Navigation() {
+    const handleCvClick = () => {
+        const contactMeDiv = document.getElementById('ContactMe');
+        const downloadCvButton = document.getElementById('download-cv-button');
+
+        if (contactMeDiv) {
+            // Scroll the ContactMe div into view
+            contactMeDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Use IntersectionObserver to detect when scrolling has stopped
+            const observer = new IntersectionObserver(
+                (entries, observer) => {
+                    const [entry] = entries;
+
+                    if (entry.isIntersecting) {
+                        // Highlight the element once in view
+                        if (downloadCvButton) {
+                            downloadCvButton.classList.add('highlight');
+
+                            // Remove highlight after 2.5 seconds
+                            setTimeout(() => {
+                                downloadCvButton.classList.remove('highlight');
+                            }, 2500);
+                        }
+
+                        // Stop observing once the element is in view
+                        observer.disconnect();
+                    }
+                },
+                { threshold: 1.0 } // Fully visible
+            );
+
+            observer.observe(contactMeDiv);
+        }
+    };
     return (
-        <nav>
-            <ul className="NST">
+        <nav id="nav-bar">
+            <ul className="page-links">
                 <li>
                     <NavLink to="/">Home</NavLink>
                 </li>
@@ -18,6 +52,13 @@ function Navigation() {
                 </li>
                 <li>
                     <NavLink to="/art">Art</NavLink>
+                </li>
+                <span className="break"/>
+                <li>
+                    <a className="cv-li-item" onClick={handleCvClick}>
+                        cv
+                        <i className="fa-regular fa-file-pdf"></i>
+                    </a>
                 </li>
             </ul>
         </nav>

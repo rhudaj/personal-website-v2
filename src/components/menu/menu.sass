@@ -3,10 +3,11 @@
  ------------------------------------ */
 
 #FullMenu
+    user-select: none // no text is selectable
     // Layout
     font-size: 1em
     display: flex
-    justify-content: space-between /* Logo ---- max space ---- nav-bar */
+    justify-content: space-between // Logo ---- max space ---- nav-bar
     align-items: center
     padding: 20px 50px 20px 50px /*T R B L*/
     border-bottom: solid white
@@ -23,25 +24,40 @@
     font-weight: bold
     user-select: none
 
-nav ul
-    list-style: none /*remove bullet points*/
-    display: flex
-    justify-content: right
-    gap: 15%
+nav
+    // 2 items: ul, a
+    display: grid
+    grid-template-columns: min-content 1fr
+    ul
+        list-style: none // remove bullet points
+        display: flex
+        justify-content: right
+        gap: 15%
+        li
+            a
+                display: inline-block
+                transition: transform 0.3s ease
+                color: white
+                text-decoration: none
+                transition: all 0.6s
+                &:hover
+                    transform: scale(1.1)
+        // render a line between
+        .break
+            border: .1em solid #525252
 
-nav ul li a
-    display: inline-block
-    transition: transform 0.3s ease
-    color: white
-    text-decoration: none
-    transition: all 0.6s
-
-nav ul li a:hover
-    transform: scale(1.1)
+        .cv-li-item
+            display: flex
+            gap: 0.5em
 
 // Active NavLink
 .active
     color: red
+
+#download-cv-button.highlight
+    outline: 5px solid yellow
+    transition: outline 0.5s ease
+
 
 /* ------------------------------------
  HiddenMenu

@@ -122,25 +122,6 @@ function AboutMe() {
     );
 }
 
-function MyWorkItem(props: {
-    img: string;
-    page: string;
-    heading: string;
-    body: string;
-}) {
-    return (
-        <div className="MyWorkItem">
-            <LazyLoadImage src={props.img} />
-            <AnimatedCover>
-                <h3>{props.heading}</h3>
-                <p>{props.body}</p>
-                <NavLink id="NavLink" to={props.page}>
-                    <i className="fa-solid fa-link" />
-                </NavLink>
-            </AnimatedCover>
-        </div>
-    );
-}
 
 export function MyWork() {
     return (
@@ -166,6 +147,27 @@ export function MyWork() {
                     body="View my Artwork"
                 />
             </div>
+        </div>
+    );
+}
+
+
+function MyWorkItem(props: {
+    img: string;
+    page: string;
+    heading: string;
+    body: string;
+}) {
+    return (
+        <div className="MyWorkItem">
+            <LazyLoadImage src={props.img} />
+            <AnimatedCover>
+                <h3>{props.heading}</h3>
+                <p>{props.body}</p>
+                <NavLink id="NavLink" to={props.page}>
+                    <i className="fa-solid fa-link" />
+                </NavLink>
+            </AnimatedCover>
         </div>
     );
 }

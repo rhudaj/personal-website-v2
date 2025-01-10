@@ -217,26 +217,27 @@
 //              MyWorkItem Animation
 //--------------------------------------------------
 
-.MyWorkItem:hover .AnimatedCover
-    height: 100% /*0-->100% height on hover*/
+.MyWorkItem:hover .animated-cover
+    // 0-->100% height on hover
+    height: 100%
 
-.AnimatedCover #NavLink
-    /*Style*/
+.animated-cover #NavLink
+    // Style
     color: #ff004f
     text-decoration: none
     font-size: 18px
     background: #fff
-    /*Shape*/
+    // Shape
     width: 60px
     height: 60px
     border-radius: 100%
-    /*Content*/
+    // Content
     display: flex
     justify-content: center
     align-items: center
-    /*Animate*/
+    // Animate
     transition: transform 0.3s
 
 
-.AnimatedCover #NavLink:hover
+.animated-cover #NavLink:hover
     transform: scale(1.2)

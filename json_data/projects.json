@@ -28,5 +28,10 @@
     "name": "Reservation System",
     "url": "https://github.com/rhudaj/ResyBot",
     "readme": "https://raw.githubusercontent.com/rhudaj/ResyBot/main/ReadMe.md"
+  },
+  {
+    "name": "Spam Email Classifier",
+    "url": "https://github.com/rhudaj/Spam-Email-Classifier",
+    "readme": "https://raw.githubusercontent.com/rhudaj/Spam-Email-Classifier/refs/heads/main/README.md"
   }
 ]

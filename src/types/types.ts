@@ -24,6 +24,7 @@ export interface Resume {
 
 export interface Project {
     name: string,
-    url: string,
-    readme: string
+    github_url: string,
+    url?: string,
+    readme: string,
 }

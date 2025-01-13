@@ -25,17 +25,20 @@ function ProjectInfo(props: Project) {
 }
 
 function ProjectThumbnail(props: {
-    title: string;
-    img: string;
-    n: number;
-    onClick: () => void;
+    title: string,
+    img: string,
+    n: number,
+    url?: string,
+    onClick: () => void
 }) {
+
     return (
         <div id={`Project-${props.n}`} className="Thumbnail">
             <div className="ProjectPreview">
                 <LazyLoadImage src={props.img} effect="blur" wrapperProps={{style: {display: "contents"}}} />
                 <AnimatedCover>
                     <h3 onClick={props.onClick}>Read More</h3>
+                    {props.url && <h3 onClick={()=>window.open(props.url)}>Try it Out</h3>}
                 </AnimatedCover>
             </div>
             <h3>{props.title}</h3>
@@ -75,6 +78,7 @@ export function Projects() {
                         title={proj.name}
                         img={`${thumbnails_dir}/proj-${i}.jpg`}
                         n={i}
+                        url={proj.url}
                         onClick={() => setSelected(i)}
                     />
                 ))}

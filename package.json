@@ -1,36 +1,46 @@
 {
-    "name": "personal-website-v2",
-    "homepage": "https://roman-hudaj.com/",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
-        "preview": "vite preview",
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d build"
-    },
-    "dependencies": {
-        "@fortawesome/fontawesome": "^1.1.8",
-        "@fortawesome/fontawesome-free": "^6.5.1",
-        "@fortawesome/react-fontawesome": "^0.2.0",
-        "font-awesome": "^4.7.0",
-        "http-proxy-middleware": "^3.0.0",
-        "node-fetch": "^3.3.2",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-lazy-load-image-component": "^1.6.3",
-        "react-markdown": "^9.0.1",
-        "react-router-dom": "^6.21.3",
-        "sass": "^1.83.1"
-    },
-    "devDependencies": {
-        "@types/react": "^18.2.43",
-        "@types/react-dom": "^18.2.17",
-        "@types/react-lazy-load-image-component": "^1.6.4",
-        "@vitejs/plugin-react": "^4.2.1",
-        "typescript": "^5.2.2",
-        "vite": "^5.0.8"
-    }
+  "name": "personal-website-v2",
+  "homepage": "https://roman-hudaj.com/",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^3.0.0",
+    "node-fetch": "^3.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-lazy-load-image-component": "^1.6.3",
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.21.3",
+    "sass": "^1.83.1",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@types/react-lazy-load-image-component": "^1.6.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fixRequestBody = void 0;
+exports.fixRequestBody = fixRequestBody;
 const querystring = require("querystring");
 /**
  * Fix proxied body if bodyParser is involved.
@@ -16,11 +16,10 @@ function fixRequestBody(proxyReq, req) {
         proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
         proxyReq.write(bodyData);
     };
-    if (contentType && contentType.includes('application/json')) {
+    if (contentType && (contentType.includes('application/json') || contentType.includes('+json'))) {
         writeBody(JSON.stringify(requestBody));
     }
     if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
         writeBody(querystring.stringify(requestBody));
     }
 }
-exports.fixRequestBody = fixRequestBody;

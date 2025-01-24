@@ -16,14 +16,14 @@
     "readme": "https://raw.githubusercontent.com/rhudaj/Spam-Email-Classifier/refs/heads/main/README.md"
   },
   {
-    "name": "Database Interface App",
-    "github_url": "https://github.com/rhudaj/DatabaseInterfaceApp",
-    "readme": "https://raw.githubusercontent.com/rhudaj/DatabaseInterfaceApp/main/README.md"
-  },
-  {
     "name": "Personal Website",
     "github_url": "https://github.com/rhudaj/personal-website-v2",
     "readme": "https://raw.githubusercontent.com/rhudaj/personal-website-v2/main/README.md"
+  },
+  {
+    "name": "Database Interface App",
+    "github_url": "https://github.com/rhudaj/DatabaseInterfaceApp",
+    "readme": "https://raw.githubusercontent.com/rhudaj/DatabaseInterfaceApp/main/README.md"
   },
   {
     "name": "CHESS-CPP",

@@ -1,0 +1,154 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>shape-model (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="b0994a87-301a-4609-9b84-85b472e7f670" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">shape-model (demo)</h1><p class="page-description"></p></header><div class="page-body"><h3 id="db19c646-7c6d-45f8-bd0b-fb7b70a3a3ea" class="">Shape Class</h3><ul id="b2262e70-5a0e-4951-84e7-47a703afa18e" class="bulleted-list"><li style="list-style-type:disc">geometry to define shape (dimensions, points, …)</li></ul><ul id="dce5bc08-ef52-4abf-8f5b-0ab75c1ab4ed" class="bulleted-list"><li style="list-style-type:disc">geometry properties (isFilled, isStroked)</li></ul><ul id="e594dd91-292e-4d88-96ec-70373b5e681a" class="bulleted-list"><li style="list-style-type:disc">visual style properties (fill, stroke, strokeWeight) </li></ul><ul id="6d3657a4-6dbd-4ff8-870b-4113076ac8b6" class="bulleted-list"><li style="list-style-type:disc">event handling</li></ul><ul id="9b1e0d23-9816-4964-8703-41df33d25968" class="bulleted-list"><li style="list-style-type:disc">method to draw (implements <code>drawable</code>) </li></ul><ul id="e4fce102-81c3-442b-881f-9f151a123501" class="bulleted-list"><li style="list-style-type:disc">method to do hit-testing (given an x-y cursor position) </li></ul><p id="950f22e1-7155-4ad9-a9f1-8f36977cc807" class="">
+</p><pre id="37b41791-84a0-4250-b57d-64785fbaac64" class="code"><code>import { Drawable } from &quot;../../../simplekit/drawable&quot;;
+
+export abstract class Shape implements Drawable
+{
+	// VISUAL STYLE PROPERTIES
+	fill: string = &quot;grey&quot;;
+  stroke: string = &quot;black&quot;;
+  strokeWidth = 1;
+
+	// GEOMETRY PROPERTIES
+  get isFilled()
+	{
+    return this.fill != &quot;&quot;;
+  }
+
+  get isStroked()
+	{
+    return this.stroke != &quot;&quot; &amp;&amp; this.strokeWidth &gt; 0;
+  }
+
+  abstract draw(gc: CanvasRenderingContext2D): void;
+
+  abstract hitTest(mx: number, my: number): boolean;
+}</code></pre><h3 id="1d810f91-35a7-4ac0-9aa0-d9851381aad4" class="">Ex: Rectangle Implementation </h3><pre id="97fe6f06-3b94-479f-891c-d501e36633cf" class="code"><code>export class Rectangle extends Shape
+{
+	// GEOMETRY
+  constructor(
+    public x: number,
+    public y: number,
+    public w: number,
+    public h: number
+  ){
+    super();
+  }
+
+  draw(gc: CanvasRenderingContext2D) {
+    gc.save();
+    gc.fillStyle = this.fill;
+    gc.strokeStyle = this.stroke;
+    gc.lineWidth = this.strokeWidth;
+    gc.beginPath();
+    gc.rect(this.x, this.y, this.w, this.h);
+    if (this.isFilled) gc.fill();
+    if (this.isStroked) gc.stroke();
+    gc.restore();
+  }
+
+  hitTest(mx: number, my: number) {
+    let hit = false;
+    if (this.isFilled) {
+      hit ||= insideHitTestRectangle(mx, my, this.x, this.y, this.w, this.h);
+    }
+    if (this.isStroked) {
+      hit ||= edgeHitTestRectangle(mx, my, this.x, this.y, this.w, this.h, this.strokeWidth);
+    }
+    return hit;
+  }
+}</code></pre><p id="b27f3288-7f76-44a7-9b54-e104c08f478e" class="">
+</p><h1 id="8bad7a04-4397-47a5-920a-cf9a00f2482b" class="">main.ts</h1><pre id="c578139c-def2-44a5-a50d-7383a558492d" class="code"><code>import { Drawable } from &quot;../../../simplekit/drawable&quot;;
+import { point } from &quot;../../../simplekit/utility&quot;;
+import { SKMouseEvent, SKResizeEvent, setSKDrawCallback, setSKEventListener, startSimpleKit,} from &quot;../../../simplekit&quot;;
+import { Shape } from &quot;./shape&quot;;
+import { Rectangle } from &quot;./rectangle&quot;;
+import { Polygon } from &quot;./polygon&quot;;
+
+// display list of drawables
+const shapes: Drawable[] = [];
+
+// polygon points, use map to translate them
+const polyPoints = [
+  point(0.0, 150.0),
+  point(100.0, 150.0),
+  point(100.0, 50.0),
+  point(50.0, 0.0),
+  point(0.0, 50.0),
+].map((p) =&gt; point((p.x += 10), (p.y += 10)));
+
+const polygon = new Polygon(polyPoints);
+polygon.fill = &quot;&quot;;
+polygon.strokeWidth = 10;
+shapes.push(polygon);
+
+const rectangle = new Rectangle(150, 100, 80, 60);
+rectangle.stroke = &quot;&quot;;
+rectangle.fill = &quot;black&quot;;
+shapes.push(rectangle);
+
+const rectangle2 = new Rectangle(250, 100, 80, 60);
+rectangle2.fill = &quot;&quot;;
+rectangle2.strokeWidth = 10;
+shapes.push(rectangle2);
+
+let width = 0;
+let height = 0;
+
+const m = { x: 0, y: 0 };
+
+// HANDLE EVENTS
+
+function eventHandler(e: SKEvent) {
+	switch (e.type) {
+    case &quot;mousemove&quot;:
+			// HIT TESTING !
+      const me = e as SKMouseEvent;
+      m.x = me.x;
+      m.y = me.y;
+      shapes.forEach((s) =&gt; {
+        if (s instanceof Shape) {
+          if (s.hitTest(me.x, me.y)) {
+            if (s.isFilled) s.fill = &quot;red&quot;;
+            if (s.isStroked) s.stroke = &quot;red&quot;;
+          } else {
+            if (s.isFilled) s.fill = &quot;black&quot;;
+            if (s.isStroked) s.stroke = &quot;black&quot;;
+          }
+        }
+      });
+      break;
+    case &quot;resize&quot;:
+      const re = e as SKResizeEvent;
+      width = re.width;
+      height = re.height;
+      break;
+  }
+}
+
+// DRAW SHAPES
+function drawShapes(gc) {
+	// CLEAR CANVAS
+	gc.clearRect(0, 0, width, height);
+	// DRAW ALL SHAPES IN DISPLAY LIST
+	shapes.forEach((s) =&gt; {s.draw(gc)});
+	domHitTests(gc);
+}
+
+// SETUP
+setSKEventListener(handleEvent);
+setSKDrawCallback(drawShapes);
+startSimpleKit();
+
+// // built-in Canvas API hit test
+// // MAY NOT BE ALLOWED ON ASSIGNMENTS, CHECK LIMITATIONS
+function domHitTests(gc: CanvasRenderingContext2D) {
+  gc.beginPath();
+  gc.rect(250, 200, 80, 60);
+  const hitFill = gc.isPointInPath(m.x, m.y);
+  gc.fillStyle = hitFill ? &quot;blue&quot; : &quot;grey&quot;;
+  gc.fill();
+  gc.lineWidth = 20;
+  const hitStroke = gc.isPointInStroke(m.x, m.y);
+  gc.strokeStyle = hitStroke ? &quot;red&quot; : &quot;black&quot;;
+  gc.stroke();
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

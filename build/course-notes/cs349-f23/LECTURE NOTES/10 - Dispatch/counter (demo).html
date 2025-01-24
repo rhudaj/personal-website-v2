@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>counter (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="c6c9e71a-ffd4-4fdd-86ff-43284581cf2e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">counter (demo)</h1><p class="page-description"></p></header><div class="page-body"><h1 id="aa47dd81-2e3e-421f-9183-b840628b15d5" class="">main</h1><pre id="4e5fefb4-2d06-458d-b440-2357743c2120" class="code"><code>let counter = 0;
+
+//widgets
+const root = new SKContainer(10, 10, 300, 300);
+	const increaseButton = new SKButton(&quot;Increase&quot;, 30, 30, 100);
+	const textfield = new SKTextfield(&quot;0&quot;, 30, 80, 100);
+	const clearButton = new SKButton(&quot;Clear&quot;, 30, 150, 100);
+
+// build widget tree
+root.addChild(increaseButton);
+root.addChild(textfield);
+root.addChild(clearButton);
+
+// set up event listeners
+increaseButton.addEventListener(&quot;action&quot;, (e) =&gt; {
+  counter++;
+  textfield.text = counter.toString();
+});
+
+clearButton.addEventListener(&quot;action&quot;, (e) =&gt; {
+  counter = 0;
+  textfield.text = counter.toString();
+});
+
+textfield.addEventListener(&quot;textchanged&quot;, (e) =&gt; {
+  const tf = e.source as SKTextfield;
+  tf.text = tf.text.replace(/[^0-9]/g, &quot;&quot;); // simple text validation
+  counter = parseInt(tf.text) || 0; // convert to number for counter
+});
+
+setSKRoot(root);</code></pre><h3 id="fe4d45b5-39fa-4b00-8a7c-1313c745f301" class=""><code><strong>setSKRoot(root)</strong></code><strong> </strong></h3><ul id="61fc1542-9339-498c-89c1-a3120bc7d5ae" class="bulleted-list"><li style="list-style-type:disc">No need for skEventHandler or skDrawCallback</li></ul><ul id="bb5ac6f5-14cc-4a09-910e-c060bbca076d" class="bulleted-list"><li style="list-style-type:disc">draws with root.draw()</li></ul><ul id="ab95fdbb-d5b7-41ab-87ce-395f58536313" class="bulleted-list"><li style="list-style-type:disc">creates a mouseDispatcher for the root which is called automatically</li></ul><h3 id="ec078cdf-aafb-4f93-b700-f361a70be450" class=""><em><strong>run-loop.ts</strong></em></h3><pre id="01ca1192-f81e-4c94-851d-0af73de772b2" class="code"><code>let uiTreeRoot: SKElement | null;
+let mouseDispatcher: MouseDispatcher | null;
+
+setSKRoot(root: SKElement) {
+  uiTreeRoot = root;
+  if (root) {
+    mouseDispatcher = new MouseDispatcher(root);
+  } else mouseDispatcher = null;
+  // set canvas to colour to help debugging
+  if (canvas) canvas.style.setProperty(&quot;background&quot;, &quot;blue&quot;);
+}</code></pre><p id="91658fb4-d5a8-4668-a0cf-b024d5493507" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

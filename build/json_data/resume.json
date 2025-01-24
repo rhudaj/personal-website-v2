@@ -1,0 +1,68 @@
+{
+    "summary": "Dynamic, agile software developer with rapid adaptability to emerging technologies, a keen aptitude for grasping intricate concepts and solving problems with automation. I am currently a CS student at the University of Waterloo. Check out what I've been up to on this site!",
+    "sections": [
+        {
+            "title": "skills",
+            "items": [
+                {
+                    "title": "Web Dev",
+                    "descr": ["React, Node, TypeScript, JavaScript, JSON, MVC Architecture, ..."]
+                },
+                {
+                    "title": "Databases",
+                    "descr": ["SQL, SQL Server, MySQL, ODBC, RDBMS, Physical/Logical Design"]
+                },
+                {
+                    "title": "Python",
+                    "descr": ["Pandas, Numpy, Selenium, PyTorch"]
+                },
+                {
+                    "title": "Big Data",
+                    "descr": ["Apache Spark (Scala), Hadoop, HDFS, Map Reduce (Java)"]
+                },
+                {
+                    "title": "Other",
+                    "descr": ["C++, C, Alteryx, Excel"]
+                }
+            ]
+        },
+        {
+            "title": "experience",
+            "items": [
+                {
+                    "title": "Martinrea International",
+                    "logo": "martinrea.png",
+                    "descr": ["Student Engineer", "Jan/22 - Aug/22"]
+                },
+                {
+                    "title": "Environics Analytics",
+                    "logo": "ea.png",
+                    "descr": ["Product Management Intern", "Apr/23 - Sep/23"]
+                },
+                {
+                    "title": "StreamSix (TimePlay)",
+                    "logo": "timeplay.png",
+                    "descr": ["Product Assistant", "May/24 - Sep/24"]
+                }
+            ]
+        },
+        {
+            "title": "education",
+            "items": [
+                {
+                    "title": "University of Waterloo",
+                    "descr": [
+                        "Bachelors of Computer Science, Honours",
+                        "Sep/20 - Dec/24"
+                    ],
+                    "logo": "uw.jpg"
+                },
+                {
+                    "title": "Ursula Franklin Academy",
+                    "descr": ["High School Diploma", "Sep/16 - Jun/20"],
+                    "logo": "ufa.png"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,85 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>closest-point (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="6ab2d1c1-8524-4d47-86a9-c1f595e65b9c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">closest-point (demo)</h1><p class="page-description"></p></header><div class="page-body"><h1 id="e59360ef-3d7f-415b-a014-ed6e16ec0711" class="">main.ts</h1><ul id="e0250697-69cb-4f03-817a-d74857f940b2" class="bulleted-list"><li style="list-style-type:disc"><strong>NOTE: </strong><ul id="d3eb88ce-6c79-4f87-83d2-ee3c9d29826b" class="bulleted-list"><li style="list-style-type:circle">draw just draws the points. Does not do anything else. </li></ul><ul id="744f94fb-aa23-4fcf-8494-326f25645b03" class="bulleted-list"><li style="list-style-type:circle">handleEvent updates the points. Does not do anything else. </li></ul></li></ul><pre id="d84e4c9b-bac7-486c-acf6-bec7e542889c" class="code"><code>import {setSKDrawCallback,setSKEventListener,startSimpleKit} from &quot;../../../simplekit&quot;;
+import { SKMouseEvent, SKResizeEvent } from &quot;../../../simplekit&quot;;
+import { Point2, point, random } from &quot;../../../simplekit/utility&quot;;
+import { closestPoint } from &quot;./closest-point&quot;;
+
+// canvas size
+let width = 0;
+let height = 0;
+
+function randomPoint(): Point2 {
+  const m = 50; // keep points inside this margin
+  return point(random(m, width - m), random(m, height - m));
+}
+
+// points to test and render in demo
+let P0: Point2 = point(0, 0); // line segment start
+let P1: Point2 = point(0, 0); // line segment end
+let M: Point2 = point(0, 0); // mouse point
+let Q: Point2 = point(0, 0); // closest point on line segment
+let QInf: Point2 = point(0, 0); // closest point on infinite line
+
+// HANDLE EVENTS
+function eventHandler(e: SKEvent)
+{
+	switch (e.type) {
+    case &quot;mousemove&quot;:
+      const { x, y } = e as SKMouseEvent;
+      M.x = x;
+      M.y = y;
+      Q = closestPoint(M, P0, P1);
+      QInf = closestPoint(M, P0, P1, false);
+      break;
+    case &quot;click&quot;:
+      // new random line
+      P0 = randomPoint();
+      P1 = randomPoint();
+      break;
+    case &quot;resize&quot;:
+      const re = e as SKResizeEvent;
+      width = re.width;
+      height = re.height;
+      // new random line
+      P0 = randomPoint();
+      P1 = randomPoint();
+      break;
+  }
+}
+
+setSKEventListener(eventHandler);
+
+// DRAW LINE AND UPDATED POINTS
+
+setSKDrawCallback((gc) =&gt;
+{
+  // clear background
+  gc.clearRect(0, 0, width, height);
+
+  // line
+  gc.beginPath();
+  gc.moveTo(P0.x, P0.y);
+  gc.lineTo(P1.x, P1.y);
+  gc.lineWidth = 2;
+  gc.strokeStyle = &quot;black&quot;;
+  gc.stroke();
+
+  // mouse point
+  gc.beginPath();
+  gc.arc(M.x, M.y, 10, 0, Math.PI * 2);
+  gc.strokeStyle = &quot;blue&quot;;
+  gc.stroke();
+
+  // closest point on infinite line
+  gc.beginPath();
+  gc.arc(QInf.x, QInf.y, 10, 0, Math.PI * 2);
+  gc.strokeStyle = &quot;pink&quot;;
+  gc.stroke();
+
+  // closest point on line segment
+  gc.beginPath();
+  gc.arc(Q.x, Q.y, 10, 0, Math.PI * 2);
+  gc.strokeStyle = &quot;red&quot;;
+  gc.stroke();
+});
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

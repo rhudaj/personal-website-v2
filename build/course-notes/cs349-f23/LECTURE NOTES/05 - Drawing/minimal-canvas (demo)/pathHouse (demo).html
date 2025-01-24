@@ -1,0 +1,31 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>pathHouse (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="795c412f-f158-4ffc-bb75-4f8cf290b032" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">pathHouse (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="0b78e830-f347-4813-9e81-f24aea214c85" class="image"><a href="pathHouse%20(demo)%20795c412ff1584ffcbb754f8cf290b032/Screen_Shot_2023-09-19_at_19.25.09.png"><img style="width:432px" src="pathHouse%20(demo)%20795c412ff1584ffcbb754f8cf290b032/Screen_Shot_2023-09-19_at_19.25.09.png"/></a></figure><pre id="66e7950f-73ef-4c3b-b836-616136a29dd2" class="code"><code>function pathHouseDemo(gc: CanvasRenderingContext2D)
+{
+  // array
+  const housePoints = [
+    [40, 0],
+    [80, 40],
+    [80, 100],
+    [0, 100],
+    [0, 40],
+  ];
+
+  gc.lineWidth = 3;
+  gc.strokeStyle = &quot;red&quot;;
+
+  gc.beginPath();               //don&#x27;t need moveTo() after this
+  housePoints.forEach((p) =&gt; {
+    const [x, y] = p;           //destructing p
+    gc.lineTo(x, y);
+  });
+
+  gc.closePath();
+  gc.stroke();
+}
+
+function colourDemo(gc: CanvasRenderingContext2D) {
+  for (let i = 0; i &lt; 10; i++) {
+    const h = Math.random() * 360;
+    gc.fillStyle = `hsl(${h}deg 80% 50%)`;
+    gc.fillRect(i * 20, 20, 20, 20);
+  }
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

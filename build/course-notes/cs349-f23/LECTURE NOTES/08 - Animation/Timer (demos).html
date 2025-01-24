@@ -1,0 +1,114 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Timer (demos)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="36617bae-9164-4fe6-8567-1a3c97a43464" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">Timer (demos)</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="7ee7a7b9-8620-47f2-8b0e-e2fd2aab7be3"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">User interfaces are all <strong><strong><strong><strong><strong><strong><strong><strong>single threaded</strong></strong></strong></strong></strong></strong></strong></strong>.
+So we put the timer.update as the animation callback. It get’s updated 60 times/second</div></figure><h1 id="f904c7d7-26d8-4da4-be60-9a96e40c8ff6" class="">Simple Timer</h1><ul id="b9b25607-c741-47c6-bb31-db15eea5def8" class="bulleted-list"><li style="list-style-type:disc">state1 → duration → state2</li></ul><ul id="f8940faa-45bb-4320-aa19-91348c9de7ab" class="bulleted-list"><li style="list-style-type:disc">🔴 hiden → 3s → 🔴 shown</li></ul><figure id="864dbe7c-96e8-4434-8a5a-db52140ea08a"><div class="source"><a href="Timer%20(demos)%2036617bae91644fe685671a3c97a43464/Screen_Recording_2023-09-28_at_22.56.25.mov">https://prod-files-secure.s3.us-west-2.amazonaws.com/21423f49-a365-4487-8460-041e9674e478/c9f42a47-6ce7-48a8-8eb3-f37f4d661916/Screen_Recording_2023-09-28_at_22.56.25.mov</a></div></figure><hr id="ffd87f1d-2539-41ca-82ea-76c8b403393f"/><h1 id="860d732c-58c9-43cb-a743-68b5a80b849e" class="">main.ts</h1><pre id="05601458-3c96-4aed-83bc-89ada591659f" class="code"><code>
+// simple &quot;Drawable&quot; object
+const dot = {
+  x: 0,
+  y: 0,
+  r: 32,
+  draw(gc: CanvasRenderingContext2D) {...},
+};
+
+dot.x = 100;
+dot.y = 100;
+
+startSimpleKit();
+
+//run the demos...</code></pre><div id="3985bd87-265a-477e-a7cb-6edcb7722c50" class="column-list"><div id="8aea341f-d449-43e2-ac8d-d388c1f86ca8" style="width:50%" class="column"><h2 id="ad72bdb5-08aa-49b3-acf4-2c3da533fb7a" class="">Basic Timer</h2><pre id="2b5ce8bb-28c3-43e8-b63a-a320508bd567" class="code code-wrap"><code>export class BasicTimer
+{
+  private startTime: number | undefined;
+	private _isRunning = false;
+
+  constructor(public duration: number) {}
+
+  start(time: number) {
+    this.startTime = time;
+    this._isRunning = true;
+  }
+
+  get isRunning() {
+    return this._isRunning;
+  }
+
+  update(time: number)
+	{
+    if (!this._isRunning || this.startTime === undefined) return;
+
+    const elapsed = time - this.startTime;
+
+    if (elapsed &gt; this.duration)
+		{
+      this.startTime = undefined;
+      this._isRunning = false;
+    }
+  }
+}</code></pre><h2 id="0cdcc867-6e99-45c5-8992-ef214c9bb413" class="">main.ts</h2><pre id="7e0d5eac-b16d-430f-ae0b-ed8bc1d8320d" class="code code-wrap"><code>// simple &quot;Drawable&quot; object
+const dot = {
+	//red circle
+};
+
+startSimpleKit();
+
+setSKAnimationCallback((time) =&gt; {timer.update(time)})
+
+setSKDrawCallback((gc, time) =&gt; {
+  // clear canvas
+	// draw text
+  if (!timer.isRunning) dot.draw(gc);
+});
+
+// create a three second timer
+const timer = new BasicTimer(3000);
+// start it
+timer.start(0);</code></pre><p id="bbea8a29-b7ac-42be-9201-117572cf03b2" class="">
+
+
+</p></div><div id="1dae0b02-f96d-4467-908e-5c1696bb1a9f" style="width:50%" class="column"><h2 id="e1cb7e95-b744-4331-9f35-58a14a9c6fae" class="">Callback Timer</h2><pre id="0c53ef5d-ef99-460d-af08-6223adedc656" class="code code-wrap"><code>export class CallbackTimer extends BasicTimer
+{
+
+
+  constructor(public duration: number, public callback: (t: number) =&gt; void){
+	 super(duration);
+  }
+
+update(time: number)
+	{
+    if (this.isRunning)
+		{
+      super.update(time);
+      if (!this.isRunning) this.callback(time);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+</code></pre><h2 id="ef6906dd-ca99-4fdd-85cb-7509ab0f3d92" class="">main.ts</h2><pre id="9fc38053-cedb-4fc0-b7bc-eb5c59d7ee1b" class="code code-wrap"><code>// simple &quot;Drawable&quot; object
+const dot = {
+	//red circle
+};
+
+startSimpleKit();
+
+setSKAnimationCallback((time) =&gt; {timer.update(time)})
+
+setSKDrawCallback((gc, time) =&gt; {
+  // clear canvas
+	// DRAW TEXT
+   if (isVisible) dot.draw(gc);
+});
+
+  let isVisible = false;
+
+  // create a three second timer and start it
+  const timer = new CallbackTimer(3000, (t) =&gt; {isVisible = !isVisible})
+
+  timer.start(0);</code></pre></div></div><p id="a32b1478-a86d-4e85-8751-c146733c616d" class="">
+</p><p id="684fdf11-35cd-4216-8ed7-bb7b39593ed8" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

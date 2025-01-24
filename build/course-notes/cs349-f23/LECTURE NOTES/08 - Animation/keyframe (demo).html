@@ -1,0 +1,69 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>keyframe (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="f84c53b8-eb1e-4c95-8fd4-e66a97b5ba29" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">keyframe (demo)</h1><p class="page-description"></p></header><div class="page-body"><h1 id="934abd36-de45-4fe2-af62-5577842cb9a0" class="">keyframe.ts</h1><pre id="7bc26ac0-11a9-49d1-861c-9181d5740ad1" class="code code-wrap"><code>// very simple keyframe object
+export type KeyFrame = {
+  time: number;
+  targetValue: number;
+};
+
+// simple keyframing animation object
+export class KeyFramer
+{
+  constructor(
+    public keyframes: KeyFrame[],
+    public updateValue: (p: number) =&gt; void
+  ) {}
+
+  update(time: number) {
+    // find active keyframe segment
+    let i = 0;
+    while (i &lt; this.keyframes.length &amp;&amp; this.keyframes[i].time &lt; time) {
+      i++;
+    }
+
+    // all keyframes finished
+    if (i == this.keyframes.length) return;
+
+    // this is the keyframe interval time is in
+    const k1 = this.keyframes[i - 1];
+    const k2 = this.keyframes[i];
+
+    // time fraction
+    let t = Math.min((time - k1.time) / (k2.time - k1.time), 1);
+
+    // calculate the current animation state
+    let p = lerp(k1.targetValue, k2.targetValue, t);
+
+    // send result to callback
+    this.updateValue(p);
+  }
+}</code></pre><h1 id="7fa2fe39-987f-4a7f-8e81-1187d2bb51e7" class="">main.ts</h1><pre id="e7452afb-f9df-48c0-9baf-eac3506fec75" class="code code-wrap"><code>import { KeyFrame, KeyFramer } from &quot;./keyframer&quot;;
+
+// simple &quot;Drawable&quot; object
+const dot = {...};
+
+// set animation callback
+setSKAnimationCallback((time) =&gt; {
+  animateDotX.update(time);
+});
+
+// set draw callback
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  dot.draw(gc);
+});
+
+startSimpleKit();
+
+// define keyframes
+const keyframes: KeyFrame[] = [
+  { time: 0, targetValue: 50 },
+  { time: 1000, targetValue: 450 },
+  { time: 3000, targetValue: 450 },
+  { time: 5000, targetValue: 50 },
+  { time: 6000, targetValue: 150 },
+];
+
+// create keyframer for animation (keyframes, callback)
+const animateDotX = new KeyFramer(keyframes, (value) =&gt; {
+  dot.x = value;
+});</code></pre><p id="eac3716a-be45-4a11-a0ea-af3cb6bda0c6" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

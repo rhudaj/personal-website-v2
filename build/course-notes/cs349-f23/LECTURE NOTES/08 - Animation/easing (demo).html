@@ -1,0 +1,102 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>easing (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="df3a1ba1-e212-43a3-8de7-13804fdc3f03" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">easing (demo)</h1><p class="page-description"></p></header><div class="page-body"><figure id="36dbf45c-5632-4668-9bb7-bbce5a53834b"><div class="source"><a href="easing%20(demo)%20df3a1ba1e21243a38de713804fdc3f03/Screen_Recording_2023-09-29_at_09.59.50.mov">https://prod-files-secure.s3.us-west-2.amazonaws.com/21423f49-a365-4487-8460-041e9674e478/132d9189-db4d-47c1-bd46-e49b42c5dbd4/Screen_Recording_2023-09-29_at_09.59.50.mov</a></div></figure><p id="a32a956b-b4e1-4ec8-835f-494341b15d7e" class="">
+</p><h1 id="b3d00cb6-b0e1-467c-a909-d9992cfbb810" class="">animater.ts</h1><pre id="1c657719-0931-461f-b9a1-39a59059e75c" class="code code-wrap"><code>// Define Lerp ...
+//Define Common Easing Functions ...
+
+//Additional Easing:
+
+export const bow: EasingFunction = (a, x = 1) =&gt;
+  easeIn(Math.pow(a, 2) * ((x + 1) * a - x));
+
+export const bounce: EasingFunction = (t, x = 1.5) =&gt;
+  Math.pow(2, 10 * (t - 1)) * Math.cos(((20 * Math.PI * x) / 3) * t);
+
+// basic animation object (same as before + easing)
+export class Animater
+{
+  constructor(
+    ...
+    public easing: EasingFunction = (t) =&gt; t
+  ) {}
+
+	...
+
+  update(time: number) {
+    ...
+    const value = lerp(this.startValue, this.endValue, this.easing(t));
+		...
+  }
+}</code></pre><h1 id="23c40ecc-0475-40ea-85df-c376202c14ce" class="">main.ts</h1><pre id="d59196bc-d2da-4d9c-9300-1c4c075aad16" class="code code-wrap"><code>// Define Drawable dot ...
+
+setSKDrawCallback((gc) =&gt; {
+  // clear canvas and draw it
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  graph.draw(gc);
+  dot.draw(gc);
+});
+
+
+// ANIMATE DOT
+
+dot.y = 350;
+
+// setup the animation
+const animateDotX = new Animater(
+  50,
+  300,
+  2000,
+  (value) =&gt; {
+    dot.x = value;
+    graph.add(value);
+  },
+  easingFunction
+);
+
+// set the animation callback
+setSKAnimationCallback((time) =&gt; {animateDotX.update(time)})
+
+animateDotX.start(0);
+
+startSimpleKit();
+
+// object to save data and draw as graph
+const graph = {
+  // array of time and position
+  data: [] as { t: number; p: number }[],
+
+  add(value: number) {
+    const t = performance.now() / animateDotX.duration;
+    const p = lerp(
+      0,
+      1,
+      (value - animateDotX.startValue) /
+        (animateDotX.endValue - animateDotX.startValue)
+    );
+
+    this.data.push({ t, p });
+  },
+
+  x: 50,
+  y: 50,
+  wh: 250,
+
+  draw(gc: CanvasRenderingContext2D)
+	{
+    // axes
+    gc.beginPath();
+    gc.moveTo(this.x, this.y);
+    gc.lineTo(this.x, this.y + this.wh);
+    gc.lineTo(this.x + this.wh, this.y + this.wh);
+    gc.lineWidth = 2;
+    gc.strokeStyle = &quot;grey&quot;;
+    gc.stroke();
+    // curve
+    gc.beginPath();
+    this.data.forEach((d) =&gt; {
+      gc.lineTo(this.x + d.t * this.wh, this.y + (1 - d.p) * this.wh);
+    });
+    gc.strokeStyle = &quot;red&quot;;
+    gc.stroke();
+  },
+};</code></pre><p id="763744d6-a86d-444e-9c57-5185f94b43cb" class="">
+</p><p id="c36cb3d7-bc9e-4e35-a438-a39f0e700f39" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

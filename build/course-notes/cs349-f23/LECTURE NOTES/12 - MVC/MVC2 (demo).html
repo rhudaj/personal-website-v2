@@ -1,0 +1,36 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MVC2 (demo)</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="a9bd27be-b509-495c-b9b7-f41df894cd76" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">MVC2 (demo)</h1><p class="page-description"></p></header><div class="page-body"><ul id="c6a64769-769a-4871-a924-37af3c6ceb0b" class="bulleted-list"><li style="list-style-type:disc">same but no <code>leftController</code></li></ul><ul id="3893d748-2aee-4ea2-bbb4-ebb465ef18be" class="bulleted-list"><li style="list-style-type:disc"><code>leftView</code> has the <code>leftController</code></li></ul><h2 id="0901e407-b9b5-4887-94f6-b420a32e3b5a" class="">LeftView.ts</h2><pre id="fe38738f-4ded-4b53-af12-1113730a300f" class="code"><code>class LeftView extends SKContainer implements Observer {
+  //#region observer pattern
+
+  update(): void {
+    this.button.text = `${this.model.count}`;
+  }
+
+  //#endregion
+
+  button: SKButton = new SKButton(&quot;?&quot;);
+
+  constructor(private model: Model) {
+    super();
+
+    // setup the view
+    this.id = &quot;left&quot;;
+    this.fill = &quot;white&quot;;
+    this.border = &quot;grey&quot;;
+    this.box.padding = 10;
+    this.fillWidth = 1;
+    this.fillHeight = 1;
+    this.layoutMethod = Layout.makeCentredLayout();
+
+    // add a button to the view
+    this.button.width = 100;
+    this.addChild(this.button);
+
+    // this is the Controller
+    this.button.addEventListener(&quot;action&quot;, () =&gt; {
+      model.increment();
+    });
+
+    // register with the model when we&#x27;re ready
+    this.model.addObserver(this);
+  }
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

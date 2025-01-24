@@ -1,0 +1,74 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Label Demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="a632fc13-82c3-49bb-bc05-cd0085df9a2f" class="page sans"><header><h1 class="page-title">Label Demo</h1><p class="page-description"></p></header><div class="page-body"><hr id="b0680b11-f974-460d-b82c-1c6ef277b7f5"/><figure id="ed95d29b-ba70-4fb7-b9c4-da6c6f3e0f3f" class="image"><a href="Label%20Demo/Screen_Shot_2023-10-14_at_17.31.03.png"><img style="width:132px" src="Label%20Demo/Screen_Shot_2023-10-14_at_17.31.03.png"/></a></figure><hr id="ef7967b6-1806-47ba-9457-90acba66b40a"/><h1 id="a1e78579-95c0-4265-911c-656b51864c0b" class="">label</h1><ul id="a9e705e5-4739-4b3c-aefb-4dd653de7e46" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong>State: </strong></strong></strong></strong></strong></strong></strong><code>align</code></li></ul><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="b2313ff7-0e7d-4859-94e4-9a6d3b48bd2a"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Need to know how big the text is to set the bounding box → <code>measureText(text, this.font)</code><ul id="47eb192b-a0ec-4bab-b94d-dc69cb9453e7" class="bulleted-list"><li style="list-style-type:disc">in simpleKit</li></ul></div></figure><pre id="5e134567-3b28-4411-a250-316d4218977e" class="code"><code>export class SKLabel extends SKElement {
+
+  align: &quot;centre&quot; | &quot;left&quot; | &quot;right&quot; = &quot;centre&quot;;
+  font = Style.font;
+
+  constructor(public text: string, x: number, y: number, width?: number){
+    super(x, y);
+
+    // find size of text to set height (and width if not specified)
+    const m = measureText(text, this.font);
+
+    if (!m) {
+      console.warn(`measureText failed in SKLabel for ${text}`);
+      return;
+    }
+
+    this.height =
+      m.fontBoundingBoxAscent + m.fontBoundingBoxDescent + Style.textPadding;
+    this.width = width || m.width + Style.textPadding * 2;
+  }
+
+  draw(gc: CanvasRenderingContext2D) {
+    gc.save();
+
+    // border (for debug)
+    if (Style.debug) {
+      gc.strokeStyle = &quot;grey&quot;;
+      gc.setLineDash([3, 3]);
+      gc.strokeRect(this.x, this.y, this.width, this.height);
+    }
+
+    //  label
+    gc.font = this.font;
+    gc.fillStyle = &quot;black&quot;;
+    gc.textBaseline = &quot;middle&quot;;
+    const padding = Style.textPadding;
+    switch (this.align) {
+      case &quot;left&quot;:
+        gc.textAlign = &quot;left&quot;;
+        gc.fillText(this.text, this.x + padding, this.y + this.height / 2);
+        break;
+
+      case &quot;centre&quot;:
+        gc.textAlign = &quot;center&quot;;
+        gc.fillText(
+          this.text,
+          this.x + this.width / 2,
+          this.y + this.height / 2
+        );
+        break;
+
+      case &quot;right&quot;:
+        gc.textAlign = &quot;right&quot;;
+        gc.fillText(
+          this.text,
+          this.x + this.width - padding,
+          this.y + this.height / 2
+        );
+        break;
+    }
+    gc.restore();
+  }
+}</code></pre><h1 id="8c1b9f6c-363d-481a-b4e9-95a8a2fdf2cc" class="">main</h1><pre id="0808e8af-73ce-4657-ad2a-c0ff6a4c6816" class="code"><code>const label = new SKLabel(&quot;Test Label&quot;, 50, 50);
+// can change other properties
+// label.width = 200;
+// label.align = &quot;right&quot;;
+// label.font = &quot;25px sans-serif&quot;;
+
+setSKDrawCallback((gc) =&gt; {
+  gc.clearRect(0, 0, gc.canvas.width, gc.canvas.height);
+  label.draw(gc);
+});
+
+startSimpleKit();</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

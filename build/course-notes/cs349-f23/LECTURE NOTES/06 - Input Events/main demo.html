@@ -1,0 +1,48 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>main demo</title><link rel="stylesheet" type="text/css" href="/course-notes/notion_styles.css"/></head><body><article id="6bb2feb5-644b-44dd-a0e4-322c3bd15e19" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧑🏽‍💻</span></div><h1 class="page-title">main demo</h1><p class="page-description"></p></header><div class="page-body"><h1 id="e74a145d-e440-4a71-964d-f450037e9274" class="">main.ts </h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8b0f219f-a73b-4024-8325-8824ab2243e2"><div style="font-size:1.5em"><span class="icon">🔧</span></div><div style="width:100%"><code><em>input-events/src/demo/main.ts</em></code> </div></figure><ul id="40b48b7f-9ae1-49cb-b7eb-6e367fc196dd" class="bulleted-list"><li style="list-style-type:disc">Uses Square Drawable to make a simple app <ul id="8e5267c5-76f0-4534-b642-cef4d7d2d806" class="bulleted-list"><li style="list-style-type:circle">handles different events and updates square state</li></ul></li></ul><ul id="e2b189cf-3be9-47d2-887e-96b818439106" class="bulleted-list"><li style="list-style-type:disc">Event dispatch with <code>setSKEventListener</code>, <code>handleEvent</code></li></ul><ul id="b5ff611c-1506-46b6-86f2-4f4a822a4e13" class="bulleted-list"><li style="list-style-type:disc">Draw with <code>setSKDrawCallback</code></li></ul><hr id="2f752ecb-505b-492d-9952-52113dab43ad"/><h2 id="b6bb9b73-d6b2-40f8-9b3a-205bbe812953" class="">Event Handler (switch statement dispatch)</h2><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="0ab8da31-263c-4b5e-9a2e-899594029fd0"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">no draw commands here... (no graphics context!)</div></figure><p id="daccd0d7-39b1-4473-b74f-42a334de35dc" class=""><strong>MVC</strong></p><ul id="97ab49f2-5f90-4eef-9bea-7de40bfa1b21" class="bulleted-list"><li style="list-style-type:disc"><strong>Controller: </strong>This function </li></ul><ul id="d24215d3-2cf9-487d-bb0f-7735aa0136a6" class="bulleted-list"><li style="list-style-type:disc"><strong>Model: </strong>the square</li></ul><ul id="1f64616e-ed31-478f-967f-126484cdc68d" class="bulleted-list"><li style="list-style-type:disc"><strong>View: </strong>the draw callback (setSKDrawCallback)</li></ul><hr id="3fec63c2-3fb7-43ad-a28a-bf5357df139d"/><pre id="9bed71bf-7e4e-411c-8a56-f9997e77cb0a" class="code"><code>import { SKEvent, SKMouseEvent } from &quot;../../../simplekit&quot;;
+import { Square } from &quot;../../../simplekit/drawable&quot;;
+import {setSKDrawCallback,setSKEventListener, startSimpleKit} from &quot;../../../simplekit&quot;;
+
+// drawable square
+const square = new Square(0, 0, 50);
+
+// EVENT HANDLER with switch statement dispatch
+function handleEvent(e: SKEvent)
+{
+  switch (e.type) {
+    case &quot;mousemove&quot;:
+      const me = e as SKMouseEvent;
+      square.x = me.x;
+      square.y = me.y;
+      break;
+    case &quot;click&quot;:
+      const fill = `hsl(${Math.random() * 360} 100% 50%)`;
+      square.setStyle = (gc: CanvasRenderingContext2D) =&gt; {
+        gc.fillStyle = fill;
+      };
+      break;
+    case &quot;drag&quot;:
+      square.size += 2;
+      break;
+    case &quot;dblclick&quot;:
+      square.size = 50;
+      break;
+    case &quot;keypress&quot;:
+      square.setStyle = (gc: CanvasRenderingContext2D) =&gt; {
+        gc.fillStyle = &quot;pink&quot;;
+      };
+      break;
+  }
+}
+
+// set the event handler
+// dispatch function: to handle the events
+setSKEventListener(handleEvent);
+
+// set the draw callback (using anonymous function)
+// tell simpleKit what function to call 60x per second
+setSKDrawCallback(function draw(gc: CanvasRenderingContext2D) {
+  square.draw(gc);
+});
+
+// start SimpleKit
+startSimpleKit();     //starts run loop</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

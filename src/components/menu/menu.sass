@@ -3,21 +3,47 @@
  ------------------------------------ */
 
 #FullMenu
-    user-select: none // no text is selectable
-    // Layout
-    font-size: 1em
+    // Layout (Logo ---- max space ---- nav-bar)
     display: flex
-    justify-content: space-between // Logo ---- max space ---- nav-bar
-    align-items: center
-    padding: 20px 50px 20px 50px /*T R B L*/
-    border-bottom: solid white
-    // Look
-    background-color: rgba(0, 0, 0, 0.8)
-    // Always on top
-    width: 100%
+    justify-content: space-between
+    // Position (Always on top)
     position: fixed
     top: 0
     z-index: 10000 /*top of page*/
+    // Look
+    user-select: none // no text is selectable
+    font-size: 1em
+    background-color: rgba(0, 0, 0, 0.8)
+
+    #page-links
+        display: flex
+
+    // 2 ORIENTATIONS
+
+    &.horizontal
+        align-items: center
+        width: 100%
+        padding: 20px 50px
+        border-bottom: 1px solid white
+
+    &.vertical
+        flex-direction: column
+        align-items: flex-end
+        right: 0
+        height: max-content
+        padding: 50px 20px
+        border-left: 1px solid white
+
+        #page-links
+            flex-direction: column
+            gap: 20px
+
+        & > #Logo
+            display: none
+
+
+
+
 
 #Logo
     font-size: 40px

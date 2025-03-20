@@ -1,7 +1,9 @@
 import "./menu.sass";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { PageRoute, routes } from "../../pages";
+import { useMediaQuery } from 'react-responsive'
+
 
 const ScrollToCV = (props: {
     target_div_id: string,
@@ -56,11 +58,10 @@ const ScrollToCV = (props: {
 };
 
 // Navigation
-function Navigation() {
-
+function NavBar() {
     return (
-        <nav id="nav-bar">
-            <ul className="page-links">
+        <nav>
+            <ul id="page-links">
                 {/* LINK TO EACH PAGE ROUTE */}
                 {routes.map((pr: PageRoute)=>
                     <li>
@@ -76,26 +77,28 @@ function Navigation() {
     );
 }
 
-function FullMenu() {
+function FullMenu(props: { isVertical?: boolean }) {
+
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
-        navigate("/"); // Navigate to the home page
+        // Navigate to the home page
+        navigate("/");
     };
 
     return (
-        <div id="FullMenu">
+        <div id="FullMenu" className={props.isVertical ? 'vertical' : 'horizontal'}>
             <p id="Logo" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
                 <span style={{ color: "red" }}>R</span>oman.
             </p>
-            <Navigation />
+            <NavBar />
         </div>
     );
 }
 
-function CollapsedMenu(props: { callback: any }) {
+function CollapsedMenuToggle(props: { onClick: any }) {
     return (
-		<div id="HiddenMenu" onClick={props.callback}>
+		<div id="HiddenMenu" onClick={props.onClick}>
 			<p>≡</p>
 		</div>
     );
@@ -106,10 +109,20 @@ function CollapsedMenu(props: { callback: any }) {
  * @returns
  */
 export function Menu() {
-    const [show, setShow] = useState(true);
-    const scroll_threshold = 50;
+    const [show, setShow] = useState(true); // show the full menu?
+    const [isVertical, setIsVertical] = useState(false);
 
-    const controlNavbar = () => {
+    const scroll_threshold = 50;
+    const screen_w_threshold = 750;
+
+    useEffect(()=>{
+        checkScreenWidth();
+        window.addEventListener("scroll", controlNavbar);
+        window.addEventListener("resize", checkScreenWidth);
+    }, []);
+
+    // Hide/show based on scroll position
+    const controlNavbar = () => {``
         if (show && window.scrollY > scroll_threshold) {
             // if scroll down hide the navbar
             setShow(false); // remember current page location to use in the next move
@@ -118,7 +131,17 @@ export function Menu() {
         }
     };
 
-    window.addEventListener("scroll", controlNavbar);
+    // Hide/show and set orientation based on width of screen
+    const checkScreenWidth = () => {
+        if(window.innerWidth < screen_w_threshold) {
+            setShow(false)
+            setIsVertical(true);
+        } else {
+            setShow(true)
+            setIsVertical(false)
+        }
+    };
 
-	return show ? <FullMenu /> : <CollapsedMenu callback={setShow} />;
+
+	return show ? <FullMenu isVertical={isVertical}/> : <CollapsedMenuToggle onClick={setShow} />;
 }

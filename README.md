@@ -3,7 +3,7 @@
 
 This project is a personal website that contains information about myself (Roman Hudaj). The website is built using React/TypeScript and is hosted on GitHub Pages.
 
-View the finished product here: [roman-hudaj.com](https://roman-hudaj.com)
+View the finished product here: [rhudaj.com](https://rhudaj.com)
 
 ### Built With
 

@@ -123,7 +123,7 @@ function Videos(props: { paths: string[] }) {
     );
 }
 
-export function Art() {
+export default function Art() {
     const [imgURLs, setImgURLs] = useState<string[]>([]);
     const videoPaths = Array(8)
         .fill(0)

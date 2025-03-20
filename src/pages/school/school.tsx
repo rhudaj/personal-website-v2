@@ -118,7 +118,7 @@ function CourseComponent(props: Course ) {
     );
 }
 
-export function School() {
+export default function School() {
 
 	const [courses, setCourses] = useState<Course[]>([]);
 

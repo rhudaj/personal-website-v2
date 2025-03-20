@@ -5,9 +5,11 @@ import 'react-lazy-load-image-component/src/effects/blur.css' // for blurring ef
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'; // replaced BrowserRouter w' HashRouter
-import { Home, Projects, School, Art } from "./pages/index"
+// import { Home, Projects, School, Art } from "./pages/index"
 import { Menu } from './components/menu/menu'
 import { ContactMe } from './components/contactMe/Contact-me';
+import { PageRoute, routes } from './pages';
+// import { PageRoute, routes } from './pages/routes';
 
 // Main:
 function Main() {
@@ -20,10 +22,13 @@ function Main() {
   return (
     <div id="Main">
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
+        {routes.map((r: PageRoute) =>
+          <Route path={r.path} element={r.component()}></Route>
+        )}
+        {/* <Route path='/' element={<Home/>}></Route>
         <Route path='/projects' element={<Projects/>}></Route>
         <Route path='/school' element={<School/>}></Route>
-        <Route path='/art' element={<Art/>}></Route>
+        <Route path='/art' element={<Art/>}></Route> */}
       </Routes>
     </div>
   );

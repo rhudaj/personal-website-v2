@@ -48,7 +48,7 @@ function ProjectThumbnail(props: {
 
 //---------------------------------------------------------------------
 
-export function Projects() {
+export default function Projects() {
 
     const thumbnails_dir = "/projects-assets";
     const [selected, setSelected] = useState<number>(-1);

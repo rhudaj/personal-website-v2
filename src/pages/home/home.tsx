@@ -122,8 +122,7 @@ function AboutMe() {
     );
 }
 
-
-export function MyWork() {
+function MyWork() {
     return (
         <div id="MyWork">
             <h1>My Work</h1>
@@ -172,7 +171,7 @@ function MyWorkItem(props: {
     );
 }
 
-export function Home() {
+export default function Home() {
     // Text that is typed out in real time.
     const head_text = useTypingEffect("Hi, I'm Roman.", 80);
 

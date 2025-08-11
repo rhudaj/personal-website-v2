@@ -43,6 +43,11 @@
                     "title": "StreamSix (TimePlay)",
                     "logo": "timeplay.png",
                     "descr": ["Product Assistant", "May/24 - Sep/24"]
+                },
+                {
+                    "title": "CAAT",
+                    "logo": "caat.png",
+                    "descr": ["Application Analyst", "Aug/25 - Present"]
                 }
             ]
         },

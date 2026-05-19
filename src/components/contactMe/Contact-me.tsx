@@ -48,10 +48,6 @@ function ContactInfo() {
                 <i className="fa-solid fa-paper-plane" aria-hidden="true" />
                 {info.email}
             </p>
-            <p className="ContactPoint">
-                <i className="fa-solid fa-square-phone" aria-hidden="true" />
-                {info.phone}
-            </p>
             <div className="social-icons">
 				{
 					(info.socials as any[]).map((social: any, i: number) => (

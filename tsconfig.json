@@ -13,7 +13,8 @@
       "resolveJsonModule": false, // ***
       "isolatedModules": false, // ***
       "noEmit": true,
-      "jsx": "react-jsx"
+      "jsx": "react-jsx",
+      "types": ["node"]
   },
   "include": ["src", "sharedTypes.ts"]
 }

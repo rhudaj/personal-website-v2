@@ -25,10 +25,6 @@ function Main() {
         {routes.map((r: PageRoute) =>
           <Route path={r.path} element={<r.component/>}></Route>
         )}
-        {/* <Route path='/' element={<Home/>}></Route>
-        <Route path='/projects' element={<Projects/>}></Route>
-        <Route path='/school' element={<School/>}></Route>
-        <Route path='/art' element={<Art/>}></Route> */}
       </Routes>
     </div>
   );

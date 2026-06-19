@@ -1,9 +1,9 @@
-import React from "react";
 import "./contact-me.sass";
+import React from "react";
 import { loadJson } from "../../util/loadJson";
+import { SHOW_CV } from "../../util/env";
 
 function ContactForm() {
-
     const submit_form = () => {
         return;
     };
@@ -31,16 +31,15 @@ function ContactForm() {
 }
 
 function ContactInfo() {
-
     const cv_path = "cv/RomanHudaj_cv.pdf";
-	const [info, setInfo] = React.useState<any>(null);
+    const [info, setInfo] = React.useState<any>(null);
 
-	// Load assets
+    // Load assets
     React.useEffect(() => {
-        loadJson<any>("contact_info").then(setInfo)
+        loadJson<any>("contact_info").then(setInfo);
     }, []);
 
-	if (! info) return <></>;
+    if (!info) return <></>;
     return (
         <div id="ContactInfo">
             <h1>Contact Me</h1>
@@ -49,17 +48,22 @@ function ContactInfo() {
                 {info.email}
             </p>
             <div className="social-icons">
-				{
-					(info.socials as any[]).map((social: any, i: number) => (
-						<a key={i} href={social.link}>
-                    		<i className={social.icon} />
-                		</a>
-					))
-				}
+                {(info.socials as any[]).map((social: any, i: number) => (
+                    <a key={i} href={social.link}>
+                        <i className={social.icon} />
+                    </a>
+                ))}
             </div>
-            <a id="download-cv-button" href={cv_path} download="" className="red-button">
-                Download CV
-            </a>
+            {SHOW_CV && (
+                <a
+                    id="download-cv-button"
+                    href={cv_path}
+                    download=""
+                    className="red-button"
+                >
+                    Download CV
+                </a>
+            )}
         </div>
     );
 }

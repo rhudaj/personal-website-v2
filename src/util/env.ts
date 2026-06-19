@@ -1,0 +1,1 @@
+export const SHOW_CV = process.env.REACT_APP_SHOW_CV?.toLowerCase() === "true";

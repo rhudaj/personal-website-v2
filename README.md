@@ -28,11 +28,27 @@ View the finished product here: [rhudaj.com](https://rhudaj.com)
 - **Art Page**: The art page contains a gallery of my artwork.
 - **School Page**: The courses page contains a list of courses I have taken at the University of Waterloo.
 
-### How to Run
+### How to Run Locally
 
 1. Clone the repository.
 2. Run `npm install` to install the dependencies.
 3. Run `npm start` to start the development server.
+
+### Development workflow
+
+1. You edit the source code on `main`.
+2. You commit/push your changes to `main` to save them.
+3. When your ready for your changes to be reflected on the live-site, you run: `npm run deploy`
+
+### Deployment Workflow
+
+After running `npm run deploy`, the following happens behind the scenes
+1. -> npm automatically runs npm run build
+2. -> React writes static files to build/
+3. -> gh-pages -d build commits build/ to the gh-pages branch
+4. -> GitHub Pages detects gh-pages changed
+5. -> GitHub runs its managed pages-build-deployment workflow
+6. -> GitHub serves the new static files at your configured custom domain
 
 ### Future Improvements
 

@@ -23,7 +23,7 @@ function Main() {
     <div id="Main">
       <Routes>
         {routes.map((r: PageRoute) =>
-          <Route path={r.path} element={r.component()}></Route>
+          <Route path={r.path} element={<r.component/>}></Route>
         )}
         {/* <Route path='/' element={<Home/>}></Route>
         <Route path='/projects' element={<Projects/>}></Route>

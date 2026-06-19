@@ -20,6 +20,7 @@ View the finished product here: [rhudaj.com](https://rhudaj.com)
 - The website is hosted on GitHub Pages.
 - The contact page has a form that sends an email to me when submitted.
 - Uses Intersection Observer API to observe when the image enters the browsers viewport.
+- Uses Lazy Loading for ALL images on the site – optimization to prevent network lag. 
 
 ### Navigation
 

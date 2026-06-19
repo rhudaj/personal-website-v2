@@ -10,32 +10,30 @@ import Art  from './art/art';
 
 export interface PageRoute {
     name: string,
-    component: any,
-    path?: string, // by default; `/${name}`
+    path: string, // by default; `/${name}`
+    component: ()=>JSX.Element,
+
 }
 
-const _routes: PageRoute[] = [
+export const routes: PageRoute[] = [
     {
-        name: "home",
+        name: "Home",
         path: "/",
-        component: Home,
+        component: Home
     },
     {
-        name: "projects",
-        component: Projects,
+        name: "Projects",
+        path: "/projects",
+        component: Projects
     },
     {
-        name: "school",
-        component: School,
+        name: "School",
+        path: "/school",
+        component: School
     },
     {
-        name: "art",
-        component: Art,
+        name: "Art",
+        path: "/art",
+        component: Art
     }
 ];
-
-// Infers the name and path
-export const routes = _routes.map(r=>({
-    ...r,
-    path: r.path ?? `/${r.name}`
-}))
